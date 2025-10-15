@@ -1,14 +1,12 @@
-import { ThemeToggle } from "~/components/theme-toggle";
+// import { ThemeToggle } from "~/components/theme-toggle";
+
+import Hero from "./_components/hero";
 
 export default function HomePage() {
   return (
-    <main className="bg-background min-h-screen p-8">
-      <div className="flex flex-col gap-2">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Landing Page</h1>
-          <ThemeToggle />
-        </div>
-      </div>
+    <main className="bg-background flex-1">
+      {/* <ThemeToggle /> */}
+      <Hero />
     </main>
   );
 }

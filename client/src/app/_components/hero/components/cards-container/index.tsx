@@ -1,0 +1,77 @@
+import Card from "./card";
+import Image from "next/image";
+import { routes } from "~/lib/routes";
+
+export default function CardsContainer() {
+  return (
+    <section aria-labelledby="cta-title">
+      <h2 id="cta-title" className="sr-only">
+        Actions
+      </h2>
+      <div className="flex justify-center gap-4">
+        <Card
+          icon={
+            <Image
+              src={"/document.svg"}
+              width={27}
+              height={36}
+              alt="Document"
+              aria-hidden="true"
+              className="mx-auto mb-6"
+            />
+          }
+          title="Information & Resources"
+          description="Explore helpful definitions, examples, and guidelines to improve the quality of your report and understand AI safety."
+          infoHint="Info about Information & Resources"
+          action={{
+            label: "Select",
+            href: routes.resources,
+            variant: "outline",
+          }}
+        />
+        <Card
+          icon={
+            <Image
+              src={"/bug.svg"}
+              width={36}
+              height={36}
+              alt="Bug"
+              aria-hidden="true"
+              className="mx-auto mb-6"
+            />
+          }
+          title="AI Flaw"
+          description="Report flaws, vulnerabilities, and safety issues you observe in AI systems. Each report supports more trustworthy AI."
+          infoHint="Info about AI Flaw"
+          action={{
+            label: "Report flaw",
+            href: routes.report,
+            variant: "outline",
+          }}
+        />
+        <Card
+          icon={
+            <Image
+              src={"/desktop-chart.svg"}
+              width={36}
+              height={36}
+              alt="Dashboard"
+              aria-hidden="true"
+              className="mx-auto mb-6"
+            />
+          }
+          title="Dashboard"
+          description="We’re building an open dashboard for AI flaw reports. Soon, you’ll be able to explore past reports and patterns."
+          infoHint="Info about Dashboard"
+          action={{
+            label: "Coming Soon",
+            disabled: true,
+            href: routes.dashboard,
+            tooltip: "We’re building an open dashboard for AI flaw reports.",
+            variant: "outline",
+          }}
+        />
+      </div>
+    </section>
+  );
+}

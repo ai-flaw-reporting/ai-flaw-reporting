@@ -550,11 +550,65 @@
   }
 }
 
+@layer components {
+  /* Typography components */
+  .display-2xl {
+    font-size: var(--font-size-display-2xl);
+    line-height: var(--line-height-display-2xl);
+  }
+  .display-xl {
+    font-size: var(--font-size-display-xl);
+    line-height: var(--line-height-display-xl);
+  }
+  .display-lg {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display-lg);
+  }
+  .display-md {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-display-md);
+  }
+  .display-sm {
+    font-size: var(--font-size-display-sm);
+    line-height: var(--line-height-display-sm);
+  }
+  .display-xs {
+    font-size: var(--font-size-display-xs);
+    line-height: var(--line-height-display-xs);
+  }
+  .text-xl {
+    font-size: var(--font-size-text-xl);
+    line-height: var(--line-height-text-xl);
+  }
+  .text-lg {
+    font-size: var(--font-size-text-lg);
+    line-height: var(--line-height-text-lg);
+  }
+  .text-md {
+    font-size: var(--font-size-text-md);
+    line-height: var(--line-height-text-md);
+  }
+  .text-sm {
+    font-size: var(--font-size-text-sm);
+    line-height: var(--line-height-text-sm);
+  }
+  .text-xs {
+    font-size: var(--font-size-text-xs);
+    line-height: var(--line-height-text-xs);
+  }
+}
+
 @layer utilities {
   .bg-blue-ai {
     background-image: var(--gradient-blue-ai);
   }
   .hover\:bg-blue-ai:hover {
     background-image: var(--gradient-blue-ai);
+  }
+
+  .group-hover\:bg-blue-ai {
+    .group:hover & {
+      background-image: var(--gradient-blue-ai);
+    }
   }
 }

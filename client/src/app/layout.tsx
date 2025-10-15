@@ -3,6 +3,8 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
+import Header from "./_components/header";
+import Footer from "./_components/footer";
 
 export const metadata: Metadata = {
   title: "AI Flaw & Incident Reporting",
@@ -31,9 +33,11 @@ export default function RootLayout({
       className={`${inter.variable} ${geist.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body className="flex min-h-screen flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Header />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
