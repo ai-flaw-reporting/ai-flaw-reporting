@@ -41,7 +41,8 @@ export default function CardComponent({
   action,
 }: Props) {
   const descId = useId();
-  const customCursor = "cursor-[url('/cursor.svg')_10_10,_pointer]";
+  const titleId = useId();
+  const customCursor = "cursor-[url('/icons/cursor.svg')_10_10,_pointer]";
 
   return (
     <Card
@@ -50,18 +51,21 @@ export default function CardComponent({
         action.disabled && "pointer-events-none opacity-60",
       )}
     >
-      <article aria-describedby={descId}>
+      <article aria-labelledby={titleId} aria-describedby={descId}>
         <CardHeader className="px-5">
           <CardTitle>
             {icon && icon}
             <div className="flex items-center justify-center gap-2">
-              <h3 className="text-md leading-7 font-semibold">{title}</h3>
+              <h3 id={titleId} className="text-md leading-7 font-semibold">
+                {title}
+              </h3>
               {infoHint && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger
                       className="inline-flex items-center justify-center rounded focus:outline-none focus-visible:ring"
                       aria-label={`Info about ${title}`}
+                      type="button"
                     >
                       <Info
                         size={16}
@@ -70,7 +74,7 @@ export default function CardComponent({
                       />
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
-                      {infoHint}
+                      <p>{infoHint}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -89,7 +93,6 @@ export default function CardComponent({
           <Button
             asChild
             variant={action.variant ?? "default"}
-            aria-disabled={action.disabled}
             disabled={action.disabled}
             className={`w-full ${customCursor} group-hover:bg-blue-ai font-semibold group-hover:border-transparent group-hover:text-white`}
           >

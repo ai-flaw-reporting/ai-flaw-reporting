@@ -1,0 +1,64 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { RadioGroup, RadioGroupItem } from "./index";
+
+const meta = {
+  title: "UI/RadioGroup",
+  component: RadioGroup,
+  parameters: {
+    layout: "centered",
+  },
+  tags: ["autodocs"],
+  argTypes: {
+    defaultValue: {
+      control: "text",
+    },
+    disabled: {
+      control: "boolean",
+    },
+  },
+} satisfies Meta<typeof RadioGroup>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1">
+      <RadioGroupItem value="option1">Option 1</RadioGroupItem>
+      <RadioGroupItem value="option2">Option 2</RadioGroupItem>
+      <RadioGroupItem value="option3">Option 3</RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const Disabled: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1">
+      <RadioGroupItem value="option1">Option 1</RadioGroupItem>
+      <RadioGroupItem value="option2" disabled>
+        Option 2 (Disabled)
+      </RadioGroupItem>
+      <RadioGroupItem value="option3">Option 3</RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const AllDisabled: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1" disabled>
+      <RadioGroupItem value="option1">Option 1</RadioGroupItem>
+      <RadioGroupItem value="option2">Option 2</RadioGroupItem>
+      <RadioGroupItem value="option3">Option 3</RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const WithIcons: Story = {
+  render: () => (
+    <RadioGroup defaultValue="email" className="flex flex-col space-y-2">
+      <RadioGroupItem value="email">📧 Email</RadioGroupItem>
+      <RadioGroupItem value="phone">📱 Phone</RadioGroupItem>
+      <RadioGroupItem value="sms">💬 SMS</RadioGroupItem>
+    </RadioGroup>
+  ),
+};

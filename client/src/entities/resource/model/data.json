@@ -1,0 +1,156 @@
+[
+  {
+    "id": "1",
+    "title": "OpenAI",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/open-ai.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "2",
+    "title": "Google",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/google.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "3",
+    "title": "Anthropic",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability", "Incident"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/anthropic.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "4",
+    "title": "Claude",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/claude.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "5",
+    "title": "Google",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/google.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "6",
+    "title": "OpenAI",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/open-ai.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "7",
+    "title": "Claude",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/claude.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "8",
+    "title": "Anthropic",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability", "Incident"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/anthropic.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "9",
+    "title": "Google",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/google.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "10",
+    "title": "OpenAI",
+    "organizationType": "AI Developer",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/open-ai.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "11",
+    "title": "OpenAI",
+    "organizationType": "Government Agency",
+    "scopesType": "Report Scope",
+    "scopes": ["AI Safety Hazard"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/open-ai.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "12",
+    "title": "Google",
+    "organizationType": "Civil Society",
+    "scopesType": "Report Scope",
+    "scopes": ["Incident"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/google.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "13",
+    "title": "Anthropic",
+    "organizationType": "Incident Database",
+    "scopesType": "Report Scope",
+    "scopes": ["Security Vulnerability", "AI Safety Hazard"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/anthropic.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  },
+  {
+    "id": "14",
+    "title": "Claude",
+    "organizationType": "Government Agency",
+    "scopesType": "Report Scope",
+    "scopes": ["Incident", "AI Safety Hazard"],
+    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
+    "icon": "icons/resource/claude.svg",
+    "reportUrl": null,
+    "readMoreUrl": null
+  }
+]

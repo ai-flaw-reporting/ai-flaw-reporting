@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="px-[107px] py-5 text-center text-sm font-normal">
+    <footer className="bg-white px-[107px] py-5 text-center text-sm font-normal">
       <div className="flex flex-col gap-8 py-5 text-gray-700">
         <p>
           A Harvard University open-source project making AI flaw reporting

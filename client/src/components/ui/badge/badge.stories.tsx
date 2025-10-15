@@ -39,3 +39,17 @@ export const Outline: Story = {
     children: "Outline",
   },
 };
+
+export const Error: Story = {
+  args: {
+    variant: "error",
+    children: "Security Vulnerability",
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    variant: "warning",
+    children: "Incident",
+  },
+};

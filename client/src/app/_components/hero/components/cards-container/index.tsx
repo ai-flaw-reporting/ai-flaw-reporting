@@ -12,7 +12,7 @@ export default function CardsContainer() {
         <Card
           icon={
             <Image
-              src={"/document.svg"}
+              src={"icons/home/document.svg"}
               width={27}
               height={36}
               alt="Document"
@@ -32,7 +32,7 @@ export default function CardsContainer() {
         <Card
           icon={
             <Image
-              src={"/bug.svg"}
+              src={"icons/bug.svg"}
               width={36}
               height={36}
               alt="Bug"
@@ -52,7 +52,7 @@ export default function CardsContainer() {
         <Card
           icon={
             <Image
-              src={"/desktop-chart.svg"}
+              src={"icons/home/desktop-chart.svg"}
               width={36}
               height={36}
               alt="Dashboard"
