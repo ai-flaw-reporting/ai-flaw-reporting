@@ -14,7 +14,7 @@ const buttonVariants = cva(
         "indigo-default":
           "bg-indigo-500 text-white focus-visible:ring-indigo-500/25 hover:bg-indigo-500/90",
         outline:
-          "border border-gray-300 text-gray-700 bg-background shadow-xs focus-visible:ring-gray-100 focus-visible:border-gray-300 dark:bg-input/30 dark:border-input dark:hover:bg-input/50 disabled:border-gray-200 disabled:text-gray-300",
+          "border border-gray-300 text-gray-700 bg-background shadow-xs focus-visible:ring-gray-100 focus-visible:border-gray-300 dark:hover:bg-input/50 disabled:border-gray-200 disabled:text-gray-300 dark:border-gray-300 dark:bg-white dark:text-gray-700",
         secondary:
           "bg-primary-50 border border-primary-200 text-primary-700 hover:bg-primary-100 hover:text-primary-800 focus-visible:ring-primary-100 focus-visible:border-primary-200 disabled:border-primary-25 disabled:text-primary-300 disabled:bg-primary-25",
         ghost:

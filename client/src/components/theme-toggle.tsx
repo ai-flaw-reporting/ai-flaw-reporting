@@ -25,7 +25,7 @@ export function ThemeToggle() {
           width={24}
           height={24}
           alt="Theme Switch"
-          src="/theme-switch.svg"
+          src="/icons/theme-switch.svg"
         />
         <span className="sr-only">Toggle theme</span>
       </Button>
@@ -43,7 +43,7 @@ export function ThemeToggle() {
         width={24}
         height={24}
         alt="Theme Switch"
-        src="/theme-switch.svg"
+        src="/icons/theme-switch.svg"
       />
       <span className="sr-only">Toggle theme</span>
     </Button>

@@ -7,8 +7,8 @@ import { routes } from "~/lib/routes";
 export function ReportBanner() {
   return (
     <>
-      <div className="mb-0 bg-white px-8 py-12 pb-12">
-        <section className="mx-auto max-w-[1280px] space-y-8 rounded-2xl bg-indigo-100 bg-[url('/images/report-background.png')] bg-cover bg-center bg-no-repeat py-16 text-center">
+      <div className="mb-0 bg-white px-8 py-12 pb-12 dark:bg-gray-900">
+        <section className="mx-auto max-w-[1280px] space-y-8 rounded-2xl bg-indigo-100 bg-[url('/images/report-background.png')] bg-auto bg-center bg-no-repeat py-16 text-center dark:bg-indigo-300 dark:bg-[url('/images/report-background-dark.png')]">
           <header className="mb-5 space-y-8">
             <Image
               src="/icons/bug.svg"
@@ -26,18 +26,16 @@ export function ReportBanner() {
               Found Something Worth Reporting?
             </h2>
           </header>
-          <p className="mx-auto max-w-[794px] text-xl font-normal text-gray-800">
+          <p className="mx-auto max-w-[794px] text-xl leading-[30px] font-normal text-gray-800">
             Help improve AI safety by submitting a report. Whether it’s a flaw,
             bug, or something that doesn’t sit right. Your insight can make a
             real difference.
           </p>
-          <Button asChild>
-            <Link
-              className="text-md bg-blue-ai px-5 py-3 font-semibold text-white"
-              href={routes.report}
-            >
-              Report flaw
-            </Link>
+          <Button
+            asChild
+            className="text-md bg-blue-ai h-12 px-5 py-3 font-semibold text-white"
+          >
+            <Link href={routes.report}>Report flaw</Link>
           </Button>
         </section>
       </div>

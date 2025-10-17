@@ -22,7 +22,9 @@ export function ResourcesFilterBar() {
       <h2 className="sr-only">Filter</h2>
 
       <div className="flex items-center gap-1.5">
-        <h3 className="px-2 text-xs font-medium text-gray-600">Form Scope:</h3>
+        <h3 className="px-2 text-xs font-medium text-gray-600 dark:text-gray-400">
+          Form Scope:
+        </h3>
         <RadioGroup value={formScope} onValueChange={handleFormScopeChange}>
           {FORM_SCOPE_OPTIONS.map((label) => (
             <RadioGroupItem key={label} value={label}>
@@ -33,7 +35,7 @@ export function ResourcesFilterBar() {
       </div>
 
       <div className="flex items-center gap-1.5">
-        <h3 className="px-2 text-xs font-medium text-gray-600">
+        <h3 className="px-2 text-xs font-medium text-gray-600 dark:text-gray-400">
           Organization Type:
         </h3>
         <RadioGroup

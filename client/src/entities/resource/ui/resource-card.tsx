@@ -15,6 +15,8 @@ import { cn } from "~/lib/utils";
 import type { Resource } from "../model/types";
 import { getBadgeVariant } from "../lib/utils";
 
+const INVERT_ICONS = ["anthropic.svg", "open-ai.svg"];
+
 export function ResourceCard({ resource }: { resource: Resource }) {
   const descId = useId();
   const customCursor = "cursor-[url('/icons/cursor.svg')_10_10,_pointer]";
@@ -29,8 +31,10 @@ export function ResourceCard({ resource }: { resource: Resource }) {
     icon,
   } = resource;
 
+  const shouldInvert = icon && INVERT_ICONS.some((name) => icon.includes(name));
+
   return (
-    <Card className={cn("py-8", customCursor)}>
+    <Card className={cn("py-8 dark:border-gray-500", customCursor)}>
       <article
         aria-labelledby={`title-${descId}`}
         aria-describedby={descId}
@@ -50,11 +54,12 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                     alt=""
                     width={32}
                     height={32}
+                    className={cn(shouldInvert && "dark:invert")}
                   />
                 )}
                 {title}
               </h3>
-              <p className="text-sm font-normal text-gray-600">
+              <p className="text-sm font-normal text-gray-600 dark:text-gray-200">
                 {organizationType}
               </p>
             </div>
@@ -91,7 +96,9 @@ export function ResourceCard({ resource }: { resource: Resource }) {
         </CardHeader>
 
         <CardContent className="mb-2 space-y-4 px-16">
-          <p className="text-sm font-semibold text-gray-600">{scopesType}</p>
+          <p className="text-sm font-semibold text-gray-600 dark:text-gray-200">
+            {scopesType}
+          </p>
           {scopes?.length && (
             <ul className="flex flex-wrap gap-4" aria-label="Report scopes">
               {scopes.map((scope) => (
@@ -101,10 +108,13 @@ export function ResourceCard({ resource }: { resource: Resource }) {
               ))}
             </ul>
           )}
-          <p className="mb-2 text-sm font-semibold text-gray-600">
+          <p className="mb-2 text-sm font-semibold text-gray-600 dark:text-gray-200">
             You should report here if...
           </p>
-          <p id={descId} className="text-sm font-normal text-gray-600">
+          <p
+            id={descId}
+            className="text-sm font-normal text-gray-600 dark:text-gray-200"
+          >
             {summary}
           </p>
         </CardContent>

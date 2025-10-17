@@ -2,7 +2,7 @@ import { Card } from "~/components/ui/card";
 
 export function AboutFlawReporting() {
   return (
-    <Card className="px-20 py-8 hover:border-gray-300">
+    <Card className="px-20 py-8 hover:border-gray-300 dark:border-gray-300 dark:bg-white">
       <section
         aria-labelledby="about-flaw-reporting-title"
         className="flex justify-between"

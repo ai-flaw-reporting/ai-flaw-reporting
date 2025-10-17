@@ -6,8 +6,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white px-[107px] py-5 text-center text-sm font-normal">
-      <div className="flex flex-col gap-8 py-5 text-gray-700">
+    <footer className="bg-white px-[107px] py-5 text-center text-sm font-normal dark:bg-gray-800">
+      <div className="flex flex-col gap-8 py-5 text-gray-700 dark:text-gray-100">
         <p>
           A Harvard University open-source project making AI flaw reporting
           easy, secure, and accessible. <br /> We're building safer AI systems
@@ -24,7 +24,7 @@ export default function Footer() {
 
       <Separator className="mb-5" aria-hidden="true" />
 
-      <p className="text-gray-500">
+      <p className="text-gray-500 dark:text-gray-400">
         © {year} AI Flaw Reporting. A Harvard University Research Initiative.
       </p>
     </footer>

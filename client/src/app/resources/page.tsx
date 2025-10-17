@@ -39,7 +39,7 @@ export default async function ResourcesPage({ searchParams }: PageProps) {
       <section
         id="resources"
         aria-labelledby="resources-title"
-        className="bg-[url('/images/hero-background.png')] bg-[length:100%_736px] bg-top bg-no-repeat pt-17"
+        className="bg-[url('/images/hero-background.png')] bg-[length:100%_736px] bg-top bg-no-repeat pt-17 dark:bg-gray-900 dark:bg-none"
       >
         <div className="mx-auto mb-8 flex max-w-[1344px] flex-col space-y-8 px-8">
           <header className="space-y-8">

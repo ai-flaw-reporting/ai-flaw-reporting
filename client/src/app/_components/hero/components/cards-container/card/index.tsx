@@ -84,7 +84,10 @@ export default function CardComponent({
         </CardHeader>
 
         <CardContent className="px-5">
-          <p id={descId} className="text-sm leading-5 text-gray-600">
+          <p
+            id={descId}
+            className="text-sm leading-5 text-gray-600 dark:text-gray-100"
+          >
             {description}
           </p>
         </CardContent>
@@ -94,7 +97,10 @@ export default function CardComponent({
             asChild
             variant={action.variant ?? "default"}
             disabled={action.disabled}
-            className={`w-full ${customCursor} group-hover:bg-blue-ai font-semibold group-hover:border-transparent group-hover:text-white`}
+            className={cn(
+              "group-hover:bg-blue-ai w-full font-semibold group-hover:border-transparent group-hover:text-base group-hover:text-white dark:group-hover:border-none dark:group-hover:text-white",
+              customCursor,
+            )}
           >
             <Link href={action.href}>{action.label}</Link>
           </Button>
