@@ -1,6 +1,6 @@
 import { SCOPE_TYPES } from "../model/constants";
 
-import { BADGE_VARIANTS, DEFAULT_FILTERS } from "../model/constants";
+import { BADGE_VARIANTS } from "../model/constants";
 import type { FilterParams, Resource } from "../model/types";
 
 export const getBadgeVariant = (scope: string) => {
@@ -40,32 +40,28 @@ export function filterAndSortResources(
   resources: Resource[],
   filters: FilterParams,
 ): Resource[] {
-  return resources
-    .filter((resource) => {
-      const matchesFormScope =
-        !filters.formScope || resource.scopes.includes(filters.formScope);
+  return resources.filter((resource) => {
+    const matchesFormScope =
+      !filters.formScope || resource.scopes.includes(filters.formScope);
 
-      const matchesOrgType =
-        !filters.organizationType ||
-        resource.organizationType === filters.organizationType;
+    const matchesOrgType =
+      !filters.organizationType ||
+      resource.organizationType === filters.organizationType;
 
-      return matchesFormScope && matchesOrgType;
-    })
-    .sort((a, b) => a.title.localeCompare(b.title));
+    return matchesFormScope && matchesOrgType;
+  });
 }
 
 export function parseResourceFilters(
   searchParams: Record<string, string | string[] | undefined>,
 ): FilterParams {
   const formScope =
-    typeof searchParams.formScope === "string"
-      ? searchParams.formScope
-      : DEFAULT_FILTERS.formScope;
+    typeof searchParams.formScope === "string" ? searchParams.formScope : null;
 
   const organizationType =
     typeof searchParams.organizationType === "string"
       ? searchParams.organizationType
-      : DEFAULT_FILTERS.organizationType;
+      : null;
 
   return {
     formScope,

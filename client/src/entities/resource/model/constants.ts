@@ -36,6 +36,6 @@ export const URL_PARAMS = {
 } as const;
 
 export const DEFAULT_FILTERS = {
-  formScope: SCOPE_TYPES.SECURITY_VULNERABILITY,
-  organizationType: ORGANIZATION_TYPES.GOVERNMENT_AGENCY,
+  formScope: null,
+  organizationType: null,
 } as const;

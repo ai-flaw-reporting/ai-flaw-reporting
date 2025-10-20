@@ -5,14 +5,15 @@ import { routes } from "~/lib/routes";
 import { cn } from "~/lib/utils";
 
 export default function Header() {
-  const navLinkStyles = "py-2 text-sm font-medium text-gray-600";
+  const navLinkStyles =
+    "py-2 text-sm font-medium text-gray-600 dark:text-gray-100";
 
   return (
     <>
-      <header className="mx-auto w-full max-w-[1440px] px-21 py-3.5">
-        <nav className="flex items-center justify-between">
+      <header className="dark:bg-gray-800">
+        <nav className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-21 py-3.5">
           <Link
-            className="py-1.5 text-base font-semibold text-gray-800"
+            className="py-1.5 text-base font-semibold text-gray-800 dark:text-white"
             href={routes.home}
           >
             AI Flaw Reporting

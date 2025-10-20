@@ -108,49 +108,5 @@
     "icon": "icons/resource/open-ai.svg",
     "reportUrl": null,
     "readMoreUrl": null
-  },
-  {
-    "id": "11",
-    "title": "OpenAI",
-    "organizationType": "Government Agency",
-    "scopesType": "Report Scope",
-    "scopes": ["AI Safety Hazard"],
-    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
-    "icon": "icons/resource/open-ai.svg",
-    "reportUrl": null,
-    "readMoreUrl": null
-  },
-  {
-    "id": "12",
-    "title": "Google",
-    "organizationType": "Civil Society",
-    "scopesType": "Report Scope",
-    "scopes": ["Incident"],
-    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
-    "icon": "icons/resource/google.svg",
-    "reportUrl": null,
-    "readMoreUrl": null
-  },
-  {
-    "id": "13",
-    "title": "Anthropic",
-    "organizationType": "Incident Database",
-    "scopesType": "Report Scope",
-    "scopes": ["Security Vulnerability", "AI Safety Hazard"],
-    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
-    "icon": "icons/resource/anthropic.svg",
-    "reportUrl": null,
-    "readMoreUrl": null
-  },
-  {
-    "id": "14",
-    "title": "Claude",
-    "organizationType": "Government Agency",
-    "scopesType": "Report Scope",
-    "scopes": ["Incident", "AI Safety Hazard"],
-    "summary": "You discovered security flaws in APIs, ChatGPT, Playground, or third-party corporate targets. Note: Content issues like hallucinations are out of scope for bounty but can be reported separately.",
-    "icon": "icons/resource/claude.svg",
-    "reportUrl": null,
-    "readMoreUrl": null
   }
 ]

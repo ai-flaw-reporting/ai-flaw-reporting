@@ -1,6 +1,6 @@
 "use client";
 
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Button } from "~/components/ui/button";
 
 import {
   FORM_SCOPE_OPTIONS,
@@ -8,6 +8,7 @@ import {
 } from "~/entities/resource";
 
 import { useResourceFilters } from "../model/useResourcesFilter";
+import { cn } from "~/lib/utils";
 
 export function ResourcesFilterBar() {
   const {
@@ -17,6 +18,11 @@ export function ResourcesFilterBar() {
     handleOrgTypeChange,
   } = useResourceFilters();
 
+  const commonClassname =
+    "h-[24px] rounded-[6px] border px-[8px] py-[3px] text-xs";
+  const unActiveClassname =
+    "dark:border-gray-400 dark:bg-transparent dark:text-gray-200";
+
   return (
     <nav className="flex items-center gap-1.5" aria-label="Filter resources">
       <h2 className="sr-only">Filter</h2>
@@ -25,29 +31,44 @@ export function ResourcesFilterBar() {
         <h3 className="px-2 text-xs font-medium text-gray-600 dark:text-gray-400">
           Form Scope:
         </h3>
-        <RadioGroup value={formScope} onValueChange={handleFormScopeChange}>
+        <div className="flex gap-1.5">
           {FORM_SCOPE_OPTIONS.map((label) => (
-            <RadioGroupItem key={label} value={label}>
+            <Button
+              key={label}
+              className={cn(
+                commonClassname,
+                formScope !== label && unActiveClassname,
+              )}
+              variant={formScope === label ? "indigo-default" : "outline"}
+              onClick={() => handleFormScopeChange(label)}
+            >
               {label}
-            </RadioGroupItem>
+            </Button>
           ))}
-        </RadioGroup>
+        </div>
       </div>
 
       <div className="flex items-center gap-1.5">
         <h3 className="px-2 text-xs font-medium text-gray-600 dark:text-gray-400">
           Organization Type:
         </h3>
-        <RadioGroup
-          value={organizationType}
-          onValueChange={handleOrgTypeChange}
-        >
+        <div className="flex gap-1.5">
           {ORGANIZATION_TYPE_OPTIONS.map((label) => (
-            <RadioGroupItem key={label} value={label}>
+            <Button
+              key={label}
+              className={cn(
+                commonClassname,
+                organizationType !== label && unActiveClassname,
+              )}
+              variant={
+                organizationType === label ? "indigo-default" : "outline"
+              }
+              onClick={() => handleOrgTypeChange(label)}
+            >
               {label}
-            </RadioGroupItem>
+            </Button>
           ))}
-        </RadioGroup>
+        </div>
       </div>
     </nav>
   );
