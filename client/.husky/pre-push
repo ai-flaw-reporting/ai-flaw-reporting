@@ -1,2 +1,2 @@
-yarn lint:fix && yarn build
+yarn lint:fix && yarn typecheck && yarn build
 

@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [".next", "cms"],
+    ignores: [".next", "next-env.d.ts"],
   },
   {
     files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],

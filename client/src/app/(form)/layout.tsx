@@ -1,7 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -17,7 +17,7 @@ import {
 
 export default function FormLayout({ children }: PropsWithChildren) {
   const form = useForm<AiFlawReportSchema>({
-    resolver: zodResolver(aiFlawReportSchema),
+resolver: zodResolver(aiFlawReportSchema) as Resolver<AiFlawReportSchema>,
     mode: "onBlur",
     defaultValues: {
       step: STEP_ORDER[0], // CLASSIFY_REPORT
