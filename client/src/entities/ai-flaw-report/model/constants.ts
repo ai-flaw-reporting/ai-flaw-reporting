@@ -1,4 +1,4 @@
-import { classifyReportSchema } from "./schema";
+import { classifyReportSchema, reporterDetailsSchema } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
 export const STEP_STATUS = {
@@ -32,6 +32,10 @@ export const SAVE_STATUS_KEY_PREFIX = "ai-flaw-report-";
 
 export const FORM_AUTOSAVE_DELAY = 1000;
 
+export const FORM_VALUES = {
+  OTHER: "Other",
+} as const;
+
 export const STEP_CONFIGS_WITH_SCHEMAS = {
   ...STEP_CONFIGS,
   CLASSIFY_REPORT: {
@@ -40,7 +44,7 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   REPORTER_AND_SYSTEM_DETAILS: {
     ...STEP_CONFIGS.REPORTER_AND_SYSTEM_DETAILS,
-    schema: undefined,
+    schema: reporterDetailsSchema,
   },
   FLAW_INCIDENT_DESCRIPTION: {
     ...STEP_CONFIGS.FLAW_INCIDENT_DESCRIPTION,

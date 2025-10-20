@@ -25,7 +25,7 @@ export function FormNavigation() {
     if (savedData) {
       reset(savedData);
     }
-  }, [reset, loadSavedData]);
+  }, [reset, loadSavedData, currentStep]);
 
   return (
     <nav className="mx-auto flex max-w-[1056px] justify-between">

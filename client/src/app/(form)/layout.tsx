@@ -18,11 +18,11 @@ import {
 export default function FormLayout({ children }: PropsWithChildren) {
   const form = useForm<AiFlawReportSchema>({
     resolver: zodResolver(aiFlawReportSchema),
+    mode: "onBlur",
     defaultValues: {
       step: STEP_ORDER[0], // CLASSIFY_REPORT
-      classifyReport: {
-        csam_acknowledgment: false,
-      },
+      classifyReport: { csam_acknowledgment: false },
+      reporterDetails: { system: { notSure: false } },
     },
   });
 

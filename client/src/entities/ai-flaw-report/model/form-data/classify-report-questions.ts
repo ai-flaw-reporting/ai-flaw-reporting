@@ -1,4 +1,4 @@
-import type { AiFlawReportSchema } from "./types";
+import type { AiFlawReportSchema } from "../types";
 
 type ClassifyReportField = keyof AiFlawReportSchema["classifyReport"];
 
