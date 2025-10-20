@@ -7,7 +7,7 @@ export const saveFormSaveStatus = (dataToSave: unknown, stepId: string) => {
   );
 };
 
-export const getFormSaveStatus = (stepId: string) => {
+export const getFormSaveStatus = (stepId: string): unknown => {
   const saved = localStorage.getItem(`${SAVE_STATUS_KEY_PREFIX}${stepId}`);
   return saved ? JSON.parse(saved) : null;
 };

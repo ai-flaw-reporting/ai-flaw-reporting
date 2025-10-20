@@ -62,7 +62,7 @@ export function useFormStep(stepKey: FormStep) {
         saveFormSaveStatus(dataToSave, stepConfig.id);
 
         setSaveStatus(SAVE_STATUS.SAVED);
-      } catch (error) {
+      } catch {
         setSaveStatus(SAVE_STATUS.SAVED);
       }
     }, FORM_AUTOSAVE_DELAY);

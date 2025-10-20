@@ -13,9 +13,9 @@ export function useResourceFilters() {
   const searchParams = useSearchParams();
 
   const formScope =
-    searchParams.get(URL_PARAMS.FORM_SCOPE) || DEFAULT_FILTERS.formScope;
+    searchParams.get(URL_PARAMS.FORM_SCOPE) ?? DEFAULT_FILTERS.formScope;
   const organizationType =
-    searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ||
+    searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ??
     DEFAULT_FILTERS.organizationType;
 
   // Initialize URL params with defaults if missing
@@ -26,9 +26,9 @@ export function useResourceFilters() {
     if (!hasFormScope || !hasOrgType) {
       const params = buildSearchParams({
         formScope:
-          searchParams.get(URL_PARAMS.FORM_SCOPE) || DEFAULT_FILTERS.formScope,
+          searchParams.get(URL_PARAMS.FORM_SCOPE) ?? DEFAULT_FILTERS.formScope,
         organizationType:
-          searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ||
+          searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ??
           DEFAULT_FILTERS.organizationType,
       });
       router.replace(`?${params}`, { scroll: false });
@@ -39,7 +39,7 @@ export function useResourceFilters() {
     const params = buildSearchParams({
       formScope: value,
       organizationType:
-        searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ||
+        searchParams.get(URL_PARAMS.ORGANIZATION_TYPE) ??
         DEFAULT_FILTERS.organizationType,
     });
     router.push(`?${params}`, { scroll: false });
@@ -48,7 +48,7 @@ export function useResourceFilters() {
   const handleOrgTypeChange = (value: string) => {
     const params = buildSearchParams({
       formScope:
-        searchParams.get(URL_PARAMS.FORM_SCOPE) || DEFAULT_FILTERS.formScope,
+        searchParams.get(URL_PARAMS.FORM_SCOPE) ?? DEFAULT_FILTERS.formScope,
       organizationType: value,
     });
     router.push(`?${params}`, { scroll: false });

@@ -31,7 +31,8 @@ export function useStepNavigation() {
     if (isFirstStep) return;
 
     const prevStep = STEP_ORDER[currentStepIndex - 1];
-    prevStep && setValue("step", prevStep);
+
+    if (prevStep) setValue("step", prevStep);
   }, [currentStepIndex, isFirstStep, setValue]);
 
   return {
