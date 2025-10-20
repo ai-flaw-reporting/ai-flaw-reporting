@@ -47,7 +47,7 @@ export default function CardComponent({
   return (
     <Card
       className={cn(
-        `group max-w-[258px] ${customCursor} pt-6.5 pb-5 text-center`,
+        `group max-w-[258px] ${customCursor} border-gray-300 bg-white pt-6.5 pb-5 text-center dark:border-gray-700 dark:bg-gray-900`,
         action.disabled && "pointer-events-none opacity-60",
       )}
     >
