@@ -53,12 +53,41 @@ export const AllDisabled: Story = {
   ),
 };
 
-export const WithIcons: Story = {
+export const YesNo: Story = {
   render: () => (
-    <RadioGroup defaultValue="email" className="flex flex-col space-y-2">
-      <RadioGroupItem value="email">📧 Email</RadioGroupItem>
-      <RadioGroupItem value="phone">📱 Phone</RadioGroupItem>
-      <RadioGroupItem value="sms">💬 SMS</RadioGroupItem>
+    <RadioGroup defaultValue="true" className="flex gap-4">
+      <RadioGroupItem variant="yesno" value="true">
+        Yes
+      </RadioGroupItem>
+      <RadioGroupItem variant="yesno" value="false">
+        No
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const YesNoDisabled: Story = {
+  render: () => (
+    <RadioGroup defaultValue="true" className="flex gap-4">
+      <RadioGroupItem variant="yesno" value="true">
+        Yes
+      </RadioGroupItem>
+      <RadioGroupItem variant="yesno" value="false" disabled>
+        No
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const YesNoUnselected: Story = {
+  render: () => (
+    <RadioGroup className="flex gap-4">
+      <RadioGroupItem variant="yesno" value="true">
+        Yes
+      </RadioGroupItem>
+      <RadioGroupItem variant="yesno" value="false">
+        No
+      </RadioGroupItem>
     </RadioGroup>
   ),
 };

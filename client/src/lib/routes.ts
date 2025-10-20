@@ -1,7 +1,7 @@
 export const routes = {
   home: "/",
   resources: "/resources",
-  report: "/report",
+  report: "/ai-flaw-report",
   dashboard: "/dashboard",
   contact: "#",
   openSource: "#",

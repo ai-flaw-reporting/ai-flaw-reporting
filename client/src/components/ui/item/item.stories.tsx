@@ -30,7 +30,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "outline", "muted"],
+      options: ["default", "outline", "muted", "danger"],
     },
     size: {
       control: "select",
@@ -122,6 +122,22 @@ export const Muted: Story = {
       <ItemContent>
         <ItemTitle>Muted Item</ItemTitle>
         <ItemDescription>This item has a muted background</ItemDescription>
+      </ItemContent>
+    </Item>
+  ),
+};
+
+export const Danger: Story = {
+  render: () => (
+    <Item variant="danger" className="w-[400px]">
+      <ItemMedia variant="icon">
+        <FileIcon />
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Security Alert</ItemTitle>
+        <ItemDescription>
+          This item indicates a dangerous or critical state
+        </ItemDescription>
       </ItemContent>
     </Item>
   ),
@@ -243,6 +259,19 @@ export const AllVariants: Story = {
           <ItemContent>
             <ItemTitle>Muted Item</ItemTitle>
             <ItemDescription>Item with muted background</ItemDescription>
+          </ItemContent>
+        </Item>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-sm font-medium">Danger</p>
+        <Item variant="danger" className="w-[400px]">
+          <ItemMedia variant="icon">
+            <FileIcon />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>Danger Item</ItemTitle>
+            <ItemDescription>Item indicating critical state</ItemDescription>
           </ItemContent>
         </Item>
       </div>

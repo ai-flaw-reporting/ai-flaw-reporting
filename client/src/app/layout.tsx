@@ -3,8 +3,6 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
-import Header from "./_components/header";
-import Footer from "./_components/footer";
 
 export const metadata: Metadata = {
   title: "AI Flaw & Incident Reporting",
@@ -40,9 +38,7 @@ export default function RootLayout({
           enableSystem
           storageKey="app-theme"
         >
-          <Header />
           {children}
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

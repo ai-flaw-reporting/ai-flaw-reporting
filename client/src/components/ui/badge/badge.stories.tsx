@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./index";
+import { Check } from "lucide-react";
 
 const meta = {
   title: "UI/Badge",
@@ -51,5 +52,12 @@ export const Warning: Story = {
   args: {
     variant: "warning",
     children: "Incident",
+  },
+};
+
+export const Success: Story = {
+  args: {
+    variant: "success",
+    children: <Check />,
   },
 };

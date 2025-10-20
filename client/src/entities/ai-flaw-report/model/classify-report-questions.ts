@@ -1,0 +1,32 @@
+import type { AiFlawReportSchema } from "./types";
+
+type ClassifyReportField = keyof AiFlawReportSchema["classifyReport"];
+
+export type QuestionConfig = {
+  name: `classifyReport.${ClassifyReportField}`;
+  label: string;
+  description: string;
+  yesClassName?: string;
+  showCsamWarning?: boolean;
+};
+
+export const CLASSIFY_REPORT_QUESTIONS: QuestionConfig[] = [
+  {
+    name: "classifyReport.real_world_harm",
+    label: "Has this flaw already caused harm in the real world?",
+    description: "(e.g., harm to people, property, rights, or infrastructure)",
+  },
+  {
+    name: "classifyReport.malicious_use",
+    label: "Could this flaw be used by someone with bad intent?",
+    description: "(e.g., harm to people, property, rights, or infrastructure)",
+  },
+  {
+    name: "classifyReport.csam_involved",
+    label: "Does this involve child sexual abuse material (real or synthetic)?",
+    description: "(e.g., harm to people, property, rights, or infrastructure)",
+    yesClassName:
+      "data-[state=checked]:bg-error-500 hover:data-[state=checked]:bg-error-600 data-[state=checked]:border-error-500 hover:data-[state=checked]:border-error-600 dark:data-[state=checked]:border-error-500 dark:hover:data-[state=checked]:border-error-600",
+    showCsamWarning: true,
+  },
+];
