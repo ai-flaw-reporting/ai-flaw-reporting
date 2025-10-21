@@ -26,7 +26,7 @@ import {
 
 import { cn } from "~/lib/utils";
 
-import { FieldTooltip } from "./field-tooltip";
+import { FieldTooltip } from "~/components/field-tooltip";
 
 type Props<T extends FieldValues> = {
   name: FieldPath<T>;

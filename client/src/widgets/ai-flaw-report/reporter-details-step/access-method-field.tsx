@@ -11,7 +11,7 @@ import {
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 
-import { FieldTooltip } from "./field-tooltip";
+import { FieldTooltip } from "~/components/field-tooltip";
 import { FormFieldRenderer } from "./form-field-renderer";
 
 export function AccessMethodField() {

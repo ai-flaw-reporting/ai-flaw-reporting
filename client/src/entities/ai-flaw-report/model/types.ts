@@ -8,6 +8,7 @@ import type {
   aiFlawReportSchema,
   classifyReportSchema,
   reporterDetailsSchema,
+  incidentDescriptionSchema,
 } from "./schema";
 
 export type FormStep = keyof typeof STEP_CONFIGS_WITH_SCHEMAS;
@@ -20,6 +21,9 @@ export type StepSchema = z.ZodSchema | undefined;
 
 export type ClassifyReportSchema = z.infer<typeof classifyReportSchema>;
 export type ReporterDetailsSchema = z.infer<typeof reporterDetailsSchema>;
+export type IncidentDescriptionSchema = z.infer<
+  typeof incidentDescriptionSchema
+>;
 export type AiFlawReportSchema = z.infer<typeof aiFlawReportSchema>;
 
 export type StepStatus = (typeof STEP_STATUS)[keyof typeof STEP_STATUS];
@@ -36,7 +40,13 @@ type BaseFieldConfig = {
 
 type InputFieldConfig = BaseFieldConfig & {
   type: "input";
-  inputType?: "text" | "email";
+  inputType?: "text" | "email" | "url";
+};
+
+type TextareaFieldConfig = BaseFieldConfig & {
+  type: "textarea";
+  rows?: number;
+  maxLength?: number;
 };
 
 type SelectFieldConfig = BaseFieldConfig & {
@@ -50,5 +60,6 @@ type CountrySelectFieldConfig = BaseFieldConfig & {
 
 export type FieldConfig =
   | InputFieldConfig
+  | TextareaFieldConfig
   | SelectFieldConfig
   | CountrySelectFieldConfig;

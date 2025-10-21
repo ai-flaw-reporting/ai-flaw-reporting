@@ -1,4 +1,8 @@
-import { classifyReportSchema, reporterDetailsSchema } from "./schema";
+import {
+  classifyReportSchema,
+  reporterDetailsSchema,
+  incidentDescriptionSchema,
+} from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
 export const STEP_STATUS = {
@@ -48,7 +52,7 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   FLAW_INCIDENT_DESCRIPTION: {
     ...STEP_CONFIGS.FLAW_INCIDENT_DESCRIPTION,
-    schema: undefined,
+    schema: incidentDescriptionSchema,
   },
   EVIDENCE_AND_REPRODUCTION: {
     ...STEP_CONFIGS.EVIDENCE_AND_REPRODUCTION,
