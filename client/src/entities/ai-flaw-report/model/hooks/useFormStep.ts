@@ -10,13 +10,14 @@ import {
   saveFormSaveStatus,
   STEP_CONFIGS_WITH_SCHEMAS,
   useAiFlawFormContext,
+  createEvidenceSchema,
   type AiFlawReportSchema,
   type FormStep,
   type SaveStatus,
 } from "~/entities/ai-flaw-report";
 
 export function useFormStep(stepKey: FormStep) {
-  const { formState, getFieldState } = useAiFlawFormContext();
+  const { formState, getFieldState, getValues } = useAiFlawFormContext();
 
   const saveTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(SAVE_STATUS.SAVED);
@@ -31,6 +32,22 @@ export function useFormStep(stepKey: FormStep) {
   const fieldState = getFieldState(formField, formState);
 
   const isStepValid = (() => {
+    // Special handling for evidence step with CSAM context
+    if (stepKey === "EVIDENCE_AND_REPRODUCTION") {
+      const csamInvolved = getValues("classifyReport.csam_involved");
+      // If CSAM is involved, always consider the step valid (evidence collection is skipped)
+      if (csamInvolved) {
+        return true;
+      }
+
+      // If CSAM is not involved, validate normally
+      if (!formData) return false;
+      const dynamicSchema = createEvidenceSchema(csamInvolved);
+      const validationResult = dynamicSchema.safeParse(formData);
+      return validationResult.success;
+    }
+
+    // For other steps, validate normally
     if (!formData) return false;
 
     if (stepConfig.schema) {
@@ -44,7 +61,15 @@ export function useFormStep(stepKey: FormStep) {
   const isNextDisabled = !isStepValid;
 
   useEffect(() => {
-    if (!formData) return;
+    console.log(`[useFormStep] Effect triggered for step: ${stepKey}`);
+    console.log(`[useFormStep] Current formData:`, formData);
+
+    if (!formData) {
+      console.log(
+        `[useFormStep] No formData, skipping save for step: ${stepKey}`,
+      );
+      return;
+    }
 
     setSaveStatus(SAVE_STATUS.SAVING);
 
@@ -52,12 +77,15 @@ export function useFormStep(stepKey: FormStep) {
       clearTimeout(saveTimeoutRef.current);
     }
 
+    console.log("Saving data for step:", stepKey, formData);
+
     saveTimeoutRef.current = setTimeout(() => {
       try {
         const dataToSave = {
           step: stepKey,
           [formField]: formData,
         };
+        console.log("Data to save:", dataToSave);
 
         saveFormSaveStatus(dataToSave, stepConfig.id);
 

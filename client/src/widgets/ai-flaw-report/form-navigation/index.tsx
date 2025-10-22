@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useWatch } from "react-hook-form";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -8,6 +8,7 @@ import {
   useAiFlawFormContext,
   useFormStep,
   useStepNavigation,
+  STEP_CONFIGS_WITH_SCHEMAS,
 } from "~/entities/ai-flaw-report";
 
 import { Button } from "~/components/ui/button";
@@ -15,17 +16,43 @@ import { Button } from "~/components/ui/button";
 export function FormNavigation() {
   const { control, reset } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
+  const loadedStepsRef = useRef<Set<string>>(new Set());
 
   const { loadSavedData } = useFormStep(currentStep);
   const { isLastStep, canGoNext, goToNextStep, goToPreviousStep, isFirstStep } =
     useStepNavigation();
 
   useEffect(() => {
-    const savedData = loadSavedData();
-    if (savedData) {
-      reset(savedData);
+    const stepConfig = STEP_CONFIGS_WITH_SCHEMAS[currentStep];
+    const stepId = stepConfig.id;
+
+    // Only load data once per step to prevent race conditions
+    if (loadedStepsRef.current.has(stepId)) {
+      return;
     }
-  }, [reset, loadSavedData, currentStep]);
+
+    const savedData = loadSavedData();
+
+    if (savedData != null) {
+      const formField = stepConfig.formField;
+
+      // Use reset with just the saved data for this field, don't merge with current data
+      const fieldData = (savedData as Record<string, unknown>)[formField];
+
+      if (fieldData) {
+        // Reset only the specific field, not the entire form
+        reset((prevData) => ({
+          ...prevData,
+          [formField]: fieldData,
+        }));
+        loadedStepsRef.current.add(stepId);
+      }
+    }
+  }, [reset, currentStep]);
+
+  useEffect(() => {
+    loadedStepsRef.current.clear();
+  }, [currentStep]);
 
   return (
     <nav className="mx-auto flex max-w-[1056px] justify-between">

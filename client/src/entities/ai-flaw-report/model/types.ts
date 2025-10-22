@@ -9,6 +9,7 @@ import type {
   classifyReportSchema,
   reporterDetailsSchema,
   incidentDescriptionSchema,
+  evidenceAndReproductionSchema,
 } from "./schema";
 
 export type FormStep = keyof typeof STEP_CONFIGS_WITH_SCHEMAS;
@@ -23,6 +24,9 @@ export type ClassifyReportSchema = z.infer<typeof classifyReportSchema>;
 export type ReporterDetailsSchema = z.infer<typeof reporterDetailsSchema>;
 export type IncidentDescriptionSchema = z.infer<
   typeof incidentDescriptionSchema
+>;
+export type EvidenceAndReproductionSchema = z.infer<
+  typeof evidenceAndReproductionSchema
 >;
 export type AiFlawReportSchema = z.infer<typeof aiFlawReportSchema>;
 
@@ -58,8 +62,16 @@ type CountrySelectFieldConfig = BaseFieldConfig & {
   type: "country";
 };
 
+type FileUploadFieldConfig = BaseFieldConfig & {
+  type: "file";
+  accept?: string;
+  maxSize?: number;
+  multiple?: boolean;
+};
+
 export type FieldConfig =
   | InputFieldConfig
   | TextareaFieldConfig
   | SelectFieldConfig
-  | CountrySelectFieldConfig;
+  | CountrySelectFieldConfig
+  | FileUploadFieldConfig;

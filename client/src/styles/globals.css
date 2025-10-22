@@ -600,9 +600,11 @@
   /* Form field styles */
   .form-label {
     @apply text-sm !leading-5 font-medium text-gray-700 dark:text-gray-100;
+    @apply text-sm !leading-5 font-medium text-gray-700 dark:text-gray-100;
   }
 
   .form-title {
+    @apply !text-xl !leading-[30px] !font-semibold text-gray-800 dark:text-white;
     @apply !text-xl !leading-[30px] !font-semibold text-gray-800 dark:text-white;
   }
 
@@ -623,7 +625,7 @@
   }
 
   .form-item-field {
-    @apply gap-1.5 !border-none !p-0 dark:!bg-gray-800;
+    @apply !gap-1.5 !border-none !p-0 dark:!bg-gray-800;
   }
 
   .form-input-with-tooltip {

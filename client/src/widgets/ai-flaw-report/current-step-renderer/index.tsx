@@ -5,6 +5,7 @@ import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
 import { ClassifyReportStep } from "../classify-report-step";
 import { ReporterDetailsStep } from "../reporter-details-step";
 import { IncidentDescriptionStep } from "../incident-description-step";
+import { EvidenceAndReproductionStep } from "../evidence-and-reproduction-step";
 
 const placeholderStep = () => <p>This step will be implemented soon.</p>;
 
@@ -12,7 +13,7 @@ const STEP_COMPONENTS = {
   CLASSIFY_REPORT: ClassifyReportStep,
   REPORTER_AND_SYSTEM_DETAILS: ReporterDetailsStep,
   FLAW_INCIDENT_DESCRIPTION: IncidentDescriptionStep,
-  EVIDENCE_AND_REPRODUCTION: placeholderStep,
+  EVIDENCE_AND_REPRODUCTION: EvidenceAndReproductionStep,
   IMPACT_AND_RISK_ASSESSMENT: placeholderStep,
   SECURITY_INCIDENT_DETAILS: placeholderStep,
   DISCLOSURE_PLAN: placeholderStep,

@@ -125,9 +125,91 @@ export const incidentDescriptionSchema = z.object({
     .optional(),
 });
 
+export const evidenceAndReproductionSchema = z.object({
+  stepsToReproduce: z
+    .string()
+    .max(5000, "Maximum 5000 characters allowed")
+    .optional()
+    .or(z.literal("")),
+  proofOfConcept: z.string().optional().or(z.literal("")),
+  attachments: z
+    .array(z.instanceof(File))
+    .refine(
+      (files) => {
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        return files.every((file) => file.size <= maxSize);
+      },
+      {
+        message: "Files must be under 5MB each",
+      },
+    )
+    .refine(
+      (files) => {
+        const allowedTypes = [".pdf", ".docx", ".jpg", ".jpeg", ".png"];
+        return files.every((file) => {
+          const fileExtension = "." + file.name.split(".").pop()?.toLowerCase();
+          return allowedTypes.includes(fileExtension);
+        });
+      },
+      {
+        message: "Only .pdf, .docx, .jpg, .jpeg, .png files are allowed",
+      },
+    )
+    .optional()
+    .default([]),
+});
+
+// Create a dynamic schema that considers CSAM context
+export const createEvidenceSchema = (csamInvolved: boolean) => {
+  if (csamInvolved) {
+    // When CSAM is involved, all fields are optional
+    return z.object({
+      stepsToReproduce: z.string().optional().or(z.literal("")),
+      proofOfConcept: z.string().optional().or(z.literal("")),
+      attachments: z.array(z.instanceof(File)).optional().default([]),
+    });
+  }
+
+  // When CSAM is not involved, require stepsToReproduce
+  return z.object({
+    stepsToReproduce: z
+      .string()
+      .min(1, "Please describe how this issue can be reproduced.")
+      .max(5000, "Maximum 5000 characters allowed"),
+    proofOfConcept: z.string().optional().or(z.literal("")),
+    attachments: z
+      .array(z.instanceof(File))
+      .refine(
+        (files) => {
+          const maxSize = 5 * 1024 * 1024; // 5MB
+          return files.every((file) => file.size <= maxSize);
+        },
+        {
+          message: "Files must be under 5MB each",
+        },
+      )
+      .refine(
+        (files) => {
+          const allowedTypes = [".pdf", ".docx", ".jpg", ".jpeg", ".png"];
+          return files.every((file) => {
+            const fileExtension =
+              "." + file.name.split(".").pop()?.toLowerCase();
+            return allowedTypes.includes(fileExtension);
+          });
+        },
+        {
+          message: "Only .pdf, .docx, .jpg, .jpeg, .png files are allowed",
+        },
+      )
+      .optional()
+      .default([]),
+  });
+};
+
 export const aiFlawReportSchema = z.object({
   step: z.enum(STEP_ORDER as [FormStep, ...FormStep[]]),
   classifyReport: classifyReportSchema,
   reporterDetails: reporterDetailsSchema,
   incidentDescription: incidentDescriptionSchema,
+  evidence: evidenceAndReproductionSchema,
 });
