@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import { Checkbox } from "./index";
+import { Checkbox, CheckboxCard } from "./index";
 
 const meta = {
   title: "UI/Checkbox",
@@ -80,29 +80,34 @@ export const FormExample: Story = {
   ),
 };
 
-export const AllVariants: Story = {
+export const CheckboxCardExample: Story = {
   render: () => (
-    <div className="space-y-4">
-      <div className="flex items-center gap-4">
-        <Checkbox />
-        <span className="text-sm">Unchecked</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <Checkbox defaultChecked />
-        <span className="text-sm">Checked</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <Checkbox disabled />
-        <span className="text-sm">Disabled</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <Checkbox disabled defaultChecked />
-        <span className="text-sm">Disabled Checked</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <Checkbox aria-invalid />
-        <span className="text-sm">Invalid</span>
-      </div>
+    <div className="w-80 space-y-4">
+      <CheckboxCard>
+        <div>
+          <h3 className="font-medium text-gray-900">Option 1</h3>
+          <p className="mt-1 text-sm text-gray-600">
+            This is a description of the first option with some additional
+            details.
+          </p>
+        </div>
+      </CheckboxCard>
+      <CheckboxCard defaultChecked>
+        <div>
+          <h3 className="font-medium text-gray-900">Option 2</h3>
+          <p className="mt-1 text-sm text-gray-600">
+            This option is pre-selected and shows how it looks when checked.
+          </p>
+        </div>
+      </CheckboxCard>
+      <CheckboxCard disabled>
+        <div>
+          <h3 className="font-medium text-gray-400">Option 3 (Disabled)</h3>
+          <p className="mt-1 text-sm text-gray-400">
+            This option is disabled and cannot be selected.
+          </p>
+        </div>
+      </CheckboxCard>
     </div>
   ),
 };

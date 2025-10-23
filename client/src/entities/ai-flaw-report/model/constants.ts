@@ -3,6 +3,7 @@ import {
   reporterDetailsSchema,
   incidentDescriptionSchema,
   evidenceAndReproductionSchema,
+  impactAndRiskAssessmentSchema,
 } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
@@ -61,7 +62,7 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   IMPACT_AND_RISK_ASSESSMENT: {
     ...STEP_CONFIGS.IMPACT_AND_RISK_ASSESSMENT,
-    schema: undefined,
+    schema: impactAndRiskAssessmentSchema,
   },
   SECURITY_INCIDENT_DETAILS: {
     ...STEP_CONFIGS.SECURITY_INCIDENT_DETAILS,

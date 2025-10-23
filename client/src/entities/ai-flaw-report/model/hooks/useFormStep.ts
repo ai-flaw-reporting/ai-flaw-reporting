@@ -61,15 +61,7 @@ export function useFormStep(stepKey: FormStep) {
   const isNextDisabled = !isStepValid;
 
   useEffect(() => {
-    console.log(`[useFormStep] Effect triggered for step: ${stepKey}`);
-    console.log(`[useFormStep] Current formData:`, formData);
-
-    if (!formData) {
-      console.log(
-        `[useFormStep] No formData, skipping save for step: ${stepKey}`,
-      );
-      return;
-    }
+    if (!formData) return;
 
     setSaveStatus(SAVE_STATUS.SAVING);
 
@@ -77,15 +69,12 @@ export function useFormStep(stepKey: FormStep) {
       clearTimeout(saveTimeoutRef.current);
     }
 
-    console.log("Saving data for step:", stepKey, formData);
-
     saveTimeoutRef.current = setTimeout(() => {
       try {
         const dataToSave = {
           step: stepKey,
           [formField]: formData,
         };
-        console.log("Data to save:", dataToSave);
 
         saveFormSaveStatus(dataToSave, stepConfig.id);
 

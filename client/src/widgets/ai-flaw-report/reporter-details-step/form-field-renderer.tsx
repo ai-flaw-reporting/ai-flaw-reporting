@@ -68,7 +68,11 @@ export function FormFieldRenderer<T extends FieldValues>({
               {config.type === "select" && (
                 <Select
                   value={field.value ?? ""}
-                  onValueChange={field.onChange}
+                  onValueChange={(newValue) => {
+                    if (!newValue) return;
+
+                    field.onChange(newValue);
+                  }}
                 >
                   <SelectTrigger
                     className={cn(

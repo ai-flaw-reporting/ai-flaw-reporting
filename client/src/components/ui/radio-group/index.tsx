@@ -27,7 +27,7 @@ function RadioGroupItem({
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Item> & {
   children?: React.ReactNode;
-  variant?: "default" | "yesno";
+  variant?: "default" | "yesno" | "dots";
 }) {
   if (variant === "yesno") {
     const isYes = props.value === "true";
@@ -131,6 +131,45 @@ function RadioGroupItem({
         <RadioGroupPrimitive.Indicator
           data-slot="radio-group-indicator"
           className="absolute inset-0 flex items-center justify-center"
+        />
+      </RadioGroupPrimitive.Item>
+    );
+  }
+
+  if (variant === "dots") {
+    return (
+      <RadioGroupPrimitive.Item
+        data-slot="radio-group-item"
+        className={cn(
+          "relative inline-flex cursor-pointer items-center gap-2 text-sm font-medium",
+          "bg-transparent text-gray-700",
+          "px-3 py-2",
+          className,
+        )}
+        {...props}
+      >
+        <span className="relative flex h-4 w-4 items-center justify-center">
+          <Image
+            src="/icons/form/radio-checked.svg"
+            alt=""
+            width={16}
+            height={16}
+            className={cn("text-current", props.checked ? "block" : "hidden")}
+            aria-hidden="true"
+          />
+          <Image
+            src="/icons/form/radio.svg"
+            alt=""
+            width={16}
+            height={16}
+            className={cn("text-current", props.checked ? "hidden" : "block")}
+            aria-hidden="true"
+          />
+        </span>
+        {children}
+        <RadioGroupPrimitive.Indicator
+          data-slot="radio-group-indicator"
+          className="absolute inset-0"
         />
       </RadioGroupPrimitive.Item>
     );

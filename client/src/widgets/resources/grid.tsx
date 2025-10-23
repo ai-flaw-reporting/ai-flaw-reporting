@@ -1,7 +1,6 @@
 import { ResourceCard, type Resource } from "~/entities/resource";
 
 export function ResourcesGrid({ resources }: { resources: Resource[] }) {
-  console.log(resources);
   return (
     <section aria-labelledby="resources-grid-title">
       <h2 id="resources-grid-title" className="sr-only">

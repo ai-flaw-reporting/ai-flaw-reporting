@@ -206,10 +206,40 @@ export const createEvidenceSchema = (csamInvolved: boolean) => {
   });
 };
 
+export const impactAndRiskAssessmentSchema = z
+  .object({
+    severityOfHarm: z.string(),
+    prevalence: z.string(),
+    harmType: z.string(),
+    harmTypes: z
+      .array(z.string())
+      .min(1, "At least one harm type must be selected"),
+    harmOtherText: z.string().max(200).optional(),
+    specificImpactTypes: z.array(z.string()).optional().default([]),
+    affectedStakeholders: z
+      .array(z.string())
+      .min(1, "At least one stakeholder must be selected"),
+    aiCompanyInvolved: z.array(z.string()).optional(),
+    mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
+  })
+  .refine(
+    (data) => {
+      if (data.harmTypes.includes("other") && !data.harmOtherText?.trim()) {
+        return false;
+      }
+      return true;
+    },
+    {
+      path: ["harmOtherText"],
+      message: "Please specify the other harm type",
+    },
+  );
+
 export const aiFlawReportSchema = z.object({
   step: z.enum(STEP_ORDER as [FormStep, ...FormStep[]]),
   classifyReport: classifyReportSchema,
   reporterDetails: reporterDetailsSchema,
   incidentDescription: incidentDescriptionSchema,
   evidence: evidenceAndReproductionSchema,
+  impactAssessment: impactAndRiskAssessmentSchema,
 });

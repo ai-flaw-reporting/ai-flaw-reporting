@@ -91,3 +91,35 @@ export const YesNoUnselected: Story = {
     </RadioGroup>
   ),
 };
+
+export const Dots: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1" className="flex gap-4">
+      <RadioGroupItem variant="dots" value="option1">
+        Option 1
+      </RadioGroupItem>
+      <RadioGroupItem variant="dots" value="option2">
+        Option 2
+      </RadioGroupItem>
+      <RadioGroupItem variant="dots" value="option3">
+        Option 3
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const DotsDisabled: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1" className="flex gap-4">
+      <RadioGroupItem variant="dots" value="option1">
+        Option 1
+      </RadioGroupItem>
+      <RadioGroupItem variant="dots" value="option2" disabled>
+        Option 2 (Disabled)
+      </RadioGroupItem>
+      <RadioGroupItem variant="dots" value="option3">
+        Option 3
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};

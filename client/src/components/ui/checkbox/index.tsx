@@ -29,4 +29,42 @@ function Checkbox({
   );
 }
 
-export { Checkbox };
+function CheckboxCard({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof CheckboxPrimitive.Root> & {
+  children?: React.ReactNode;
+}) {
+  return (
+    <CheckboxPrimitive.Root
+      data-slot="checkbox-card"
+      className={cn(
+        "relative w-full rounded-lg border bg-white px-3.5 py-3 text-left",
+        "border-gray-300 data-[state=checked]:border-indigo-700 data-[state=checked]:bg-indigo-50",
+        "transition-colors outline-none",
+        "focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:ring-[3px]",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        "flex items-start",
+        className,
+      )}
+      {...props}
+    >
+      <div className="pr-8 leading-relaxed">{children}</div>
+
+      <CheckboxPrimitive.Indicator
+        data-slot="checkbox-card-indicator"
+        className="pointer-events-none absolute top-3 right-3.5"
+      >
+        <img
+          src="/icons/form/circle-checked.svg"
+          alt=""
+          className="h-5 w-5"
+          aria-hidden
+        />
+      </CheckboxPrimitive.Indicator>
+    </CheckboxPrimitive.Root>
+  );
+}
+
+export { Checkbox, CheckboxCard };
