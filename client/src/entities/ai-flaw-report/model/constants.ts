@@ -4,6 +4,7 @@ import {
   incidentDescriptionSchema,
   evidenceAndReproductionSchema,
   impactAndRiskAssessmentSchema,
+  createSecurityIncidentDetailsSchema,
 } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
@@ -66,7 +67,7 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   SECURITY_INCIDENT_DETAILS: {
     ...STEP_CONFIGS.SECURITY_INCIDENT_DETAILS,
-    schema: undefined,
+    schema: createSecurityIncidentDetailsSchema,
   },
   DISCLOSURE_PLAN: {
     ...STEP_CONFIGS.DISCLOSURE_PLAN,

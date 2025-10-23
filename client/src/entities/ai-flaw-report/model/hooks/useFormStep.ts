@@ -11,6 +11,7 @@ import {
   STEP_CONFIGS_WITH_SCHEMAS,
   useAiFlawFormContext,
   createEvidenceSchema,
+  createSecurityIncidentDetailsSchema,
   type AiFlawReportSchema,
   type FormStep,
   type SaveStatus,
@@ -47,10 +48,29 @@ export function useFormStep(stepKey: FormStep) {
       return validationResult.success;
     }
 
+    // Special handling for security incident details step
+    if (stepKey === "SECURITY_INCIDENT_DETAILS") {
+      const realWorldHarm = getValues("classifyReport.real_world_harm");
+      const maliciousUse = getValues("classifyReport.malicious_use");
+
+      if (!formData) return false;
+      const dynamicSchema = createSecurityIncidentDetailsSchema(
+        realWorldHarm,
+        maliciousUse,
+      );
+      const validationResult = dynamicSchema.safeParse(formData);
+      return validationResult.success;
+    }
+
     // For other steps, validate normally
     if (!formData) return false;
 
     if (stepConfig.schema) {
+      // Check if schema is a function (dynamic schema)
+      if (typeof stepConfig.schema === "function") {
+        // For dynamic schemas, we need to handle them in special cases above
+        return true;
+      }
       const validationResult = stepConfig.schema.safeParse(formData);
       return validationResult.success;
     }

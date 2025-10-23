@@ -159,10 +159,8 @@ export const evidenceAndReproductionSchema = z.object({
     .default([]),
 });
 
-// Create a dynamic schema that considers CSAM context
 export const createEvidenceSchema = (csamInvolved: boolean) => {
   if (csamInvolved) {
-    // When CSAM is involved, all fields are optional
     return z.object({
       stepsToReproduce: z.string().optional().or(z.literal("")),
       proofOfConcept: z.string().optional().or(z.literal("")),
@@ -170,7 +168,6 @@ export const createEvidenceSchema = (csamInvolved: boolean) => {
     });
   }
 
-  // When CSAM is not involved, require stepsToReproduce
   return z.object({
     stepsToReproduce: z
       .string()
@@ -204,6 +201,99 @@ export const createEvidenceSchema = (csamInvolved: boolean) => {
       .optional()
       .default([]),
   });
+};
+
+export const securityDetailsSchema = z.object({
+  substrateRelationship: z.string().optional(),
+  incidentLocation: z.array(z.string()).optional().default([]),
+  harmNarrative: z.string().max(500).optional().or(z.literal("")),
+  attackerResources: z.string().optional(),
+  attackerResourcesOther: z.string().optional(),
+  attackerObjectives: z.string().optional(),
+  attackerObjectivesOther: z.string().optional(),
+  detectionMethod: z.string().optional(),
+  discoveryNarrative: z.string().optional().or(z.literal("")),
+});
+
+export const createSecurityIncidentDetailsSchema = (
+  realWorldHarm: boolean,
+  maliciousUse: boolean,
+) => {
+  return securityDetailsSchema
+    .refine(
+      (data) => {
+        if (realWorldHarm && !data.substrateRelationship?.trim()) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["substrateRelationship"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (maliciousUse && !data.attackerResources?.trim()) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["attackerResources"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (
+          maliciousUse &&
+          data.attackerResources === "other" &&
+          !data.attackerResourcesOther?.trim()
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["attackerResourcesOther"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (maliciousUse && !data.attackerObjectives?.trim()) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["attackerObjectives"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (
+          maliciousUse &&
+          data.attackerObjectives === "other" &&
+          !data.attackerObjectivesOther?.trim()
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["attackerObjectivesOther"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (realWorldHarm && !data.detectionMethod?.trim()) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["detectionMethod"],
+      },
+    );
 };
 
 export const impactAndRiskAssessmentSchema = z
@@ -242,4 +332,5 @@ export const aiFlawReportSchema = z.object({
   incidentDescription: incidentDescriptionSchema,
   evidence: evidenceAndReproductionSchema,
   impactAssessment: impactAndRiskAssessmentSchema,
+  securityDetails: securityDetailsSchema,
 });

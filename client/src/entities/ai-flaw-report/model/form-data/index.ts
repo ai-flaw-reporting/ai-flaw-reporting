@@ -7,3 +7,4 @@ export * from "./ai-model-fields-config";
 export * from "./incident-description-fields-config";
 export * from "./evidence-fields-config";
 export * from "./impact-assessment-fields-config";
+export * from "./security-details-fields-config";

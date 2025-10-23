@@ -11,6 +11,8 @@ import type {
   incidentDescriptionSchema,
   evidenceAndReproductionSchema,
   impactAndRiskAssessmentSchema,
+  securityDetailsSchema,
+  createSecurityIncidentDetailsSchema,
 } from "./schema";
 
 export type FormStep = keyof typeof STEP_CONFIGS_WITH_SCHEMAS;
@@ -31,6 +33,10 @@ export type EvidenceAndReproductionSchema = z.infer<
 >;
 export type ImpactAndRiskAssessmentSchema = z.infer<
   typeof impactAndRiskAssessmentSchema
+>;
+export type SecurityDetailsSchema = z.infer<typeof securityDetailsSchema>;
+export type SecurityIncidentDetailsSchema = z.infer<
+  ReturnType<typeof createSecurityIncidentDetailsSchema>
 >;
 export type AiFlawReportSchema = z.infer<typeof aiFlawReportSchema>;
 
