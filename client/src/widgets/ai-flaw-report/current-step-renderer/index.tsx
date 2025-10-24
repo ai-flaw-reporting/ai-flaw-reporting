@@ -8,6 +8,7 @@ import { IncidentDescriptionStep } from "../incident-description-step";
 import { EvidenceAndReproductionStep } from "../evidence-and-reproduction-step";
 import { ImpactAndRiskAssessmentStep } from "../impact-and-risk-assessment-step";
 import { SecurityIncidentDetailsStep } from "../security-incident-details-step";
+import { DisclosurePlanStep } from "../disclosure-plan-step";
 
 const placeholderStep = () => <p>This step will be implemented soon.</p>;
 
@@ -18,7 +19,7 @@ const STEP_COMPONENTS = {
   EVIDENCE_AND_REPRODUCTION: EvidenceAndReproductionStep,
   IMPACT_AND_RISK_ASSESSMENT: ImpactAndRiskAssessmentStep,
   SECURITY_INCIDENT_DETAILS: SecurityIncidentDetailsStep,
-  DISCLOSURE_PLAN: placeholderStep,
+  DISCLOSURE_PLAN: DisclosurePlanStep,
   REVIEW_AND_SUBMIT_REPORT: placeholderStep,
 } as const;
 

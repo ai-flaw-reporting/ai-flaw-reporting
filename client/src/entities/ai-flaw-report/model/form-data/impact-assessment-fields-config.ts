@@ -1,3 +1,4 @@
+import { FORM_VALUES } from "../constants";
 import type { FieldConfig } from "../types";
 
 export type ImpactAssessmentFieldName =
@@ -113,7 +114,7 @@ export const HARM_TYPES_FIELD = {
       description: "Bias against protected groups",
     },
     {
-      value: "other",
+      value: FORM_VALUES.OTHER_LOWERCASE,
       label: "Other",
       description: "Other types of harm",
     },
@@ -169,7 +170,7 @@ export const AFFECTED_STAKEHOLDERS_FIELD = {
       description: "Critical systems and services",
     },
     {
-      value: "other",
+      value: FORM_VALUES.OTHER_LOWERCASE,
       label: "Other",
       description: "Other affected parties",
     },

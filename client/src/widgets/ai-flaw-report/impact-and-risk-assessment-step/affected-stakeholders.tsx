@@ -1,6 +1,7 @@
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
 import {
   safeIncludes,
   createArrayCheckboxHandler,
@@ -68,7 +69,7 @@ export function AffectedStakeholders() {
                         </li>
                       ))}
                     </ul>
-                    {safeIncludes(field.value, "other") && (
+                    {safeIncludes(field.value, FORM_VALUES.OTHER_LOWERCASE) && (
                       <div className="space-y-8">
                         <AiCompanyInvolved />
                         <MitigationNotes />

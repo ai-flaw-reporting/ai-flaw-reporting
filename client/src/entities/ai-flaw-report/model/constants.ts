@@ -5,6 +5,7 @@ import {
   evidenceAndReproductionSchema,
   impactAndRiskAssessmentSchema,
   createSecurityIncidentDetailsSchema,
+  disclosurePlanSchema,
 } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
@@ -41,6 +42,7 @@ export const FORM_AUTOSAVE_DELAY = 1000;
 
 export const FORM_VALUES = {
   OTHER: "Other",
+  OTHER_LOWERCASE: "other",
 } as const;
 
 export const STEP_CONFIGS_WITH_SCHEMAS = {
@@ -71,7 +73,7 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   DISCLOSURE_PLAN: {
     ...STEP_CONFIGS.DISCLOSURE_PLAN,
-    schema: undefined,
+    schema: disclosurePlanSchema,
   },
   REVIEW_AND_SUBMIT_REPORT: {
     ...STEP_CONFIGS.REVIEW_AND_SUBMIT_REPORT,

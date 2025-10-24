@@ -123,3 +123,51 @@ export const DotsDisabled: Story = {
     </RadioGroup>
   ),
 };
+
+export const Card: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1" className="flex gap-4">
+      <RadioGroupItem variant="card" value="option1">
+        Option 1
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option2">
+        Option 2
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option3">
+        Option 3
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const CardDisabled: Story = {
+  render: () => (
+    <RadioGroup defaultValue="option1" className="flex gap-4">
+      <RadioGroupItem variant="card" value="option1">
+        Option 1
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option2" disabled>
+        Option 2 (Disabled)
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option3">
+        Option 3
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};
+
+export const CardUnselected: Story = {
+  render: () => (
+    <RadioGroup className="flex gap-4">
+      <RadioGroupItem variant="card" value="option1">
+        Option 1
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option2">
+        Option 2
+      </RadioGroupItem>
+      <RadioGroupItem variant="card" value="option3">
+        Option 3
+      </RadioGroupItem>
+    </RadioGroup>
+  ),
+};

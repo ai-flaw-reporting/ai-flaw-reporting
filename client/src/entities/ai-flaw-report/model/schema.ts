@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { FORM_VALUES } from "./constants";
 import { STEP_ORDER } from "./step-config";
+import { PUBLIC_DISCLOSURE_INTENT_VALUES } from "./form-data/disclosure-plan-fields-config";
 import type { FormStep } from "./types";
 
 export const classifyReportSchema = z
@@ -203,6 +204,38 @@ export const createEvidenceSchema = (csamInvolved: boolean) => {
   });
 };
 
+export const impactAndRiskAssessmentSchema = z
+  .object({
+    severityOfHarm: z.string(),
+    prevalence: z.string(),
+    harmType: z.string(),
+    harmTypes: z
+      .array(z.string())
+      .min(1, "At least one harm type must be selected"),
+    harmOtherText: z.string().max(200).optional(),
+    specificImpactTypes: z.array(z.string()).optional().default([]),
+    affectedStakeholders: z
+      .array(z.string())
+      .min(1, "At least one stakeholder must be selected"),
+    aiCompanyInvolved: z.array(z.string()).optional(),
+    mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
+  })
+  .refine(
+    (data) => {
+      if (
+        data.harmTypes.includes(FORM_VALUES.OTHER_LOWERCASE as string) &&
+        !data.harmOtherText?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      path: ["harmOtherText"],
+      message: "Please specify the other harm type",
+    },
+  );
+
 export const securityDetailsSchema = z.object({
   substrateRelationship: z.string().optional(),
   incidentLocation: z.array(z.string()).optional().default([]),
@@ -246,7 +279,7 @@ export const createSecurityIncidentDetailsSchema = (
       (data) => {
         if (
           maliciousUse &&
-          data.attackerResources === "other" &&
+          data.attackerResources === (FORM_VALUES.OTHER_LOWERCASE as string) &&
           !data.attackerResourcesOther?.trim()
         ) {
           return false;
@@ -272,7 +305,7 @@ export const createSecurityIncidentDetailsSchema = (
       (data) => {
         if (
           maliciousUse &&
-          data.attackerObjectives === "other" &&
+          data.attackerObjectives === (FORM_VALUES.OTHER_LOWERCASE as string) &&
           !data.attackerObjectivesOther?.trim()
         ) {
           return false;
@@ -296,32 +329,44 @@ export const createSecurityIncidentDetailsSchema = (
     );
 };
 
-export const impactAndRiskAssessmentSchema = z
+export const disclosurePlanSchema = z
   .object({
-    severityOfHarm: z.string(),
-    prevalence: z.string(),
-    harmType: z.string(),
-    harmTypes: z
-      .array(z.string())
-      .min(1, "At least one harm type must be selected"),
-    harmOtherText: z.string().max(200).optional(),
-    specificImpactTypes: z.array(z.string()).optional().default([]),
-    affectedStakeholders: z
-      .array(z.string())
-      .min(1, "At least one stakeholder must be selected"),
-    aiCompanyInvolved: z.array(z.string()).optional(),
-    mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
+    publicDisclosureIntent: z.enum([
+      PUBLIC_DISCLOSURE_INTENT_VALUES.YES,
+      PUBLIC_DISCLOSURE_INTENT_VALUES.NO,
+      PUBLIC_DISCLOSURE_INTENT_VALUES.UNDECIDED,
+      PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY,
+    ]),
+    embargoDetails: z.string().optional(),
+    disclosureTimeline: z.string().optional(),
+    disclosureDatepicker: z.string().optional(),
   })
   .refine(
-    (data) => {
-      if (data.harmTypes.includes("other") && !data.harmOtherText?.trim()) {
-        return false;
-      }
-      return true;
-    },
+    (data) =>
+      data.publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES ||
+      !!data.embargoDetails?.trim(),
     {
-      path: ["harmOtherText"],
-      message: "Please specify the other harm type",
+      path: ["embargoDetails"],
+    },
+  )
+  .refine(
+    (data) =>
+      (data.publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES &&
+        data.publicDisclosureIntent !==
+          PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY) ||
+      !!data.disclosureTimeline?.trim(),
+    {
+      path: ["disclosureTimeline"],
+    },
+  )
+  .refine(
+    (data) =>
+      (data.publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES &&
+        data.publicDisclosureIntent !==
+          PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY) ||
+      !!data.disclosureDatepicker?.trim(),
+    {
+      path: ["disclosureDatepicker"],
     },
   );
 
@@ -333,4 +378,5 @@ export const aiFlawReportSchema = z.object({
   evidence: evidenceAndReproductionSchema,
   impactAssessment: impactAndRiskAssessmentSchema,
   securityDetails: securityDetailsSchema,
+  disclosurePlan: disclosurePlanSchema,
 });

@@ -1,5 +1,6 @@
 import {
   ATTACKER_OBJECTIVES_OTHER_FIELD,
+  FORM_VALUES,
   useAiFlawFormContext,
 } from "~/entities/ai-flaw-report";
 
@@ -16,7 +17,7 @@ export function AttackerObjectivesField() {
     name: "securityDetails.attackerObjectives",
   });
 
-  if (attackerObjectives !== "other") return null;
+  if (attackerObjectives !== FORM_VALUES.OTHER_LOWERCASE) return null;
 
   return (
     <FormField

@@ -1,5 +1,6 @@
 import {
   ATTACKER_RESOURCES_OTHER_FIELD,
+  FORM_VALUES,
   useAiFlawFormContext,
 } from "~/entities/ai-flaw-report";
 
@@ -20,7 +21,7 @@ export function AttackerResourcesField() {
     name: "securityDetails.attackerResources",
   });
 
-  if (attackerResources !== "other") return null;
+  if (attackerResources !== FORM_VALUES.OTHER_LOWERCASE) return null;
 
   return (
     <FormField

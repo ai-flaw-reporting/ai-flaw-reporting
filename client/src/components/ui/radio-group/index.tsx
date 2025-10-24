@@ -5,6 +5,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import Image from "next/image";
 
 import { cn } from "~/lib/utils";
+import { Badge } from "../badge";
 
 function RadioGroup({
   className,
@@ -27,7 +28,7 @@ function RadioGroupItem({
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Item> & {
   children?: React.ReactNode;
-  variant?: "default" | "yesno" | "dots";
+  variant?: "default" | "yesno" | "dots" | "card";
 }) {
   if (variant === "yesno") {
     const isYes = props.value === "true";
@@ -150,27 +151,65 @@ function RadioGroupItem({
       >
         <span className="relative flex h-4 w-4 items-center justify-center">
           <Image
-            src="/icons/form/radio-checked.svg"
-            alt=""
-            width={16}
-            height={16}
-            className={cn("text-current", props.checked ? "block" : "hidden")}
-            aria-hidden="true"
-          />
-          <Image
             src="/icons/form/radio.svg"
             alt=""
             width={16}
             height={16}
-            className={cn("text-current", props.checked ? "hidden" : "block")}
+            className="text-current"
             aria-hidden="true"
           />
+          <RadioGroupPrimitive.Indicator className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/icons/form/radio-checked.svg"
+              alt=""
+              width={16}
+              height={16}
+              className="text-current"
+              aria-hidden="true"
+            />
+          </RadioGroupPrimitive.Indicator>
         </span>
+
         {children}
+
         <RadioGroupPrimitive.Indicator
           data-slot="radio-group-indicator"
           className="absolute inset-0"
         />
+      </RadioGroupPrimitive.Item>
+    );
+  }
+
+  if (variant === "card") {
+    return (
+      <RadioGroupPrimitive.Item
+        data-slot="radio-group-item"
+        className={cn(
+          // base
+          "text-md relative inline-flex w-auto cursor-pointer items-center gap-2 rounded-lg border bg-white px-4 py-[25px] font-semibold text-gray-800",
+          // borders
+          "border-gray-300",
+          // focus
+          "focus-visible:ring-ring/50 focus-visible:border-ring outline-none focus-visible:ring-[3px]",
+          // disabled
+          "disabled:pointer-events-none disabled:opacity-50",
+          // checked styles
+          "data-[state=checked]:border-indigo-700 data-[state=checked]:bg-indigo-50",
+          className,
+        )}
+        {...props}
+      >
+        <span className="flex w-full items-center justify-between">
+          {children}
+          <RadioGroupPrimitive.Indicator asChild>
+            <Badge
+              variant="default"
+              className="text-gray-25 ml-2 rounded-md border-none bg-indigo-700 px-2 py-[3px] text-xs font-bold"
+            >
+              Selected
+            </Badge>
+          </RadioGroupPrimitive.Indicator>
+        </span>
       </RadioGroupPrimitive.Item>
     );
   }
