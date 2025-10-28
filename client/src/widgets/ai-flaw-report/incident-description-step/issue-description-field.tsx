@@ -39,6 +39,9 @@ export function IssueDescriptionField() {
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
                 {ISSUE_DESCRIPTION_FIELD.label}
+                {ISSUE_DESCRIPTION_FIELD.required && (
+                  <span className="text-error-600"> *</span>
+                )}
               </FormLabel>
               <FormControl>
                 <Textarea

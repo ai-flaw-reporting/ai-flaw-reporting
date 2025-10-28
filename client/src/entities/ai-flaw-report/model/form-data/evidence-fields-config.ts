@@ -25,10 +25,10 @@ export const STEPS_TO_REPRODUCE_FIELD: EvidenceFieldConfig = {
   type: "textarea",
   rows: 3,
   maxLength: 5000,
-  placeholder: `1. Go to [specific page/interface]  
-2. Enter the following prompt: [exact prompt]  
-3. Click [specific button/action]  
-4. Observe the unexpected behavior  
+  placeholder: `1. Go to [specific page/interface]
+2. Enter the following prompt: [exact prompt]
+3. Click [specific button/action]
+4. Observe the unexpected behavior
 
 Be as specific as possible with exact steps, prompts, and settings used...`,
   description:

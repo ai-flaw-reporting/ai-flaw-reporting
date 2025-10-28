@@ -34,11 +34,11 @@ export function ResourceCard({ resource }: { resource: Resource }) {
   const shouldInvert = icon && INVERT_ICONS.some((name) => icon.includes(name));
 
   return (
-    <Card className={cn("py-8 dark:border-gray-500", customCursor)}>
+    <Card className={cn("h-full py-8 dark:border-gray-500", customCursor)}>
       <article
         aria-labelledby={`title-${descId}`}
         aria-describedby={descId}
-        className="flex flex-col space-y-4"
+        className="flex h-full flex-col space-y-4"
       >
         <CardHeader className="gap-0 px-16 pt-5">
           <CardTitle className="flex justify-between">
@@ -95,7 +95,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="mb-2 space-y-4 px-16">
+        <CardContent className="mb-2 flex-1 space-y-4 px-16">
           <p className="text-sm font-semibold text-gray-600 dark:text-gray-200">
             {scopesType}
           </p>
@@ -124,6 +124,8 @@ export function ResourceCard({ resource }: { resource: Resource }) {
             <Link
               className={`text-sm font-semibold text-indigo-600 underline hover:text-indigo-800 ${customCursor}`}
               href={readMoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Read more
             </Link>

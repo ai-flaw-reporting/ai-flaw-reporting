@@ -31,7 +31,8 @@ export function SeverityHarmField() {
                 aria-hidden="true"
               />
             )}
-            {SEVERITY_OF_HARM_FIELD.title}
+            {SEVERITY_OF_HARM_FIELD.title}{" "}
+            <span className="text-error-600"> *</span>
           </ItemTitle>
           <SeverityHarmBadge />
         </div>

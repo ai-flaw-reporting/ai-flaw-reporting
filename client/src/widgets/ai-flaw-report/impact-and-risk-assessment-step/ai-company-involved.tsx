@@ -24,16 +24,9 @@ import {
   useAiFlawFormContext,
   AI_COMPANY_INVOLVED_FIELD,
 } from "~/entities/ai-flaw-report";
-import { useEffect } from "react";
 
 export function AiCompanyInvolved() {
-  const { control, setValue } = useAiFlawFormContext();
-
-  useEffect(() => {
-    return () => {
-      setValue("impactAssessment.aiCompanyInvolved", []);
-    };
-  }, [setValue]);
+  const { control } = useAiFlawFormContext();
 
   return (
     <FormField

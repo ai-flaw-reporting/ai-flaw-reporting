@@ -1,16 +1,9 @@
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
-import { useEffect } from "react";
 
 export function HarmOtherTextInput() {
-  const { control, setValue } = useAiFlawFormContext();
-
-  useEffect(() => {
-    return () => {
-      setValue("impactAssessment.harmOtherText", "");
-    };
-  }, [setValue]);
+  const { control } = useAiFlawFormContext();
 
   return (
     <FormField

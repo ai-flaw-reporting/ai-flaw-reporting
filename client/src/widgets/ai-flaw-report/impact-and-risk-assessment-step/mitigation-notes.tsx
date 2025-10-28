@@ -6,7 +6,6 @@ import {
   FormDescription,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
-import { useEffect } from "react";
 
 import {
   useAiFlawFormContext,
@@ -14,13 +13,7 @@ import {
 } from "~/entities/ai-flaw-report";
 
 export function MitigationNotes() {
-  const { control, setValue } = useAiFlawFormContext();
-
-  useEffect(() => {
-    return () => {
-      setValue("impactAssessment.mitigationNotes", "");
-    };
-  }, [setValue]);
+  const { control } = useAiFlawFormContext();
 
   return (
     <FormField

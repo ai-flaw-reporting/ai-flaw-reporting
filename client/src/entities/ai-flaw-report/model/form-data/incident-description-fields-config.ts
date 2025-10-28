@@ -19,7 +19,7 @@ export const ISSUE_DESCRIPTION_FIELD: IncidentDescriptionFieldConfig = {
   name: "incidentDescription.issueDescription",
   title: "Issue Description",
   icon: "/icons/form/document.svg",
-  label: "Describe the flaw or incident *",
+  label: "Describe the flaw or incident",
   type: "textarea",
   rows: 3,
   maxLength: 5000,

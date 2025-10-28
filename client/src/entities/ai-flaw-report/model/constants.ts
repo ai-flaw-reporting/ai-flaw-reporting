@@ -6,6 +6,7 @@ import {
   impactAndRiskAssessmentSchema,
   createSecurityIncidentDetailsSchema,
   disclosurePlanSchema,
+  reviewReportSchema,
 } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
 
@@ -77,6 +78,6 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
   },
   REVIEW_AND_SUBMIT_REPORT: {
     ...STEP_CONFIGS.REVIEW_AND_SUBMIT_REPORT,
-    schema: undefined,
+    schema: reviewReportSchema,
   },
 } as const;

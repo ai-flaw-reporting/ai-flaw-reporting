@@ -1,4 +1,7 @@
 import { z } from "zod";
+
+import { isDomainOrHttpsUrl } from "~/lib/url";
+
 import { FORM_VALUES } from "./constants";
 import { STEP_ORDER } from "./step-config";
 import { PUBLIC_DISCLOSURE_INTENT_VALUES } from "./form-data/disclosure-plan-fields-config";
@@ -110,15 +113,12 @@ export const incidentDescriptionSchema = z.object({
         .transform((val) => val?.trim())
         .refine(
           (val) => {
-            if (!val || val === "") return true;
-            try {
-              new URL(val);
-              return true;
-            } catch {
-              return false;
-            }
+            return isDomainOrHttpsUrl(val ?? "");
           },
-          { message: "Please enter a valid URL" },
+          {
+            message:
+              "Please enter a valid URL, e.g. https://example.com or example.com",
+          },
         )
         .or(z.literal("")),
       reason: z.string().max(2000).optional().or(z.literal("")),
@@ -370,6 +370,10 @@ export const disclosurePlanSchema = z
     },
   );
 
+export const reviewReportSchema = z.object({
+  selectedStakeholders: z.array(z.string()).min(1),
+});
+
 export const aiFlawReportSchema = z.object({
   step: z.enum(STEP_ORDER as [FormStep, ...FormStep[]]),
   classifyReport: classifyReportSchema,
@@ -379,4 +383,5 @@ export const aiFlawReportSchema = z.object({
   impactAssessment: impactAndRiskAssessmentSchema,
   securityDetails: securityDetailsSchema,
   disclosurePlan: disclosurePlanSchema,
+  reviewReport: reviewReportSchema,
 });

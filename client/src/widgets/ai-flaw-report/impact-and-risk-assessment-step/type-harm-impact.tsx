@@ -28,7 +28,7 @@ export function TypeOfHarmImpact() {
             height={24}
             aria-hidden="true"
           />
-          {HARM_TYPES_FIELD.title} *
+          {HARM_TYPES_FIELD.title} <span className="text-error-600"> *</span>
         </ItemTitle>
         <FormField
           control={control}

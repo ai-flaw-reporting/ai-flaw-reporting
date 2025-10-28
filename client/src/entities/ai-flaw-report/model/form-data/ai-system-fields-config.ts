@@ -29,4 +29,5 @@ export const createVersionFieldConfig = (
   type: "input",
   placeholder: "e.g., gpt-t-0125-preview, specific URL, version number",
   tooltipClassName: "dark:hover:text-gray-500",
+  required: isRequired,
 });

@@ -39,6 +39,9 @@ export function StepsToReproduceField() {
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
                 {EVIDENCE_FIELDS.stepsToReproduce.label}
+                {EVIDENCE_FIELDS.stepsToReproduce.required && (
+                  <span className="text-error-600"> *</span>
+                )}
               </FormLabel>
               <FormControl>
                 <Textarea

@@ -3,8 +3,15 @@
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 
 import { cn } from "~/lib/utils";
+
+const CheckCircleFillIcon = dynamic(() =>
+  import("~/components/icons/check-circle-fill-icon").then(
+    (mod) => mod.CheckCircleFillIcon,
+  ),
+);
 
 function Checkbox({
   className,
@@ -31,16 +38,18 @@ function Checkbox({
 
 function CheckboxCard({
   className,
+  iconClassName,
   children,
   ...props
 }: React.ComponentProps<typeof CheckboxPrimitive.Root> & {
   children?: React.ReactNode;
+  iconClassName?: string;
 }) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox-card"
       className={cn(
-        "relative w-full rounded-lg border bg-white px-3.5 py-3 text-left",
+        "relative w-full cursor-pointer rounded-lg border bg-white px-3.5 py-3 text-left",
         "border-gray-300 data-[state=checked]:border-indigo-700 data-[state=checked]:bg-indigo-50",
         "transition-colors outline-none",
         "focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:ring-[3px]",
@@ -56,11 +65,9 @@ function CheckboxCard({
         data-slot="checkbox-card-indicator"
         className="pointer-events-none absolute top-3 right-3.5"
       >
-        <img
-          src="/icons/form/circle-checked.svg"
-          alt=""
-          className="h-5 w-5"
-          aria-hidden
+        <CheckCircleFillIcon
+          className={cn("size-[26px] text-indigo-800", iconClassName)}
+          aria-hidden="true"
         />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

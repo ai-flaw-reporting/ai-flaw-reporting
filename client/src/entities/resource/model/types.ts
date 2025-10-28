@@ -5,7 +5,7 @@ export type Resource = {
   scopesType: string;
   scopes: string[];
   summary: string;
-  icon: string;
+  icon: string | null;
   reportUrl: string | null;
   readMoreUrl: string | null;
 };

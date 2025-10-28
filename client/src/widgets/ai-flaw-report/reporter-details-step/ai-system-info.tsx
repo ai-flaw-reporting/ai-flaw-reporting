@@ -1,12 +1,8 @@
-import { useMemo } from "react";
-import { useWatch } from "react-hook-form";
 import Image from "next/image";
 
 import {
-  FORM_VALUES,
   useAiFlawFormContext,
   AI_SYSTEM_PLATFORM_FIELD,
-  createVersionFieldConfig,
 } from "~/entities/ai-flaw-report";
 
 import {
@@ -21,22 +17,10 @@ import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { AccessMethodField } from "./access-method-field";
 import { AiModelField } from "./ai-model-field";
 import { FormFieldRenderer } from "./form-field-renderer";
+import { VersionEndpointDetails } from "./version-endpoint-details";
 
 export function AiSystemInfo() {
   const { control } = useAiFlawFormContext();
-
-  const selectedAccessMethod = useWatch({
-    control,
-    name: "reporterDetails.system.accessMethod",
-  });
-
-  const isVersionRequired =
-    !!selectedAccessMethod && selectedAccessMethod !== FORM_VALUES.OTHER;
-
-  const versionFieldConfig = useMemo(
-    () => createVersionFieldConfig(isVersionRequired),
-    [isVersionRequired],
-  );
 
   return (
     <Item variant="outline" className="form-item-card">
@@ -62,12 +46,7 @@ export function AiSystemInfo() {
 
         <AccessMethodField />
 
-        <FormFieldRenderer
-          name={versionFieldConfig.name}
-          control={control}
-          config={versionFieldConfig}
-          inputClassName="dark:bg-white dark:text-gray-800"
-        />
+        <VersionEndpointDetails />
 
         <FormField
           control={control}

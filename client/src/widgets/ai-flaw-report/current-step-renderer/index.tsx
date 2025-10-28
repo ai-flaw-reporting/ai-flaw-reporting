@@ -9,8 +9,7 @@ import { EvidenceAndReproductionStep } from "../evidence-and-reproduction-step";
 import { ImpactAndRiskAssessmentStep } from "../impact-and-risk-assessment-step";
 import { SecurityIncidentDetailsStep } from "../security-incident-details-step";
 import { DisclosurePlanStep } from "../disclosure-plan-step";
-
-const placeholderStep = () => <p>This step will be implemented soon.</p>;
+import { ReviewAndSubmitStep } from "../review-and-submit-step";
 
 const STEP_COMPONENTS = {
   CLASSIFY_REPORT: ClassifyReportStep,
@@ -20,7 +19,7 @@ const STEP_COMPONENTS = {
   IMPACT_AND_RISK_ASSESSMENT: ImpactAndRiskAssessmentStep,
   SECURITY_INCIDENT_DETAILS: SecurityIncidentDetailsStep,
   DISCLOSURE_PLAN: DisclosurePlanStep,
-  REVIEW_AND_SUBMIT_REPORT: placeholderStep,
+  REVIEW_AND_SUBMIT_REPORT: ReviewAndSubmitStep,
 } as const;
 
 export function CurrentStepRenderer() {
