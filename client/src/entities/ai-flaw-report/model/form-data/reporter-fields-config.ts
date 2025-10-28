@@ -12,12 +12,13 @@ export type ReporterFieldConfig = FieldConfig & {
 export const REPORTER_FIELDS: ReporterFieldConfig[] = [
   {
     name: "reporterDetails.reporter.email",
-    label: "Email Address (optional)",
+    label: "Email Address",
     type: "input",
     inputType: "email",
     placeholder: "olivia@gmail.com",
     description: "Required for follow-up and report delivery",
     showMessage: true,
+    required: true,
   },
 ];
 

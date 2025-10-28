@@ -50,7 +50,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Security Vulnerability", "Incident"],
     "summary": "You discovered issues with hosted models, datasets (discuss via Discussions tab), or platform/library security vulnerabilities.",
-    "icon": null,
+    "icon": "/icons/resource/hugging-face.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://hackerone.com/hugging_face"
   },
@@ -61,7 +61,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Incident"],
     "summary": "You have knowledge of an AI-related incident that caused harm and has been reported in media or you have direct knowledge of. Submissions are reviewed by editors.",
-    "icon": null,
+    "icon": "/icons/resource/ai-incident-database.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://incidentdatabase.ai/"
   },
@@ -72,7 +72,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Incident"],
     "summary": "You want to report AI, algorithmic, or automation incidents and controversies, particularly those involving poor ethics, transparency, or accountability.",
-    "icon": null,
+    "icon": "/icons/resource/aiaaic.png",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.aiaaic.org/"
   },
@@ -83,7 +83,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Security Vulnerability", "AI Safety"],
     "summary": "You discovered vulnerabilities covering Security, Ethics, and Performance (SEP) issues across the AI lifecycle using CVE-inspired procedures.",
-    "icon": null,
+    "icon": "/icons/resource/avid.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://avidml.org/"
   },
@@ -94,7 +94,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Incident"],
     "summary": "You have information about AI incidents that caused injury, infrastructure disruption, rights violations, or property/environmental harm. Currently does not accept direct submissions but plans to expand.",
-    "icon": null,
+    "icon": "/icons/resource/oecd.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": null
   },
@@ -105,7 +105,8 @@
     "scopesType": "Report Scope",
     "scopes": ["Security Vulnerability"],
     "summary": "You discovered traditional cybersecurity vulnerabilities, including some ML-related security flaws that need CVE assignment.",
-    "icon": null,
+    "icon": "/icons/resource/mitre.svg",
+    "iconDark": "/icons/resource/mitre-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.cve.org/ReportRequest/ReportRequestForNonCNAs"
   },
@@ -127,7 +128,7 @@
     "scopesType": "Report Scope",
     "scopes": ["Security Vulnerability"],
     "summary": "You found cybersecurity vulnerabilities in AI systems with potential cybersecurity impact. CISA treats AI as a subset of software systems.",
-    "icon": null,
+    "icon": "/icons/resource/cisa.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.cisa.gov/resources-tools/programs/coordinated-vulnerability-disclosure-program"
   },

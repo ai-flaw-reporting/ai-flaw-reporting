@@ -4,13 +4,13 @@ import { REPORT_SUMMARY_CONFIG } from "~/entities/ai-flaw-report/model/form-data
 
 import ReportSummaryHeader from "./report-summary-header";
 import SummaryField from "./summary-field";
-import ReportTypeBadge from "./report-type-badge";
-import AiSystemBadge from "./ai-system-badge";
 import RiskAssessment from "./risk-assessment";
 import Classification from "./classification";
 import Stakeholders from "./stakeholders";
+import ReportTypeBadge from "./report-type-badge";
+import AiSystemBadge from "./ai-system-badge";
 
-export default function ReportSummary() {
+export function ReportSummary() {
   return (
     <Item variant="outline" className="form-item-card">
       <ItemContent className="gap-4">

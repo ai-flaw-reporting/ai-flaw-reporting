@@ -8,7 +8,12 @@ import {
   ACCESS_METHOD_INPUT_FIELD,
 } from "~/entities/ai-flaw-report";
 
-import { FormControl, FormField, FormItem } from "~/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 
 import { FieldTooltip } from "~/components/field-tooltip";
@@ -29,6 +34,9 @@ export function AccessMethodField() {
         name={ACCESS_METHOD_INPUT_FIELD.name}
         render={({ field }) => (
           <FormItem className="form-item-select">
+            <FormLabel className="form-label">
+              {ACCESS_METHOD_INPUT_FIELD.label}
+            </FormLabel>
             <FormControl>
               <div className="relative">
                 <Input

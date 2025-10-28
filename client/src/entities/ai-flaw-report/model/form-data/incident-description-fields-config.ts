@@ -39,7 +39,7 @@ export const EXPECTED_BEHAVIOR_FIELD: IncidentDescriptionFieldConfig = {
   rows: 3,
   maxLength: 5000,
   placeholder:
-    "Provide a clear, detailed description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
+    "What outcome did you expect, and how should the system have responded or handled the situation if functioning properly?",
 };
 
 export const ACTUAL_BEHAVIOR_FIELD: IncidentDescriptionFieldConfig = {
@@ -50,8 +50,7 @@ export const ACTUAL_BEHAVIOR_FIELD: IncidentDescriptionFieldConfig = {
   type: "textarea",
   rows: 3,
   maxLength: 5000,
-  placeholder:
-    "Provide a clear, detailed description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
+  placeholder: "How did the system behave differently from what you expected?",
 };
 
 export const POLICY_VIOLATION_FIELDS = {

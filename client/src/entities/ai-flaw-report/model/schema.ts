@@ -29,7 +29,7 @@ export const classifyReportSchema = z
 export const reporterDetailsSchema = z
   .object({
     reporter: z.object({
-      email: z.union([z.string().email(), z.string().length(0)]).optional(),
+      email: z.string().email(),
       org: z.string().optional(),
       country: z.string().optional(),
     }),
@@ -66,20 +66,6 @@ export const reporterDetailsSchema = z
     },
     {
       path: ["system", "model"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (
-        data.system.accessMethod === FORM_VALUES.OTHER &&
-        !data.system.accessMethodOther?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["system", "accessMethodOther"],
     },
   )
   .refine(

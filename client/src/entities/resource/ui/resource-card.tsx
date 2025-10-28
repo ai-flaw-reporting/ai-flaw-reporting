@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -11,14 +13,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { useId } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "~/lib/utils";
 import type { Resource } from "../model/types";
 import { getBadgeVariant } from "../lib/utils";
 
-const INVERT_ICONS = ["anthropic.svg", "open-ai.svg"];
+const INVERT_ICONS = [
+  "anthropic.svg",
+  "open-ai.svg",
+  "ai-incident-database.svg",
+];
 
 export function ResourceCard({ resource }: { resource: Resource }) {
   const descId = useId();
+  const { theme } = useTheme();
   const customCursor = "cursor-[url('/icons/cursor.svg')_10_10,_pointer]";
   const {
     title,
@@ -29,9 +37,13 @@ export function ResourceCard({ resource }: { resource: Resource }) {
     reportUrl,
     readMoreUrl,
     icon,
+    iconDark,
   } = resource;
 
-  const shouldInvert = icon && INVERT_ICONS.some((name) => icon.includes(name));
+  const isDarkMode = theme === "dark";
+  const displayIcon = isDarkMode && iconDark ? iconDark : icon;
+  const shouldInvert =
+    displayIcon && INVERT_ICONS.some((name) => displayIcon.includes(name));
 
   return (
     <Card className={cn("h-full py-8 dark:border-gray-500", customCursor)}>
@@ -47,10 +59,10 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                 id={`title-${descId}`}
                 className="flex items-center gap-4 text-xl font-bold"
               >
-                {icon && (
+                {displayIcon && (
                   <Image
                     aria-hidden="true"
-                    src={icon}
+                    src={displayIcon}
                     alt=""
                     width={32}
                     height={32}

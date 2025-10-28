@@ -1,7 +1,7 @@
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemFooter, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
-import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
   safeIncludes,
   createArrayCheckboxHandler,
