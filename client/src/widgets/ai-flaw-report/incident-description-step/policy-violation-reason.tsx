@@ -1,11 +1,6 @@
 import { useWatch } from "react-hook-form";
 
 import {
-  POLICY_VIOLATION_FIELDS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
-
-import {
   FormControl,
   FormDescription,
   FormField,
@@ -13,6 +8,9 @@ import {
   FormLabel,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
+import { POLICY_VIOLATION_FIELDS } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { getSafeArray } from "~/lib/form-field-utils";
 
 export function PolicyViolationReason() {
   const { control } = useAiFlawFormContext();
@@ -22,7 +20,8 @@ export function PolicyViolationReason() {
     name: POLICY_VIOLATION_FIELDS.url.name,
   });
 
-  const shouldShowReason = !!policyUrl && policyUrl.trim() !== "";
+  const urls = getSafeArray<string>(policyUrl);
+  const shouldShowReason = urls.some((url) => url?.trim());
 
   if (!shouldShowReason) return null;
 

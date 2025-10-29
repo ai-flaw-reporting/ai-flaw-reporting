@@ -1,24 +1,20 @@
 import Image from "next/image";
-import { Link } from "lucide-react";
-
-import {
-  useAiFlawFormContext,
-  POLICY_VIOLATION_FIELDS,
-} from "~/entities/ai-flaw-report";
 
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+import { ChipsRow } from "~/components/ui/chips-row";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { FieldTooltip } from "~/components/field-tooltip";
+import { getSafeArray } from "~/lib/form-field-utils";
 
-import { ProviderBadge } from "./provider-badge";
 import { PolicyViolationReason } from "./policy-violation-reason";
+import { Link } from "lucide-react";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { POLICY_VIOLATION_FIELDS } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
 
 export function PolicyViolationSection() {
   const { control } = useAiFlawFormContext();
@@ -56,17 +52,18 @@ export function PolicyViolationSection() {
               </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <Link
-                    className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-gray-500"
-                    aria-hidden="true"
-                  />
-                  <ProviderBadge url={field.value ?? ""} />
-                  <Input
-                    {...field}
-                    value={field.value ?? ""}
-                    type="url"
+                  <ChipsRow
+                    data={POLICY_VIOLATION_FIELDS.urlOptions}
+                    value={getSafeArray<string>(field.value)}
+                    onValueChange={field.onChange}
                     placeholder={POLICY_VIOLATION_FIELDS.url.placeholder}
-                    className="pl-10 !text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
+                    className="!text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
+                    icon={
+                      <Link
+                        className="h-5 w-5 text-gray-500"
+                        aria-hidden="true"
+                      />
+                    }
                   />
                   <FieldTooltip
                     text="Help text placeholder"
@@ -74,7 +71,6 @@ export function PolicyViolationSection() {
                   />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />

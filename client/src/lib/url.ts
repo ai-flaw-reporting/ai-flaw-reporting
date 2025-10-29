@@ -1,3 +1,14 @@
+/**
+ * Normalizes URL by removing protocol, www, and trailing slash for comparison purposes
+ */
+export const normalizeUrl = (url: string): string => {
+  return url
+    .replace(/^https?:\/\//, "") // remove protocol
+    .replace(/^www\./, "") // remove www
+    .replace(/\/$/, "") // remove trailing slash
+    .toLowerCase();
+};
+
 export const isDomainOrHttpsUrl = (input: string): boolean => {
   const v = input.trim();
   if (!v) return false;

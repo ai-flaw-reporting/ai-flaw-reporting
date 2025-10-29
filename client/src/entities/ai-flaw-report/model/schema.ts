@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { isDomainOrHttpsUrl } from "~/lib/url";
-
 import { FORM_VALUES } from "./constants";
 import { STEP_ORDER } from "./step-config";
 import { PUBLIC_DISCLOSURE_INTENT_VALUES } from "./form-data/disclosure-plan-fields-config";
@@ -93,20 +91,7 @@ export const incidentDescriptionSchema = z.object({
   actualBehavior: z.string().max(5000).optional().or(z.literal("")),
   policyViolation: z
     .object({
-      url: z
-        .string()
-        .optional()
-        .transform((val) => val?.trim())
-        .refine(
-          (val) => {
-            return isDomainOrHttpsUrl(val ?? "");
-          },
-          {
-            message:
-              "Please enter a valid URL, e.g. https://example.com or example.com",
-          },
-        )
-        .or(z.literal("")),
+      url: z.array(z.string()).optional().default([]),
       reason: z.string().max(2000).optional().or(z.literal("")),
     })
     .optional(),

@@ -73,4 +73,11 @@ export const POLICY_VIOLATION_FIELDS = {
     placeholder: "Explain how this issue violates the selected policy...",
     description: "This could be an explanation text for this field.",
   } as IncidentDescriptionFieldConfig,
+  urlOptions: [
+    {
+      name: "OpenAI Policies",
+      associatedTerm: "openai",
+      value: "https://openai.com/policies/usage-policies/",
+    },
+  ],
 };

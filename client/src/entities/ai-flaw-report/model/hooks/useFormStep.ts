@@ -112,8 +112,17 @@ export function useFormStep(stepKey: FormStep) {
   }, [formData, stepKey, formField, stepConfig.id]);
 
   const loadSavedData = useCallback(() => {
-    return getFormSaveStatus(stepConfig.id);
-  }, [stepConfig.id]);
+    const dataFromForm = getValues(formField);
+    const dataFromStorage = getFormSaveStatus(stepConfig.id);
+
+    const isFormDirty = formState.isDirty;
+
+    if (isFormDirty && dataFromForm) {
+      return dataFromForm;
+    }
+
+    return dataFromStorage;
+  }, [formField, getValues, stepConfig.id, formState.isDirty]);
 
   return {
     formData,
