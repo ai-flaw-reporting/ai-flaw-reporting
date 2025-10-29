@@ -3,11 +3,17 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { routes } from "~/lib/routes";
+import { cn } from "~/lib/utils";
 
-export function ReportBanner() {
+export function ReportBanner({ className }: { className?: string }) {
   return (
     <>
-      <div className="mb-0 bg-white px-8 py-12 pb-12 dark:bg-gray-900">
+      <div
+        className={cn(
+          "mb-0 bg-white px-8 py-12 pb-12 dark:bg-gray-900",
+          className,
+        )}
+      >
         <section className="mx-auto max-w-[1280px] space-y-8 rounded-2xl bg-indigo-100 bg-[url('/images/report-background.png')] bg-auto bg-center bg-no-repeat py-16 text-center dark:bg-indigo-300 dark:bg-[url('/images/report-background-dark.png')]">
           <header className="mb-5 space-y-8">
             <Image

@@ -1,0 +1,41 @@
+{
+  "pageSize": 5,
+  "total": "1,248",
+  "data": [
+    {
+      "reportId": "FLW-2023-0421",
+      "dateSubmitted": "Apr 21, 2023",
+      "whoSubmitted": "Anonymous",
+      "aiSystem": "OpenAI",
+      "severity": "Critical"
+    },
+    {
+      "reportId": "FLW-2023-0420",
+      "dateSubmitted": "Apr 20, 2023",
+      "whoSubmitted": "Grok",
+      "aiSystem": "Grok",
+      "severity": "High"
+    },
+    {
+      "reportId": "FLW-2023-0419",
+      "dateSubmitted": "Apr 18, 2023",
+      "whoSubmitted": "Gemini",
+      "aiSystem": "Gemini",
+      "severity": "Medium"
+    },
+    {
+      "reportId": "FLW-2023-0418",
+      "dateSubmitted": "Apr 18, 2023",
+      "whoSubmitted": "Gemini",
+      "aiSystem": "Gemini",
+      "severity": "Medium"
+    },
+    {
+      "reportId": "FLW-2023-0417",
+      "dateSubmitted": "Apr 18, 2023",
+      "whoSubmitted": "Gemini",
+      "aiSystem": "Gemini",
+      "severity": "Medium"
+    }
+  ]
+}

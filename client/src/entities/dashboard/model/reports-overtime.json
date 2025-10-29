@@ -1,0 +1,9 @@
+[
+  { "month": "Jan", "public": 120, "private": 30 },
+  { "month": "Feb", "public": 180, "private": 90 },
+  { "month": "Mar", "public": 160, "private": 70 },
+  { "month": "Apr", "public": 200, "private": 110 },
+  { "month": "May", "public": 220, "private": 130 },
+  { "month": "Jun", "public": 240, "private": 150 },
+  { "month": "Jul", "public": 280, "private": 190 }
+]

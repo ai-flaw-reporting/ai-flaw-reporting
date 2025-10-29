@@ -1,0 +1,20 @@
+[
+  {
+    "label": "Total Reports Filed",
+    "value": "1,248",
+    "trend": "+12.5% this month",
+    "iconUrl": "/icons/dashboard/document.svg"
+  },
+  {
+    "label": "AI Systems Affected",
+    "value": "42",
+    "trend": "+15.7% this month",
+    "iconUrl": "/icons/dashboard/warning.svg"
+  },
+  {
+    "label": "Community Contributors",
+    "value": "850+",
+    "trend": "Growing",
+    "iconUrl": "/icons/dashboard/persons.svg"
+  }
+]

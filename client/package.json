@@ -47,6 +47,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.65.0",
     "react-simple-code-editor": "^0.14.1",
+    "recharts": "^3.3.0",
     "tailwind-merge": "^3.3.1",
     "zod": "^3.24.2"
   },

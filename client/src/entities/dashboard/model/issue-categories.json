@@ -1,0 +1,7 @@
+[
+  { "label": "Bias Detection", "value": 35, "color": "#EF4444" },
+  { "label": "Security Flaw", "value": 25, "color": "#F97316" },
+  { "label": "Privacy Concern", "value": 20, "color": "#EAB308" },
+  { "label": "Performance Issue", "value": 15, "color": "#22C55E" },
+  { "label": "Ethical Concern", "value": 5, "color": "#3B82F6" }
+]

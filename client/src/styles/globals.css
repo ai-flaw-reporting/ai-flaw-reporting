@@ -52,6 +52,7 @@
   --color-gray-500: #667085;
   --color-gray-600: #475467;
   --color-gray-700: #344054;
+  --color-gray-750: #373d48;
   --color-gray-800: #1d2939;
   --color-gray-900: #101828;
   --color-gray-950: #0c111d;
@@ -161,6 +162,7 @@
   --color-gray-neutral-200: #e5e7eb;
   --color-gray-neutral-300: #d2d6db;
   --color-gray-neutral-400: #9da4ae;
+  --color-gray-neutral-450: #6c727f;
   --color-gray-neutral-500: #6c737f;
   --color-gray-neutral-600: #4d5761;
   --color-gray-neutral-700: #384250;
@@ -209,6 +211,12 @@
   --color-gray-warm-800: #292524;
   --color-gray-warm-900: #1c1917;
   --color-gray-warm-950: #171412;
+
+  /* Blue */
+  --color-blue-500: #2563eb;
+
+  /* Green */
+  --color-green-500: #16a34c;
 
   /* Indigo */
   --color-indigo-500: #6172f3;
@@ -276,6 +284,7 @@
   --color-gray-500: #667085;
   --color-gray-600: #475467;
   --color-gray-700: #344054;
+  --color-gray-750: #373d48;
   --color-gray-800: #1d2939;
   --color-gray-900: #101828;
   --color-gray-950: #0c111d;
@@ -385,6 +394,7 @@
   --color-gray-neutral-200: #e5e7eb;
   --color-gray-neutral-300: #d2d6db;
   --color-gray-neutral-400: #9da4ae;
+  --color-gray-neutral-450: #6c727f;
   --color-gray-neutral-500: #6c737f;
   --color-gray-neutral-600: #4d5761;
   --color-gray-neutral-700: #384250;
@@ -461,6 +471,12 @@
   --color-yellow-800: #854a0e;
   --color-yellow-900: #713b12;
   --color-yellow-950: #542d0d;
+
+  /* Blue */
+  --color-blue-500: #2563eb;
+
+  /* Green */
+  --color-green-500: #16a34c;
 
   /* Indigo */
   --color-indigo-500: #6172f3;
@@ -642,6 +658,14 @@
 
   .badge {
     @apply max-h-6 !rounded-[6px] !border-gray-300 px-2 !py-[3px] !text-xs !font-bold text-gray-700;
+  }
+
+  .dashboard-title {
+    @apply text-gray-750 text-3xl leading-9 font-bold dark:text-white;
+  }
+
+  .dashboard-subtitle {
+    @apply text-gray-neutral-450 text-base leading-7 font-normal dark:text-gray-100;
   }
 }
 
