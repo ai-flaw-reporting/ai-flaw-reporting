@@ -64,8 +64,7 @@ export default function CardsContainer() {
           description="We’re building an open dashboard for AI flaw reports. Soon, you’ll be able to explore past reports and patterns."
           infoHint="Info about Dashboard"
           action={{
-            label: "Coming Soon",
-            disabled: true,
+            label: "Open",
             href: routes.dashboard,
             tooltip: "We’re building an open dashboard for AI flaw reports.",
             variant: "outline",
