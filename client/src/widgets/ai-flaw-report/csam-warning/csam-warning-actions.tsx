@@ -18,8 +18,10 @@ export function CsamWarningActions({ onDismiss }: Props) {
         Dismiss
       </Button>
       <Link
-        href="#"
+        href="https://report.cybertip.org/"
         className="text-error-700 hover:text-error-800 text-sm font-semibold"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         Learn more
       </Link>

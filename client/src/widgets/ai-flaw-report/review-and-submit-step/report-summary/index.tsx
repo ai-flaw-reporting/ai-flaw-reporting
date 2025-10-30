@@ -18,9 +18,6 @@ export function ReportSummary() {
           <ReportSummaryHeader
             title={REPORT_SUMMARY_CONFIG.title}
             iconSrc={REPORT_SUMMARY_CONFIG.icon}
-            onEdit={() => {
-              // TODO
-            }}
           />
         </ItemTitle>
 
