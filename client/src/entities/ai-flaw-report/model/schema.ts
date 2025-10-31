@@ -70,6 +70,7 @@ export const reporterDetailsSchema = z
   .refine(
     (data) => {
       if (
+        !data.system.notSure &&
         data.system.accessMethod &&
         data.system.accessMethod !== FORM_VALUES.OTHER &&
         !data.system.version?.trim()

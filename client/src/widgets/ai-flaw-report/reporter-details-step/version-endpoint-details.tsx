@@ -17,8 +17,15 @@ export function VersionEndpointDetails() {
     name: "reporterDetails.system.accessMethod",
   });
 
+  const notSure = useWatch({
+    control,
+    name: "reporterDetails.system.notSure",
+  });
+
   const isVersionRequired =
-    !!selectedAccessMethod && selectedAccessMethod !== FORM_VALUES.OTHER;
+    !notSure &&
+    !!selectedAccessMethod &&
+    selectedAccessMethod !== FORM_VALUES.OTHER;
 
   const versionFieldConfig = useMemo(
     () => createVersionFieldConfig(isVersionRequired),
