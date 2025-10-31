@@ -3,12 +3,10 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useWatch } from "react-hook-form";
 
-import {
-  FORM_VALUES,
-  useAiFlawFormContext,
-  createAiModelSelectField,
-  createAiModelInputField,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
+import { createAiModelSelectField } from "~/entities/ai-flaw-report/model/form-data/ai-model-fields-config";
+import { createAiModelInputField } from "~/entities/ai-flaw-report/model/form-data/ai-model-fields-config";
 import { getPlatformsModels } from "~/entities/ai-flaw-report/lib/get-platforms-models";
 import { useHuggingFaceModels } from "~/features/ai-flaw-report/multi-step-form/models-context";
 

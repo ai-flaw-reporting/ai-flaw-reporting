@@ -15,11 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import {
-  ATTACKER_RESOURCES_FIELD,
-  ATTACKER_OBJECTIVES_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { ATTACKER_RESOURCES_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import { ATTACKER_OBJECTIVES_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 import { AttackerResourcesField } from "./attacker-resources-field";
 import { AttackerObjectivesField } from "./attacker-objectives-field";
 

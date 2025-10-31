@@ -1,9 +1,7 @@
 import { useWatch } from "react-hook-form";
 import { Badge } from "~/components/ui/badge";
-import {
-  SEVERITY_OF_HARM_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { SEVERITY_OF_HARM_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 
 export function SeverityHarmBadge() {
   const { control } = useAiFlawFormContext();

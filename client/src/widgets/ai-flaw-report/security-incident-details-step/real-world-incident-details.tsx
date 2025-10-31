@@ -20,12 +20,10 @@ import {
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Badge } from "~/components/ui/badge";
-import {
-  SUBSTRATE_RELATIONSHIP_FIELD,
-  INCIDENT_LOCATION_FIELD,
-  HARM_NARRATIVE_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { SUBSTRATE_RELATIONSHIP_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import { INCIDENT_LOCATION_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import { HARM_NARRATIVE_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 import { getSafeArray, createArrayRemoveHandler } from "~/lib/form-field-utils";
 
 export function RealWorldIncidentDetails() {

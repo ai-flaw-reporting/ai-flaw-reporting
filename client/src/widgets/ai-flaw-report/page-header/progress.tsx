@@ -1,13 +1,11 @@
 import { useWatch } from "react-hook-form";
 import { Check } from "lucide-react";
 
-import {
-  STEP_ORDER,
-  STEP_CONFIGS,
-  STEP_STATUS,
-  BADGE_VARIANTS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { STEP_ORDER } from "~/entities/ai-flaw-report/model/step-config";
+import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
+import { STEP_STATUS } from "~/entities/ai-flaw-report/model/constants";
+import { BADGE_VARIANTS } from "~/entities/ai-flaw-report/model/constants";
 
 import { Progress } from "~/components/ui/progress";
 import { Badge } from "~/components/ui/badge";

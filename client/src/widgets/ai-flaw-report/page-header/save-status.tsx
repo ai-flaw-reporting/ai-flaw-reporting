@@ -1,11 +1,9 @@
 import { useWatch } from "react-hook-form";
 
-import {
-  SAVE_STATUS_COLORS,
-  SAVE_STATUS_TEXT,
-  useAiFlawFormContext,
-  useFormStep,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { SAVE_STATUS_COLORS } from "~/entities/ai-flaw-report/model/constants";
+import { SAVE_STATUS_TEXT } from "~/entities/ai-flaw-report/model/constants";
+import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
 
 import { cn } from "~/lib/utils";
 

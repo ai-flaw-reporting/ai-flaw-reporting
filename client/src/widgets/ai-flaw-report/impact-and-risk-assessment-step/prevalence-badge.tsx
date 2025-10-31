@@ -1,11 +1,8 @@
 import { useWatch } from "react-hook-form";
 
 import { Badge } from "~/components/ui/badge";
-
-import {
-  PREVALENCE_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { PREVALENCE_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function PrevalenceBadge() {
   const { control } = useAiFlawFormContext();

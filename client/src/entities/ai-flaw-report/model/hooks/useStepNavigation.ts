@@ -3,7 +3,8 @@
 import { useCallback } from "react";
 import { useWatch } from "react-hook-form";
 
-import { STEP_ORDER, useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "./useAiFlawFormContext";
+import { STEP_ORDER } from "../step-config";
 
 import { useFormStep } from "./useFormStep";
 

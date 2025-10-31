@@ -4,14 +4,11 @@ import { useEffect, useRef } from "react";
 import { useWatch } from "react-hook-form";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import {
-  useAiFlawFormContext,
-  useFormStep,
-  useStepNavigation,
-  STEP_CONFIGS_WITH_SCHEMAS,
-} from "~/entities/ai-flaw-report";
-
 import { Button } from "~/components/ui/button";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
+import { useStepNavigation } from "~/entities/ai-flaw-report/model/hooks/useStepNavigation";
+import { STEP_CONFIGS_WITH_SCHEMAS } from "~/entities/ai-flaw-report/model/constants";
 
 export function FormNavigation() {
   const { control, reset } = useAiFlawFormContext();

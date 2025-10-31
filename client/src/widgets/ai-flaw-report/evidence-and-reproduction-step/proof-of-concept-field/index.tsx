@@ -1,9 +1,7 @@
 import Image from "next/image";
 
-import {
-  EVIDENCE_FIELDS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { EVIDENCE_FIELDS } from "~/entities/ai-flaw-report/model/form-data/evidence-fields-config";
 import {
   FormControl,
   FormDescription,

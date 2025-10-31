@@ -1,9 +1,7 @@
 import Image from "next/image";
 
-import {
-  useAiFlawFormContext,
-  AI_SYSTEM_PLATFORM_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { AI_SYSTEM_PLATFORM_FIELD } from "~/entities/ai-flaw-report/model/form-data/ai-system-fields-config";
 
 import {
   FormControl,

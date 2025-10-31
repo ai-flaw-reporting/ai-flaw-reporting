@@ -1,8 +1,6 @@
-import {
-  ATTACKER_OBJECTIVES_OTHER_FIELD,
-  FORM_VALUES,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { ATTACKER_OBJECTIVES_OTHER_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
 
 import { FormControl, FormItem, FormLabel } from "~/components/ui/form";
 import { FormField } from "~/components/ui/form";

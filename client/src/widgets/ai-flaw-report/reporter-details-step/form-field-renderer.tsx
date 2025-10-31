@@ -4,7 +4,7 @@ import {
   type FieldValues,
 } from "react-hook-form";
 
-import { type FieldConfig } from "~/entities/ai-flaw-report";
+import { type FieldConfig } from "~/entities/ai-flaw-report/model/types";
 
 import {
   FormControl,

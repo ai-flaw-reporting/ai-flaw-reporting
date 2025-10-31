@@ -1,4 +1,4 @@
-import { MultiStepAiFlawReportForm } from "~/features/ai-flaw-report";
+import { MultiStepAiFlawReportForm } from "~/features/ai-flaw-report/multi-step-form";
 import { fetchHuggingFaceModels } from "~/app/actions/huggingface";
 
 export default async function AiFlawReportPage() {

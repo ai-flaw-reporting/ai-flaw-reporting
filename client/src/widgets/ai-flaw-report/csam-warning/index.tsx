@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useWatch } from "react-hook-form";
 
-import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 
 import { Item } from "~/components/ui/item";
 

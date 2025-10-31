@@ -12,10 +12,8 @@ import {
   createArrayCheckboxHandler,
 } from "~/lib/form-field-utils";
 
-import {
-  AFFECTED_STAKEHOLDERS_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { AFFECTED_STAKEHOLDERS_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 import Image from "next/image";
 import { AiCompanyInvolved } from "./ai-company-involved";

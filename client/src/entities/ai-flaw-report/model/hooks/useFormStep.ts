@@ -5,17 +5,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   FORM_AUTOSAVE_DELAY,
-  getFormSaveStatus,
   SAVE_STATUS,
-  saveFormSaveStatus,
   STEP_CONFIGS_WITH_SCHEMAS,
-  useAiFlawFormContext,
+} from "../constants";
+import {
   createEvidenceSchema,
   createSecurityIncidentDetailsSchema,
-  type AiFlawReportSchema,
-  type FormStep,
-  type SaveStatus,
-} from "~/entities/ai-flaw-report";
+} from "../schema";
+import type { AiFlawReportSchema, FormStep, SaveStatus } from "../types";
+import { useAiFlawFormContext } from "./useAiFlawFormContext";
+import { getFormSaveStatus, saveFormSaveStatus } from "../../lib/utils";
 
 export function useFormStep(stepKey: FormStep) {
   const { formState, getFieldState, getValues } = useAiFlawFormContext();
@@ -28,7 +27,7 @@ export function useFormStep(stepKey: FormStep) {
 
   const formData = useWatch<AiFlawReportSchema>({
     name: formField,
-  }) as AiFlawReportSchema[typeof formField] | undefined;
+  });
 
   const fieldState = getFieldState(formField, formState);
 

@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  useAiFlawFormContext,
-  type AiFlawReportSchema,
-} from "~/entities/ai-flaw-report";
-
-import {
-  CurrentStepRenderer,
-  FormHeader,
-  FormNavigation,
-} from "~/widgets/ai-flaw-report";
 import { HuggingFaceModelsProvider } from "./models-context";
+import { FormHeader } from "~/widgets/ai-flaw-report/form-header";
+import { CurrentStepRenderer } from "~/widgets/ai-flaw-report/current-step-renderer";
+import { FormNavigation } from "~/widgets/ai-flaw-report/form-navigation";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 
 export function MultiStepAiFlawReportForm({
   huggingFaceModels,

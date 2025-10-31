@@ -1,12 +1,6 @@
 import Image from "next/image";
 
 import {
-  useAiFlawFormContext,
-  EXPECTED_BEHAVIOR_FIELD,
-  ACTUAL_BEHAVIOR_FIELD,
-} from "~/entities/ai-flaw-report";
-
-import {
   FormControl,
   FormField,
   FormItem,
@@ -16,6 +10,11 @@ import { Textarea } from "~/components/ui/textarea";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 
 import { TitleTooltip } from "./title-tooltip";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import {
+  ACTUAL_BEHAVIOR_FIELD,
+  EXPECTED_BEHAVIOR_FIELD,
+} from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
 
 export function BehaviorFields() {
   const { control } = useAiFlawFormContext();

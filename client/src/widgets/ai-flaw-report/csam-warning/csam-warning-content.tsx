@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 
 import {
   FormControl,

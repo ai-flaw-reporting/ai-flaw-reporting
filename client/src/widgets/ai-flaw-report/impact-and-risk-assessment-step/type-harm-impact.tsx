@@ -6,13 +6,12 @@ import {
   safeIncludes,
   createArrayCheckboxHandler,
 } from "~/lib/form-field-utils";
-import {
-  HARM_TYPES_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+
 import { HarmOtherTextInput } from "./harm-other-text-input";
 
 import Image from "next/image";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { HARM_TYPES_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function TypeOfHarmImpact() {
   const { control } = useAiFlawFormContext();

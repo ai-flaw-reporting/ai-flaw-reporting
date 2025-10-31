@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import {
-  filterAndSortResources,
-  parseResourceFilters,
-  resourcesData,
-} from "~/entities/resource";
-import { ResourcesFilterBar } from "~/features/resources-filter";
 
+import { ResourcesFilterBar } from "~/features/resources-filter/ui/filter-bar";
 import {
-  ResourcesHero,
-  ResourcesGrid,
-  AboutFlawReporting,
-  ReportBanner,
-} from "~/widgets/resources";
+  parseResourceFilters,
+  filterAndSortResources,
+} from "~/entities/resource/lib/utils";
+import resourcesData from "~/entities/resource/model/data.json";
+import { ResourcesHero } from "~/widgets/resources/hero";
+import { ResourcesGrid } from "~/widgets/resources/grid";
+import { AboutFlawReporting } from "~/widgets/resources/about-flaw-reporting";
+import { ReportBanner } from "~/widgets/resources/banner";
 
 type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;

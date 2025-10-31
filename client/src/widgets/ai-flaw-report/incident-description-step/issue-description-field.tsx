@@ -1,9 +1,7 @@
 import Image from "next/image";
 
-import {
-  useAiFlawFormContext,
-  ISSUE_DESCRIPTION_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { ISSUE_DESCRIPTION_FIELD } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
 
 import {
   FormControl,

@@ -1,6 +1,7 @@
 import { useWatch } from "react-hook-form";
 
-import { STEP_ORDER, useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { STEP_ORDER } from "~/entities/ai-flaw-report/model/step-config";
 
 export function StepIndicator() {
   const { control } = useAiFlawFormContext();

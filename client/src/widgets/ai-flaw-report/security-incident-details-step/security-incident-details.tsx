@@ -15,10 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import {
-  DETECTION_METHOD_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { DETECTION_METHOD_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 
 export function SecurityIncidentDetails() {
   const { control } = useAiFlawFormContext();

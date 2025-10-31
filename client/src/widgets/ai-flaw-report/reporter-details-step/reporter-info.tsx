@@ -1,10 +1,8 @@
 import Image from "next/image";
 
-import {
-  REPORTER_FIELDS,
-  REPORTER_ROW_FIELDS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { REPORTER_FIELDS } from "~/entities/ai-flaw-report/model/form-data/reporter-fields-config";
+import { REPORTER_ROW_FIELDS } from "~/entities/ai-flaw-report/model/form-data/reporter-fields-config";
 
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 

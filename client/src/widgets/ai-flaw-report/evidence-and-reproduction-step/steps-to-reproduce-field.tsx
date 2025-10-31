@@ -1,9 +1,6 @@
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import Image from "next/image";
-import {
-  EVIDENCE_FIELDS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+
 import {
   FormControl,
   FormDescription,
@@ -13,6 +10,8 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { EVIDENCE_FIELDS } from "~/entities/ai-flaw-report/model/form-data/evidence-fields-config";
 
 export function StepsToReproduceField() {
   const { control } = useAiFlawFormContext();

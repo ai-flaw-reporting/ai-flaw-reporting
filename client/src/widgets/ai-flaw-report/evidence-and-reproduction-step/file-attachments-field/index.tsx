@@ -1,10 +1,6 @@
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 
 import {
-  EVIDENCE_FIELDS,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
-import {
   FormControl,
   FormField,
   FormItem,
@@ -15,6 +11,8 @@ import React from "react";
 import { Upload } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { FileList } from "./file-list";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { EVIDENCE_FIELDS } from "~/entities/ai-flaw-report/model/form-data/evidence-fields-config";
 
 export function FileAttachmentsField() {
   const { control } = useAiFlawFormContext();

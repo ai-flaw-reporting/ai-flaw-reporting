@@ -9,10 +9,8 @@ import {
 } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { Textarea } from "~/components/ui/textarea";
-import {
-  DISCOVERY_NARRATIVE_FIELD,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { DISCOVERY_NARRATIVE_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 
 export function StatisticalArgumentWithExamples() {
   const { control } = useAiFlawFormContext();

@@ -7,10 +7,8 @@ import {
   FormControl,
   FormLabel,
 } from "~/components/ui/form";
-import {
-  useAiFlawFormContext,
-  PREVALENCE_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { PREVALENCE_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 import { PrevalenceBadge } from "./prevalence-badge";
 
 export function PrevalenceField() {

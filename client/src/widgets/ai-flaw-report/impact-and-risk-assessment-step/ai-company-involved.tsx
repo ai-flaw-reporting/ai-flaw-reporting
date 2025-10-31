@@ -20,10 +20,8 @@ import {
   createArraySelectHandler,
   createArrayRemoveHandler,
 } from "~/lib/form-field-utils";
-import {
-  useAiFlawFormContext,
-  AI_COMPANY_INVOLVED_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { AI_COMPANY_INVOLVED_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function AiCompanyInvolved() {
   const { control } = useAiFlawFormContext();

@@ -1,8 +1,3 @@
-import {
-  useAiFlawFormContext,
-  CLASSIFY_REPORT_QUESTIONS,
-} from "~/entities/ai-flaw-report";
-
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 
 import { Item } from "~/components/ui/item";
@@ -18,6 +13,8 @@ import {
 import { cn } from "~/lib/utils";
 
 import { CsamWarning } from "../csam-warning";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { CLASSIFY_REPORT_QUESTIONS } from "~/entities/ai-flaw-report/model/form-data/classify-report-questions";
 
 export function ClassifyReportStep() {
   const { control } = useAiFlawFormContext();

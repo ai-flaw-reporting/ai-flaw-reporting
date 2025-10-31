@@ -1,12 +1,10 @@
 import { useWatch } from "react-hook-form";
 import { X } from "lucide-react";
 
-import {
-  FORM_VALUES,
-  useAiFlawFormContext,
-  ACCESS_METHOD_SELECT_FIELD,
-  ACCESS_METHOD_INPUT_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
+import { ACCESS_METHOD_SELECT_FIELD } from "~/entities/ai-flaw-report/model/form-data/access-method-fields-config";
+import { ACCESS_METHOD_INPUT_FIELD } from "~/entities/ai-flaw-report/model/form-data/access-method-fields-config";
 
 import {
   FormControl,

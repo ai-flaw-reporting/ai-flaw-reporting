@@ -7,10 +7,8 @@ import {
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
 
-import {
-  useAiFlawFormContext,
-  MITIGATION_NOTES_FIELD,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { MITIGATION_NOTES_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function MitigationNotes() {
   const { control } = useAiFlawFormContext();

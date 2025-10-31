@@ -7,11 +7,10 @@ import {
   FormControl,
   FormLabel,
 } from "~/components/ui/form";
-import {
-  useAiFlawFormContext,
-  SEVERITY_OF_HARM_FIELD,
-} from "~/entities/ai-flaw-report";
+
 import { SeverityHarmBadge } from "./severity-harm-badge";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { SEVERITY_OF_HARM_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function SeverityHarmField() {
   const { control } = useAiFlawFormContext();

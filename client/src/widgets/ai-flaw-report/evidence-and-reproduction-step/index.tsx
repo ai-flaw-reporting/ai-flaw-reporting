@@ -1,6 +1,6 @@
 import { useWatch } from "react-hook-form";
 
-import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 
 import { StepsToReproduceField } from "./steps-to-reproduce-field";
 import { ProofOfConceptField } from "./proof-of-concept-field";

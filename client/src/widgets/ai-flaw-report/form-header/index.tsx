@@ -1,6 +1,7 @@
 import { useWatch } from "react-hook-form";
 
-import { STEP_CONFIGS, useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
 
 export function FormHeader() {
   const { control } = useAiFlawFormContext();

@@ -2,13 +2,12 @@
 
 import { Button } from "~/components/ui/button";
 
+import { useResourceFilters } from "../model/useResourcesFilter";
+import { cn } from "~/lib/utils";
 import {
   FORM_SCOPE_OPTIONS,
   ORGANIZATION_TYPE_OPTIONS,
-} from "~/entities/resource";
-
-import { useResourceFilters } from "../model/useResourcesFilter";
-import { cn } from "~/lib/utils";
+} from "~/entities/resource/model/constants";
 
 export function ResourcesFilterBar() {
   const {

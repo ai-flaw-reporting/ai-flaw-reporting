@@ -1,4 +1,5 @@
-import { ResourceCard, type Resource } from "~/entities/resource";
+import { ResourceCard } from "~/entities/resource/ui/resource-card";
+import type { Resource } from "~/entities/resource/model/types";
 
 export function ResourcesGrid({ resources }: { resources: Resource[] }) {
   return (

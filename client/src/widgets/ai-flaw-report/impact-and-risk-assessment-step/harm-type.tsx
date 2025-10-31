@@ -1,8 +1,8 @@
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
   HARM_TYPE_FIELD,
-  useAiFlawFormContext,
   HARM_OPTION_VALUE,
-} from "~/entities/ai-flaw-report";
+} from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";

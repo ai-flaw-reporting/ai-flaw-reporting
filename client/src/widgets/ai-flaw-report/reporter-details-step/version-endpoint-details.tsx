@@ -1,11 +1,9 @@
 import { useWatch } from "react-hook-form";
 import { useMemo } from "react";
 
-import {
-  createVersionFieldConfig,
-  FORM_VALUES,
-  useAiFlawFormContext,
-} from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
+import { createVersionFieldConfig } from "~/entities/ai-flaw-report/model/form-data/ai-system-fields-config";
 
 import { FormFieldRenderer } from "./form-field-renderer";
 

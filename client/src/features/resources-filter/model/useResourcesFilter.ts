@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { buildSearchParams, URL_PARAMS } from "~/entities/resource";
+import { buildSearchParams } from "~/entities/resource/lib/utils";
+import { URL_PARAMS } from "~/entities/resource/model/constants";
 
 export function useResourceFilters() {
   const router = useRouter();

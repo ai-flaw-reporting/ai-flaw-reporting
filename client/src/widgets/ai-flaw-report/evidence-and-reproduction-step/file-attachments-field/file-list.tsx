@@ -2,7 +2,7 @@ import { FileText, Trash } from "lucide-react";
 import { useWatch } from "react-hook-form";
 import { Button } from "~/components/ui/button";
 import { Item, ItemContent } from "~/components/ui/item";
-import { useAiFlawFormContext } from "~/entities/ai-flaw-report";
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 
 export function FileList() {
   const { control, setValue } = useAiFlawFormContext();
