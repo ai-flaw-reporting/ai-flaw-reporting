@@ -1,23 +1,30 @@
 import Image from "next/image";
+import { Link as LucideLink } from "lucide-react";
 
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "~/components/ui/form";
-import { ChipsRow } from "~/components/ui/chips-row";
+
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { FieldTooltip } from "~/components/field-tooltip";
-import { getSafeArray } from "~/lib/form-field-utils";
 
 import { PolicyViolationReason } from "./policy-violation-reason";
-import { Link } from "lucide-react";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import { POLICY_VIOLATION_FIELDS } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
+import { Input } from "~/components/ui/input";
+import { getPolicyLinks } from "~/entities/ai-flaw-report/lib/policy-links";
+import Link from "next/link";
+import { getSafeArray } from "~/lib/form-field-utils";
 
 export function PolicyViolationSection() {
-  const { control } = useAiFlawFormContext();
+  const { control, getValues } = useAiFlawFormContext();
+
+  const selectedPlatforms = getValues("reporterDetails.system.platforms");
+  const policyLinks = getPolicyLinks(getSafeArray<string>(selectedPlatforms));
 
   return (
     <Item variant="outline" className="form-item-card">
@@ -52,18 +59,14 @@ export function PolicyViolationSection() {
               </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <ChipsRow
-                    data={POLICY_VIOLATION_FIELDS.urlOptions}
-                    value={getSafeArray<string>(field.value)}
-                    onValueChange={field.onChange}
+                  <LucideLink
+                    className="absolute top-1/2 left-3 z-10 h-5 w-5 -translate-y-1/2 text-gray-500"
+                    aria-hidden="true"
+                  />
+                  <Input
                     placeholder={POLICY_VIOLATION_FIELDS.url.placeholder}
-                    className="!text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
-                    icon={
-                      <Link
-                        className="h-5 w-5 text-gray-500"
-                        aria-hidden="true"
-                      />
-                    }
+                    className="pl-10 !text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
+                    {...field}
                   />
                   <FieldTooltip
                     text="Help text placeholder"
@@ -71,6 +74,23 @@ export function PolicyViolationSection() {
                   />
                 </div>
               </FormControl>
+              <FormMessage />
+              {!!policyLinks.length && (
+                <ul className="mt-2.5 flex flex-wrap gap-2">
+                  {policyLinks.map((link, index) => (
+                    <li key={index}>
+                      <Link
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-25 rounded-sm bg-indigo-500 px-2 py-[5px] text-xs leading-4.5 font-medium capitalize"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </FormItem>
           )}
         />

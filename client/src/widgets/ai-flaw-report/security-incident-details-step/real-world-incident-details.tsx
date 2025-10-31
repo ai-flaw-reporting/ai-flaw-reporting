@@ -61,7 +61,8 @@ export function RealWorldIncidentDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {SUBSTRATE_RELATIONSHIP_FIELD.label}
+                {SUBSTRATE_RELATIONSHIP_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>

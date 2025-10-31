@@ -52,7 +52,8 @@ export function SecurityIncidentDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {DETECTION_METHOD_FIELD.label}
+                {DETECTION_METHOD_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>

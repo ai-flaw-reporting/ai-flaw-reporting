@@ -91,3 +91,8 @@ export type FieldConfig =
   | CountrySelectFieldConfig
   | FileUploadFieldConfig
   | MultiSelectFieldConfig;
+
+export type PolicyLink = {
+  label: string;
+  url: string;
+};

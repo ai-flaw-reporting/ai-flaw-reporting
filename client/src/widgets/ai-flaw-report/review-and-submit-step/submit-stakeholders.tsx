@@ -24,7 +24,10 @@ export function SubmitStakeholders() {
             height={24}
             aria-hidden="true"
           />
-          {SUBMIT_STAKEHOLDERS_CONFIG.title}
+          <span>
+            {SUBMIT_STAKEHOLDERS_CONFIG.title}{" "}
+            <span className="text-error-600">*</span>
+          </span>
         </ItemTitle>
         <p className="text-sm font-normal text-gray-600 dark:text-gray-100">
           {SUBMIT_STAKEHOLDERS_CONFIG.description}

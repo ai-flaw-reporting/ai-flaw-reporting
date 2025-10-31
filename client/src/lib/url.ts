@@ -17,16 +17,13 @@ export const isDomainOrHttpsUrl = (input: string): boolean => {
 
   if (!hasScheme) {
     // Bare domain only, optionally a trailing slash
-    // - labels: a-z0-9- (no leading/trailing dash in a label)
-    // - at least one dot, TLD 2+ letters
-    // - no path/query/hash/port
     const domainOnly = v.replace(/\/$/, ""); // allow a single trailing slash
     const domainRegex =
       /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])\.)+[a-z]{2,}$/i;
     return domainRegex.test(domainOnly);
   }
 
-  // With scheme: must be valid URL and https only
+  // With scheme: must be valid HTTPS URL
   let u: URL;
   try {
     u = new URL(v);
@@ -36,14 +33,12 @@ export const isDomainOrHttpsUrl = (input: string): boolean => {
 
   if (u.protocol !== "https:") return false;
 
-  // Disallow port, path, query, hash (adjust if you want to allow them)
+  // Disallow port
   if (u.port) return false;
-  const pathOk = u.pathname === "" || u.pathname === "/";
-  const noExtras = !u.search && !u.hash;
 
-  // Also ensure it has a sensible hostname (not an IP or empty)
+  // Hostname must be a sensible domain (no IP)
   const hostnameOk =
     /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])\.)+[a-z]{2,}$/i.test(u.hostname);
 
-  return hostnameOk && pathOk && noExtras;
+  return hostnameOk;
 };

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isDomainOrHttpsUrl } from "~/lib/url";
 
 import { FORM_VALUES } from "./constants";
 import { STEP_ORDER } from "./step-config";
@@ -91,7 +92,15 @@ export const incidentDescriptionSchema = z.object({
   actualBehavior: z.string().max(5000).optional().or(z.literal("")),
   policyViolation: z
     .object({
-      url: z.array(z.string()).optional().default([]),
+      url: z
+        .string()
+        .trim()
+        .refine(isDomainOrHttpsUrl, {
+          message:
+            "Please enter a valid URL, e.g. https://example.com or example.com",
+        })
+        .optional()
+        .or(z.literal("")),
       reason: z.string().max(2000).optional().or(z.literal("")),
     })
     .optional(),

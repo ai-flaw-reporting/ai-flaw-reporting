@@ -35,8 +35,10 @@ export function AffectedStakeholders() {
             height={24}
             aria-hidden="true"
           />
-          {AFFECTED_STAKEHOLDERS_FIELD.title}{" "}
-          <span className="text-error-600"> *</span>
+          <span>
+            {AFFECTED_STAKEHOLDERS_FIELD.title}{" "}
+            <span className="text-error-600"> *</span>
+          </span>
         </ItemTitle>
         <FormField
           control={control}

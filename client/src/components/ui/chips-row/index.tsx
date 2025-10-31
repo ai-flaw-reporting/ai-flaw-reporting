@@ -2,11 +2,14 @@
 import React, { useState, useRef, useCallback, useMemo } from "react";
 
 import { X } from "lucide-react";
+
+import { cn, truncateText } from "~/lib/utils";
+
 import { Popover, PopoverAnchor, PopoverContent } from "../popover";
 import { Badge } from "../badge";
 import { Input } from "../input";
-import { cn } from "~/lib/utils";
-import { isItemSelected, itemMatchesInput, truncateText } from "./utils";
+
+import { isItemSelected, itemMatchesInput } from "./utils";
 
 type DataItem = {
   id?: string;

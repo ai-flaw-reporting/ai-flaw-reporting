@@ -14,8 +14,10 @@ export function HarmType() {
   return (
     <Item variant="outline" className="form-item-card">
       <ItemContent className="space-y-8">
-        <ItemTitle className="form-title flex items-baseline gap-4">
-          {HARM_TYPE_FIELD.title} <span className="text-error-600"> *</span>
+        <ItemTitle className="form-title flex items-baseline">
+          <span>
+            {HARM_TYPE_FIELD.title} <span className="text-error-600">*</span>
+          </span>
         </ItemTitle>
         <FormField
           control={control}

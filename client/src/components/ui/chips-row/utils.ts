@@ -1,8 +1,3 @@
-export const truncateText = (text: string, maxLength: number): string => {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + "...";
-};
-
 export const itemMatchesInput = (
   item: { name: string; associatedTerm?: string },
   searchValue: string,

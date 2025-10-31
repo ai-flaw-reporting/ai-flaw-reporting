@@ -43,7 +43,6 @@ export function StatisticalArgumentWithExamples() {
             aria-hidden="true"
           />
           {DISCOVERY_NARRATIVE_FIELD.title}{" "}
-          <span className="text-error-600"> *</span>
         </ItemTitle>
 
         <FormField

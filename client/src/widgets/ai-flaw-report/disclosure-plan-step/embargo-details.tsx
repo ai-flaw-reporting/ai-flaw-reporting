@@ -42,7 +42,8 @@ export function EmbargoDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {EMBARGO_DETAILS_FIELD.label}
+                {EMBARGO_DETAILS_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <Textarea

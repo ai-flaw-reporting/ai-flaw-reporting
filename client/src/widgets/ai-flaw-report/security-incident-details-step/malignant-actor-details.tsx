@@ -53,7 +53,8 @@ export function MalignantActorDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {ATTACKER_RESOURCES_FIELD.label}
+                {ATTACKER_RESOURCES_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
@@ -86,7 +87,8 @@ export function MalignantActorDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {ATTACKER_OBJECTIVES_FIELD.label}
+                {ATTACKER_OBJECTIVES_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>

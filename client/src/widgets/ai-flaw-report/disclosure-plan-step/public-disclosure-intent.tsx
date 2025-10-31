@@ -26,7 +26,8 @@ export function PublicDisclosureIntent() {
           render={({ field }) => (
             <FormItem className="gap-4 border-none p-0 dark:bg-gray-800">
               <FormLabel className="form-label">
-                {PUBLIC_DISCLOSURE_INTENT_FIELD.label}
+                {PUBLIC_DISCLOSURE_INTENT_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <RadioGroup

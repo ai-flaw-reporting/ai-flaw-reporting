@@ -26,7 +26,8 @@ export function AttackerObjectivesField() {
       render={({ field }) => (
         <FormItem className="form-item-field">
           <FormLabel className="form-label">
-            {ATTACKER_OBJECTIVES_OTHER_FIELD.label}
+            {ATTACKER_OBJECTIVES_OTHER_FIELD.label}{" "}
+            <span className="text-error-600">*</span>
           </FormLabel>
           <FormControl>
             <Input

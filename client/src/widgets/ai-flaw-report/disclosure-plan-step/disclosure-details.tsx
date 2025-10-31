@@ -67,7 +67,8 @@ export function DisclosureDetails() {
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormLabel className="form-label">
-                {DISCLOSURE_TIMELINE_FIELD.label}
+                {DISCLOSURE_TIMELINE_FIELD.label}{" "}
+                <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
                 <div className="relative">
@@ -96,7 +97,8 @@ export function DisclosureDetails() {
             return (
               <FormItem className="form-item-field relative">
                 <FormLabel className="form-label">
-                  {DISCLOSURE_DATEPICKER_FIELD.label}
+                  {DISCLOSURE_DATEPICKER_FIELD.label}{" "}
+                  <span className="text-error-600">*</span>
                 </FormLabel>
                 <Popover>
                   <FormControl>

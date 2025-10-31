@@ -9,6 +9,7 @@ import {
   reviewReportSchema,
 } from "./schema";
 import { STEP_CONFIGS } from "./step-config";
+import type { PolicyLink } from "./types";
 
 export const STEP_STATUS = {
   UPCOMING: "UPCOMING",
@@ -81,3 +82,60 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
     schema: reviewReportSchema,
   },
 } as const;
+
+export const POLICIES: Record<string, PolicyLink[]> = {
+  openai: [
+    {
+      label: "OpenAI Usage Policies",
+      url: "https://openai.com/policies/usage-policies/",
+    },
+    {
+      label: "OpenAI Terms of Use",
+      url: "https://openai.com/policies/terms-of-use/",
+    },
+  ],
+  google: [
+    {
+      label: "Google AI Use Policy",
+      url: "https://policies.google.com/terms/generative-ai/use-policy",
+    },
+    {
+      label: "Google Terms of Service",
+      url: "https://policies.google.com/terms",
+    },
+  ],
+  microsoft: [
+    {
+      label: "Microsoft Responsible AI",
+      url: "https://www.microsoft.com/en-us/ai/responsible-ai",
+    },
+    {
+      label: "Microsoft Services Agreement",
+      url: "https://www.microsoft.com/en-us/servicesagreement",
+    },
+  ],
+  meta: [
+    {
+      label: "Meta AI Responsible Use",
+      url: "https://ai.meta.com/static-resource/responsible-use-guide/",
+    },
+    {
+      label: "Meta Terms of Service",
+      url: "https://www.facebook.com/terms/",
+    },
+  ],
+  anthropic: [
+    {
+      label: "Anthropic Usage Policy",
+      url: "https://www.anthropic.com/legal/aup",
+    },
+    {
+      label: "Anthropic Bug Bounty",
+      url: "https://hackerone.com/anthropic-vdp?type=team",
+    },
+    {
+      label: "Anthropic Disclosure Policy",
+      url: "https://www.anthropic.com/responsible-disclosure-policy",
+    },
+  ],
+};
