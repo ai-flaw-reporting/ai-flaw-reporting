@@ -51,20 +51,25 @@ export function StatisticalArgumentWithExamples() {
           name="securityDetails.discoveryNarrative"
           render={({ field }) => (
             <FormItem className="form-item-field">
-              <FormLabel className="form-label">
-                {DISCOVERY_NARRATIVE_FIELD.label}
-              </FormLabel>
+              {DISCOVERY_NARRATIVE_FIELD.label && (
+                <FormLabel className="form-label">
+                  {DISCOVERY_NARRATIVE_FIELD.label}
+                </FormLabel>
+              )}
+
               <FormControl>
                 <Textarea
-                  placeholder={DISCOVERY_NARRATIVE_FIELD.label}
+                  placeholder={DISCOVERY_NARRATIVE_FIELD.placeholder}
                   rows={DISCOVERY_NARRATIVE_FIELD.rows}
                   className="text-md min-h-[141px] w-full resize-none pr-10 dark:bg-white dark:text-gray-800"
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="text-gray-600 dark:text-gray-100">
-                {DISCOVERY_NARRATIVE_FIELD.description}
-              </FormDescription>
+              {DISCOVERY_NARRATIVE_FIELD.description && (
+                <FormDescription className="text-gray-600 dark:text-gray-100">
+                  {DISCOVERY_NARRATIVE_FIELD.description}
+                </FormDescription>
+              )}
             </FormItem>
           )}
         />

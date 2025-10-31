@@ -1,4 +1,4 @@
-export const ACCESS_METHODS = [
+export const ACCESS_METHODS: string[] = [
   "Web App",
   "Official API",
   "Third-party tool/integration",
@@ -6,53 +6,40 @@ export const ACCESS_METHODS = [
   "Desktop App",
   "Browser Extension",
   "Other",
-] as const;
+];
 
 // Platform configuration with models and synonyms for matching
 type PlatformConfig = {
   id: string;
   label: string;
-  models: readonly string[];
-  synonyms: readonly string[]; // Keywords for automatic platform detection
+  models: string[];
+  synonyms: string[]; // Keywords for automatic platform detection
 };
 
-export const PLATFORM_CONFIGS: readonly PlatformConfig[] = [
+export const PLATFORM_CONFIGS: PlatformConfig[] = [
   // AI Developers
   {
     id: "openai",
     label: "OpenAI (ChatGPT, API, Playground)",
-    models: [
-      "GPT-4o",
-      "GPT-4o-mini",
-      "GPT-4-turbo",
-      "GPT-4",
-      "GPT-3.5-turbo",
-      "DALL-E 3",
-      "Whisper",
-    ],
+    models: ["GPT-5", "o3-mini", "o1", "GPT-3.5-Turbo", "DALL-E-3"],
     synonyms: ["openai", "chatgpt", "gpt"],
   },
   {
     id: "google",
     label: "Google (Gemini, AI Studio, Bard)",
-    models: [
-      "Gemini 1.5 Pro",
-      "Gemini 1.5 Flash",
-      "Gemini Pro",
-      "Gemini Ultra",
-      "PaLM 2",
-    ],
+    models: ["Gemini-2.5-Pro", "Gemini-2.0", "Gemini-1.5", "Imagen-3", "Veo-2"],
     synonyms: ["google", "gemini", "bard", "vertex", "palm"],
   },
   {
     id: "anthropic",
     label: "Anthropic (Claude, API)",
     models: [
-      "Claude 3.5 Sonnet",
-      "Claude 3 Opus",
-      "Claude 3 Haiku",
-      "Claude 2.1",
-      "Claude Instant",
+      "Claude-4-Opus",
+      "Claude-4-Sonnet",
+      "Claude-3.7-Sonnet",
+      "Claude-3-Sonnet",
+      "Claude-instant",
+      "Claude-2",
     ],
     synonyms: ["anthropic", "claude", "bedrock"],
   },
@@ -72,13 +59,13 @@ export const PLATFORM_CONFIGS: readonly PlatformConfig[] = [
   {
     id: "microsoft",
     label: "Microsoft (Copilot, Azure AI)",
-    models: ["GPT-4o", "GPT-4", "GPT-3.5-turbo", "DALL-E 3", "Copilot Pro"],
+    models: ["GPT-4o", "GPT-4", "GPT-3.5-Turbo", "DALL-E-3", "Copilot Pro"],
     synonyms: ["microsoft", "copilot", "azure"],
   },
   {
     id: "xai",
     label: "xAI (Grok)",
-    models: ["Grok-1", "Grok-2"],
+    models: ["Grok-4", "Grok-2"],
     synonyms: ["xai", "grok", "x.ai"],
   },
 
@@ -86,7 +73,7 @@ export const PLATFORM_CONFIGS: readonly PlatformConfig[] = [
   {
     id: "huggingface",
     label: "Hugging Face",
-    models: ["Various Open Source Models", "Custom Models"],
+    models: [],
     synonyms: ["hugging face", "huggingface", "hf"],
   },
   {
@@ -213,11 +200,11 @@ export const PLATFORM_CONFIGS: readonly PlatformConfig[] = [
 
 export const AI_PLATFORMS = PLATFORM_CONFIGS.map((p) => p.label);
 
-export const PLATFORM_MODELS: Record<string, readonly string[]> =
+export const PLATFORM_MODELS: Record<string, string[]> =
   PLATFORM_CONFIGS.reduce(
     (acc, config) => {
       acc[config.label] = config.models;
       return acc;
     },
-    {} as Record<string, readonly string[]>,
+    {} as Record<string, string[]>,
   );

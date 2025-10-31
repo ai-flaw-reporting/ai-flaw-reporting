@@ -51,7 +51,11 @@ export default function CardComponent({
         action.disabled && "pointer-events-none opacity-60",
       )}
     >
-      <article aria-labelledby={titleId} aria-describedby={descId}>
+      <article
+        aria-labelledby={titleId}
+        aria-describedby={descId}
+        className="flex h-full flex-col justify-between"
+      >
         <CardHeader className="px-5">
           <CardTitle>
             {icon && icon}

@@ -2,7 +2,7 @@ export const REPORT_SUMMARY_CONFIG = {
   title: "Report Summary",
   icon: "/icons/form/document.svg",
   reportType: "Report Type",
-  aiSystem: "AI System",
+  aiSystem: "AI System(s)",
   riskAssessment: "Risk Assessment",
   classification: "Classification",
   affectedStakeholders: "Affected Stakeholders",

@@ -32,9 +32,9 @@ export const reporterDetailsSchema = z
       country: z.string().optional(),
     }),
     system: z.object({
-      platform: z.string().min(1),
+      platforms: z.array(z.string()).min(1),
       platformOther: z.string().optional(),
-      model: z.string().optional(),
+      models: z.array(z.string()).optional(),
       version: z.string().optional(),
       accessMethod: z.string().optional(),
       accessMethodOther: z.string().optional(),
@@ -44,7 +44,7 @@ export const reporterDetailsSchema = z
   .refine(
     (data) => {
       if (
-        data.system.platform === FORM_VALUES.OTHER &&
+        data.system.platforms.includes(FORM_VALUES.OTHER) &&
         !data.system.platformOther?.trim()
       ) {
         return false;
@@ -57,13 +57,13 @@ export const reporterDetailsSchema = z
   )
   .refine(
     (data) => {
-      if (!data.system.notSure && !data.system.model?.trim()) {
+      if (!data.system.notSure && !data.system.models?.length) {
         return false;
       }
       return true;
     },
     {
-      path: ["system", "model"],
+      path: ["system", "models"],
     },
   )
   .refine(

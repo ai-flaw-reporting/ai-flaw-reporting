@@ -65,7 +65,7 @@ type TextareaFieldConfig = BaseFieldConfig & {
 
 type SelectFieldConfig = BaseFieldConfig & {
   type: "select";
-  options: readonly string[] | string[];
+  options: string[];
 };
 
 type CountrySelectFieldConfig = BaseFieldConfig & {
@@ -79,9 +79,15 @@ type FileUploadFieldConfig = BaseFieldConfig & {
   multiple?: boolean;
 };
 
+type MultiSelectFieldConfig = BaseFieldConfig & {
+  type: "multi-select";
+  options: string[];
+};
+
 export type FieldConfig =
   | InputFieldConfig
   | TextareaFieldConfig
   | SelectFieldConfig
   | CountrySelectFieldConfig
-  | FileUploadFieldConfig;
+  | FileUploadFieldConfig
+  | MultiSelectFieldConfig;

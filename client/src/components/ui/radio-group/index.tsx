@@ -149,7 +149,7 @@ function RadioGroupItem({
         )}
         {...props}
       >
-        <span className="relative flex h-4 w-4 items-center justify-center">
+        <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
           <Image
             src="/icons/form/radio.svg"
             alt=""

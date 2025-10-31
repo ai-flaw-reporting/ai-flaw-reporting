@@ -21,7 +21,7 @@ export default function CardsContainer() {
             />
           }
           title="Information & Resources"
-          description="Explore helpful definitions, examples, and guidelines to improve the quality of your report and understand AI safety."
+          description="Explore helpful definitions, and other resources for reporting issues with AI systems."
           infoHint="Info about Information & Resources"
           action={{
             label: "Select",
@@ -41,7 +41,7 @@ export default function CardsContainer() {
             />
           }
           title="AI Flaw"
-          description="Report flaws, vulnerabilities, and safety issues you observe in AI systems. Each report supports more trustworthy AI."
+          description="Generate flaw, vulnerability, and incident reports for AI systems. Automatically send reports to key stakeholders."
           infoHint="Info about AI Flaw"
           action={{
             label: "Report flaw",

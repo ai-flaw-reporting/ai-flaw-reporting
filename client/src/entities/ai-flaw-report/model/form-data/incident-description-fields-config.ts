@@ -24,7 +24,7 @@ export const ISSUE_DESCRIPTION_FIELD: IncidentDescriptionFieldConfig = {
   rows: 3,
   maxLength: 5000,
   placeholder:
-    "Provide a clear, detailed description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
+    "Provide a clear description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
   description:
     "Be as specific as possible. This helps developers understand and reproduce the issue.",
   required: true,
@@ -54,7 +54,7 @@ export const ACTUAL_BEHAVIOR_FIELD: IncidentDescriptionFieldConfig = {
 };
 
 export const POLICY_VIOLATION_FIELDS = {
-  title: "Policy Violations",
+  title: "Potential Policy Violations",
   icon: "/icons/form/warning-outline.svg",
   description: "Select any policies or guidelines that this issue may violate:",
   url: {
@@ -62,16 +62,16 @@ export const POLICY_VIOLATION_FIELDS = {
     label: "Policy / Guideline Link",
     type: "input",
     inputType: "url",
-    placeholder: "Enter policy/guideline URL",
+    placeholder: "Enter policy/guideline URL. Why is this a violation?",
   } as IncidentDescriptionFieldConfig,
   reason: {
     name: "incidentDescription.policyViolation.reason",
-    label: "Why is this a policy violation?",
+    label:
+      "Please explain why this might be a potential violation of the policy, or of the intended acceptable uses for the product/system?",
     type: "textarea",
     rows: 3,
     maxLength: 2000,
     placeholder: "Explain how this issue violates the selected policy...",
-    description: "This could be an explanation text for this field.",
   } as IncidentDescriptionFieldConfig,
   urlOptions: [
     {

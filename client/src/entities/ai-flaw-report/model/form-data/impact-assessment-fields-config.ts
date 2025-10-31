@@ -29,10 +29,10 @@ export const SEVERITY_OF_HARM_FIELD = {
   title: "Severity of Harm",
   icon: "/icons/form/warning-outline.svg",
   label: "How severe is the potential harm?",
-  options: ["negligible", "minor", "moderate", "severe", "critical"] as const,
+  options: ["negligible", "low", "medium", "high", "critical"] as const,
   type: "input",
-  minValue: "Negligible",
-  maxValue: "Critical",
+  minValue: "negligible",
+  maxValue: "critical",
 };
 
 export const PREVALENCE_FIELD = {
@@ -40,10 +40,10 @@ export const PREVALENCE_FIELD = {
   title: "Prevalence",
   icon: "/icons/form/prevalence.svg",
   label: "How common is this issue?",
-  options: ["rare", "uncommon", "common", "widespread"] as const,
+  options: ["isolated", "rare", "occasional", "common", "widespread"] as const,
   type: "input",
-  minValue: "Rare",
-  maxValue: "Widespread",
+  minValue: "isolated",
+  maxValue: "widespread",
 };
 
 export const HARM_OPTION_VALUE = {
@@ -61,12 +61,13 @@ export const HARM_TYPE_FIELD = {
     {
       value: HARM_OPTION_VALUE.DOCUMENTED,
       label: "Documented Harm",
-      description: "Save my login details for next time.",
+      description:
+        "Common weaknesses of systems that may already be cataloged in MITRE’s CWE.",
     },
     {
       value: HARM_OPTION_VALUE.NEW,
       label: "New Harm",
-      description: "Save my login details for next time.",
+      description: "",
     },
   ] as const,
 };
@@ -79,39 +80,128 @@ export const HARM_TYPES_FIELD = {
   type: "input",
   options: [
     {
-      value: "psychological",
-      label: "Psychological Harm",
-      description: "Mental distress, anxiety, trauma",
+      value: "cwe-22",
+      label: "CWE-22",
+      description:
+        "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
     },
     {
-      value: "reputational",
-      label: "Reputational Harm",
-      description: "Damage to reputation or standing",
+      value: "cwe-79",
+      label: "CWE-79",
+      description:
+        "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
     },
     {
-      value: "rights_violation",
-      label: "Rights Violations",
-      description: "Civil rights, privacy violations",
+      value: "cwe-89",
+      label: "CWE-89",
+      description:
+        "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    },
+    { value: "cwe-416", label: "CWE-416", description: "Use After Free" },
+    {
+      value: "cwe-78",
+      label: "CWE-78",
+      description:
+        "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
     },
     {
-      value: "misinformation",
-      label: "Misinformation",
-      description: "Spread of false information",
+      value: "cwe-20",
+      label: "CWE-20",
+      description: "Improper Input Validation",
+    },
+    { value: "cwe-125", label: "CWE-125", description: "Out-of-bounds Read" },
+    { value: "cwe-787", label: "CWE-787", description: "Out-of-bounds Write" },
+    {
+      value: "cwe-352",
+      label: "CWE-352",
+      description: "Cross-Site Request Forgery (CSRF)",
     },
     {
-      value: "financial_harm",
-      label: "Financial Harm",
-      description: "Economic losses, fraud, theft",
+      value: "cwe-434",
+      label: "CWE-434",
+      description: "Unrestricted Upload of File with Dangerous Type",
     },
     {
-      value: "physical_harm",
-      label: "Physical Harm",
-      description: "Bodily injury or physical danger",
+      value: "cwe-476",
+      label: "CWE-476",
+      description: "NULL Pointer Dereference",
     },
     {
-      value: "discrimination",
-      label: "Discrimination",
-      description: "Bias against protected groups",
+      value: "cwe-502",
+      label: "CWE-502",
+      description: "Deserialization of Untrusted Data",
+    },
+    {
+      value: "cwe-190",
+      label: "CWE-190",
+      description: "Integer Overflow or Wraparound",
+    },
+    {
+      value: "cwe-287",
+      label: "CWE-287",
+      description: "Improper Authentication",
+    },
+    {
+      value: "cwe-798",
+      label: "CWE-798",
+      description: "Use of Hard-coded Credentials",
+    },
+    {
+      value: "cwe-862",
+      label: "CWE-862",
+      description: "Missing Authorization",
+    },
+    {
+      value: "cwe-77",
+      label: "CWE-77",
+      description:
+        "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    },
+    {
+      value: "cwe-306",
+      label: "CWE-306",
+      description: "Missing Authentication for Critical Function",
+    },
+    {
+      value: "cwe-119",
+      label: "CWE-119",
+      description:
+        "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+    },
+    {
+      value: "cwe-863",
+      label: "CWE-863",
+      description: "Incorrect Authorization",
+    },
+    {
+      value: "cwe-276",
+      label: "CWE-276",
+      description: "Incorrect Default Permissions",
+    },
+    {
+      value: "cwe-200",
+      label: "CWE-200",
+      description: "Exposure of Sensitive Information to an Unauthorized Actor",
+    },
+    {
+      value: "cwe-918",
+      label: "CWE-918",
+      description: "Server-Side Request Forgery (SSRF)",
+    },
+    {
+      value: "cwe-269",
+      label: "CWE-269",
+      description: "Improper Privilege Management",
+    },
+    {
+      value: "cwe-94",
+      label: "CWE-94",
+      description: "Improper Control of Generation of Code ('Code Injection')",
+    },
+    {
+      value: "cwe-400",
+      label: "CWE-400",
+      description: "Uncontrolled Resource Consumption",
     },
     {
       value: FORM_VALUES.OTHER_LOWERCASE,
@@ -135,7 +225,7 @@ export const AFFECTED_STAKEHOLDERS_FIELD = {
   name: "impactAssessment.affectedStakeholders",
   title: "Affected Stakeholders",
   icon: "/icons/form/stakeholders.svg",
-  label: "Select all types of harm or impact that apply:",
+  label: "Select all organizations or companies that might be relevant.",
   type: "input",
   options: [
     {
@@ -200,7 +290,7 @@ export const AI_COMPANY_OPTIONS = [
 
 export const AI_COMPANY_INVOLVED_FIELD = {
   name: "impactAssessment.aiCompanyInvolved",
-  label: "AI Company involved",
+  label: "Specific names of affected stakeholders (if known):",
   type: "select",
   options: AI_COMPANY_OPTIONS,
   placeholder: "Select AI companies",
@@ -214,5 +304,5 @@ export const MITIGATION_NOTES_FIELD = {
   placeholder:
     "Describe any coordination with vendors, embargo periods, or special disclosure requirements....",
   description:
-    "This helps coordinate responsible disclosure with affected parties",
+    "This helps us coordinate responsible disclosure with affected parties.",
 };

@@ -1,4 +1,9 @@
-import { FormControl, FormField, FormItem } from "~/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
 import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
@@ -44,6 +49,9 @@ export function AffectedStakeholders() {
 
             return (
               <FormItem className="form-item-field">
+                <FormLabel className="form-label mb-6.5">
+                  {AFFECTED_STAKEHOLDERS_FIELD.label}
+                </FormLabel>
                 <FormControl>
                   <div className="space-y-8">
                     <ul className="grid grid-cols-2 gap-1.5">

@@ -27,12 +27,12 @@ export const SUBSTRATE_RELATIONSHIP_FIELD = {
   label: "Substrate Relationship",
   placeholder: "Choose an option",
   description:
-    "Tell us if you saw this, were hurt by this built the system, or other",
+    "Tell us if you saw this, were hurt by this, built the system, or other.",
   type: "select",
   options: [
-    { value: "ai_system", label: "AI system" },
-    { value: "human_operator", label: "Human operator" },
-    { value: "third_party_integration", label: "Third-party integration" },
+    { value: "affected_stakeholder", label: "Affected stakeholder" },
+    { value: "independent_observer", label: "Independent observer" },
+    { value: "system_developer", label: "System developer" },
     { value: "other", label: "Other" },
   ] as const,
 };
@@ -58,17 +58,41 @@ export const HARM_NARRATIVE_FIELD = {
 
 export const ATTACKER_RESOURCES_FIELD = {
   name: "securityDetails.attackerResources",
-  title: "Malignant Actor details",
+  title: "Malign Actor details",
   icon: "/icons/form/mask.svg",
   label: "Attackers Resources",
   placeholder: "Choose an option",
   description: "Select the types of access or control the attacker has",
   type: "select",
   options: [
-    { value: "individual_user", label: "Individual user" },
-    { value: "organization", label: "Organization" },
-    { value: "automated_script_bot", label: "Automated script/bot" },
-    { value: "unknown", label: "Unknown" },
+    {
+      value: "training_data_feedback_control",
+      label: "Training data/feedback control",
+    },
+    {
+      value: "model_system_supply_chain_control",
+      label: "Model/system supply chain control",
+    },
+    {
+      value: "direct_query_access_white_box",
+      label: "Direct query access — white-box",
+    },
+    {
+      value: "direct_query_access_black_box",
+      label: "Direct query access — black-box",
+    },
+    {
+      value: "direct_query_access_grey_box",
+      label: "Direct query access — grey-box",
+    },
+    {
+      value: "application_plugin_supply_chain_control",
+      label: "Application/plugin supply chain control",
+    },
+    {
+      value: "application_plugin_output_control",
+      label: "Application/plugin output control",
+    },
     { value: "other", label: "Other" },
   ] as const,
 };
@@ -87,11 +111,10 @@ export const ATTACKER_OBJECTIVES_FIELD = {
   description: "Select what the attacker is trying to achieve",
   type: "select",
   options: [
-    { value: "financial_gain", label: "Financial gain" },
-    { value: "reputation_damage", label: "Reputation damage" },
-    { value: "data_exfiltration", label: "Data exfiltration" },
-    { value: "model_poisoning", label: "Model poisoning" },
-    { value: "misuse_demonstration", label: "Misuse demonstration" },
+    { value: "availability_breakdown", label: "Availability breakdown" },
+    { value: "integrity_violation", label: "Integrity violation" },
+    { value: "privacy_compromise", label: "Privacy compromise" },
+    { value: "abuse_violation", label: "Abuse violation" },
     { value: "other", label: "Other" },
   ] as const,
 };
@@ -113,9 +136,11 @@ export const DETECTION_METHOD_FIELD = {
     "Describe methods you used to discover or observe this incident.",
   type: "select",
   options: [
-    { value: "manual_review", label: "Manual review" },
-    { value: "automated_monitoring", label: "Automated monitoring" },
-    { value: "user_report", label: "User report" },
+    { value: "user_observation", label: "User observation" },
+    { value: "monitoring", label: "Monitoring" },
+    { value: "testing", label: "Testing" },
+    { value: "external_report", label: "External report" },
+    { value: "automated_analysis", label: "Automated analysis" },
     { value: "unknown", label: "Unknown" },
   ] as const,
 };
@@ -124,9 +149,9 @@ export const DISCOVERY_NARRATIVE_FIELD = {
   name: "securityDetails.discoveryNarrative",
   title: "Statistical Argument with Examples",
   icon: "/icons/form/refresh.svg",
-  label: "Explain with examples why this flaw is likely to reoccur.",
-  description:
-    "Include exact prompts, settings, and conditions. Use numbered steps for clarity.",
+  label: "",
+  placeholder: "Explain with examples why this flaw is likely to reoccur.",
+  description: "",
   type: "textarea",
   rows: 6,
 };

@@ -27,6 +27,33 @@ export function ClassifyReportStep() {
 
   return (
     <>
+      <div className="space-y-4 text-sm font-normal text-gray-600 dark:text-gray-100">
+        <p>
+          You are welcome to report any broadly-scoped flaw, vulnerability, or
+          incident relating to an AI system or model. We encourage reports with
+          demonstrable risks, harms, or systematic concerns related to
+          general-purpose AI systems.
+        </p>
+        <p>This form will:</p>
+        <ul>
+          <li className="list-inside list-disc">
+            Help you generate a comprehensive, machine-readable report, informed
+            by security best practices.
+          </li>
+          <li className="list-inside list-disc">
+            Elicit details that will make it easier to review and triage.
+          </li>
+          <li className="list-inside list-disc">
+            Provide the option to automatically submit your report to a list of
+            the venues relevant for your flaw.
+          </li>
+        </ul>
+        <p>
+          This form creates a report for you. Reports are handled in strict
+          confidence, and will not be saved or sent unless you choose to submit
+          them.
+        </p>
+      </div>
       {CLASSIFY_REPORT_QUESTIONS.map((question) => (
         <Item key={question.name} variant="outline" className="form-item-card">
           <FormField

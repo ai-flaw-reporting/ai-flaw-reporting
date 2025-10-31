@@ -15,9 +15,9 @@ import { Checkbox } from "~/components/ui/checkbox";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 
 import { AccessMethodField } from "./access-method-field";
-import { AiModelField } from "./ai-model-field";
 import { FormFieldRenderer } from "./form-field-renderer";
 import { VersionEndpointDetails } from "./version-endpoint-details";
+import { AiModelField } from "./ai-model-field";
 
 export function AiSystemInfo() {
   const { control } = useAiFlawFormContext();

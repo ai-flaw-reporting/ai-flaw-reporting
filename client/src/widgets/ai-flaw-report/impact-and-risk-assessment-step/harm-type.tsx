@@ -32,30 +32,34 @@ export function HarmType() {
                     variant="dots"
                     value={HARM_TYPE_FIELD.options[0].value}
                     checked={field.value === HARM_OPTION_VALUE.DOCUMENTED}
-                    className="flex items-start gap-2"
+                    className="flex flex-1 items-start gap-2"
                   >
                     <div className="flex flex-col text-start">
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-100">
                         {HARM_TYPE_FIELD.options[0].label}
                       </span>
-                      <span className="textgray-600 text-sm font-normal dark:text-gray-100">
-                        {HARM_TYPE_FIELD.options[0].description}
-                      </span>
+                      {HARM_TYPE_FIELD.options[0].description && (
+                        <span className="textgray-600 text-sm font-normal dark:text-gray-100">
+                          {HARM_TYPE_FIELD.options[0].description}
+                        </span>
+                      )}
                     </div>
                   </RadioGroupItem>
                   <RadioGroupItem
                     variant="dots"
                     value={HARM_TYPE_FIELD.options[1].value}
                     checked={field.value === HARM_OPTION_VALUE.NEW}
-                    className="flex items-start gap-2"
+                    className="flex flex-1 items-start gap-2"
                   >
                     <div className="flex flex-col text-start">
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-100">
                         {HARM_TYPE_FIELD.options[1].label}
                       </span>
-                      <span className="textgray-600 text-sm font-normal dark:text-gray-100">
-                        {HARM_TYPE_FIELD.options[1].description}
-                      </span>
+                      {HARM_TYPE_FIELD.options[1].description && (
+                        <span className="textgray-600 text-sm font-normal dark:text-gray-100">
+                          {HARM_TYPE_FIELD.options[1].description}
+                        </span>
+                      )}
                     </div>
                   </RadioGroupItem>
                 </RadioGroup>

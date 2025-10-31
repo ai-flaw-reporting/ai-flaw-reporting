@@ -1,7 +1,7 @@
 import type { FieldConfig } from "../types";
 
 export type AiModelFieldName =
-  | "reporterDetails.system.model"
+  | "reporterDetails.system.models"
   | "reporterDetails.system.platformOther";
 
 export type AiModelFieldConfig = FieldConfig & {
@@ -9,12 +9,12 @@ export type AiModelFieldConfig = FieldConfig & {
 };
 
 export const createAiModelSelectField = (
-  options: readonly string[] | string[],
+  options: string[],
   isRequired: boolean,
 ): AiModelFieldConfig => ({
-  name: "reporterDetails.system.model",
+  name: "reporterDetails.system.models",
   label: "AI System/Model",
-  type: "select",
+  type: "multi-select",
   placeholder: "Select the AI system",
   options,
   required: isRequired,

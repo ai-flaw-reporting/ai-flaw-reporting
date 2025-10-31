@@ -1,4 +1,5 @@
 import { SAVE_STATUS_KEY_PREFIX, FORM_VALUES } from "../model/constants";
+import type { AiFlawReportSchema } from "../model/types";
 
 /**
  * Recursively removes File objects and File arrays from data to allow localStorage serialization.
@@ -74,18 +75,14 @@ export function getReportType(formData: {
   return "Policy Violation";
 }
 
-export function getAiSystem(formData: {
-  reporterDetails?: {
-    system?: {
-      platform?: string;
-      platformOther?: string;
-    };
-  };
-}): string | undefined {
-  const platform = formData?.reporterDetails?.system?.platform;
-  return platform === FORM_VALUES.OTHER
-    ? formData?.reporterDetails?.system?.platformOther
-    : platform;
+export function getAiSystem(
+  formData: AiFlawReportSchema["reporterDetails"],
+): string | string[] | undefined {
+  const platforms = formData?.system?.platforms;
+
+  return platforms.includes(FORM_VALUES.OTHER)
+    ? formData?.system?.platformOther
+    : platforms;
 }
 
 export function formatStakeholder(stakeholder: string): string {

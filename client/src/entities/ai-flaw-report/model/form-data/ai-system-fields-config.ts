@@ -2,7 +2,7 @@ import type { FieldConfig } from "../types";
 import { AI_PLATFORMS } from "./reporter-details-data";
 
 export type AiSystemFieldName =
-  | "reporterDetails.system.platform"
+  | "reporterDetails.system.platforms"
   | "reporterDetails.system.version";
 
 export type AiSystemFieldConfig = FieldConfig & {
@@ -10,9 +10,9 @@ export type AiSystemFieldConfig = FieldConfig & {
 };
 
 export const AI_SYSTEM_PLATFORM_FIELD: AiSystemFieldConfig = {
-  name: "reporterDetails.system.platform",
+  name: "reporterDetails.system.platforms",
   label: "AI Product/Platform",
-  type: "select",
+  type: "multi-select",
   placeholder: "Select the product or platform",
   options: AI_PLATFORMS,
   required: true,

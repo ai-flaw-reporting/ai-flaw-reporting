@@ -13,7 +13,7 @@ export type QuestionConfig = {
 export const CLASSIFY_REPORT_QUESTIONS: QuestionConfig[] = [
   {
     name: "classifyReport.real_world_harm",
-    label: "Has this flaw already caused harm in the real world?",
+    label: "Has this flaw already caused an incident of harm?",
     description: "(e.g., harm to people, property, rights, or infrastructure)",
   },
   {

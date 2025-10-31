@@ -5,12 +5,12 @@ export default function Header() {
         id="hero-title"
         className="display-sm text-center font-bold text-gray-800 dark:text-white"
       >
-        Help Make AI Safer for Everyone
+        Report AI Flaws & Incidents
       </h1>
       <p className="text-center text-sm leading-5 text-gray-600 dark:text-gray-100">
-        This open-source project by Harvard researchers lets you securely report
-        AI flaws and vulnerabilities. Your voice helps shape safer, more ethical
-        AI systems.
+        This open-source project lets you generate your own AI flaw / incident
+        reports, and optionally send them to stakeholders. Your voice helps make
+        AI safer and more secure.
       </p>
     </header>
   );

@@ -45,8 +45,9 @@ export function TypeOfHarmImpact() {
                   <div className="space-y-8">
                     <ul className="grid grid-cols-2 gap-1.5">
                       {HARM_TYPES_FIELD.options.map((option) => (
-                        <li key={option.value}>
+                        <li key={option.value} className="h-full">
                           <CheckboxCard
+                            className="h-full min-h-[120px]"
                             checked={safeIncludes(field.value, option.value)}
                             onCheckedChange={(checked) =>
                               handleCheckboxChange(
