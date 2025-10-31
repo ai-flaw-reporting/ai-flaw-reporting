@@ -47,15 +47,21 @@ export function ProgressComponent() {
               <Badge
                 variant={BADGE_VARIANTS[stepStatus]}
                 className={cn(
-                  "h-8 w-8 rounded-full p-0 text-lg font-medium",
-                  isCurrent && "text-primary-foreground",
+                  "h-8 w-8 rounded-full p-0 text-lg font-medium dark:text-gray-400",
+                  isCurrent && "text-primary-foreground dark:text-white",
                   !isCurrent && !isSuccess && "dark:bg-transparent",
                 )}
                 aria-label={`Step ${index + 1}: ${stepConfig.badgeTitle} - ${stepStatus}`}
                 aria-current={isCurrent ? "step" : undefined}
               >
                 <span aria-hidden="true">
-                  {isCurrent ? index + 1 : isSuccess ? <Check /> : index + 1}
+                  {isCurrent ? (
+                    index + 1
+                  ) : isSuccess ? (
+                    <Check className="text-gray-25" />
+                  ) : (
+                    index + 1
+                  )}
                 </span>
               </Badge>
               <p

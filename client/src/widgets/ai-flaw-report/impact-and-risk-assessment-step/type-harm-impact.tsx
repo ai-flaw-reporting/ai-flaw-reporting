@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import { useWatch } from "react-hook-form";
+
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
@@ -11,10 +14,36 @@ import { HarmOtherTextInput } from "./harm-other-text-input";
 
 import Image from "next/image";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import { HARM_TYPES_FIELD } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
+import {
+  HARM_OPTION_VALUE,
+  HARM_TYPES_FIELD,
+} from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 export function TypeOfHarmImpact() {
-  const { control } = useAiFlawFormContext();
+  const { control, setValue } = useAiFlawFormContext();
+
+  const harmType = useWatch({
+    control,
+    name: "impactAssessment.harmType",
+  });
+
+  const previousHarmTypeRef = useRef<string | undefined>(undefined);
+
+  const isNewHarm =
+    harmType === HARM_OPTION_VALUE.NEW || harmType === undefined;
+
+  useEffect(() => {
+    if (
+      previousHarmTypeRef.current &&
+      previousHarmTypeRef.current !== harmType
+    ) {
+      setValue("impactAssessment.harmTypes", []);
+      setValue("impactAssessment.harmOtherText", "");
+    }
+    previousHarmTypeRef.current = harmType;
+  }, [harmType, setValue]);
+
+  if (!isNewHarm) return null;
 
   return (
     <Item variant="outline" className="form-item-card">
@@ -46,9 +75,8 @@ export function TypeOfHarmImpact() {
                   <div className="space-y-8">
                     <ul className="grid grid-cols-2 gap-1.5">
                       {HARM_TYPES_FIELD.options.map((option) => (
-                        <li key={option.value} className="h-full">
+                        <li key={option.value}>
                           <CheckboxCard
-                            className="h-full min-h-[120px]"
                             checked={safeIncludes(field.value, option.value)}
                             onCheckedChange={(checked) =>
                               handleCheckboxChange(

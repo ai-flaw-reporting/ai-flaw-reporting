@@ -1,10 +1,10 @@
-import { FORM_VALUES } from "../constants";
 import type { FieldConfig } from "../types";
 
 export type ImpactAssessmentFieldName =
   | "impactAssessment.severityOfHarm"
   | "impactAssessment.prevalence"
   | "impactAssessment.harmType"
+  | "impactAssessment.documentedHarmCwe"
   | "impactAssessment.harmTypes"
   | "impactAssessment.harmOtherText"
   | "impactAssessment.specificImpactTypes"
@@ -78,6 +78,54 @@ export const HARM_TYPES_FIELD = {
   icon: "/icons/form/circle.svg",
   label: "Select all types of harm or impact that apply:",
   type: "input",
+  options: [
+    {
+      value: "psychological_harm",
+      label: "Psychological Harm",
+      description: "Mental distress, anxiety, trauma",
+    },
+    {
+      value: "financial_harm",
+      label: "Financial Harm",
+      description: "Economic losses, fraud, theft",
+    },
+    {
+      value: "reputational_harm",
+      label: "Reputational Harm",
+      description: "Damage to reputation or standing",
+    },
+    {
+      value: "physical_harm",
+      label: "Physical Harm",
+      description: "Bodily injury or physical danger",
+    },
+    {
+      value: "rights_violations",
+      label: "Rights Violations",
+      description: "Civil rights, privacy violations",
+    },
+    {
+      value: "discrimination",
+      label: "Discrimination",
+      description: "Bias against protected groups",
+    },
+    {
+      value: "misinformation",
+      label: "Misinformation",
+      description: "Spread of false information",
+    },
+    {
+      value: "other",
+      label: "Other",
+      description: "Other types of harm",
+    },
+  ] as const,
+};
+
+export const DOCUMENTED_HARM_CWE_FIELD = {
+  name: "impactAssessment.documentedHarmCwe",
+  type: "select",
+  placeholder: "MITRE's CWE",
   options: [
     {
       value: "cwe-22",
@@ -203,13 +251,8 @@ export const HARM_TYPES_FIELD = {
       label: "CWE-400",
       description: "Uncontrolled Resource Consumption",
     },
-    {
-      value: FORM_VALUES.OTHER_LOWERCASE,
-      label: "Other",
-      description: "Other types of harm",
-    },
-  ] as const,
-};
+  ],
+} as const;
 
 export const SPECIFIC_IMPACT_TYPES_FIELD: ImpactAssessmentFieldConfig = {
   name: "impactAssessment.specificImpactTypes",
@@ -260,7 +303,7 @@ export const AFFECTED_STAKEHOLDERS_FIELD = {
       description: "Critical systems and services",
     },
     {
-      value: FORM_VALUES.OTHER_LOWERCASE,
+      value: "other",
       label: "Other",
       description: "Other affected parties",
     },

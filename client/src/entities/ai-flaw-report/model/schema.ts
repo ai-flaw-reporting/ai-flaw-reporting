@@ -4,6 +4,7 @@ import { isDomainOrHttpsUrl } from "~/lib/url";
 import { FORM_VALUES } from "./constants";
 import { STEP_ORDER } from "./step-config";
 import { PUBLIC_DISCLOSURE_INTENT_VALUES } from "./form-data/disclosure-plan-fields-config";
+import { HARM_OPTION_VALUE } from "./form-data/impact-assessment-fields-config";
 import type { FormStep } from "./types";
 
 export const classifyReportSchema = z
@@ -190,9 +191,8 @@ export const impactAndRiskAssessmentSchema = z
     severityOfHarm: z.string(),
     prevalence: z.string(),
     harmType: z.string(),
-    harmTypes: z
-      .array(z.string())
-      .min(1, "At least one harm type must be selected"),
+    documentedHarmCwe: z.string().optional(),
+    harmTypes: z.array(z.string()).optional(),
     harmOtherText: z.string().max(200).optional(),
     specificImpactTypes: z.array(z.string()).optional().default([]),
     affectedStakeholders: z
@@ -203,7 +203,30 @@ export const impactAndRiskAssessmentSchema = z
   })
   .refine(
     (data) => {
+      if (data.harmType === HARM_OPTION_VALUE.NEW) {
+        return !!data.harmTypes?.length;
+      }
+      return true;
+    },
+    {
+      path: ["harmTypes"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.harmType === HARM_OPTION_VALUE.DOCUMENTED) {
+        return !!data.documentedHarmCwe?.trim();
+      }
+      return true;
+    },
+    {
+      path: ["documentedHarmCwe"],
+    },
+  )
+  .refine(
+    (data) => {
       if (
+        data.harmTypes &&
         data.harmTypes.includes(FORM_VALUES.OTHER_LOWERCASE as string) &&
         !data.harmOtherText?.trim()
       ) {

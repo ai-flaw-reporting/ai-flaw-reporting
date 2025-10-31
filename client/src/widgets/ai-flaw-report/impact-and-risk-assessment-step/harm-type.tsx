@@ -1,15 +1,46 @@
+import { useEffect, useRef } from "react";
+import { useWatch } from "react-hook-form";
+
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
   HARM_TYPE_FIELD,
   HARM_OPTION_VALUE,
+  DOCUMENTED_HARM_CWE_FIELD,
 } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
+import { FieldTooltip } from "~/components/field-tooltip";
 
 export function HarmType() {
-  const { control } = useAiFlawFormContext();
+  const { control, setValue } = useAiFlawFormContext();
+
+  const harmType = useWatch({
+    control,
+    name: "impactAssessment.harmType",
+  });
+
+  const previousHarmTypeRef = useRef<string | undefined>(undefined);
+
+  const isDocumentedHarm = harmType === HARM_OPTION_VALUE.DOCUMENTED;
+
+  useEffect(() => {
+    if (
+      previousHarmTypeRef.current &&
+      previousHarmTypeRef.current !== harmType
+    ) {
+      setValue("impactAssessment.documentedHarmCwe", "");
+    }
+    previousHarmTypeRef.current = harmType;
+  }, [harmType, setValue]);
 
   return (
     <Item variant="outline" className="form-item-card">
@@ -69,6 +100,39 @@ export function HarmType() {
             </FormItem>
           )}
         />
+        {isDocumentedHarm && (
+          <FormField
+            control={control}
+            name="impactAssessment.documentedHarmCwe"
+            render={({ field }) => (
+              <FormItem className="form-item-field">
+                <FormControl>
+                  <div className="relative max-w-[353px]">
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="text-md w-full dark:bg-white dark:text-gray-800">
+                        <SelectValue
+                          placeholder={DOCUMENTED_HARM_CWE_FIELD.placeholder}
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {DOCUMENTED_HARM_CWE_FIELD.options.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FieldTooltip
+                      text="Select the CWE that applies to this incident"
+                      ariaLabel="Documented Harm CWE help"
+                      className="right-13"
+                    />
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        )}
       </ItemContent>
     </Item>
   );
