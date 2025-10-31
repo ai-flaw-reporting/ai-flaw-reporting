@@ -48,3 +48,10 @@ export const SUBMIT_STAKEHOLDERS_CONFIG = {
     },
   ],
 };
+
+export const PLATFORM_TO_STAKEHOLDER_MAP: Record<string, string> = {
+  "OpenAI (ChatGPT, API, Playground)": "OpenAI",
+  "Hugging Face": "HuggingFace AI Flaw Database",
+  "AI Incident Database": "AI Incident Database",
+  "US AI Safety Institute": "AI Safety Institute",
+};

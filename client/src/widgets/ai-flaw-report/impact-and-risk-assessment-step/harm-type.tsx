@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useWatch } from "react-hook-form";
 
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
@@ -8,6 +8,7 @@ import {
   DOCUMENTED_HARM_CWE_FIELD,
 } from "~/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config";
 
+import { truncateText } from "~/lib/utils";
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
@@ -28,9 +29,26 @@ export function HarmType() {
     name: "impactAssessment.harmType",
   });
 
+  const documentedHarmCwe = useWatch({
+    control,
+    name: "impactAssessment.documentedHarmCwe",
+  });
+
   const previousHarmTypeRef = useRef<string | undefined>(undefined);
 
   const isDocumentedHarm = harmType === HARM_OPTION_VALUE.DOCUMENTED;
+
+  const truncatedSelectedText = useMemo(() => {
+    const selectedOption = DOCUMENTED_HARM_CWE_FIELD.options.find(
+      (option) => option.value === documentedHarmCwe,
+    );
+    return selectedOption
+      ? truncateText(
+          `${selectedOption.label} ${selectedOption.description}`,
+          30,
+        )
+      : null;
+  }, [documentedHarmCwe]);
 
   useEffect(() => {
     if (
@@ -112,12 +130,14 @@ export function HarmType() {
                       <SelectTrigger className="text-md w-full dark:bg-white dark:text-gray-800">
                         <SelectValue
                           placeholder={DOCUMENTED_HARM_CWE_FIELD.placeholder}
-                        />
+                        >
+                          {truncatedSelectedText}
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent>
                         {DOCUMENTED_HARM_CWE_FIELD.options.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
-                            {option.label}
+                            {option.label} {option.description}
                           </SelectItem>
                         ))}
                       </SelectContent>

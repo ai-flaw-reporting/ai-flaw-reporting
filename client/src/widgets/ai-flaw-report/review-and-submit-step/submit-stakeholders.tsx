@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemFooter, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
@@ -8,10 +9,26 @@ import {
 } from "~/lib/form-field-utils";
 import Image from "next/image";
 import { SUBMIT_STAKEHOLDERS_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
+import { mergeStakeholdersWithPlatforms } from "~/entities/ai-flaw-report/lib/get-stakeholders-from-platforms";
 import { SubmitButton } from "./submit-button";
 
 export function SubmitStakeholders() {
-  const { control } = useAiFlawFormContext();
+  const { control, getValues, setValue } = useAiFlawFormContext();
+
+  useEffect(() => {
+    const selectedPlatforms = getValues("reporterDetails.system.platforms");
+
+    const currentStakeholders = getValues("reviewReport.selectedStakeholders");
+
+    const mergedStakeholders = mergeStakeholdersWithPlatforms(
+      selectedPlatforms,
+      currentStakeholders,
+    );
+
+    setValue("reviewReport.selectedStakeholders", mergedStakeholders, {
+      shouldValidate: false,
+    });
+  }, []);
 
   return (
     <Item variant="outline" className="form-item-card">
