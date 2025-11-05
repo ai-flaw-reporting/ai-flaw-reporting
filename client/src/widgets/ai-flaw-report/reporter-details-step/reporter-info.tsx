@@ -6,7 +6,7 @@ import { REPORTER_ROW_FIELDS } from "~/entities/ai-flaw-report/model/form-data/r
 
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 
-import { FormFieldRenderer } from "./form-field-renderer";
+import { FormFieldRenderer } from "~/components/form-field-renderer";
 
 export function ReporterInfo() {
   const { control } = useAiFlawFormContext();

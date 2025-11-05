@@ -15,7 +15,7 @@ import {
 import { Input } from "~/components/ui/input";
 
 import { FieldTooltip } from "~/components/field-tooltip";
-import { FormFieldRenderer } from "./form-field-renderer";
+import { FormFieldRenderer } from "~/components/form-field-renderer";
 
 export function AccessMethodField() {
   const { control, setValue } = useAiFlawFormContext();

@@ -40,7 +40,7 @@ export const SAVE_STATUS_TEXT = {
 
 export const SAVE_STATUS_KEY_PREFIX = "ai-flaw-report-";
 
-export const FORM_AUTOSAVE_DELAY = 1000;
+export const FORM_AUTOSAVE_DELAY = 150; // 150ms
 
 export const FORM_VALUES = {
   OTHER: "Other",

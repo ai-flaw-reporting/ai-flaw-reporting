@@ -10,7 +10,7 @@ import { createAiModelInputField } from "~/entities/ai-flaw-report/model/form-da
 import { getPlatformsModels } from "~/entities/ai-flaw-report/lib/get-platforms-models";
 import { useHuggingFaceModels } from "~/features/ai-flaw-report/multi-step-form/models-context";
 
-import { FormFieldRenderer } from "./form-field-renderer";
+import { FormFieldRenderer } from "~/components/form-field-renderer";
 
 export function AiModelField() {
   const { control, setValue, getValues } = useAiFlawFormContext();

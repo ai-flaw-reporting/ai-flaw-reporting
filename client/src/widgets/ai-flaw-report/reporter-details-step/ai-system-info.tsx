@@ -13,7 +13,7 @@ import { Checkbox } from "~/components/ui/checkbox";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 
 import { AccessMethodField } from "./access-method-field";
-import { FormFieldRenderer } from "./form-field-renderer";
+import { FormFieldRenderer } from "~/components/form-field-renderer";
 import { VersionEndpointDetails } from "./version-endpoint-details";
 import { AiModelField } from "./ai-model-field";
 

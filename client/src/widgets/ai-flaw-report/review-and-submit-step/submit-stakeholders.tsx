@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { useWatch } from "react-hook-form";
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemFooter, ItemTitle } from "~/components/ui/item";
 import { CheckboxCard } from "~/components/ui/checkbox";
@@ -10,14 +11,50 @@ import {
 import Image from "next/image";
 import { SUBMIT_STAKEHOLDERS_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
 import { mergeStakeholdersWithPlatforms } from "~/entities/ai-flaw-report/lib/get-stakeholders-from-platforms";
+import { useHuggingFaceModels } from "~/features/ai-flaw-report/multi-step-form/models-context";
 import { SubmitButton } from "./submit-button";
 
 export function SubmitStakeholders() {
   const { control, getValues, setValue } = useAiFlawFormContext();
+  const huggingFaceModels = useHuggingFaceModels();
 
+  // Watch form fields needed for visibility conditions
+  const platforms = useWatch({
+    control,
+    name: "reporterDetails.system.platforms",
+  });
+
+  const models = useWatch({
+    control,
+    name: "reporterDetails.system.models",
+  });
+
+  const realWorldHarm = useWatch({
+    control,
+    name: "classifyReport.real_world_harm",
+  });
+
+  // Filter stakeholders based on visibility conditions
+  const visibleStakeholders = useMemo(() => {
+    const formData = {
+      platforms,
+      models,
+      realWorldHarm,
+      huggingFaceModels,
+    };
+
+    return SUBMIT_STAKEHOLDERS_CONFIG.stakeholders.filter((stakeholder) => {
+      // If no visibility condition is defined, default to visible
+      if (!stakeholder.isVisible) {
+        return true;
+      }
+      return stakeholder.isVisible(formData);
+    });
+  }, [platforms, models, realWorldHarm, huggingFaceModels]);
+
+  // Auto-select stakeholders based on platforms and incident selection, and filter out invisible ones
   useEffect(() => {
     const selectedPlatforms = getValues("reporterDetails.system.platforms");
-
     const currentStakeholders = getValues("reviewReport.selectedStakeholders");
 
     const mergedStakeholders = mergeStakeholdersWithPlatforms(
@@ -25,10 +62,48 @@ export function SubmitStakeholders() {
       currentStakeholders,
     );
 
-    setValue("reviewReport.selectedStakeholders", mergedStakeholders, {
+    // Auto-select AVID and AIID if incident is selected
+    const stakeholdersToAdd: string[] = [];
+    if (realWorldHarm === true) {
+      stakeholdersToAdd.push("AVID", "AIID");
+    }
+
+    const allStakeholders = Array.from(
+      new Set([...mergedStakeholders, ...stakeholdersToAdd]),
+    );
+
+    // Filter out stakeholders that are no longer visible
+    const formData = {
+      platforms,
+      models,
+      realWorldHarm,
+      huggingFaceModels,
+    };
+
+    const visibleStakeholderNames = new Set(
+      SUBMIT_STAKEHOLDERS_CONFIG.stakeholders
+        .filter((stakeholder) => {
+          if (!stakeholder.isVisible) return true;
+          return stakeholder.isVisible(formData);
+        })
+        .map((s) => s.name),
+    );
+
+    const filteredStakeholders = allStakeholders.filter((name) =>
+      visibleStakeholderNames.has(name),
+    );
+
+    setValue("reviewReport.selectedStakeholders", filteredStakeholders, {
       shouldValidate: false,
     });
-  }, []);
+  }, [
+    platforms,
+    models,
+    realWorldHarm,
+    huggingFaceModels,
+    getValues,
+    setValue,
+  ]);
 
   return (
     <Item variant="outline" className="form-item-card">
@@ -62,22 +137,28 @@ export function SubmitStakeholders() {
               <FormItem className="form-item-field">
                 <FormControl>
                   <ul className="space-y-1.5">
-                    {SUBMIT_STAKEHOLDERS_CONFIG.stakeholders.map(
-                      (stakeholder) => (
+                    {visibleStakeholders.map((stakeholder) => {
+                      const isSelectable = stakeholder.isSelectable !== false;
+                      const isChecked = safeIncludes(
+                        field.value,
+                        stakeholder.name,
+                      );
+
+                      return (
                         <li key={stakeholder.name}>
                           <CheckboxCard
                             className="data-[state=checked]:border-indigo-600"
                             iconClassName="text-indigo-600"
-                            checked={safeIncludes(
-                              field.value,
-                              stakeholder.name,
-                            )}
-                            onCheckedChange={(checked) =>
-                              handleCheckboxChange(
-                                checked as boolean,
-                                stakeholder.name,
-                              )
-                            }
+                            checked={isChecked}
+                            disabled={!isSelectable}
+                            onCheckedChange={(checked) => {
+                              if (isSelectable) {
+                                handleCheckboxChange(
+                                  checked as boolean,
+                                  stakeholder.name,
+                                );
+                              }
+                            }}
                           >
                             <div className="space-y-4">
                               <h3 className="text-md font-semibold text-gray-900">
@@ -89,8 +170,8 @@ export function SubmitStakeholders() {
                             </div>
                           </CheckboxCard>
                         </li>
-                      ),
-                    )}
+                      );
+                    })}
                   </ul>
                 </FormControl>
               </FormItem>

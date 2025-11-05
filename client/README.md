@@ -652,9 +652,184 @@ Once both are deployed:
 
 ---
 
-## 📄 License
+## 🔧 Maintainability Guide
 
-[Your License Here]
+This application is designed to be easily maintainable and extensible. The following tasks can be performed with minimal code changes:
+
+### 1. Adding a New Input Field at Any Stage
+
+Fields are configured declaratively and automatically rendered. To add a new field:
+
+**Step 1: Add to Schema** (`src/entities/ai-flaw-report/model/schema.ts`)
+
+```typescript
+export const incidentDescriptionSchema = z.object({
+  // ... existing fields
+  newField: z.string().max(2000).optional(), // Add your field
+});
+```
+
+**Step 2: Add Field Configuration** (e.g., `src/entities/ai-flaw-report/model/form-data/incident-description-fields-config.ts`)
+
+```typescript
+export const NEW_FIELD: IncidentDescriptionFieldConfig = {
+  name: "incidentDescription.newField",
+  title: "New Field",
+  icon: "/icons/form/document.svg",
+  label: "Field Label",
+  type: "textarea", // or "input", "select", "multi-select"
+  rows: 3,
+  maxLength: 2000,
+  placeholder: "Enter value...",
+  description: "Field description",
+  required: false,
+};
+```
+
+**Step 3: Use in Component**
+
+```typescript
+import { FormFieldRenderer } from "~/components/form-field-renderer";
+import { NEW_FIELD } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
+
+<FormFieldRenderer
+  name="incidentDescription.newField"
+  control={control}
+  config={NEW_FIELD}
+/>
+```
+
+**Field Configuration Files by Stage:**
+
+- Reporter & System Details: `src/entities/ai-flaw-report/model/form-data/reporter-fields-config.ts`
+- Incident Description: `src/entities/ai-flaw-report/model/form-data/incident-description-fields-config.ts`
+- Evidence & Reproduction: `src/entities/ai-flaw-report/model/form-data/evidence-fields-config.ts`
+- Impact & Risk Assessment: `src/entities/ai-flaw-report/model/form-data/impact-assessment-fields-config.ts`
+- Security Incident Details: `src/entities/ai-flaw-report/model/form-data/security-details-fields-config.ts`
+- Disclosure Plan: `src/entities/ai-flaw-report/model/form-data/disclosure-plan-fields-config.ts`
+
+**Supported Field Types:**
+
+- `input` - Text input (supports `text`, `email`, `url`)
+- `textarea` - Multi-line text input
+- `select` - Single-select dropdown
+- `multi-select` - Multi-select dropdown
+- `country` - Country selector
+- `file` - File upload
+
+### 2. Swapping Out a Taxonomy for Existing Multi-Choice
+
+To update the options for a multi-select or select field, simply update the `options` array in the field configuration:
+
+**Location**: Field config files in `src/entities/ai-flaw-report/model/form-data/`
+
+**Example** (`impact-assessment-fields-config.ts`):
+
+```typescript
+export const HARM_TYPES_FIELD = {
+  // ... other properties
+  options: [
+    // Replace with your new taxonomy
+    { value: "new_category_1", label: "New Category 1", description: "..." },
+    { value: "new_category_2", label: "New Category 2", description: "..." },
+  ],
+};
+```
+
+For simple string arrays:
+
+```typescript
+options: ["option1", "option2", "option3"], // Replace with new options
+```
+
+### 3. Adding a New Report Recipient (Stakeholder)
+
+**Location**: `src/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config.ts`
+
+Add a new entry to the `stakeholders` array in `SUBMIT_STAKEHOLDERS_CONFIG`:
+
+```typescript
+export const SUBMIT_STAKEHOLDERS_CONFIG = {
+  // ... existing config
+  stakeholders: [
+    // ... existing stakeholders
+    {
+      name: "New Organization",
+      description: "Description of the organization",
+      // Always visible
+      isVisible: () => true,
+      isSelectable: true,
+    },
+    // OR with conditional visibility:
+    {
+      name: "Conditional Organization",
+      description: "Only shown when conditions are met",
+      isVisible: ({ platforms, models, realWorldHarm }) => {
+        return platforms?.includes("Specific Platform") ?? false;
+      },
+      isSelectable: true,
+    },
+  ] as StakeholderConfig[],
+};
+```
+
+**Optional**: If you want auto-selection based on platform, add to `PLATFORM_TO_STAKEHOLDER_MAP`:
+
+```typescript
+export const PLATFORM_TO_STAKEHOLDER_MAP: Record<string, string> = {
+  // ... existing mappings
+  "New Platform": "New Organization",
+};
+```
+
+### 4. Automatic Integration
+
+All form fields are automatically integrated into:
+
+- ✅ **Report Rendering** - Review & Submit step displays all form data
+- ✅ **JSON Download** - All fields included in downloaded report
+- ✅ **Database Storage** - Form submission includes all validated data
+- ✅ **Sending to Recipients** - Report object includes all form data
+
+**No additional integration work needed** - the form system handles everything automatically through the schema-based architecture.
+
+### Reusable Components
+
+**FormFieldRenderer** (`src/components/form-field-renderer.tsx`)
+
+- Generic field renderer used across all form steps
+- Supports all field types (input, textarea, select, multi-select, country, file)
+- Automatically handles validation, labels, descriptions, and tooltips
+
+**Import in any step:**
+
+```typescript
+import { FormFieldRenderer } from "~/components/form-field-renderer";
+```
+
+### Field Configuration Structure
+
+All field configurations follow this structure:
+
+```typescript
+type FieldConfig = {
+  name: string; // Form field path (e.g., "incidentDescription.issueDescription")
+  label: string; // Field label
+  type: "input" | "textarea" | "select" | "multi-select" | "country" | "file";
+  placeholder?: string; // Placeholder text
+  description?: string; // Help text below field
+  required?: boolean; // Whether field is required
+  showMessage?: boolean; // Show validation messages
+  // Type-specific options:
+  inputType?: "text" | "email" | "url"; // For input type
+  rows?: number; // For textarea
+  maxLength?: number; // For textarea/input
+  options?: string[]; // For select/multi-select
+  // ... other type-specific props
+};
+```
+
+For detailed examples and complete code snippets, see [`MAINTAINABILITY_GUIDE.md`](./MAINTAINABILITY_GUIDE.md) in the project root.
 
 ---
 

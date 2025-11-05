@@ -5,7 +5,7 @@ import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useA
 import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
 import { createVersionFieldConfig } from "~/entities/ai-flaw-report/model/form-data/ai-system-fields-config";
 
-import { FormFieldRenderer } from "./form-field-renderer";
+import { FormFieldRenderer } from "~/components/form-field-renderer";
 
 export function VersionEndpointDetails() {
   const { control } = useAiFlawFormContext();
