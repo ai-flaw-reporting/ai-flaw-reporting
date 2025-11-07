@@ -15,6 +15,7 @@ export default factories.createCoreController(
       const MAX_FILE_SIZE = 5 * 1024 * 1024;
       const files = Object.entries(ctx.request?.files || {});
       const emailAttachments = [];
+      let attachmentsSize = 0;
       let reportData;
 
       if (ctx.is("multipart")) {
@@ -35,9 +36,10 @@ export default factories.createCoreController(
             emailAttachments.push({
               filename: file.originalFilename,
               content: fs.readFileSync(file.filepath).toString("base64"),
-              contentType: file.mimetype,
-              size: file.size,
+              type: file.mimetype,
+              disposition: "attachment",
             });
+            attachmentsSize += file.size || 0;
           });
       } else {
         reportData = ctx.request.body.data || ctx.request.body;
@@ -64,15 +66,14 @@ export default factories.createCoreController(
           });
       }
 
-      const attachmentsSize = emailAttachments.reduce((acc, curr) => acc + (curr.size || 0), 0);
-
       const jsonAttachment = {
         filename: `ai-flaw-report-${entity.documentId}.json`,
         content: Buffer.from(
           JSON.stringify(reportData, null, 2),
           "utf-8",
         ).toString("base64"),
-        contentType: "application/json",
+        type: "application/json",
+        disposition: "attachment",
       };
 
       const attachmentsToSend =
