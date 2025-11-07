@@ -54,8 +54,9 @@ AI Flaw Reporting Automation`;
       return;
     }
 
+    // IS_TEST_ENV because free strapi has only production environment
     if (
-      process.env.NODE_ENV !== "production" &&
+      (process.env.NODE_ENV !== "production" || !!process.env.IS_TEST_ENV) &&
       reportData.reporterDetails?.reporter?.email
     ) {
       recipients = [reportData.reporterDetails?.reporter?.email];
