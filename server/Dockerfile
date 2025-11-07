@@ -1,6 +1,6 @@
 FROM node:20-alpine AS builder
 
-sharp lib in# Install system dependencies for sharp
+# Install system dependencies for sharp
 RUN apk add --no-cache \
     vips-dev \
     fftw-dev \
@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install && npm rebuild sharp
 
 COPY . .
 
@@ -26,12 +26,14 @@ RUN node node_modules/@strapi/strapi/bin/strapi.js build
 FROM node:20-alpine AS runner
 
 # Install runtime dependencies for sharp
-RUN apk add --no-cache vips
+RUN apk add --no-cache \
+    vips \
+    vips-cpp
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production
+RUN npm install --production && npm rebuild sharp
 
 COPY --from=builder /app ./
 
