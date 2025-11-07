@@ -2,204 +2,114 @@
  * report controller
  */
 
-import { factories } from '@strapi/strapi';
+import fs from "fs";
+import { factories } from "@strapi/strapi";
+import type { FlattenedReport } from "../content-types/report/types";
+import emailService from "../services/email";
+import { flattenReport, reshapeReport } from "../utils/report-helpers";
 
-function flattenReport(data: any) {
-  return {
-    step: data.step,
-    // Metadata
-    metadata_createdAt: data.metadata?.createdAt,
-    metadata_schemaVersion: data.metadata?.schemaVersion,
-    metadata_reportType: data.metadata?.reportType,
-    // Classify Report
-    classify_realWorldHarm: data.classifyReport?.real_world_harm,
-    classify_maliciousUse: data.classifyReport?.malicious_use,
-    classify_csamInvolved: data.classifyReport?.csam_involved,
-    classify_csamAcknowledgment: data.classifyReport?.csam_acknowledgment,
-    // Reporter Details
-    reporter_email: data.reporterDetails?.reporter?.email,
-    reporter_org: data.reporterDetails?.reporter?.org,
-    reporter_country: data.reporterDetails?.reporter?.country,
-    // System Details
-    system_platforms: data.reporterDetails?.system?.platforms,
-    system_platformOther: data.reporterDetails?.system?.platformOther,
-    system_models: data.reporterDetails?.system?.models,
-    system_version: data.reporterDetails?.system?.version,
-    system_accessMethod: data.reporterDetails?.system?.accessMethod,
-    system_accessMethodOther: data.reporterDetails?.system?.accessMethodOther,
-    system_notSure: data.reporterDetails?.system?.notSure,
-    // Incident Description
-    incident_issueDescription: data.incidentDescription?.issueDescription,
-    incident_expectedBehavior: data.incidentDescription?.expectedBehavior,
-    incident_actualBehavior: data.incidentDescription?.actualBehavior,
-    incident_policyViolationUrl: data.incidentDescription?.policyViolation?.url,
-    incident_policyViolationReason: data.incidentDescription?.policyViolation?.reason,
-    // Evidence
-    evidence_stepsToReproduce: data.evidence?.stepsToReproduce,
-    evidence_proofOfConcept: data.evidence?.proofOfConcept,
-    evidence_attachments: data.evidence?.attachments,
-    // Impact Assessment
-    impact_severityOfHarm: data.impactAssessment?.severityOfHarm,
-    impact_prevalence: data.impactAssessment?.prevalence,
-    impact_harmType: data.impactAssessment?.harmType,
-    impact_harmTypes: data.impactAssessment?.harmTypes,
-    impact_affectedStakeholders: data.impactAssessment?.affectedStakeholders,
-    impact_harmOtherText: data.impactAssessment?.harmOtherText,
-    impact_aiCompanyInvolved: data.impactAssessment?.aiCompanyInvolved,
-    impact_mitigationNotes: data.impactAssessment?.mitigationNotes,
-    // Security Details
-    security_attackerResources: data.securityDetails?.attackerResources,
-    security_attackerObjectives: data.securityDetails?.attackerObjectives,
-    security_attackerObjectivesOther: data.securityDetails?.attackerObjectivesOther,
-    security_discoveryNarrative: data.securityDetails?.discoveryNarrative,
-    security_substrateRelationship: data.securityDetails?.substrateRelationship,
-    security_incidentLocation: data.securityDetails?.incidentLocation,
-    security_harmNarrative: data.securityDetails?.harmNarrative,
-    security_detectionMethod: data.securityDetails?.detectionMethod,
-    // Disclosure Plan
-    disclosure_publicDisclosureIntent: data.disclosurePlan?.publicDisclosureIntent,
-    disclosure_embargoDetails: data.disclosurePlan?.embargoDetails,
-    disclosure_disclosureTimeline: data.disclosurePlan?.disclosureTimeline,
-    disclosure_disclosureDatepicker: data.disclosurePlan?.disclosureDatepicker,
-    // Review Report
-    review_publicDisclosureIntent: data.reviewReport?.publicDisclosureIntent,
-    review_embargoDetails: data.reviewReport?.embargoDetails,
-    review_disclosureTimeline: data.reviewReport?.disclosureTimeline,
-    review_disclosureDatepicker: data.reviewReport?.disclosureDatepicker,
-    review_selectedStakeholders: data.reviewReport?.selectedStakeholders,
-  };
-}
+export default factories.createCoreController(
+  "api::report.report",
+  ({ strapi }) => ({
+    async create(ctx) {
+      let reportData;
+      const files = ctx.request?.files || {};
+      const emailAttachments = [];
 
-// Helper to reshape flat data back to nested
-function reshapeReport(flatData: any) {
-  return {
-    id: flatData.id,
-    documentId: flatData.documentId,
-    createdAt: flatData.createdAt,
-    updatedAt: flatData.updatedAt,
-    metadata: {
-      createdAt: flatData.metadata_createdAt,
-      schemaVersion: flatData.metadata_schemaVersion,
-      reportType: flatData.metadata_reportType,
-    },
-    step: flatData.step,
-    classifyReport: {
-      real_world_harm: flatData.classify_realWorldHarm,
-      malicious_use: flatData.classify_maliciousUse,
-      csam_involved: flatData.classify_csamInvolved,
-      csam_acknowledgment: flatData.classify_csamAcknowledgment,
-    },
-    reporterDetails: {
-      reporter: {
-        email: flatData.reporter_email,
-        org: flatData.reporter_org,
-        country: flatData.reporter_country,
-      },
-      system: {
-        platforms: flatData.system_platforms,
-        platformOther: flatData.system_platformOther,
-        models: flatData.system_models,
-        version: flatData.system_version,
-        accessMethod: flatData.system_accessMethod,
-        accessMethodOther: flatData.system_accessMethodOther,
-        notSure: flatData.system_notSure,
-      },
-    },
-    incidentDescription: {
-      issueDescription: flatData.incident_issueDescription,
-      expectedBehavior: flatData.incident_expectedBehavior,
-      actualBehavior: flatData.incident_actualBehavior,
-      policyViolation: {
-        url: flatData.incident_policyViolationUrl,
-        reason: flatData.incident_policyViolationReason,
-      },
-    },
-    evidence: {
-      stepsToReproduce: flatData.evidence_stepsToReproduce,
-      proofOfConcept: flatData.evidence_proofOfConcept,
-      attachments: flatData.evidence_attachments,
-    },
-    impactAssessment: {
-      severityOfHarm: flatData.impact_severityOfHarm,
-      prevalence: flatData.impact_prevalence,
-      harmType: flatData.impact_harmType,
-      harmTypes: flatData.impact_harmTypes,
-      affectedStakeholders: flatData.impact_affectedStakeholders,
-      harmOtherText: flatData.impact_harmOtherText,
-      aiCompanyInvolved: flatData.impact_aiCompanyInvolved,
-      mitigationNotes: flatData.impact_mitigationNotes,
-    },
-    securityDetails: {
-      attackerResources: flatData.security_attackerResources,
-      attackerObjectives: flatData.security_attackerObjectives,
-      attackerObjectivesOther: flatData.security_attackerObjectivesOther,
-      discoveryNarrative: flatData.security_discoveryNarrative,
-      substrateRelationship: flatData.security_substrateRelationship,
-      incidentLocation: flatData.security_incidentLocation,
-      harmNarrative: flatData.security_harmNarrative,
-      detectionMethod: flatData.security_detectionMethod,
-    },
-    disclosurePlan: {
-      publicDisclosureIntent: flatData.disclosure_publicDisclosureIntent,
-      embargoDetails: flatData.disclosure_embargoDetails,
-      disclosureTimeline: flatData.disclosure_disclosureTimeline,
-      disclosureDatepicker: flatData.disclosure_disclosureDatepicker,
-    },
-    reviewReport: {
-      publicDisclosureIntent: flatData.review_publicDisclosureIntent,
-      embargoDetails: flatData.review_embargoDetails,
-      disclosureTimeline: flatData.review_disclosureTimeline,
-      disclosureDatepicker: flatData.review_disclosureDatepicker,
-    },
-  };
-}
-
-export default factories.createCoreController('api::report.report' as any, ({ strapi }) => ({
-  async create(ctx) {
-    let reportData;
-    let files = {};
-
-    if (ctx.is('multipart')) {
-      const { data, files: uploadedFiles } = ctx.request.body;
-
-      reportData = typeof data === 'string' ? JSON.parse(data) : data;
-
-      if (uploadedFiles && uploadedFiles['evidence.attachments']) {
-        files['evidence_attachments'] = uploadedFiles['evidence.attachments'];
+      if (ctx.is("multipart")) {
+        reportData =
+          typeof ctx.request.body.data === "string"
+            ? JSON.parse(ctx.request.body.data)
+            : ctx.request.body.data;
+      } else {
+        reportData = ctx.request.body.data || ctx.request.body;
       }
-    } else {
-      reportData = ctx.request.body.data || ctx.request.body;
-    }
 
-    const flattened = flattenReport(reportData);
-    ctx.request.body = { data: flattened, files };
+      const entity = await strapi.documents("api::report.report").create({
+        data: flattenReport(reportData),
+      }) as FlattenedReport;
 
-    const response = await super.create(ctx);
+      if (Object.keys(files).length > 0) {
+        for (const [fieldName, fileData] of Object.entries(files)) {
+          try {
+            const filesArray = Array.isArray(fileData) ? fileData : [fileData];
 
-    if (response.data) {
-      response.data = reshapeReport(response.data);
-    }
+            await strapi.plugins.upload.services.upload.upload({
+              data: {
+                refId: entity.id,
+                ref: "api::report.report",
+                field: fieldName,
+              },
+              files: filesArray,
+            });
 
-    return response;
-  },
+            filesArray.forEach((file) =>
+              emailAttachments.push({
+                filename: file.originalFilename,
+                content: fs.readFileSync(file.filepath).toString("base64"),
+                contentType: file.mimetype,
+                size: file.size,
+              }),
+            );
+          } catch (uploadErr) {
+            strapi.log.error(
+              `Failed to upload files for field ${fieldName}: ${uploadErr.message}`,
+            );
+          }
+        }
+      }
 
-  async find(ctx) {
-    const response = await super.find(ctx);
+      const attachmentsSize = emailAttachments.reduce((acc, curr) => acc + (curr.size || 0), 0);
 
-    if (response.data) {
-      response.data = response.data.map(reshapeReport);
-    }
+      const jsonAttachment = {
+        filename: `ai-flaw-report-${entity.documentId}.json`,
+        content: Buffer.from(
+          JSON.stringify(reportData, null, 2),
+          "utf-8",
+        ).toString("base64"),
+        contentType: "application/json",
+      };
 
-    return response;
-  },
+      const attachmentsToSend =
+        attachmentsSize + Buffer.byteLength(jsonAttachment.content, "utf8") > 10 * 1024 * 1024
+          ? [jsonAttachment]
+          : [jsonAttachment, ...emailAttachments];
 
-  async findOne(ctx) {
-    const response = await super.findOne(ctx);
+      const selectedStakeholders = entity.review_selectedStakeholders || [];
+      if (selectedStakeholders && selectedStakeholders.length > 0) {
+        emailService
+          .sendReportEmail(
+            strapi,
+            reportData,
+            selectedStakeholders,
+            attachmentsToSend,
+          )
+          .catch((err) => {
+            strapi.log.error(`Failed to send email: ${err.message}` );
+          });
+      }
 
-    if (response.data) {
-      response.data = reshapeReport(response.data);
-    }
+      return { data: reshapeReport(entity) };
+    },
 
-    return response;
-  },
-}));
+    async find(ctx) {
+      const response = await super.find(ctx);
+
+      if (response.data) {
+        response.data = response.data.map(reshapeReport);
+      }
+
+      return response;
+    },
+
+    async findOne(ctx) {
+      const response = await super.findOne(ctx);
+
+      if (response.data) {
+        response.data = reshapeReport(response.data);
+      }
+
+      return response;
+    },
+  }),
+);

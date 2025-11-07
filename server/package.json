@@ -18,6 +18,7 @@
   "dependencies": {
     "@strapi/plugin-cloud": "5.27.0",
     "@strapi/plugin-users-permissions": "5.27.0",
+    "@strapi/provider-email-sendgrid": "^5.30.0",
     "@strapi/strapi": "5.27.0",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
