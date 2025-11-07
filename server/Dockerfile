@@ -15,7 +15,11 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install && npm rebuild sharp
+# Force reinstall sharp for the correct platform
+RUN npm install && \
+    rm -rf node_modules/sharp node_modules/@img && \
+    npm install --os=linux --libc=musl --cpu=x64 sharp && \
+    npm rebuild sharp
 
 COPY . .
 
@@ -26,14 +30,14 @@ RUN node node_modules/@strapi/strapi/bin/strapi.js build
 FROM node:20-alpine AS runner
 
 # Install runtime dependencies for sharp
-RUN apk add --no-cache \
-    vips \
-    vips-cpp
+RUN apk add --no-cache vips
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production && npm rebuild sharp
+RUN npm install --production && \
+    rm -rf node_modules/sharp node_modules/@img && \
+    npm install --os=linux --libc=musl --cpu=x64 sharp
 
 COPY --from=builder /app ./
 
