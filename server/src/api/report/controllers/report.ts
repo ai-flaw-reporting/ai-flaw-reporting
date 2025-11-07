@@ -90,7 +90,7 @@ export default factories.createCoreController(
             strapi,
             response.data,
             selectedStakeholders,
-            attachmentsToSend,
+            // attachmentsToSend,
           )
           .catch((err) => {
             strapi.log.error(`Failed to send email: ${err.message}`);
