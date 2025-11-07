@@ -41,8 +41,7 @@ AI Flaw Reporting Automation`;
     attachments: {
       filename: string;
       content: string;
-      contentType: string;
-      size: number;
+      type: string;
     }[] = [],
   ) {
     let recipients = providers

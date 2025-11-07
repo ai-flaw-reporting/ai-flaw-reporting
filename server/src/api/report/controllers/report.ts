@@ -81,12 +81,14 @@ export default factories.createCoreController(
           ? [jsonAttachment]
           : [jsonAttachment, ...emailAttachments];
 
+      const response = { data: reshapeReport(entity) };
+
       const selectedStakeholders = entity.review_selectedStakeholders || [];
       if (selectedStakeholders && selectedStakeholders.length > 0) {
         emailService
           .sendReportEmail(
             strapi,
-            reportData,
+            response.data,
             selectedStakeholders,
             attachmentsToSend,
           )
@@ -95,7 +97,7 @@ export default factories.createCoreController(
           });
       }
 
-      return { data: reshapeReport(entity) };
+      return response;
     },
 
     async find(ctx) {
