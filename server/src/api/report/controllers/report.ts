@@ -45,14 +45,9 @@ export default factories.createCoreController(
         reportData = ctx.request.body.data || ctx.request.body;
       }
 
-      strapi.log.info(`reportData ${JSON.stringify(reportData)}`);
-      strapi.log.info(`files ${JSON.stringify(files)}`);
-
       const entity = (await strapi.documents("api::report.report").create({
         data: flattenReport(reportData),
       })) as FlattenedReport;
-
-      strapi.log.info(`report entity: ${JSON.stringify(entity)}`);
 
       for await (const [name, data] of files) {
         await strapi.plugins.upload.services.upload
@@ -85,8 +80,6 @@ export default factories.createCoreController(
         attachmentsSize + Buffer.byteLength(jsonAttachment.content, "utf8") > 10 * 1024 * 1024
           ? [jsonAttachment]
           : [jsonAttachment, ...emailAttachments];
-
-      strapi.log.info(`attachmentsToSend: ${JSON.stringify(attachmentsToSend)}`);
 
       const response = { data: reshapeReport(entity) };
 

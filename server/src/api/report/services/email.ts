@@ -63,15 +63,7 @@ AI Flaw Reporting Automation`;
 
     const text = this.generateEmailBody();
     const subject = `New AI Incident Report Submitted — ${reportData.documentId} (${reportData.metadata.reportType})`;
-    strapi.log.info(
-      `email body: ${JSON.stringify({
-        to: recipients,
-        from: process.env.EMAIL_DEFAULT_FROM,
-        subject,
-        text,
-        attachments,
-      })}`,
-    );
+
     await strapi.plugins.email.services.email
       .send({
         to: recipients,
@@ -86,5 +78,6 @@ AI Flaw Reporting Automation`;
         );
         throw error;
       });
+      strapi.log.info(`Email successfully send to ${recipients.join(", ")}.`);
   },
 };
