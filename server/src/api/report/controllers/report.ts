@@ -45,9 +45,14 @@ export default factories.createCoreController(
         reportData = ctx.request.body.data || ctx.request.body;
       }
 
+      strapi.log.info(`reportData ${JSON.stringify(reportData)}`);
+      strapi.log.info(`files ${JSON.stringify(files)}`);
+
       const entity = (await strapi.documents("api::report.report").create({
         data: flattenReport(reportData),
       })) as FlattenedReport;
+
+      strapi.log.info(`report entity: ${JSON.stringify(entity)}`);
 
       for await (const [name, data] of files) {
         await strapi.plugins.upload.services.upload
@@ -81,6 +86,8 @@ export default factories.createCoreController(
           ? [jsonAttachment]
           : [jsonAttachment, ...emailAttachments];
 
+      strapi.log.info(`attachmentsToSend: ${JSON.stringify(attachmentsToSend)}`);
+
       const response = { data: reshapeReport(entity) };
 
       const selectedStakeholders = entity.review_selectedStakeholders || [];
@@ -90,7 +97,7 @@ export default factories.createCoreController(
             strapi,
             response.data,
             selectedStakeholders,
-            // attachmentsToSend,
+            attachmentsToSend,
           )
           .catch((err) => {
             strapi.log.error(`Failed to send email: ${err.message}`);
