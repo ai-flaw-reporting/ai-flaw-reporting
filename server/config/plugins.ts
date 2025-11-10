@@ -6,8 +6,8 @@ export default ({ env }) => ({
         apiKey: env('SENDGRID_API_KEY'),
       },
       settings: {
-        defaultFrom: env('EMAIL_DEFAULT_FROM', 'noreply@aiflawreport.com'),
-        defaultReplyTo: env('EMAIL_DEFAULT_REPLY_TO', 'noreply@aiflawreport.com'),
+        defaultFrom: env('EMAIL_DEFAULT_FROM'),
+        defaultReplyTo: env('EMAIL_DEFAULT_REPLY_TO'),
       },
     },
   },

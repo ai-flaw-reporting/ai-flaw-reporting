@@ -66,6 +66,7 @@ AI Flaw Reporting Automation`;
     strapi.log.info(
       `email body: ${JSON.stringify({
         to: recipients,
+        from: process.env.EMAIL_DEFAULT_FROM,
         subject,
         text,
         attachments,
@@ -74,12 +75,15 @@ AI Flaw Reporting Automation`;
     await strapi.plugins.email.services.email
       .send({
         to: recipients,
+        from: process.env.EMAIL_DEFAULT_FROM,
         subject,
         text,
         attachments,
       })
       .catch((error: any) => {
-        strapi.log.error(`Failed to send email to ${recipients.join(", ")}, error: ${JSON.stringify(error)}`);
+        strapi.log.error(
+          `Failed to send email to ${recipients.join(", ")}, error: ${JSON.stringify(error)}`,
+        );
         throw error;
       });
   },
