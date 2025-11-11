@@ -24,6 +24,7 @@ export function useSubmitReport() {
 
   return {
     isSubmitted: formState.isSubmitted,
+    isSubmitting: formState.isSubmitting,
     selectedStakeholders: selectedStakeholders ?? [],
     csamInvolved,
     csamAcknowledgment,

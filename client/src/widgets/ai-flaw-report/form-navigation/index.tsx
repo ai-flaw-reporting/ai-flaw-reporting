@@ -9,15 +9,33 @@ import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useA
 import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
 import { useStepNavigation } from "~/entities/ai-flaw-report/model/hooks/useStepNavigation";
 import { STEP_CONFIGS_WITH_SCHEMAS } from "~/entities/ai-flaw-report/model/constants";
+import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 
 export function FormNavigation() {
-  const { control, reset } = useAiFlawFormContext();
+  const { control, reset, trigger } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
   const loadedStepsRef = useRef<Set<string>>(new Set());
+  const rafIdRef = useRef<number | null>(null);
+  const currentStepRef = useRef(currentStep);
 
   const { loadSavedData } = useFormStep(currentStep);
   const { isLastStep, canGoNext, goToNextStep, goToPreviousStep, isFirstStep } =
     useStepNavigation();
+
+  // Keep currentStepRef in sync with currentStep
+  useEffect(() => {
+    currentStepRef.current = currentStep;
+  }, [currentStep]);
+
+  useEffect(() => {
+    // Clear the loaded steps when step changes
+    loadedStepsRef.current.clear();
+    // Cancel any pending animation frame
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+  }, [currentStep]);
 
   useEffect(() => {
     const stepConfig = STEP_CONFIGS_WITH_SCHEMAS[currentStep];
@@ -28,28 +46,63 @@ export function FormNavigation() {
       return;
     }
 
-    const savedData = loadSavedData();
+    // Delay data loading to ensure conditional fields are registered
+    // Use requestAnimationFrame to wait for React to finish rendering
+    // Double RAF ensures we wait for the next paint cycle where conditional fields are registered
+    rafIdRef.current = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // Double-check we're still on the same step before loading
+        const currentStepConfig =
+          STEP_CONFIGS_WITH_SCHEMAS[currentStepRef.current];
+        if (currentStepConfig.id !== stepId) {
+          rafIdRef.current = null;
+          return;
+        }
 
-    if (savedData != null) {
-      const formField = stepConfig.formField;
+        // Check again if we've already loaded (race condition protection)
+        if (loadedStepsRef.current.has(stepId)) {
+          rafIdRef.current = null;
+          return;
+        }
 
-      // Use reset with just the saved data for this field, don't merge with current data
-      const fieldData = (savedData as Record<string, unknown>)[formField];
+        const savedData = loadSavedData();
 
-      if (fieldData) {
-        // Reset only the specific field, not the entire form
-        reset((prevData) => ({
-          ...prevData,
-          [formField]: fieldData,
-        }));
-        loadedStepsRef.current.add(stepId);
+        if (savedData != null) {
+          const formField = stepConfig.formField;
+
+          // Use reset with just the saved data for this field, don't merge with current data
+          const fieldData = (savedData as Record<string, unknown>)[formField];
+
+          if (fieldData) {
+            // Reset only the specific field, not the entire form
+            reset((prevData) => ({
+              ...prevData,
+              [formField]: fieldData,
+            }));
+
+            // Trigger validation for the field to update validation state
+            // This ensures the Next button state is updated correctly
+            void trigger(formField as keyof AiFlawReportSchema).then(() => {
+              loadedStepsRef.current.add(stepId);
+            });
+          } else {
+            loadedStepsRef.current.add(stepId);
+          }
+        } else {
+          loadedStepsRef.current.add(stepId);
+        }
+        rafIdRef.current = null;
+      });
+    });
+
+    return () => {
+      // Cancel animation frame on cleanup
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
       }
-    }
-  }, [reset, currentStep]);
-
-  useEffect(() => {
-    loadedStepsRef.current.clear();
-  }, [currentStep]);
+    };
+  }, [reset, trigger, currentStep, loadSavedData]);
 
   return (
     <nav className="mx-auto flex max-w-[1056px] justify-between">
