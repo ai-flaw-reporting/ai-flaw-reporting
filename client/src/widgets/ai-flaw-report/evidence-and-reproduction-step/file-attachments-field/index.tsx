@@ -53,7 +53,7 @@ export function FileAttachmentsField() {
                   />
                   <Button
                     variant="outline"
-                    className="text-md h-11 min-w-[465px] cursor-pointer gap-2 py-2.5 font-semibold text-gray-700 dark:hover:bg-white"
+                    className="text-md h-11 w-full min-w-[465px] cursor-pointer gap-2 py-2.5 font-semibold text-gray-700 dark:hover:bg-white"
                     onClick={() => {
                       const inputEl = document.getElementById(
                         "attachmentsInput",

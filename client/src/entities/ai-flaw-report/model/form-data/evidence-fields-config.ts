@@ -40,7 +40,7 @@ export const PROOF_OF_CONCEPT_FIELD: EvidenceFieldConfig = {
   name: "evidence.proofOfConcept",
   title: "Proof of Concept / Exploit Code",
   icon: "/icons/form/code-snippet.svg",
-  label: "Code, prompts, or techniques used (Optional)",
+  label: "Code, prompts, or techniques used",
   type: "textarea",
   rows: 6,
   language: "javascript",
