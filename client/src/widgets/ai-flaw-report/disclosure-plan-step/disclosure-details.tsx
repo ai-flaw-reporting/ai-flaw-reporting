@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useWatch } from "react-hook-form";
 
 import { cn } from "~/lib/utils";
-import { isValidDate } from "~/lib/date";
+import { isValidDate, isDisclosureDateDisabled } from "~/lib/date";
 
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
@@ -59,6 +59,7 @@ export function DisclosureDetails() {
             height={27}
           />
           {DISCLOSURE_TIMELINE_FIELD.title}
+          <span className="text-error-600">*</span>
         </ItemTitle>
 
         <FormField
@@ -126,7 +127,7 @@ export function DisclosureDetails() {
                       selected={selectedDate}
                       onSelect={(date) => field.onChange(date?.toISOString())}
                       disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                        isDisclosureDateDisabled(date, publicDisclosureIntent)
                       }
                     />
                   </PopoverContent>

@@ -7,10 +7,55 @@ import {
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import { PUBLIC_DISCLOSURE_INTENT_FIELD } from "~/entities/ai-flaw-report/model/form-data/disclosure-plan-fields-config";
+import {
+  PUBLIC_DISCLOSURE_INTENT_FIELD,
+  PUBLIC_DISCLOSURE_INTENT_VALUES,
+} from "~/entities/ai-flaw-report/model/form-data/disclosure-plan-fields-config";
+import { useWatch } from "react-hook-form";
+import { useEffect, useRef } from "react";
 
 export function PublicDisclosureIntent() {
-  const { control } = useAiFlawFormContext();
+  const { control, setValue } = useAiFlawFormContext();
+  const previousIntentRef = useRef<string | undefined>(undefined);
+
+  const publicDisclosureIntent = useWatch({
+    control,
+    name: "disclosurePlan.publicDisclosureIntent",
+  });
+
+  useEffect(() => {
+    const isYes =
+      publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.YES;
+    const isYesOrAlready =
+      publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.YES ||
+      publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY;
+
+    // Always clear datepicker when intent changes
+    if (
+      previousIntentRef.current !== undefined &&
+      previousIntentRef.current !== publicDisclosureIntent
+    ) {
+      setValue("disclosurePlan.disclosureDatepicker", "", {
+        shouldValidate: false,
+      });
+    }
+
+    // Clear embargoDetails when not YES
+    if (!isYes) {
+      setValue("disclosurePlan.embargoDetails", "", {
+        shouldValidate: false,
+      });
+    }
+
+    // Clear disclosureTimeline when not YES or ALREADY
+    if (!isYesOrAlready) {
+      setValue("disclosurePlan.disclosureTimeline", "", {
+        shouldValidate: false,
+      });
+    }
+
+    previousIntentRef.current = publicDisclosureIntent;
+  }, [publicDisclosureIntent, setValue]);
 
   return (
     <Item variant="outline" className="form-item-card">

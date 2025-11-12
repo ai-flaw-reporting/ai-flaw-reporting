@@ -88,7 +88,7 @@ export const DISCLOSURE_TIMELINE_FIELD = {
   name: "disclosurePlan.disclosureTimeline",
   title: "Disclosure Details",
   icon: "icons/form/building.svg",
-  label: "Where did you plan or already disclose this issue?",
+  label: "When did you or will you publicly disclose this report?",
   placeholder: "Enter timeline",
   type: "input",
 };

@@ -34,6 +34,7 @@ export function EmbargoDetails() {
         <ItemTitle className="form-title flex items-baseline gap-4">
           <EMBARGO_DETAILS_FIELD.icon className="text-warning-400" />
           {EMBARGO_DETAILS_FIELD.title}
+          <span className="text-error-600">*</span>
         </ItemTitle>
 
         <FormField
