@@ -6,6 +6,7 @@ import fs from "fs";
 import { factories } from "@strapi/strapi";
 import type { FlattenedReport } from "../content-types/report/types";
 import emailService from "../services/email";
+import huggingfaceService from "../services/huggingface";
 import { flattenReport, reshapeReport } from "../utils/report-helpers";
 
 export default factories.createCoreController(
@@ -15,6 +16,7 @@ export default factories.createCoreController(
       const MAX_FILE_SIZE = 5 * 1024 * 1024;
       const files = Object.entries(ctx.request?.files || {});
       const emailAttachments = [];
+      const hfAttachments = [];
       let attachmentsSize = 0;
       let reportData;
 
@@ -33,12 +35,22 @@ export default factories.createCoreController(
                 `File "${file.originalFilename}" exceeds the maximum size of 5MB (${(file.size / (1024 * 1024)).toFixed(2)}MB)`,
               );
             }
+
+            const fileBuffer = fs.readFileSync(file.filepath);
+
             emailAttachments.push({
               filename: file.originalFilename,
-              content: fs.readFileSync(file.filepath).toString("base64"),
+              content: fileBuffer.toString("base64"),
               type: file.mimetype,
               disposition: "attachment",
             });
+
+            hfAttachments.push({
+              filename: file.originalFilename,
+              content: fileBuffer,
+              type: file.mimetype,
+            });
+
             attachmentsSize += file.size || 0;
           });
       } else {
@@ -85,7 +97,7 @@ export default factories.createCoreController(
 
       const selectedStakeholders = entity.review_selectedStakeholders || [];
       if (selectedStakeholders && selectedStakeholders.length > 0) {
-        emailService
+        void emailService
           .sendReportEmail(
             strapi,
             response.data,
@@ -96,6 +108,14 @@ export default factories.createCoreController(
             strapi.log.error(`Failed to send email: ${err.message}`);
           });
       }
+
+      void huggingfaceService
+        .commitReport(strapi, response.data, hfAttachments)
+        .catch((err) => {
+          strapi.log.error(
+            `Failed to mirror report to HF dataset: ${JSON.stringify(err)}`,
+          );
+        });
 
       return response;
     },
