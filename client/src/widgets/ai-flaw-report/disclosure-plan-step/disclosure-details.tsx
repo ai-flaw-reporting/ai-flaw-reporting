@@ -76,10 +76,7 @@ export function DisclosureDetails() {
                     placeholder={DISCLOSURE_TIMELINE_FIELD.placeholder}
                     {...field}
                   />
-                  <FieldTooltip
-                    text="Help text placeholder"
-                    ariaLabel="Disclosure timeline help"
-                  />
+                  <FieldTooltip text="" ariaLabel="Disclosure timeline help" />
                 </div>
               </FormControl>
             </FormItem>
@@ -116,7 +113,7 @@ export function DisclosureDetails() {
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                         <FieldTooltip
-                          text="Help text placeholder"
+                          text=""
                           ariaLabel="Disclosure date help"
                           className="top-[13px] right-11"
                         />

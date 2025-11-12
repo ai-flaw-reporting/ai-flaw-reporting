@@ -143,7 +143,7 @@ export function HarmType() {
                       </SelectContent>
                     </Select>
                     <FieldTooltip
-                      text="Select the CWE that applies to this incident"
+                      text=""
                       ariaLabel="Documented Harm CWE help"
                       className="right-13"
                     />

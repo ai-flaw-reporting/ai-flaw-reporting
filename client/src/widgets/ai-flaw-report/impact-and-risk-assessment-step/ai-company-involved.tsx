@@ -78,7 +78,7 @@ export function AiCompanyInvolved() {
                     </SelectContent>
                   </Select>
                   <FieldTooltip
-                    text="Select the AI companies involved in this incident"
+                    text=""
                     ariaLabel="AI Company involved help"
                     className="right-13"
                   />

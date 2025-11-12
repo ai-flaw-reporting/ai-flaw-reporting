@@ -163,7 +163,7 @@ export function FormFieldRenderer<T extends FieldValues>({
 
               <FieldTooltip
                 ariaLabel={`${config.label} help`}
-                text="Help text placeholder"
+                text=""
                 className={config.tooltipClassName}
               />
             </div>

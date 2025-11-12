@@ -32,10 +32,7 @@ export function BehaviorFields() {
               height={23.8}
             />
             {EXPECTED_BEHAVIOR_FIELD.title}
-            <TitleTooltip
-              text="Help text placeholder"
-              ariaLabel="Expected Behavior help"
-            />
+            <TitleTooltip text="" ariaLabel="Expected Behavior help" />
           </ItemTitle>
 
           <FormField
@@ -75,10 +72,7 @@ export function BehaviorFields() {
               />
             )}
             {ACTUAL_BEHAVIOR_FIELD.title}
-            <TitleTooltip
-              text="Help text placeholder"
-              ariaLabel="Actual Behavior help"
-            />
+            <TitleTooltip text="" ariaLabel="Actual Behavior help" />
           </ItemTitle>
 
           <FormField

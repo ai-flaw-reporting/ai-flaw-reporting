@@ -45,7 +45,7 @@ export function AccessMethodField() {
                 />
                 <FieldTooltip
                   ariaLabel={`${ACCESS_METHOD_INPUT_FIELD.label} help`}
-                  text="Help text placeholder"
+                  text=""
                   className={ACCESS_METHOD_INPUT_FIELD.tooltipClassName}
                 />
                 <button

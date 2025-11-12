@@ -68,10 +68,7 @@ export function PolicyViolationSection() {
                     className="pl-10 !text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
                     {...field}
                   />
-                  <FieldTooltip
-                    text="Help text placeholder"
-                    ariaLabel="Policy URL help"
-                  />
+                  <FieldTooltip text="" ariaLabel="Policy URL help" />
                 </div>
               </FormControl>
               <FormMessage />
