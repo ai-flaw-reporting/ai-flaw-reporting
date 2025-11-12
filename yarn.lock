@@ -1669,6 +1669,20 @@
   dependencies:
     "@standard-schema/utils" "^0.3.0"
 
+"@huggingface/hub@^2.6.12":
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/@huggingface/hub/-/hub-2.6.12.tgz#e9f5308f5fd2738a6f43a11b765e0f0fc5553e54"
+  integrity sha512-/AZN2LAtrt4B8S83/Ru4wMorHY4NPwIYXo60SkuD6c/Mr135t1UqffD1vqcqtDYVf0hhLiyVmm1LMU1CXi8iKQ==
+  dependencies:
+    "@huggingface/tasks" "^0.19.50"
+  optionalDependencies:
+    cli-progress "^3.12.0"
+
+"@huggingface/tasks@^0.19.50":
+  version "0.19.63"
+  resolved "https://registry.yarnpkg.com/@huggingface/tasks/-/tasks-0.19.63.tgz#a4fef3ea92d6a1ab396b56f308747be32d5e0787"
+  integrity sha512-hmd8e5fdjRiIJE7/EYWXS+Pm2SAu89xjZEgfZddN10ubWqlelXLyj2YgHZrVDEVkVA+5+ImMZUpQIez7b2//fw==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.npmjs.org/@humanfs/core/-/core-0.19.1.tgz"
@@ -6543,7 +6557,7 @@ cli-cursor@^5.0.0:
   dependencies:
     restore-cursor "^5.0.0"
 
-cli-progress@3.12.0:
+cli-progress@3.12.0, cli-progress@^3.12.0:
   version "3.12.0"
   resolved "https://registry.npmjs.org/cli-progress/-/cli-progress-3.12.0.tgz"
   integrity sha512-tRkV3HJ1ASwm19THiiLIXLO7Im7wlTuKnvkYaTkyoAPefqjNg7W7DHKUlGRxy9vxDvbyCYQkQozvptuMkGCg8A==
