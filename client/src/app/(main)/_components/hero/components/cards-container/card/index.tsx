@@ -1,4 +1,9 @@
-import Link from "next/link";
+"use client";
+
+import { Info } from "lucide-react";
+import { useId } from "react";
+import { useRouter } from "next/navigation";
+
 import {
   Card,
   CardHeader,
@@ -10,11 +15,9 @@ import { Button } from "~/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { Info } from "lucide-react";
-import { useId } from "react";
+
 import { cn } from "~/lib/utils";
 
 type Action = {
@@ -43,9 +46,14 @@ export default function CardComponent({
   const descId = useId();
   const titleId = useId();
   const customCursor = "cursor-[url('/icons/cursor.svg')_10_10,_pointer]";
+  const router = useRouter();
 
   return (
     <Card
+      onClick={() => {
+        if (action.disabled) return;
+        router.push(action.href);
+      }}
       className={cn(
         `group max-w-[258px] ${customCursor} border-gray-300 bg-white pt-6.5 pb-5 text-center dark:border-gray-700 dark:bg-gray-900`,
         action.disabled && "pointer-events-none opacity-60",
@@ -63,26 +71,20 @@ export default function CardComponent({
               <h3 id={titleId} className="text-md leading-7 font-semibold">
                 {title}
               </h3>
-              {infoHint && (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger
-                      className="inline-flex items-center justify-center rounded focus:outline-none focus-visible:ring"
-                      aria-label={`Info about ${title}`}
-                      type="button"
-                    >
-                      <Info
-                        size={16}
-                        aria-hidden="true"
-                        className="text-gray-400"
-                      />
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs">
-                      <p>{infoHint}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              )}
+              <Tooltip>
+                <TooltipTrigger
+                  className="inline-flex items-center justify-center rounded focus:outline-none focus-visible:ring"
+                  aria-label={`Info about ${title}`}
+                  type="button"
+                >
+                  <Info
+                    size={16}
+                    aria-hidden="true"
+                    className="text-gray-400"
+                  />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">{infoHint}</TooltipContent>
+              </Tooltip>
             </div>
           </CardTitle>
         </CardHeader>
@@ -98,7 +100,6 @@ export default function CardComponent({
 
         <CardFooter className="mt-4 px-5">
           <Button
-            asChild
             variant={action.variant ?? "default"}
             disabled={action.disabled}
             className={cn(
@@ -106,7 +107,7 @@ export default function CardComponent({
               customCursor,
             )}
           >
-            <Link href={action.href}>{action.label}</Link>
+            {action.label}
           </Button>
         </CardFooter>
       </article>

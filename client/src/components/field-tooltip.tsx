@@ -11,10 +11,12 @@ export function FieldTooltip({
   ariaLabel,
   className,
 }: {
-  text: string;
+  text?: string;
   ariaLabel: string;
   className?: string;
 }) {
+  if (!text) return null;
+
   return (
     <Tooltip>
       <TooltipTrigger

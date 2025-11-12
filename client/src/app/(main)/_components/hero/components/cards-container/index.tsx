@@ -22,7 +22,6 @@ export default function CardsContainer() {
           }
           title="Information & Resources"
           description="Explore helpful definitions, and other resources for reporting issues with AI systems."
-          infoHint="Info about Information & Resources"
           action={{
             label: "Select",
             href: routes.resources,
@@ -42,7 +41,6 @@ export default function CardsContainer() {
           }
           title="AI Flaw"
           description="Generate flaw, vulnerability, and incident reports for AI systems. Automatically send reports to key stakeholders."
-          infoHint="Info about AI Flaw"
           action={{
             label: "Report flaw",
             href: routes.report,
@@ -62,7 +60,6 @@ export default function CardsContainer() {
           }
           title="Dashboard"
           description="We’re building an open dashboard for AI flaw reports. Soon, you’ll be able to explore past reports and patterns."
-          infoHint="Info about Dashboard"
           action={{
             label: "Open",
             href: routes.dashboard,

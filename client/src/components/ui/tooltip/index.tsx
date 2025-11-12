@@ -18,16 +18,6 @@ function TooltipProvider({
   );
 }
 
-function Tooltip({
-  ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
-  return (
-    <TooltipProvider>
-      <TooltipPrimitive.Root data-slot="tooltip" {...props} />
-    </TooltipProvider>
-  );
-}
-
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
@@ -40,6 +30,10 @@ function TooltipContent({
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+  // Don't render tooltip if there's no content
+  if (!children || (typeof children === "string" && children.trim() === "")) {
+    return null;
+  }
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content
@@ -55,6 +49,58 @@ function TooltipContent({
         <TooltipPrimitive.Arrow className="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
+  );
+}
+
+// Helper function to check if TooltipContent has content
+function hasTooltipContent(
+  children: React.ReactNode,
+  TooltipContentComponent: typeof TooltipContent,
+): boolean {
+  let hasContent = false;
+
+  React.Children.forEach(children, (child) => {
+    if (hasContent) return;
+
+    if (React.isValidElement(child)) {
+      // Check if this is a TooltipContent component by comparing the function
+      if (child.type === TooltipContentComponent) {
+        const props = child.props as { children?: React.ReactNode };
+        const content = props.children;
+        if (content && (typeof content !== "string" || content.trim() !== "")) {
+          hasContent = true;
+        }
+      } else {
+        const props = child.props as { children?: React.ReactNode };
+        if (props.children) {
+          // Recursively check nested children
+          hasContent = hasTooltipContent(
+            props.children,
+            TooltipContentComponent,
+          );
+        }
+      }
+    }
+  });
+
+  return hasContent;
+}
+
+function Tooltip({
+  children,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+  // Don't render tooltip if TooltipContent has no content
+  if (!hasTooltipContent(children, TooltipContent)) {
+    return null;
+  }
+
+  return (
+    <TooltipProvider>
+      <TooltipPrimitive.Root data-slot="tooltip" {...props}>
+        {children}
+      </TooltipPrimitive.Root>
+    </TooltipProvider>
   );
 }
 
