@@ -73,6 +73,7 @@ export function AiModelField() {
 
   return (
     <FormFieldRenderer
+      showClearBtn
       name={fieldConfig.name}
       control={control}
       config={fieldConfig}

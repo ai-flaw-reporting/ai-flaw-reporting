@@ -34,6 +34,7 @@ type MultiSelectContextType = {
   setOpen: (open: boolean) => void;
   selectedValues: Set<string>;
   toggleValue: (value: string) => void;
+  clearAll: () => void;
   items: Map<string, ReactNode>;
   onItemAdded: (value: string, label: ReactNode) => void;
 };
@@ -71,6 +72,11 @@ export function MultiSelect({
     onValuesChange?.([...getNewSet(selectedValues)]);
   }
 
+  function clearAll() {
+    setInternalValues(new Set());
+    onValuesChange?.([]);
+  }
+
   const onItemAdded = useCallback((value: string, label: ReactNode) => {
     setItems((prev) => {
       if (prev.get(value) === label) return prev;
@@ -85,6 +91,7 @@ export function MultiSelect({
         setOpen,
         selectedValues,
         toggleValue,
+        clearAll,
         items,
         onItemAdded,
       }}
@@ -99,12 +106,20 @@ export function MultiSelect({
 export function MultiSelectTrigger({
   className,
   children,
+  showClearBtn = false,
   ...props
 }: {
   className?: string;
   children?: ReactNode;
+  showClearBtn?: boolean;
 } & ComponentPropsWithoutRef<typeof Button>) {
-  const { open } = useMultiSelectContext();
+  const { open, selectedValues, clearAll } = useMultiSelectContext();
+  const hasValues = selectedValues.size > 0;
+
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    clearAll();
+  };
 
   return (
     <PopoverTrigger asChild>
@@ -119,7 +134,19 @@ export function MultiSelectTrigger({
         )}
       >
         {children}
-        <ChevronDownIcon className="size-4 shrink-0 text-gray-500" />
+        <div className="flex items-center gap-1">
+          {showClearBtn && hasValues && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="ring-offset-background focus:ring-ring flex items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none [&_svg]:pointer-events-auto"
+              aria-label="Clear all selections"
+            >
+              <XIcon className="size-4 text-gray-500" />
+            </button>
+          )}
+          <ChevronDownIcon className="size-4 shrink-0 text-gray-500" />
+        </div>
       </Button>
     </PopoverTrigger>
   );

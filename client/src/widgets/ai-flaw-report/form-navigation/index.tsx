@@ -9,7 +9,6 @@ import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useA
 import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
 import { useStepNavigation } from "~/entities/ai-flaw-report/model/hooks/useStepNavigation";
 import { STEP_CONFIGS_WITH_SCHEMAS } from "~/entities/ai-flaw-report/model/constants";
-import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 
 export function FormNavigation() {
   const { control, reset, trigger } = useAiFlawFormContext();
@@ -79,12 +78,6 @@ export function FormNavigation() {
               ...prevData,
               [formField]: fieldData,
             }));
-
-            // Trigger validation for the field to update validation state
-            // This ensures the Next button state is updated correctly
-            void trigger(formField as keyof AiFlawReportSchema).then(() => {
-              loadedStepsRef.current.add(stepId);
-            });
           } else {
             loadedStepsRef.current.add(stepId);
           }

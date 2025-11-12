@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { CheckIcon, ChevronDown, Globe } from "lucide-react";
 import { CircleFlag } from "react-circle-flags";
-import { countries } from "country-data-list";
 
 import {
   Command,
@@ -22,17 +21,7 @@ import {
 
 import { cn } from "~/lib/utils";
 
-export type Country = {
-  alpha2: string;
-  alpha3: string;
-  countryCallingCodes: string[];
-  currencies: string[];
-  emoji?: string;
-  ioc: string;
-  languages: string[];
-  name: string;
-  status: string;
-};
+import { COUNTRIES, type Country } from "./countries";
 
 type CountrySelectProps = {
   value?: string;
@@ -53,10 +42,7 @@ export function CountrySelect({
 }: CountrySelectProps) {
   const [open, setOpen] = useState(false);
 
-  const options = (countries as { all: Country[] }).all.filter(
-    (country: Country) =>
-      country.emoji && country.status !== "deleted" && country.ioc !== "PRK",
-  );
+  const options = COUNTRIES;
 
   const selectedCountry = value
     ? options.find((country) => country.name === value)

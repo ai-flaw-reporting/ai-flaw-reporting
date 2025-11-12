@@ -2,15 +2,33 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from "lucide-react";
 
 import { cn } from "~/lib/utils";
 
-function Select({
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" {...props} />;
-}
+const SelectContext = React.createContext<{
+  value?: string;
+  onValueChange?: (value: string) => void;
+} | null>(null);
+
+const Select: React.FC<React.ComponentProps<typeof SelectPrimitive.Root>> = (
+  props,
+) => {
+  const { value, ...restProps } = props;
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const onValueChange = props.onValueChange;
+
+  return (
+    <SelectContext.Provider value={{ value, onValueChange }}>
+      <SelectPrimitive.Root
+        data-slot="select"
+        value={value}
+        onValueChange={onValueChange}
+        {...restProps}
+      />
+    </SelectContext.Provider>
+  );
+};
 
 function SelectGroup({
   ...props
@@ -28,10 +46,22 @@ function SelectTrigger({
   className,
   size = "default",
   children,
+  showClearBtn = false,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: "sm" | "default";
+  showClearBtn?: boolean;
 }) {
+  const context = React.useContext(SelectContext);
+  const hasValue = context?.value && context.value !== "";
+
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Use empty string to clear - Radix Select requires a string value
+    // The parent component should handle empty string as "no selection"
+    context?.onValueChange?.("");
+  };
+
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -43,9 +73,21 @@ function SelectTrigger({
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 text-gray-500" />
-      </SelectPrimitive.Icon>
+      <div className="flex items-center gap-1">
+        {showClearBtn && hasValue && (
+          <button
+            type="button"
+            onClick={handleClear}
+            className="ring-offset-background focus:ring-ring flex items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none [&_svg]:pointer-events-auto"
+            aria-label="Clear selection"
+          >
+            <XIcon className="size-4 text-gray-500" />
+          </button>
+        )}
+        <SelectPrimitive.Icon asChild>
+          <ChevronDownIcon className="size-4 text-gray-500" />
+        </SelectPrimitive.Icon>
+      </div>
     </SelectPrimitive.Trigger>
   );
 }

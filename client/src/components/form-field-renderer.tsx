@@ -44,6 +44,7 @@ type Props<T extends FieldValues> = {
   config: FieldConfig;
   className?: string;
   inputClassName?: string;
+  showClearBtn?: boolean;
 };
 
 type OptionRowProps = RowComponentProps & {
@@ -65,6 +66,7 @@ export function FormFieldRenderer<T extends FieldValues>({
   config,
   className = "form-item-select",
   inputClassName,
+  showClearBtn = false,
 }: Props<T>) {
   return (
     <FormField
@@ -93,11 +95,13 @@ export function FormFieldRenderer<T extends FieldValues>({
                 <MultiSelect
                   values={field.value ?? []}
                   onValuesChange={(values) => {
-                    if (!Array.isArray(values) || !values.length) return;
                     field.onChange(values);
                   }}
                 >
-                  <MultiSelectTrigger className="h-[42px] w-full max-w-[728px] dark:bg-white dark:text-gray-800 dark:hover:bg-white">
+                  <MultiSelectTrigger
+                    showClearBtn={showClearBtn}
+                    className="h-[42px] w-full max-w-[728px] dark:bg-white dark:text-gray-800 dark:hover:bg-white"
+                  >
                     <MultiSelectValue
                       placeholder={config.placeholder}
                       className="*:!text-[14px] *:text-gray-800"
@@ -119,7 +123,6 @@ export function FormFieldRenderer<T extends FieldValues>({
                 <Select
                   value={field.value ?? ""}
                   onValueChange={(newValue) => {
-                    if (!newValue) return;
                     field.onChange(newValue);
                   }}
                 >
