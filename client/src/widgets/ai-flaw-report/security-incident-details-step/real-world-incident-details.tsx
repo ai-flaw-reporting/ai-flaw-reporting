@@ -21,9 +21,13 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Badge } from "~/components/ui/badge";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import { SUBSTRATE_RELATIONSHIP_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import {
+  SUBSTRATE_RELATIONSHIP_FIELD,
+  SUBSTRATE_RELATIONSHIP_OTHER_FIELD,
+} from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 import { INCIDENT_LOCATION_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 import { HARM_NARRATIVE_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
+import { FORM_VALUES } from "~/entities/ai-flaw-report/model/constants";
 import { getSafeArray, createArrayRemoveHandler } from "~/lib/form-field-utils";
 
 export function RealWorldIncidentDetails() {
@@ -33,6 +37,11 @@ export function RealWorldIncidentDetails() {
   const realWorldHarm = useWatch({
     control,
     name: "classifyReport.real_world_harm",
+  });
+
+  const substrateRelationship = useWatch({
+    control,
+    name: "securityDetails.substrateRelationship",
   });
 
   if (!realWorldHarm) {
@@ -78,12 +87,31 @@ export function RealWorldIncidentDetails() {
                   </SelectContent>
                 </Select>
               </FormControl>
-              <FormDescription className="text-gray-600 dark:text-gray-100">
-                {SUBSTRATE_RELATIONSHIP_FIELD.description}
-              </FormDescription>
             </FormItem>
           )}
         />
+
+        {substrateRelationship === FORM_VALUES.OTHER_LOWERCASE && (
+          <FormField
+            control={control}
+            name="securityDetails.substrateRelationshipOther"
+            render={({ field }) => (
+              <FormItem className="form-item-field">
+                <FormLabel className="form-label">
+                  {SUBSTRATE_RELATIONSHIP_OTHER_FIELD.label}{" "}
+                  <span className="text-error-600">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={SUBSTRATE_RELATIONSHIP_OTHER_FIELD.placeholder}
+                    className="text-md w-full dark:bg-white dark:text-gray-800"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        )}
 
         <FormField
           control={control}

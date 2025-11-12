@@ -242,6 +242,7 @@ export const impactAndRiskAssessmentSchema = z
 
 export const securityDetailsSchema = z.object({
   substrateRelationship: z.string().optional(),
+  substrateRelationshipOther: z.string().optional(),
   incidentLocation: z.array(z.string()).optional().default([]),
   harmNarrative: z.string().max(500).optional().or(z.literal("")),
   attackerResources: z.string().optional(),
@@ -266,6 +267,22 @@ export const createSecurityIncidentDetailsSchema = (
       },
       {
         path: ["substrateRelationship"],
+      },
+    )
+    .refine(
+      (data) => {
+        if (
+          realWorldHarm &&
+          data.substrateRelationship ===
+            (FORM_VALUES.OTHER_LOWERCASE as string) &&
+          !data.substrateRelationshipOther?.trim()
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        path: ["substrateRelationshipOther"],
       },
     )
     .refine(

@@ -2,6 +2,7 @@ import type { FieldConfig } from "../types";
 
 export type SecurityDetailsFieldName =
   | "securityDetails.substrateRelationship"
+  | "securityDetails.substrateRelationshipOther"
   | "securityDetails.incidentLocation"
   | "securityDetails.harmNarrative"
   | "securityDetails.attackerResources"
@@ -24,10 +25,8 @@ export const SUBSTRATE_RELATIONSHIP_FIELD = {
   name: "securityDetails.substrateRelationship",
   title: "Real-World incident details",
   icon: "/icons/form/tree.svg",
-  label: "Substrate Relationship",
+  label: "Reporter Relationship",
   placeholder: "Choose an option",
-  description:
-    "Tell us if you saw this, were hurt by this, built the system, or other.",
   type: "select",
   options: [
     { value: "affected_stakeholder", label: "Affected stakeholder" },
@@ -35,6 +34,13 @@ export const SUBSTRATE_RELATIONSHIP_FIELD = {
     { value: "system_developer", label: "System developer" },
     { value: "other", label: "Other" },
   ] as const,
+};
+
+export const SUBSTRATE_RELATIONSHIP_OTHER_FIELD = {
+  name: "securityDetails.substrateRelationshipOther",
+  label: "Other reporter relationship",
+  placeholder: "Please specify",
+  type: "input",
 };
 
 export const INCIDENT_LOCATION_FIELD = {
