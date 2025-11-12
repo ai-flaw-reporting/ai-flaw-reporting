@@ -31,8 +31,7 @@ export function SeverityHarmField() {
               />
             )}
             <span className="text-nowrap">
-              {SEVERITY_OF_HARM_FIELD.title}{" "}
-              <span className="text-error-600">*</span>
+              {SEVERITY_OF_HARM_FIELD.title}
             </span>
           </ItemTitle>
           <SeverityHarmBadge />

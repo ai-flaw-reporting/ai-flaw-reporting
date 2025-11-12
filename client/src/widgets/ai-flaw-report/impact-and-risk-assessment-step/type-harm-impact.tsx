@@ -89,7 +89,7 @@ export function TypeOfHarmImpact() {
                               <h3 className="text-md font-semibold text-gray-900">
                                 {option.label}
                               </h3>
-                              <p className="text-md font-bold text-gray-700">
+                              <p className="text-md text-gray-700">
                                 {option.description}
                               </p>
                             </div>

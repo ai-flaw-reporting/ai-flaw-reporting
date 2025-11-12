@@ -62,12 +62,12 @@ export const HARM_TYPE_FIELD = {
       value: HARM_OPTION_VALUE.DOCUMENTED,
       label: "Documented Harm",
       description:
-        "Common weaknesses of systems that may already be cataloged in MITRE’s CWE.",
+        "Common weaknesses of systems that may already be cataloged in ",
     },
     {
       value: HARM_OPTION_VALUE.NEW,
       label: "New Harm",
-      description: "",
+      description: "The harm is not already a category in ",
     },
   ] as const,
 };

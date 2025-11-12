@@ -70,7 +70,7 @@ export function AffectedStakeholders() {
                               <h3 className="text-md font-semibold text-gray-900">
                                 {option.label}
                               </h3>
-                              <p className="text-md font-bold text-nowrap text-gray-700">
+                              <p className="text-md text-nowrap text-gray-700">
                                 {option.description}
                               </p>
                             </div>

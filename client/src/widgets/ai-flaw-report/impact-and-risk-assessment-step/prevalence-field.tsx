@@ -31,7 +31,7 @@ export function PrevalenceField() {
               />
             )}
             <span className="text-nowrap">
-              {PREVALENCE_FIELD.title} <span className="text-error-600">*</span>
+              {PREVALENCE_FIELD.title}
             </span>
           </ItemTitle>
           <PrevalenceBadge />

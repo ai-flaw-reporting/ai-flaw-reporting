@@ -188,8 +188,8 @@ export const createEvidenceSchema = (csamInvolved: boolean) => {
 
 export const impactAndRiskAssessmentSchema = z
   .object({
-    severityOfHarm: z.string(),
-    prevalence: z.string(),
+    severityOfHarm: z.string().optional(),
+    prevalence: z.string().optional(),
     harmType: z.string(),
     documentedHarmCwe: z.string().optional(),
     harmTypes: z.array(z.string()).optional(),

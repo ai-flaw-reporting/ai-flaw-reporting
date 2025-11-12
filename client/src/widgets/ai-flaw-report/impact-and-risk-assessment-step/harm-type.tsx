@@ -90,8 +90,16 @@ export function HarmType() {
                         {HARM_TYPE_FIELD.options[0].label}
                       </span>
                       {HARM_TYPE_FIELD.options[0].description && (
-                        <span className="textgray-600 text-sm font-normal dark:text-gray-100">
+                        <span className="textgray-600 text-sm font-light dark:text-gray-100">
                           {HARM_TYPE_FIELD.options[0].description}
+                          <a
+                            href="https://cwe.mitre.org/documents/schema/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline dark:text-blue-400"
+                          >
+                            MITRE's CWE
+                          </a>
                         </span>
                       )}
                     </div>
@@ -107,8 +115,16 @@ export function HarmType() {
                         {HARM_TYPE_FIELD.options[1].label}
                       </span>
                       {HARM_TYPE_FIELD.options[1].description && (
-                        <span className="textgray-600 text-sm font-normal dark:text-gray-100">
+                        <span className="textgray-600 text-sm font-light dark:text-gray-100">
                           {HARM_TYPE_FIELD.options[1].description}
+                          <a
+                            href="https://cwe.mitre.org/documents/schema/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline dark:text-blue-400"
+                          >
+                            MITRE's CWE
+                          </a>
                         </span>
                       )}
                     </div>
