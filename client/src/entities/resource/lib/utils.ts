@@ -10,11 +10,22 @@ export const getBadgeVariant = (scope: string) => {
     case SCOPE_TYPES.INCIDENT:
       return BADGE_VARIANTS.WARNING;
     case SCOPE_TYPES.AI_SAFETY_HAZARD:
+    case SCOPE_TYPES.AI_SAFETY:
       return BADGE_VARIANTS.ERROR;
     default:
       return BADGE_VARIANTS.DEFAULT;
   }
 };
+
+function matchesOrganizationType(
+  resourceOrgTypes: string[],
+  filterOrgType: string | null,
+): boolean {
+  if (!filterOrgType) {
+    return true;
+  }
+  return resourceOrgTypes.includes(filterOrgType);
+}
 
 export function sortResourcesByName(resources: Resource[]): Resource[] {
   return [...resources].sort((a, b) => a.title.localeCompare(b.title));
@@ -25,12 +36,27 @@ export function filterResources(
   filters: FilterParams,
 ): Resource[] {
   return resources.filter((resource) => {
-    const matchesFormScope =
-      !filters.formScope || resource.scopes.includes(filters.formScope);
+    // Map "AI Safety Hazard" filter to "AI Safety" scope in data
+    if (!filters.formScope) {
+      const matchesOrgType = matchesOrganizationType(
+        resource.organizationTypes,
+        filters.organizationType,
+      );
+      return matchesOrgType;
+    }
 
-    const matchesOrgType =
-      !filters.organizationType ||
-      resource.organizationType === filters.organizationType;
+    const formScope: string = filters.formScope;
+    const scopeToMatch =
+      formScope === SCOPE_TYPES.AI_SAFETY_HAZARD
+        ? SCOPE_TYPES.AI_SAFETY
+        : formScope;
+
+    const matchesFormScope = resource.scopes.includes(scopeToMatch);
+
+    const matchesOrgType = matchesOrganizationType(
+      resource.organizationTypes,
+      filters.organizationType,
+    );
 
     return matchesFormScope && matchesOrgType;
   });
@@ -41,12 +67,27 @@ export function filterAndSortResources(
   filters: FilterParams,
 ): Resource[] {
   return resources.filter((resource) => {
-    const matchesFormScope =
-      !filters.formScope || resource.scopes.includes(filters.formScope);
+    // Map "AI Safety Hazard" filter to "AI Safety" scope in data
+    if (!filters.formScope) {
+      const matchesOrgType = matchesOrganizationType(
+        resource.organizationTypes,
+        filters.organizationType,
+      );
+      return matchesOrgType;
+    }
 
-    const matchesOrgType =
-      !filters.organizationType ||
-      resource.organizationType === filters.organizationType;
+    const formScope: string = filters.formScope;
+    const scopeToMatch =
+      formScope === SCOPE_TYPES.AI_SAFETY_HAZARD
+        ? SCOPE_TYPES.AI_SAFETY
+        : formScope;
+
+    const matchesFormScope = resource.scopes.includes(scopeToMatch);
+
+    const matchesOrgType = matchesOrganizationType(
+      resource.organizationTypes,
+      filters.organizationType,
+    );
 
     return matchesFormScope && matchesOrgType;
   });

@@ -1,7 +1,7 @@
 export type Resource = {
   id: string;
   title: string;
-  organizationType: string;
+  organizationTypes: string[];
   scopesType: string;
   scopes: string[];
   summary: string;

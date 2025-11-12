@@ -30,8 +30,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
   const customCursor = "cursor-[url('/icons/cursor.svg')_10_10,_pointer]";
   const {
     title,
-    organizationType,
-    scopesType,
+    organizationTypes,
     scopes,
     summary,
     reportUrl,
@@ -71,9 +70,6 @@ export function ResourceCard({ resource }: { resource: Resource }) {
                 )}
                 {title}
               </h3>
-              <p className="text-sm font-normal text-gray-600 dark:text-gray-200">
-                {organizationType}
-              </p>
             </div>
 
             {reportUrl ? (
@@ -108,18 +104,21 @@ export function ResourceCard({ resource }: { resource: Resource }) {
         </CardHeader>
 
         <CardContent className="mb-2 flex-1 space-y-4 px-16">
-          <p className="text-sm font-semibold text-gray-600 dark:text-gray-200">
-            {scopesType}
-          </p>
-          {scopes?.length && (
-            <ul className="flex flex-wrap gap-4" aria-label="Report scopes">
-              {scopes.map((scope) => (
-                <li key={scope}>
-                  <Badge variant={getBadgeVariant(scope)}>{scope}</Badge>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul
+            className="flex flex-wrap gap-4"
+            aria-label="Organization type and report scopes"
+          >
+            {organizationTypes?.map((orgType: string) => (
+              <li key={orgType}>
+                <Badge variant="default">{orgType}</Badge>
+              </li>
+            ))}
+            {scopes?.map((scope) => (
+              <li key={scope}>
+                <Badge variant={getBadgeVariant(scope)}>{scope}</Badge>
+              </li>
+            ))}
+          </ul>
           <p className="mb-2 text-sm font-semibold text-gray-600 dark:text-gray-200">
             You should report here if...
           </p>

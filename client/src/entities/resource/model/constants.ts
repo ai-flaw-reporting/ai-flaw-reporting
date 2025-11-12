@@ -2,6 +2,7 @@ export const SCOPE_TYPES = {
   SECURITY_VULNERABILITY: "Security Vulnerability",
   INCIDENT: "Incident",
   AI_SAFETY_HAZARD: "AI Safety Hazard",
+  AI_SAFETY: "AI Safety",
 } as const;
 
 export const ORGANIZATION_TYPES = {
