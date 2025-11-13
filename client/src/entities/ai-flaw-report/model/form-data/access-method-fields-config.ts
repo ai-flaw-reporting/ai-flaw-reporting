@@ -20,7 +20,7 @@ export const ACCESS_METHOD_SELECT_FIELD: AccessMethodFieldConfig = {
 
 export const ACCESS_METHOD_INPUT_FIELD: AccessMethodFieldConfig = {
   name: "reporterDetails.system.accessMethodOther",
-  label: "Access Method",
+  label: "Other access method",
   type: "input",
   placeholder: "How did you access the system?",
   tooltipClassName: "right-[44px] dark:hover:text-gray-500",

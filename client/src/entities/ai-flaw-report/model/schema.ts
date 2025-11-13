@@ -83,6 +83,21 @@ export const reporterDetailsSchema = z
     {
       path: ["system", "version"],
     },
+  )
+  .refine(
+    (data) => {
+      if (
+        data.system.accessMethod === FORM_VALUES.OTHER &&
+        !data.system.accessMethodOther?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      path: ["system", "accessMethodOther"],
+      message: "Please specify the other access method",
+    },
   );
 
 export const incidentDescriptionSchema = z.object({
