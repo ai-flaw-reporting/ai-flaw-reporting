@@ -7,6 +7,7 @@ import { factories } from "@strapi/strapi";
 import type { FlattenedReport } from "../content-types/report/types";
 import emailService from "../services/email";
 import huggingfaceService from "../services/huggingface";
+import n8nService from "../services/n8n";
 import { flattenReport, reshapeReport } from "../utils/report-helpers";
 
 export default factories.createCoreController(
@@ -17,11 +18,12 @@ export default factories.createCoreController(
       const files = Object.entries(ctx.request?.files || {});
       const emailAttachments = [];
       const hfAttachments = [];
+      const uploads = [];
       let attachmentsSize = 0;
-      let reportData;
+      let payload;
 
       if (ctx.is("multipart")) {
-        reportData =
+        payload =
           typeof ctx.request.body.data === "string"
             ? JSON.parse(ctx.request.body.data)
             : ctx.request.body.data;
@@ -54,36 +56,35 @@ export default factories.createCoreController(
             attachmentsSize += file.size || 0;
           });
       } else {
-        reportData = ctx.request.body.data || ctx.request.body;
+        payload = ctx.request.body.data || ctx.request.body;
       }
 
       const entity = (await strapi.documents("api::report.report").create({
-        data: flattenReport(reportData),
+        data: flattenReport(payload),
       })) as FlattenedReport;
 
       for await (const [name, data] of files) {
-        await strapi.plugins.upload.services.upload
-          .upload({
-            data: {
-              refId: entity.id,
-              ref: "api::report.report",
-              field: name,
-            },
-            files: Array.isArray(data) ? data : [data],
-          })
-          .catch((uploadErr) => {
-            strapi.log.error(
-              `Failed to upload files for field ${name}: ${uploadErr.message}`,
-            );
-          });
+        uploads.push(
+          await strapi.plugins.upload.services.upload
+            .upload({
+              data: {
+                refId: entity.id,
+                ref: "api::report.report",
+                field: name,
+              },
+              files: Array.isArray(data) ? data : [data],
+            })
+            .catch((uploadErr) => {
+              strapi.log.error(
+                `Failed to upload files for field ${name}: ${uploadErr.message}`,
+              );
+            }),
+        );
       }
 
       const jsonAttachment = {
         filename: `ai-flaw-report-${entity.documentId}.json`,
-        content: Buffer.from(
-          JSON.stringify(reportData, null, 2),
-          "utf-8",
-        ).toString("base64"),
+        content: Buffer.from(JSON.stringify(payload, null, 2), "utf-8").toString("base64"),
         type: "application/json",
         disposition: "attachment",
       };
@@ -114,6 +115,14 @@ export default factories.createCoreController(
         .catch((err) => {
           strapi.log.error(
             `Failed to mirror report to HF dataset: ${JSON.stringify(err)}`,
+          );
+        });
+
+      void n8nService
+        .sendReportToWebhook(strapi, response.data, uploads)
+        .catch((err) => {
+          strapi.log.error(
+            `Failed to send report to N8N webhook: ${JSON.stringify(err)}`,
           );
         });
 
