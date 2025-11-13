@@ -100,12 +100,10 @@
       "allowedTypes": ["images", "files", "videos"]
     },
     "impact_severityOfHarm": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "impact_prevalence": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "impact_harmType": {
       "type": "string",

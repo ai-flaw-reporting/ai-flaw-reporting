@@ -21,7 +21,7 @@ export function ReportComplited({ selectedStakeholders }: Props) {
       <ItemContent className="flex flex-col items-center justify-center gap-8">
         <ItemTitle className="form-title flex flex-col items-center justify-center gap-4">
           <CheckCircleOutlineIcon className="text-success-700 size-12.5" />
-          Report Complited
+          Report Completed
         </ItemTitle>
         <div className="flex flex-col items-center justify-center gap-1.5">
           <p className="text-center text-sm font-medium text-gray-700 dark:text-gray-100">

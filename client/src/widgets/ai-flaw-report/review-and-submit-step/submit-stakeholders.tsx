@@ -68,6 +68,9 @@ export function SubmitStakeholders() {
       stakeholdersToAdd.push("AVID", "AIID");
     }
 
+    // Always auto-select "General AI Flaw Database"
+    stakeholdersToAdd.push("General AI Flaw Database");
+
     const allStakeholders = Array.from(
       new Set([...mergedStakeholders, ...stakeholdersToAdd]),
     );
@@ -123,6 +126,15 @@ export function SubmitStakeholders() {
         </ItemTitle>
         <p className="text-sm font-normal text-gray-600 dark:text-gray-100">
           {SUBMIT_STAKEHOLDERS_CONFIG.description}
+        </p>
+        <p className="text-sm font-normal text-gray-600 dark:text-gray-100">
+          This will submit your full report to these organizations, with your
+          provided contact information, either via email or API. You will
+          receive an email confirming the report was sent to each organization.
+          Once the report is sent we cannot guarantee how each organization will
+          process, triage, or review the reports. We recommend downloading your
+          report (above) so you can continue to distribute it later if you need
+          to.
         </p>
         <FormField
           control={control}

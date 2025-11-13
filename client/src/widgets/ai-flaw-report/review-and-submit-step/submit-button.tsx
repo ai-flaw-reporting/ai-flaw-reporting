@@ -5,12 +5,12 @@ import { useSubmission } from "~/features/ai-flaw-report/multi-step-form/submiss
 import { ReportComplited } from "./report-complited";
 
 export function SubmitButton() {
-  const { isSubmitted, isSubmitting, selectedStakeholders, isSubmitDisabled } =
+  const { isSubmitting, selectedStakeholders, isSubmitDisabled } =
     useSubmitReport();
-  const { submitError } = useSubmission();
+  const { submitError, isSubmitSuccessful } = useSubmission();
 
-  // Only show success widget if submission succeeded (isSubmitted) and there's no error
-  const showSuccess = isSubmitted && !submitError;
+  // Only show success widget if submission actually succeeded (after API call completes)
+  const showSuccess = isSubmitSuccessful && !submitError;
 
   return (
     <>

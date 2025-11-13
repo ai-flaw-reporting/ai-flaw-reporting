@@ -13,8 +13,9 @@ import { STEP_ORDER } from "~/entities/ai-flaw-report/model/step-config";
 
 function FormContent({ huggingFaceModels }: { huggingFaceModels: string[] }) {
   const { handleSubmit, control, reset } = useAiFlawFormContext();
-  const { setSubmitError } = useSubmission();
   const currentStep = useWatch({ control, name: "step" });
+
+  const { setSubmitError, setIsSubmitSuccessful } = useSubmission();
 
   const onSubmit = async (data: AiFlawReportSchema) => {
     // Only allow submission on the final step
@@ -24,9 +25,12 @@ function FormContent({ huggingFaceModels }: { huggingFaceModels: string[] }) {
     }
 
     setSubmitError(null);
+    setIsSubmitSuccessful(false);
 
     try {
       await submitReport(data);
+      // Only set success to true after the API call completes successfully
+      setIsSubmitSuccessful(true);
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : "Failed to submit report",
