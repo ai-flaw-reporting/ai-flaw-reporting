@@ -4,7 +4,6 @@ import { IssueDescriptionField } from "./issue-description-field";
 import { BehaviorFields } from "./behavior-fields";
 import { PolicyViolationSection } from "./policy-violation-section";
 import { CsamWarning } from "./csam-warning";
-import { WarningMessage } from "./warning-message";
 
 export function IncidentDescriptionStep() {
   return (
@@ -12,7 +11,6 @@ export function IncidentDescriptionStep() {
       <IssueDescriptionField />
       <BehaviorFields />
       <PolicyViolationSection />
-      <WarningMessage />
       <CsamWarning />
     </div>
   );
