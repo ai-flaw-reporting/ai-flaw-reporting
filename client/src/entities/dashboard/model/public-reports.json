@@ -1,5 +1,5 @@
 {
-  "pageSize": 5,
+  "pageSize": 10,
   "total": "1,248",
   "data": [
     {
@@ -36,6 +36,41 @@
       "whoSubmitted": "Gemini",
       "aiSystem": "Gemini",
       "severity": "Medium"
+    },
+    {
+      "reportId": "FLW-2023-0416",
+      "dateSubmitted": "Apr 17, 2023",
+      "whoSubmitted": "Anthropic",
+      "aiSystem": "Claude",
+      "severity": "High"
+    },
+    {
+      "reportId": "FLW-2023-0415",
+      "dateSubmitted": "Apr 15, 2023",
+      "whoSubmitted": "Meta",
+      "aiSystem": "Llama",
+      "severity": "Low"
+    },
+    {
+      "reportId": "FLW-2023-0414",
+      "dateSubmitted": "Apr 14, 2023",
+      "whoSubmitted": "Anonymous",
+      "aiSystem": "DeepMind",
+      "severity": "Critical"
+    },
+    {
+      "reportId": "FLW-2023-0413",
+      "dateSubmitted": "Apr 12, 2023",
+      "whoSubmitted": "OpenAI",
+      "aiSystem": "OpenAI",
+      "severity": "Medium"
+    },
+    {
+      "reportId": "FLW-2023-0412",
+      "dateSubmitted": "Apr 10, 2023",
+      "whoSubmitted": "User123",
+      "aiSystem": "Perplexity",
+      "severity": "High"
     }
   ]
 }

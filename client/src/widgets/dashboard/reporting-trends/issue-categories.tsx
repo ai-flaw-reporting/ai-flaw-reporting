@@ -66,7 +66,7 @@ export function IssueCategories() {
           </div>
 
           <ul
-            className="flex flex-col justify-center space-y-3"
+            className="flex flex-col justify-center space-y-2 max-h-[260px] overflow-y-auto pr-2"
             aria-label="Categories legend"
           >
             {issueCategories.map((s) => (

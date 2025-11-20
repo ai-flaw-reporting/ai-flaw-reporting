@@ -95,6 +95,7 @@ export function ReportsOverTime() {
                     : LINE_CHART_COLORS.axis.tick.light,
                 }}
                 tickMargin={8}
+                interval={0}
                 aria-hidden="true"
               />
               <YAxis

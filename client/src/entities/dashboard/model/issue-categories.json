@@ -1,7 +1,62 @@
 [
-  { "label": "Bias Detection", "value": 35, "color": "#EF4444" },
-  { "label": "Security Flaw", "value": 25, "color": "#F97316" },
-  { "label": "Privacy Concern", "value": 20, "color": "#EAB308" },
-  { "label": "Performance Issue", "value": 15, "color": "#22C55E" },
-  { "label": "Ethical Concern", "value": 5, "color": "#3B82F6" }
+  {
+    "label": "Autonomy / Agency Loss",
+    "value": 22,
+    "color": "#EF4444"
+  },
+  {
+    "label": "Physical Harm",
+    "value": 8,
+    "color": "#F97316"
+  },
+  {
+    "label": "Psychological Harm",
+    "value": 19,
+    "color": "#EAB308"
+  },
+  {
+    "label": "Reputational Harm",
+    "value": 11,
+    "color": "#22C55E"
+  },
+  {
+    "label": "Economic / Financial Harm",
+    "value": 14,
+    "color": "#10B981"
+  },
+  {
+    "label": "Human Rights & Civil Liberties",
+    "value": 17,
+    "color": "#3B82F6"
+  },
+  {
+    "label": "Societal & Cultural Harm",
+    "value": 13,
+    "color": "#6366F1"
+  },
+  {
+    "label": "Political & Economic Stability",
+    "value": 9,
+    "color": "#8B5CF6"
+  },
+  {
+    "label": "Environmental Harm",
+    "value": 6,
+    "color": "#22D3EE"
+  },
+  {
+    "label": "Sexualization",
+    "value": 5,
+    "color": "#F43F5E"
+  },
+  {
+    "label": "Public Interest / Critical Infrastructure",
+    "value": 7,
+    "color": "#A855F7"
+  },
+  {
+    "label": "Other / Not Yet Classified",
+    "value": 4,
+    "color": "#6B7280"
+  }
 ]
