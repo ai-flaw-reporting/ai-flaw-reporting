@@ -9,8 +9,7 @@ export default function Footer() {
       <div className="flex flex-col gap-8 py-5 text-gray-700 dark:text-gray-100">
         <p>
           An open-source project to make AI flaw and incident reporting easy,
-          secure, and accessible. <br /> By researchers at MIT and Stanford
-          University.
+          secure, and accessible. <br /> By researchers.
         </p>
         <p>Need help? Contact</p>
         <Link
