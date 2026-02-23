@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "add-component": "bash ./scripts/add-component.sh"
+    "add-component": "bash ./scripts/add-component.sh",
+    "format-and-check": "yarn format:write && yarn lint && yarn typecheck"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

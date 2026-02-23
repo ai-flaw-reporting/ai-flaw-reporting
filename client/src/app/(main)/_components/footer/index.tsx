@@ -5,11 +5,11 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white px-[107px] py-5 text-center text-sm font-normal dark:bg-gray-800">
-      <div className="flex flex-col gap-8 py-5 text-gray-700 dark:text-gray-100">
+    <footer className="border-t border-[#EAECF0] bg-white px-4 py-5 text-center text-sm font-normal md:px-8 dark:border-gray-700 dark:bg-gray-800">
+      <div className="mx-auto flex max-w-[1226px] flex-col gap-8 py-5 text-gray-700 dark:text-gray-100">
         <p>
-          An open-source project to make AI flaw and incident reporting easy,
-          secure, and accessible. <br /> By researchers.
+          An open-source project making AI flaw reporting easy, secure, and
+          accessible.
         </p>
         <p>Need help? Contact</p>
         <Link
@@ -22,8 +22,8 @@ export default function Footer() {
 
       <Separator className="mb-5" aria-hidden="true" />
 
-      <p className="text-gray-500 dark:text-gray-400">
-        © {year} AI Flaw Reporting.
+      <p className="text-[#667085] dark:text-gray-400">
+        © {year} AI Flaw Reporting. A Harvard University Research Initiative.
       </p>
     </footer>
   );
