@@ -30,9 +30,7 @@ export function PrevalenceField() {
                 aria-hidden="true"
               />
             )}
-            <span className="text-nowrap">
-              {PREVALENCE_FIELD.title}
-            </span>
+            <span className="text-nowrap">{PREVALENCE_FIELD.title}</span>
           </ItemTitle>
           <PrevalenceBadge />
         </div>

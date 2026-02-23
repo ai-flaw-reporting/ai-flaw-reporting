@@ -30,9 +30,7 @@ export function SeverityHarmField() {
                 aria-hidden="true"
               />
             )}
-            <span className="text-nowrap">
-              {SEVERITY_OF_HARM_FIELD.title}
-            </span>
+            <span className="text-nowrap">{SEVERITY_OF_HARM_FIELD.title}</span>
           </ItemTitle>
           <SeverityHarmBadge />
         </div>
