@@ -57,7 +57,7 @@ export default function CardComponent({
         router.push(action.href);
       }}
       className={cn(
-        `group w-full md:w-[270px] ${customCursor} bg-[#F9FAFB] pt-8 pr-5 pb-5 pl-5 text-center dark:bg-gray-900`,
+        `group w-full md:w-[270px] ${customCursor} bg-[#F9FAFB] pt-8 pr-5 pb-5 pl-5 text-center transition-colors duration-300 ease-in-out dark:bg-gray-900`,
         highlighted
           ? "border-[#7F56D9] md:order-1 lg:order-none dark:border-[#7F56D9]"
           : "border-gray-300 dark:border-gray-700",
@@ -111,11 +111,12 @@ export default function CardComponent({
             variant={action.variant ?? "default"}
             disabled={action.disabled}
             className={cn(
-              "w-full font-bold",
+              "w-full font-bold duration-300",
               "group-hover:border-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white",
+              "dark:group-hover:border-[#2563EB] dark:group-hover:bg-[#2563EB] dark:group-hover:text-white",
               highlighted &&
                 action.variant === "default" &&
-                "border-[#2563EB] bg-[#2563EB] px-5 py-3 text-white hover:bg-[#1d4ed8]",
+                "border-[#2563EB] bg-[#2563EB] px-5 py-3 text-white hover:bg-[#1d4ed8] dark:hover:bg-[#1d4ed8]",
               customCursor,
             )}
           >

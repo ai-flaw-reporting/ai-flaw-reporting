@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+
+const ICON_TRANSITION_MS = 500;
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -14,9 +16,28 @@ export function ThemeToggle() {
 
   const isDark = resolvedTheme === "dark";
 
+  const handleToggle = useCallback(() => {
+    if (!mounted) return;
+
+    // Disable all transitions except the toggle icons so theme colors snap instantly
+    const style = document.createElement("style");
+    style.textContent =
+      "*, *::before, *::after { transition: none !important; } " +
+      "[data-theme-toggle] img { transition: all 500ms ease-in-out !important; }";
+    document.head.appendChild(style);
+
+    setTheme(isDark ? "light" : "dark");
+
+    // Re-enable transitions after the icon animation completes
+    setTimeout(() => {
+      style.remove();
+    }, ICON_TRANSITION_MS);
+  }, [mounted, isDark, setTheme]);
+
   return (
     <button
-      onClick={() => mounted && setTheme(isDark ? "light" : "dark")}
+      data-theme-toggle
+      onClick={handleToggle}
       disabled={!mounted}
       className="relative size-[27px] shrink-0 cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:opacity-50"
       aria-label={
