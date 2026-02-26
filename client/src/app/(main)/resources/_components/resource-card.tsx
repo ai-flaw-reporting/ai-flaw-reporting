@@ -46,9 +46,9 @@ export function ResourceCard({ resource }: { resource: Resource }) {
     <article
       onClick={handleCardClick}
       className={cn(
-        "flex h-full flex-col gap-4 overflow-hidden rounded-2xl border-2 border-gray-300 bg-white px-6 py-4 transition-all duration-300",
+        "flex h-full flex-col gap-4 overflow-hidden rounded-2xl border-2 border-gray-300 bg-white px-6 py-4 transition-all duration-300 dark:border-gray-500 dark:bg-gray-800",
         reportUrl
-          ? "hover:border-primary-400 cursor-pointer hover:shadow-[0_32px_64px_-12px_rgba(181,111,235,0.14)]"
+          ? "hover:border-primary-400 dark:hover:border-primary-400 cursor-pointer hover:shadow-[0_32px_64px_-12px_rgba(181,111,235,0.14)]"
           : "cursor-default",
       )}
     >
@@ -68,7 +68,9 @@ export function ResourceCard({ resource }: { resource: Resource }) {
               )}
             />
           )}
-          <h3 className="min-w-0 text-lg font-bold text-gray-800">{title}</h3>
+          <h3 className="min-w-0 text-lg font-bold text-gray-800 dark:text-white">
+            {title}
+          </h3>
         </div>
 
         {reportUrl ? (
@@ -77,7 +79,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900"
+            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 text-sm font-semibold text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
           >
             <SquareArrowOutUpRight aria-hidden="true" className="size-4" />
             Report
@@ -93,7 +95,10 @@ export function ResourceCard({ resource }: { resource: Resource }) {
       {/* Row 2: org types */}
       <div className="flex items-center gap-2">
         {organizationTypes.map((orgType) => (
-          <span key={orgType} className="text-sm text-gray-500">
+          <span
+            key={orgType}
+            className="text-sm text-gray-500 dark:text-gray-400"
+          >
             {orgType}
           </span>
         ))}
@@ -101,10 +106,10 @@ export function ResourceCard({ resource }: { resource: Resource }) {
 
       {/* Description */}
       <div className="flex flex-1 flex-col gap-1">
-        <p className="text-sm font-semibold text-gray-600">
+        <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
           You should report here if...
         </p>
-        <p className="text-sm text-gray-600">{summary}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">{summary}</p>
       </div>
 
       {/* Read More toggle — always at bottom */}
@@ -115,7 +120,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
             e.stopPropagation();
             setIsOpen((prev) => !prev);
           }}
-          className="flex cursor-pointer items-center gap-1 text-sm font-semibold text-indigo-600 transition-colors hover:text-indigo-800"
+          className="flex cursor-pointer items-center gap-1 text-sm font-semibold text-indigo-600 transition-colors hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300"
         >
           Read More
           {isOpen ? (
@@ -135,7 +140,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
       >
         <div className="overflow-hidden">
           <div className="flex flex-col gap-2 pb-2">
-            <span className="text-sm font-medium text-gray-600">
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
               {scopesType}:
             </span>
             <div className="flex flex-wrap gap-2">

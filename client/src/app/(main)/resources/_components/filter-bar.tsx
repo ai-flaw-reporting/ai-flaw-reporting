@@ -29,7 +29,7 @@ function FilterButton({
         "text-md inline-flex h-[24px] cursor-pointer items-center justify-center rounded-[6px] border px-2 py-[3px] leading-[21px] font-medium shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] transition-colors",
         isActive
           ? "border-indigo-500 bg-indigo-500 text-white"
-          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50",
+          : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600",
         className,
       )}
     >
@@ -57,7 +57,7 @@ export function ResourcesFilterBar() {
           type="button"
           onClick={() => setIsMobileOpen((prev) => !prev)}
           className={cn(
-            "flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] transition-colors hover:bg-gray-50",
+            "flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] transition-colors hover:bg-gray-50 dark:border-gray-500 dark:bg-gray-800 dark:hover:bg-gray-700",
             hasActiveFilters && "border-indigo-500",
           )}
         >
@@ -67,8 +67,11 @@ export function ResourcesFilterBar() {
             aria-hidden="true"
             width={20}
             height={20}
+            className="dark:invert"
           />
-          <span className="text-sm font-bold text-gray-700">Filters</span>
+          <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
+            Filters
+          </span>
         </button>
 
         {/* Mobile filters with smooth animation */}
@@ -81,7 +84,7 @@ export function ResourcesFilterBar() {
           <div className="overflow-hidden">
             <div className="flex flex-col gap-4 pt-3">
               <div className="flex flex-col gap-2">
-                <h3 className="pl-2 text-sm font-medium text-gray-600">
+                <h3 className="pl-2 text-sm font-medium text-gray-600 dark:text-gray-400">
                   Form Scope:
                 </h3>
                 <div className="flex flex-col gap-2">
@@ -97,7 +100,7 @@ export function ResourcesFilterBar() {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="pl-2 text-sm font-medium text-gray-600">
+                <h3 className="pl-2 text-sm font-medium text-gray-600 dark:text-gray-400">
                   Organization Type:
                 </h3>
                 <div className="flex flex-col gap-2">
@@ -120,7 +123,7 @@ export function ResourcesFilterBar() {
       {/* Desktop: Inline filter groups */}
       <div className="hidden items-center gap-1.5 lg:flex lg:flex-wrap">
         <div className="flex items-center gap-1.5">
-          <h3 className="text-md pl-2 leading-[21px] font-medium text-gray-600">
+          <h3 className="text-md pl-2 leading-[21px] font-medium text-gray-600 dark:text-gray-400">
             Form Scope:
           </h3>
           {FORM_SCOPE_OPTIONS.map((label) => (
@@ -134,7 +137,7 @@ export function ResourcesFilterBar() {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <h3 className="text-md pl-2 leading-[21px] font-medium text-gray-600">
+          <h3 className="text-md pl-2 leading-[21px] font-medium text-gray-600 dark:text-gray-400">
             Organization Type:
           </h3>
           {ORGANIZATION_TYPE_OPTIONS.map((label) => (
