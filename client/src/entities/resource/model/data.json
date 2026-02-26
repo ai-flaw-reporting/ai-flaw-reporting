@@ -39,7 +39,8 @@
     "scopesType": "Report Scope",
     "scopes": ["Security Vulnerability"],
     "summary": "You discovered vulnerabilities that affect multiple vendors, impact safety/critical infrastructure, or when vendor coordination has broken down.",
-    "icon": null,
+    "icon": "/icons/resource/cert.svg",
+    "iconDark": "/icons/resource/cert-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://kb.cert.org/vuls/report/"
   },
@@ -72,7 +73,8 @@
     "scopesType": "Report Scope",
     "scopes": ["Incident", "Security Vulnerability"],
     "summary": "You want to share real-world AI incidents with the trusted community or contribute to the adversarial tactics knowledge base for AI systems.",
-    "icon": null,
+    "icon": "/icons/resource/mitre.svg",
+    "iconDark": "/icons/resource/mitre-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://ai-incidents.mitre.org/"
   },
@@ -95,7 +97,8 @@
     "scopesType": "Report Scope",
     "scopes": ["AI Safety"],
     "summary": "You want to collaborate on research-oriented AI risk assessment, testing, and systematic evaluation of AI systems using frameworks like AI RMF",
-    "icon": null,
+    "icon": "/icons/resource/nist.svg",
+    "iconDark": "/icons/resource/nist-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.nist.gov/about-nist/contact-us"
   },
@@ -117,7 +120,8 @@
     "scopesType": "Report Scope",
     "scopes": ["AI Safety"],
     "summary": "You have novel evaluations, agent scaffolding discoveries, or want to participate in their bounty program for AI safety research.",
-    "icon": null,
+    "icon": "/icons/resource/uk-aisi.svg",
+    "iconDark": "/icons/resource/uk-aisi-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.aisi.gov.uk/work/evals-bounty"
   },
@@ -128,7 +132,8 @@
     "scopesType": "Report Scope",
     "scopes": ["AI Safety"],
     "summary": "You want to report issues with AI capabilities assessments, safeguard testing, or collaborate on safety evaluations with national security implications.",
-    "icon": null,
+    "icon": "/icons/resource/nist.svg",
+    "iconDark": "/icons/resource/nist-dark.svg",
     "reportUrl": "/ai-flaw-report",
     "readMoreUrl": "https://www.nist.gov/aisi"
   },

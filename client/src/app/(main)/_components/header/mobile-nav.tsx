@@ -123,7 +123,10 @@ export function MobileNav() {
           <div className="flex justify-center">
             <ThemeToggle />
           </div>
-          <Button asChild className="mt-4 w-full bg-[#2563EB] hover:bg-[#1d4ed8]">
+          <Button
+            asChild
+            className="mt-4 w-full bg-[#2563EB] hover:bg-[#1d4ed8]"
+          >
             <Link
               href={routes.report}
               className="text-sm font-bold"
