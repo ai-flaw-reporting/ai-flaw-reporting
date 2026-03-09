@@ -105,16 +105,7 @@ export function MobileNav() {
               href={routes.aboutUs}
               onClick={() => setIsOpen(false)}
             >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={navLinkStyles}
-              href={routes.contact}
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
+              About the Project
             </Link>
           </li>
         </ul>
@@ -123,10 +114,7 @@ export function MobileNav() {
           <div className="flex justify-center">
             <ThemeToggle />
           </div>
-          <Button
-            asChild
-            className="mt-4 w-full bg-[#2563EB] hover:bg-[#1d4ed8]"
-          >
+          <Button asChild variant="indigo-default" className="mt-4 w-full">
             <Link
               href={routes.report}
               className="text-sm font-bold"

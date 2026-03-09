@@ -37,7 +37,15 @@ function PartnerCard({ partner }: { partner: Partner }) {
   );
 }
 
-export default function PartnersCarousel() {
+interface PartnersCarouselProps {
+  subtitle?: string;
+  showAboutLink?: boolean;
+}
+
+export default function PartnersCarousel({
+  subtitle = "Organizations that have advised on the design and integration with Flare AI",
+  showAboutLink = true,
+}: PartnersCarouselProps) {
   return (
     <section className="overflow-hidden bg-white/60 px-4 py-5 md:px-8 dark:bg-gray-800/60">
       <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-8">
@@ -48,15 +56,16 @@ export default function PartnersCarousel() {
               Partners & Collaborators
             </h2>
             <p className="text-center text-base leading-7 text-[#6C727F] dark:text-gray-400">
-              Organizations that have advised on the design and integration with
-              Flare AI
+              {subtitle}
             </p>
           </div>
-          <Button asChild variant="outline" className="mt-2">
-            <Link href={routes.aboutUs} className="text-sm font-bold">
-              About Us <ArrowRight width={20} height={20} />
-            </Link>
-          </Button>
+          {showAboutLink && (
+            <Button asChild variant="outline" className="mt-2">
+              <Link href={routes.aboutUs} className="text-sm font-bold">
+                About Us <ArrowRight width={20} height={20} />
+              </Link>
+            </Button>
+          )}
         </div>
 
         {/* Infinite scroll carousel */}
