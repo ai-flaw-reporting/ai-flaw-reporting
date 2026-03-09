@@ -7,7 +7,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 export const metadata: Metadata = {
   title: "AI Flaw & Incident Reporting",
   description:
-    "Report flaws, vulnerabilities, and safety issues you observe in AI systems. Each report supports more trustworthy AI.",
+    "Generate flaw, vulnerability, and incident reports for AI systems. Automatically send reports to key stakeholders.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
