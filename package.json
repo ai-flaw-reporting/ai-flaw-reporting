@@ -16,8 +16,9 @@
     "lint": "yarn client:lint"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
-    "concurrently": "^9.2.1"
+    "@img/sharp-libvips-darwin-arm64": "1.0.4",
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7"
   },
   "workspaces": {
     "packages": [
