@@ -53,7 +53,10 @@ export default function Header() {
                 variant="indigo-default"
                 className="rounded-lg shadow-xs"
               >
-                <Link href={routes.report} className="text-sm font-bold">
+                <Link
+                  href={routes.introductionReport}
+                  className="text-sm font-bold"
+                >
                   Report Now <CircleArrowRight width={20} height={20} />
                 </Link>
               </Button>

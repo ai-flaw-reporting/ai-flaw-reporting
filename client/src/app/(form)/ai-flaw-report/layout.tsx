@@ -9,6 +9,7 @@ import { AiFlawReportFooter } from "~/widgets/ai-flaw-report/page-footer";
 import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 import { aiFlawReportSchema } from "~/entities/ai-flaw-report/model/schema";
 import { STEP_ORDER } from "~/entities/ai-flaw-report/model/step-config";
+import { HeaderLayout } from "~/widgets/ai-flaw-report/page-header/header-layout";
 
 export default function FormLayout({ children }: PropsWithChildren) {
   const form = useForm<AiFlawReportSchema>({
@@ -23,7 +24,9 @@ export default function FormLayout({ children }: PropsWithChildren) {
 
   return (
     <FormProvider {...form}>
-      <AiFlawReportHeader />
+      <HeaderLayout>
+        <AiFlawReportHeader />
+      </HeaderLayout>
       {children}
       <AiFlawReportFooter />
     </FormProvider>
