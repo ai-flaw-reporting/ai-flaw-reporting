@@ -58,17 +58,17 @@ export function IntroductionContent() {
             You are welcome to report any broadly-scoped{" "}
             <InlineTooltip
               term="flaw"
-              tooltip="A deficiency or weakness in an AI system that could lead to undesirable behavior or outcomes."
+              tooltip="A set of conditions or behaviors that allow the violation of an explicit or implicit policy related to the safety, security, or other undesirable effects from use of the AI system."
             />
             ,{" "}
             <InlineTooltip
               term="vulnerability"
-              tooltip="A specific weakness in an AI system that can be exploited to cause harm or unintended behavior."
+              tooltip="A set of conditions that may lead to an incident; commonly used by security professionals for software security threats."
             />
             , or{" "}
             <InlineTooltip
               term="incident"
-              tooltip="An event where an AI system caused or nearly caused harm, damage, or unintended consequences."
+              tooltip="A real-world event that has resulted in harm, loss, or policy violations."
             />{" "}
             relating to an AI system or model. We encourage reports with
             demonstrable risks, harms, or systematic concerns related to

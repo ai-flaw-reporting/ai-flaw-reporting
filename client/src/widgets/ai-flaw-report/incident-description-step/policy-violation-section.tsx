@@ -17,11 +17,10 @@ import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useA
 import { POLICY_VIOLATION_FIELDS } from "~/entities/ai-flaw-report/model/form-data/incident-description-fields-config";
 import { Input } from "~/components/ui/input";
 import { getPolicyLinks } from "~/entities/ai-flaw-report/lib/policy-links";
-import Link from "next/link";
 import { getSafeArray } from "~/lib/form-field-utils";
 
 export function PolicyViolationSection() {
-  const { control, getValues } = useAiFlawFormContext();
+  const { control, getValues, setValue } = useAiFlawFormContext();
 
   const systemEntries = getValues("reporterDetails.systems") ?? [];
   const selectedPlatforms = systemEntries.map((s) => s.platform);
@@ -69,7 +68,10 @@ export function PolicyViolationSection() {
                     className="pl-10 !text-base placeholder:!text-base placeholder:!leading-6 dark:border-gray-500 dark:placeholder:text-gray-500"
                     {...field}
                   />
-                  <FieldTooltip text="" ariaLabel="Policy URL help" />
+                  <FieldTooltip
+                    text="Enter or paste a direct URL to the relevant policy or guideline"
+                    ariaLabel="Policy URL help"
+                  />
                 </div>
               </FormControl>
               <FormMessage />
@@ -77,14 +79,15 @@ export function PolicyViolationSection() {
                 <ul className="mt-2.5 flex flex-wrap gap-2">
                   {policyLinks.map((link, index) => (
                     <li key={index}>
-                      <Link
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-25 rounded-sm bg-indigo-500 px-2 py-[5px] text-xs leading-4.5 font-medium capitalize"
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setValue(POLICY_VIOLATION_FIELDS.url.name, link.url)
+                        }
+                        className="text-gray-25 rounded-sm bg-indigo-500 px-2 py-[5px] text-xs leading-4.5 font-medium"
                       >
                         {link.label}
-                      </Link>
+                      </button>
                     </li>
                   ))}
                 </ul>

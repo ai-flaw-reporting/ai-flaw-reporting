@@ -20,7 +20,7 @@ export function BehaviorFields() {
   const { control } = useAiFlawFormContext();
 
   return (
-    <div className="flex gap-8">
+    <div className="flex flex-col gap-8 md:flex-row">
       <Item variant="outline" className="form-item-card-compact flex-1">
         <ItemContent className="space-y-4">
           <ItemTitle className="form-title flex items-center gap-4">
@@ -32,7 +32,10 @@ export function BehaviorFields() {
               height={23.8}
             />
             {EXPECTED_BEHAVIOR_FIELD.title}
-            <TitleTooltip text="" ariaLabel="Expected Behavior help" />
+            <TitleTooltip
+              text="Describe the correct or intended outcome you expected from the AI system."
+              ariaLabel="Expected Behavior help"
+            />
           </ItemTitle>
 
           <FormField
@@ -72,7 +75,10 @@ export function BehaviorFields() {
               />
             )}
             {ACTUAL_BEHAVIOR_FIELD.title}
-            <TitleTooltip text="" ariaLabel="Actual Behavior help" />
+            <TitleTooltip
+              text="Describe what the AI system actually did, including any incorrect or unexpected output."
+              ariaLabel="Actual Behavior help"
+            />
           </ItemTitle>
 
           <FormField
