@@ -1,7 +1,10 @@
 import { useWatch } from "react-hook-form";
 
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
+import {
+  STEP_CONFIGS,
+  STEP_ORDER,
+} from "~/entities/ai-flaw-report/model/step-config";
 
 export function FormHeader() {
   const { control } = useAiFlawFormContext();
@@ -11,8 +14,13 @@ export function FormHeader() {
     return <div>Loading...</div>;
   }
 
+  const stepNumber = STEP_ORDER.indexOf(step) + 1;
+
   return (
     <header aria-labelledby="form-title" className="space-y-4 text-center">
+      <p className="text-sm font-semibold uppercase tracking-wide text-blue-500">
+        Step {stepNumber}
+      </p>
       <h2
         id="form-title"
         className="display-sm font-bold text-gray-800 dark:text-white"

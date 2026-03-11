@@ -18,13 +18,12 @@ export type FlattenedReport = {
   reporter_email?: string;
   reporter_org?: string;
   reporter_country?: string;
-  system_platforms?: string[];
-  system_platformOther?: string;
-  system_models?: string[];
-  system_version?: string;
-  system_accessMethod?: string;
-  system_accessMethodOther?: string;
-  system_notSure?: boolean;
+  system_configurations?: Array<{
+    platform: string;
+    model: string;
+    accessMethod?: string;
+    version?: string;
+  }>;
   incident_issueDescription?: string;
   incident_expectedBehavior?: string;
   incident_actualBehavior?: string;
@@ -83,15 +82,12 @@ export type ReshapedReportData = {
       org?: string;
       country?: string;
     };
-    system: {
-      platforms?: string[];
-      platformOther?: string;
-      models?: string[];
-      version?: string;
+    systems: Array<{
+      platform: string;
+      model: string;
       accessMethod?: string;
-      accessMethodOther?: string;
-      notSure?: boolean;
-    };
+      version?: string;
+    }>;
   };
   incidentDescription: {
     issueDescription?: string;

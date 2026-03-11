@@ -18,16 +18,16 @@ export function SubmitStakeholders() {
   const { control, getValues, setValue } = useAiFlawFormContext();
   const huggingFaceModels = useHuggingFaceModels();
 
-  // Watch form fields needed for visibility conditions
-  const platforms = useWatch({
+  const systems = useWatch({
     control,
-    name: "reporterDetails.system.platforms",
+    name: "reporterDetails.systems",
   });
 
-  const models = useWatch({
-    control,
-    name: "reporterDetails.system.models",
-  });
+  const platforms = systems?.map((s) => s.platform) ?? [];
+  const models =
+    systems
+      ?.map((s) => s.model)
+      .filter((m) => m !== "I'm not sure") ?? [];
 
   const realWorldHarm = useWatch({
     control,
@@ -54,7 +54,8 @@ export function SubmitStakeholders() {
 
   // Auto-select stakeholders based on platforms and incident selection, and filter out invisible ones
   useEffect(() => {
-    const selectedPlatforms = getValues("reporterDetails.system.platforms");
+    const systemEntries = getValues("reporterDetails.systems") ?? [];
+    const selectedPlatforms = systemEntries.map((s) => s.platform);
     const currentStakeholders = getValues("reviewReport.selectedStakeholders");
 
     const mergedStakeholders = mergeStakeholdersWithPlatforms(

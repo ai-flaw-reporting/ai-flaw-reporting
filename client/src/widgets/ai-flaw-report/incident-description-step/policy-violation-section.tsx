@@ -23,7 +23,8 @@ import { getSafeArray } from "~/lib/form-field-utils";
 export function PolicyViolationSection() {
   const { control, getValues } = useAiFlawFormContext();
 
-  const selectedPlatforms = getValues("reporterDetails.system.platforms");
+  const systemEntries = getValues("reporterDetails.systems") ?? [];
+  const selectedPlatforms = systemEntries.map((s) => s.platform);
   const policyLinks = getPolicyLinks(getSafeArray<string>(selectedPlatforms));
 
   return (

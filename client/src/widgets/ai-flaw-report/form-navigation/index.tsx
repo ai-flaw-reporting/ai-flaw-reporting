@@ -117,7 +117,7 @@ export function FormNavigation() {
           disabled={!canGoNext}
           className="bg-indigo-500 text-white hover:bg-indigo-500/90 focus-visible:ring-indigo-500/25 disabled:bg-indigo-200"
         >
-          Next{" "}
+          Next Step{" "}
           <ChevronRight aria-hidden="true" size={20} className="!h-5 !w-5" />
         </Button>
       )}

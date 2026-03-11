@@ -6,6 +6,7 @@ import type {
 } from "./constants";
 import type {
   aiFlawReportSchema,
+  aiSystemConfigSchema,
   classifyReportSchema,
   reporterDetailsSchema,
   incidentDescriptionSchema,
@@ -25,6 +26,7 @@ export type StepSchema = z.ZodSchema | undefined;
 
 export type ClassifyReportSchema = z.infer<typeof classifyReportSchema>;
 export type ReporterDetailsSchema = z.infer<typeof reporterDetailsSchema>;
+export type AiSystemConfig = z.infer<typeof aiSystemConfigSchema>;
 export type IncidentDescriptionSchema = z.infer<
   typeof incidentDescriptionSchema
 >;

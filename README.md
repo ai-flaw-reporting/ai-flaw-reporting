@@ -37,14 +37,29 @@ cd server && yarn install
 Run both applications in separate terminals:
 
 ```bash
-# Terminal 1: Start frontend (http://localhost:3000)
-cd client
-yarn dev
-
-# Terminal 2: Start CMS (http://localhost:1337)
+# Terminal 1: Start CMS (http://localhost:1337)
 cd server
 yarn develop
+
+# Terminal 2: Start frontend (http://localhost:3000)
+cd client
+yarn dev
 ```
+
+### Configure Strapi API Permissions
+
+After starting Strapi for the first time, you need to configure API permissions so the frontend can communicate with the backend:
+
+1. Open the Strapi admin panel at **http://localhost:1337/admin**
+2. Create your admin account (first-time only)
+3. In the left sidebar, click the **Settings** (gear icon)
+4. Scroll down in the Settings sidebar to **USERS & PERMISSIONS PLUGIN** section
+5. Click **Roles** (under Users & Permissions Plugin, not the one under Administration Panel)
+6. Click **Public**
+7. Under **Report**, enable the permissions your app needs (e.g. **create**, **find**, **findOne**)
+8. Click **Save**
+
+> **Note:** The "USERS & PERMISSIONS PLUGIN" roles are different from "ADMINISTRATION PANEL" roles. The API permissions are managed under the plugin section at the bottom of the Settings sidebar.
 
 ### Optional: Storybook
 

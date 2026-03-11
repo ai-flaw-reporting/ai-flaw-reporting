@@ -8,24 +8,18 @@ export default function AiSystemBadge() {
   const { getValues } = useAiFlawFormContext();
   const formData = getValues("reporterDetails");
 
-  const aiSystem = getAiSystem(formData);
-  if (!aiSystem) return <span className="text-gray-600">—</span>;
+  const aiSystems = getAiSystem(formData);
+  if (!aiSystems?.length) return <span className="text-gray-600">—</span>;
 
   return (
     <SummaryField label={REPORT_SUMMARY_CONFIG.aiSystem}>
-      {Array.isArray(aiSystem) ? (
-        <div className="flex flex-wrap gap-2">
-          {aiSystem.map((system) => (
-            <Badge key={system} className="badge" variant="outline">
-              {system}
-            </Badge>
-          ))}
-        </div>
-      ) : (
-        <Badge className="badge" variant="outline">
-          {aiSystem}
-        </Badge>
-      )}
+      <div className="flex flex-wrap gap-2">
+        {aiSystems.map((system) => (
+          <Badge key={system} className="badge" variant="outline">
+            {system}
+          </Badge>
+        ))}
+      </div>
     </SummaryField>
   );
 }

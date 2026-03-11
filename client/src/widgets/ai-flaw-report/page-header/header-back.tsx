@@ -1,9 +1,8 @@
-import type { PropsWithChildren } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { routes } from "~/lib/routes";
 
-export function HeaderLayout({ children }: PropsWithChildren) {
+export function HeaderBack() {
   return (
     <header className="w-full bg-gray-100 dark:bg-gray-900">
       <div className="bg-blue-ai h-8 w-full" aria-hidden="true" />
@@ -16,7 +15,6 @@ export function HeaderLayout({ children }: PropsWithChildren) {
             <ArrowLeft size={24} aria-hidden="true" /> Back to Home
           </Link>
         </nav>
-        {children}
       </div>
     </header>
   );
