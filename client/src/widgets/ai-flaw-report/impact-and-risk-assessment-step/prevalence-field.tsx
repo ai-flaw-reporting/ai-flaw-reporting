@@ -62,7 +62,7 @@ export function PrevalenceField() {
                     />
                     <div className="flex justify-between text-sm font-bold text-gray-600">
                       <span className="text-center capitalize">
-                        {PREVALENCE_FIELD.minValue}
+                        {PREVALENCE_FIELD.minValue.replace(/_/g, " ")}
                       </span>
                       <span className="text-center capitalize">
                         {PREVALENCE_FIELD.maxValue}

@@ -44,6 +44,11 @@ export const flattenReport = (data: any) => ({
   impact_harmOtherText: data.impactAssessment?.harmOtherText,
   impact_aiCompanyInvolved: data.impactAssessment?.aiCompanyInvolved,
   impact_mitigationNotes: data.impactAssessment?.mitigationNotes,
+  impact_documentedHarmCwe: data.impactAssessment?.documentedHarmCwe,
+  impact_discoveryContext: data.impactAssessment?.discoveryContext,
+  impact_responsibleFactors: data.impactAssessment?.responsibleFactors,
+  impact_responsibleFactorsOtherText:
+    data.impactAssessment?.responsibleFactorsOtherText,
   // Security Details
   security_attackerResources: data.securityDetails?.attackerResources,
   security_attackerObjectives: data.securityDetails?.attackerObjectives,
@@ -116,6 +121,10 @@ export const reshapeReport = (flatData: FlattenedReport): ReshapedReportData => 
     harmOtherText: flatData.impact_harmOtherText,
     aiCompanyInvolved: flatData.impact_aiCompanyInvolved,
     mitigationNotes: flatData.impact_mitigationNotes,
+    documentedHarmCwe: flatData.impact_documentedHarmCwe,
+    discoveryContext: flatData.impact_discoveryContext,
+    responsibleFactors: flatData.impact_responsibleFactors,
+    responsibleFactorsOtherText: flatData.impact_responsibleFactorsOtherText,
   },
   securityDetails: {
     attackerResources: flatData.security_attackerResources,

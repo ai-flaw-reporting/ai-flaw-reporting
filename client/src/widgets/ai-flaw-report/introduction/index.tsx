@@ -81,12 +81,8 @@ export function IntroductionContent() {
             </h2>
             <ul className="text-md list-disc space-y-1 pl-6 font-medium text-gray-700 dark:text-gray-300">
               <li>
-                Help you generate a comprehensive,{" "}
-                <InlineTooltip
-                  term="machine-readable report"
-                  tooltip="A structured report format that can be automatically processed and analyzed by other systems and tools."
-                />
-                , informed by security best practices.
+                Help you generate a comprehensive, machine-readable report,
+                informed by security best practices.
               </li>
               <li>
                 Elicit details that will make it easier to{" "}
@@ -98,23 +94,15 @@ export function IntroductionContent() {
               </li>
               <li>
                 Provide the option to automatically submit your report to a list
-                of the{" "}
-                <InlineTooltip
-                  term="venues"
-                  tooltip="Organizations, platforms, or channels where AI flaw reports can be submitted for review and action."
-                />{" "}
-                relevant for your flaw.
+                of the venues relevant for your flaw.
               </li>
             </ul>
           </div>
 
           <p className="text-md px-4 text-center font-medium text-gray-500 md:px-0 dark:text-gray-400">
-            This form creates a report for you. Reports are handled in{" "}
-            <InlineTooltip
-              term="strict confidence"
-              tooltip="Your report data is kept private and secure, and will only be shared with parties you explicitly authorize."
-            />
-            , and will not be saved or sent unless you choose to submit them.
+            This form creates a report for you. Reports are handled in strict
+            confidence, and will not be saved or sent unless you choose to
+            submit them.
           </p>
         </div>
 

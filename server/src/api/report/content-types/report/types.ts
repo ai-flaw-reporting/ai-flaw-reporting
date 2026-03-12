@@ -40,6 +40,10 @@ export type FlattenedReport = {
   impact_harmOtherText?: string;
   impact_aiCompanyInvolved?: string[];
   impact_mitigationNotes?: string;
+  impact_documentedHarmCwe?: string;
+  impact_discoveryContext?: string;
+  impact_responsibleFactors?: string[];
+  impact_responsibleFactorsOtherText?: string;
   security_attackerResources?: string;
   security_attackerObjectives?: string;
   security_attackerObjectivesOther?: string;
@@ -112,6 +116,10 @@ export type ReshapedReportData = {
     harmOtherText?: string;
     aiCompanyInvolved?: string[];
     mitigationNotes?: string;
+    documentedHarmCwe?: string;
+    discoveryContext?: string;
+    responsibleFactors?: string[];
+    responsibleFactorsOtherText?: string;
   };
   securityDetails: {
     attackerResources?: string;

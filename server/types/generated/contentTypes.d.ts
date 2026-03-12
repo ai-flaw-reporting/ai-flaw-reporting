@@ -505,11 +505,15 @@ export interface ApiReportReport extends Struct.CollectionTypeSchema {
     impact_affectedStakeholders: Schema.Attribute.JSON &
       Schema.Attribute.Required;
     impact_aiCompanyInvolved: Schema.Attribute.JSON;
+    impact_discoveryContext: Schema.Attribute.String;
+    impact_documentedHarmCwe: Schema.Attribute.String;
     impact_harmOtherText: Schema.Attribute.String;
     impact_harmType: Schema.Attribute.String & Schema.Attribute.Required;
     impact_harmTypes: Schema.Attribute.JSON;
     impact_mitigationNotes: Schema.Attribute.Text;
     impact_prevalence: Schema.Attribute.String;
+    impact_responsibleFactors: Schema.Attribute.JSON;
+    impact_responsibleFactorsOtherText: Schema.Attribute.Text;
     impact_severityOfHarm: Schema.Attribute.String;
     incident_actualBehavior: Schema.Attribute.Text;
     incident_expectedBehavior: Schema.Attribute.Text;

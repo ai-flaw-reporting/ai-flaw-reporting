@@ -157,6 +157,13 @@ export const impactAndRiskAssessmentSchema = z
       .min(1, "At least one stakeholder must be selected"),
     aiCompanyInvolved: z.array(z.string()).optional(),
     mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
+    discoveryContext: z.string().optional(),
+    responsibleFactors: z.array(z.string()).optional(),
+    responsibleFactorsOtherText: z
+      .string()
+      .max(400)
+      .optional()
+      .or(z.literal("")),
   })
   .refine(
     (data) => {
@@ -194,6 +201,24 @@ export const impactAndRiskAssessmentSchema = z
     {
       path: ["harmOtherText"],
       message: "Please specify the other harm type",
+    },
+  )
+  .refine(
+    (data) => {
+      if (
+        data.responsibleFactors &&
+        data.responsibleFactors.includes(
+          FORM_VALUES.OTHER_LOWERCASE as string,
+        ) &&
+        !data.responsibleFactorsOtherText?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      path: ["responsibleFactorsOtherText"],
+      message: "Please describe the responsible factor",
     },
   );
 

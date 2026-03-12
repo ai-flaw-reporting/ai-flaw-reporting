@@ -11,9 +11,14 @@ export function SeverityHarmBadge() {
     name: "impactAssessment.severityOfHarm",
   });
 
+  const displayValue = (selected ?? SEVERITY_OF_HARM_FIELD.minValue).replace(
+    /_/g,
+    " ",
+  );
+
   return (
     <Badge variant="outline" className="max-h-[25.76px] capitalize">
-      {selected ?? SEVERITY_OF_HARM_FIELD.minValue}
+      {displayValue}
     </Badge>
   );
 }

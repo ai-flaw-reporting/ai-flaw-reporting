@@ -106,6 +106,18 @@
     "impact_mitigationNotes": {
       "type": "text"
     },
+    "impact_documentedHarmCwe": {
+      "type": "string"
+    },
+    "impact_discoveryContext": {
+      "type": "string"
+    },
+    "impact_responsibleFactors": {
+      "type": "json"
+    },
+    "impact_responsibleFactorsOtherText": {
+      "type": "text"
+    },
     "security_attackerResources": {
       "type": "string"
     },
