@@ -29,5 +29,9 @@
       "**/@storybook/**"
     ]
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22",
+  "resolutions": {
+    "sharp": "0.34.4",
+    "@img/sharp-libvips-linuxmusl-x64": "1.2.3"
+  }
 }
