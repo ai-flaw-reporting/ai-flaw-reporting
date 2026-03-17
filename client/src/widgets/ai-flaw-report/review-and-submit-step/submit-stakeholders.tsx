@@ -2,17 +2,19 @@ import { useEffect, useMemo } from "react";
 import { useWatch } from "react-hook-form";
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemFooter, ItemTitle } from "~/components/ui/item";
-import { CheckboxCard } from "~/components/ui/checkbox";
+import { Switch } from "~/components/ui/switch";
+import { Badge } from "~/components/ui/badge";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import {
-  safeIncludes,
-  createArrayCheckboxHandler,
-} from "~/lib/form-field-utils";
+import { safeIncludes } from "~/lib/form-field-utils";
 import Image from "next/image";
-import { SUBMIT_STAKEHOLDERS_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
+import {
+  SUBMIT_STAKEHOLDERS_CONFIG,
+  type StakeholderConfig,
+} from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
 import { mergeStakeholdersWithPlatforms } from "~/entities/ai-flaw-report/lib/get-stakeholders-from-platforms";
 import { useHuggingFaceModels } from "~/features/ai-flaw-report/multi-step-form/models-context";
 import { SubmitButton } from "./submit-button";
+import { AlertTriangle, ExternalLink } from "lucide-react";
 
 export function SubmitStakeholders() {
   const { control, getValues, setValue } = useAiFlawFormContext();
@@ -34,7 +36,6 @@ export function SubmitStakeholders() {
     name: "classifyReport.real_world_harm",
   });
 
-  // Filter stakeholders based on visibility conditions
   const visibleStakeholders = useMemo(() => {
     const formData = {
       platforms,
@@ -44,15 +45,11 @@ export function SubmitStakeholders() {
     };
 
     return SUBMIT_STAKEHOLDERS_CONFIG.stakeholders.filter((stakeholder) => {
-      // If no visibility condition is defined, default to visible
-      if (!stakeholder.isVisible) {
-        return true;
-      }
+      if (!stakeholder.isVisible) return true;
       return stakeholder.isVisible(formData);
     });
   }, [platforms, models, realWorldHarm, huggingFaceModels]);
 
-  // Auto-select stakeholders based on platforms and incident selection, and filter out invisible ones
   useEffect(() => {
     const systemEntries = getValues("reporterDetails.systems") ?? [];
     const selectedPlatforms = systemEntries.map((s) => s.platform);
@@ -63,20 +60,16 @@ export function SubmitStakeholders() {
       currentStakeholders,
     );
 
-    // Auto-select AVID and AIID if incident is selected
     const stakeholdersToAdd: string[] = [];
     if (realWorldHarm === true) {
       stakeholdersToAdd.push("AVID", "AIID");
     }
-
-    // Always auto-select "General AI Flaw Database"
     stakeholdersToAdd.push("General AI Flaw Database");
 
     const allStakeholders = Array.from(
       new Set([...mergedStakeholders, ...stakeholdersToAdd]),
     );
 
-    // Filter out stakeholders that are no longer visible
     const formData = {
       platforms,
       models,
@@ -122,79 +115,111 @@ export function SubmitStakeholders() {
           />
           <span>
             {SUBMIT_STAKEHOLDERS_CONFIG.title}{" "}
-            <span className="text-error-600">*</span>
+            <span className="text-error-600 dark:text-error-400">*</span>
           </span>
         </ItemTitle>
         <p className="text-sm font-normal text-gray-600 dark:text-gray-100">
           {SUBMIT_STAKEHOLDERS_CONFIG.description}
         </p>
-        <p className="text-sm font-normal text-gray-600 dark:text-gray-100">
-          This will submit your full report to these organizations, with your
-          provided contact information, either via email or API. You will
-          receive an email confirming the report was sent to each organization.
-          Once the report is sent we cannot guarantee how each organization will
-          process, triage, or review the reports. We recommend downloading your
-          report (above) so you can continue to distribute it later if you need
-          to.
-        </p>
         <FormField
           control={control}
           name="reviewReport.selectedStakeholders"
-          render={({ field }) => {
-            const handleCheckboxChange = createArrayCheckboxHandler(
-              field.value,
-              field.onChange,
-            );
-
-            return (
-              <FormItem className="form-item-field">
-                <FormControl>
-                  <ul className="space-y-1.5">
-                    {visibleStakeholders.map((stakeholder) => {
-                      const isSelectable = stakeholder.isSelectable !== false;
-                      const isChecked = safeIncludes(
-                        field.value,
-                        stakeholder.name,
-                      );
-
-                      return (
-                        <li key={stakeholder.name}>
-                          <CheckboxCard
-                            className="data-[state=checked]:border-indigo-600"
-                            iconClassName="text-indigo-600"
-                            checked={isChecked}
-                            disabled={!isSelectable}
-                            onCheckedChange={(checked) => {
-                              if (isSelectable) {
-                                handleCheckboxChange(
-                                  checked as boolean,
-                                  stakeholder.name,
-                                );
-                              }
-                            }}
-                          >
-                            <div className="space-y-4">
-                              <h3 className="text-md font-semibold text-gray-900">
-                                {stakeholder.name}
-                              </h3>
-                              <p className="text-sm font-normal text-nowrap text-gray-600">
-                                {stakeholder.description}
-                              </p>
-                            </div>
-                          </CheckboxCard>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </FormControl>
-              </FormItem>
-            );
-          }}
+          render={({ field }) => (
+            <FormItem className="form-item-field">
+              <FormControl>
+                <ul className="space-y-1.5">
+                  {visibleStakeholders.map((stakeholder) => (
+                    <StakeholderRow
+                      key={stakeholder.name}
+                      stakeholder={stakeholder}
+                      checked={safeIncludes(field.value, stakeholder.name)}
+                      onToggle={(checked) => {
+                        if (stakeholder.isSelectable === false) return;
+                        const current = field.value ?? [];
+                        const next = checked
+                          ? [...current, stakeholder.name]
+                          : current.filter(
+                              (s: string) => s !== stakeholder.name,
+                            );
+                        field.onChange(next);
+                      }}
+                    />
+                  ))}
+                </ul>
+              </FormControl>
+            </FormItem>
+          )}
         />
       </ItemContent>
       <ItemFooter className="flex flex-col gap-4">
         <SubmitButton />
       </ItemFooter>
     </Item>
+  );
+}
+
+function StakeholderRow({
+  stakeholder,
+  checked,
+  onToggle,
+}: {
+  stakeholder: StakeholderConfig;
+  checked: boolean;
+  onToggle: (checked: boolean) => void;
+}) {
+  const isSelectable = stakeholder.isSelectable !== false;
+
+  return (
+    <li
+      className={`flex items-center gap-4 rounded-lg border px-4 py-3 transition-colors ${
+        checked
+          ? "border-indigo-600 bg-indigo-50 dark:border-indigo-500 dark:bg-indigo-950"
+          : "border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-800"
+      } ${!isSelectable ? "opacity-60" : ""}`}
+    >
+      <Switch
+        checked={checked}
+        onCheckedChange={onToggle}
+        disabled={!isSelectable}
+        aria-label={`Toggle ${stakeholder.name}`}
+      />
+
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+            {stakeholder.name}
+          </span>
+          {stakeholder.makesReportPublic && (
+            <Badge
+              variant="outline"
+              className="border-error-300 bg-error-50 text-error-700 dark:border-error-800 dark:bg-error-950 dark:text-error-300 flex items-center gap-1 text-xs font-medium"
+            >
+              <AlertTriangle className="size-3" />
+              Makes Report Public
+            </Badge>
+          )}
+        </div>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{stakeholder.description}</span>
+        {stakeholder.makesReportPublic &&
+          stakeholder.publicWarning &&
+          checked && (
+            <p className="text-error-600 dark:text-error-400 text-xs font-medium">
+              {stakeholder.publicWarning}
+            </p>
+          )}
+      </div>
+
+      {stakeholder.policyUrl && (
+        <a
+          href={stakeholder.policyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+          aria-label={`${stakeholder.name} reporting policy`}
+        >
+          <ExternalLink className="size-4" />
+        </a>
+      )}
+    </li>
   );
 }

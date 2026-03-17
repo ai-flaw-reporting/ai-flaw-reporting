@@ -10,6 +10,7 @@ import { ImpactAndRiskAssessmentStep } from "../impact-and-risk-assessment-step"
 import { SecurityIncidentDetailsStep } from "../security-incident-details-step";
 import { DisclosurePlanStep } from "../disclosure-plan-step";
 import { ReviewAndSubmitStep } from "../review-and-submit-step";
+import { SubmissionSuccessStep } from "../submission-success-step";
 
 const STEP_COMPONENTS = {
   CLASSIFY_REPORT: ClassifyReportStep,
@@ -20,6 +21,7 @@ const STEP_COMPONENTS = {
   SECURITY_INCIDENT_DETAILS: SecurityIncidentDetailsStep,
   DISCLOSURE_PLAN: DisclosurePlanStep,
   REVIEW_AND_SUBMIT_REPORT: ReviewAndSubmitStep,
+  SUBMISSION_SUCCESS: SubmissionSuccessStep,
 } as const;
 
 export function CurrentStepRenderer() {

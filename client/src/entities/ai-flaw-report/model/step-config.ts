@@ -57,6 +57,13 @@ export const STEP_CONFIGS = {
     description: "Review your report and choose how to submit it",
     formField: "reviewReport",
   },
+  SUBMISSION_SUCCESS: {
+    id: "submission-success",
+    title: "Report Successfully Filed",
+    badgeTitle: "Success",
+    description: "Your report has been filed and cannot be modified",
+    formField: "reviewReport",
+  },
 } as const;
 
 export const STEP_ORDER = Object.keys(STEP_CONFIGS) as Array<

@@ -1,4 +1,5 @@
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
+import { Separator } from "~/components/ui/separator";
 
 import { REPORT_SUMMARY_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
 
@@ -9,6 +10,11 @@ import Classification from "./classification";
 import Stakeholders from "./stakeholders";
 import ReportTypeBadge from "./report-type-badge";
 import AiSystemBadge from "./ai-system-badge";
+import HarmClassification from "./harm-classification";
+import DisclosurePlanSummary from "./disclosure-plan-summary";
+import FilesUploaded from "./files-uploaded";
+import ModeOfDetection from "./mode-of-detection";
+import IssueDescription from "./issue-description";
 
 export function ReportSummary() {
   return (
@@ -30,6 +36,14 @@ export function ReportSummary() {
             <SummaryField label={REPORT_SUMMARY_CONFIG.riskAssessment}>
               <RiskAssessment />
             </SummaryField>
+
+            <SummaryField label={REPORT_SUMMARY_CONFIG.harmClassification}>
+              <HarmClassification />
+            </SummaryField>
+
+            <SummaryField label={REPORT_SUMMARY_CONFIG.modeOfDetection}>
+              <ModeOfDetection />
+            </SummaryField>
           </div>
 
           <div className="space-y-4">
@@ -40,8 +54,22 @@ export function ReportSummary() {
             <SummaryField label={REPORT_SUMMARY_CONFIG.affectedStakeholders}>
               <Stakeholders />
             </SummaryField>
+
+            <SummaryField label={REPORT_SUMMARY_CONFIG.filesUploaded}>
+              <FilesUploaded />
+            </SummaryField>
+
+            <SummaryField label={REPORT_SUMMARY_CONFIG.disclosurePlan}>
+              <DisclosurePlanSummary />
+            </SummaryField>
           </div>
         </dl>
+
+        <Separator />
+
+        <SummaryField label={REPORT_SUMMARY_CONFIG.issueDescription}>
+          <IssueDescription />
+        </SummaryField>
       </ItemContent>
     </Item>
   );

@@ -12,13 +12,20 @@ import { Badge } from "~/components/ui/badge";
 
 import { cn } from "~/lib/utils";
 
+const VISIBLE_STEPS = STEP_ORDER.filter((s) => s !== "SUBMISSION_SUCCESS");
+
 export function ProgressComponent() {
   const { control } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
 
-  const currentStepIndex = STEP_ORDER.indexOf(currentStep);
-  const totalSteps = STEP_ORDER.length;
-  const progressValue = ((currentStepIndex + 1) / totalSteps) * 100;
+  const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
+  const currentStepIndex = isSuccessStep
+    ? VISIBLE_STEPS.length
+    : VISIBLE_STEPS.indexOf(currentStep);
+  const totalSteps = VISIBLE_STEPS.length;
+  const progressValue = isSuccessStep
+    ? 100
+    : ((currentStepIndex + 1) / totalSteps) * 100;
 
   return (
     <div role="region" aria-label="Form progress" className="space-y-7">
@@ -31,14 +38,14 @@ export function ProgressComponent() {
         className="flex flex-wrap justify-center gap-19.5"
         aria-label="Form steps"
       >
-        {STEP_ORDER.map((step, index) => {
+        {VISIBLE_STEPS.map((step, index) => {
           const stepConfig = STEP_CONFIGS[step];
-          const isSuccess = index < currentStepIndex;
-          const isCurrent = step === currentStep;
+          const isCompleted = isSuccessStep || index < currentStepIndex;
+          const isCurrent = !isSuccessStep && step === currentStep;
 
           const stepStatus = isCurrent
             ? STEP_STATUS.CURRENT
-            : isSuccess
+            : isCompleted
               ? STEP_STATUS.COMPLETED
               : STEP_STATUS.UPCOMING;
 
@@ -49,7 +56,7 @@ export function ProgressComponent() {
                 className={cn(
                   "h-8 w-8 rounded-full p-0 text-lg font-medium dark:text-gray-400",
                   isCurrent && "text-primary-foreground dark:text-white",
-                  !isCurrent && !isSuccess && "dark:bg-transparent",
+                  !isCurrent && !isCompleted && "dark:bg-transparent",
                 )}
                 aria-label={`Step ${index + 1}: ${stepConfig.badgeTitle} - ${stepStatus}`}
                 aria-current={isCurrent ? "step" : undefined}
@@ -57,7 +64,7 @@ export function ProgressComponent() {
                 <span aria-hidden="true">
                   {isCurrent ? (
                     index + 1
-                  ) : isSuccess ? (
+                  ) : isCompleted ? (
                     <Check className="text-gray-25" />
                   ) : (
                     index + 1
@@ -67,7 +74,7 @@ export function ProgressComponent() {
               <p
                 className={cn(
                   "text-sm",
-                  isSuccess
+                  isCompleted
                     ? "text-success-600 font-bold"
                     : isCurrent
                       ? "font-bold text-indigo-500"

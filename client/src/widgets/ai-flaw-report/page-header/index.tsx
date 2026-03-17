@@ -1,9 +1,21 @@
+import { useWatch } from "react-hook-form";
+
+import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import MainHeader from "~/app/(main)/_components/header";
+
 import { SaveStatus } from "./save-status";
 import { StepIndicator } from "./step-indicator";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { ProgressComponent } from "./progress";
 
 export function AiFlawReportHeader() {
+  const { control } = useAiFlawFormContext();
+  const currentStep = useWatch({ control, name: "step" });
+
+  if (currentStep === "SUBMISSION_SUCCESS") {
+    return <MainHeader />;
+  }
+
   return (
     <header className="w-full bg-gray-100 dark:bg-gray-900">
       <div className="mx-auto max-w-[1440px] space-y-7 px-8 pt-8 pb-8">
