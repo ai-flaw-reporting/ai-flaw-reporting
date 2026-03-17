@@ -81,6 +81,10 @@ export const STEP_CONFIGS_WITH_SCHEMAS = {
     ...STEP_CONFIGS.REVIEW_AND_SUBMIT_REPORT,
     schema: reviewReportSchema,
   },
+  SUBMISSION_SUCCESS: {
+    ...STEP_CONFIGS.SUBMISSION_SUCCESS,
+    schema: undefined,
+  },
 } as const;
 
 export const POLICIES: Record<string, PolicyLink[]> = {

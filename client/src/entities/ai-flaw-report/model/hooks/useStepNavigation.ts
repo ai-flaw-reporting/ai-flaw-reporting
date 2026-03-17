@@ -5,8 +5,14 @@ import { useWatch } from "react-hook-form";
 
 import { useAiFlawFormContext } from "./useAiFlawFormContext";
 import { STEP_ORDER } from "../step-config";
+import type { FormStep } from "../types";
 
 import { useFormStep } from "./useFormStep";
+
+const NAVIGABLE_STEPS = STEP_ORDER.filter(
+  (s): s is Exclude<FormStep, "SUBMISSION_SUCCESS"> =>
+    s !== "SUBMISSION_SUCCESS",
+);
 
 export function useStepNavigation() {
   const { control, setValue } = useAiFlawFormContext();
@@ -14,27 +20,30 @@ export function useStepNavigation() {
 
   const { isNextDisabled } = useFormStep(currentStep);
 
-  const currentStepIndex = STEP_ORDER.indexOf(currentStep);
+  const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
+  const currentStepIndex = isSuccessStep
+    ? -1
+    : NAVIGABLE_STEPS.indexOf(currentStep);
   const isFirstStep = currentStepIndex === 0;
-  const isLastStep = currentStepIndex === STEP_ORDER.length - 1;
+  const isLastStep =
+    isSuccessStep || currentStepIndex === NAVIGABLE_STEPS.length - 1;
   const canGoNext = !isNextDisabled;
 
   const goToNextStep = useCallback(() => {
-    if (isLastStep || !canGoNext) return;
+    if (isLastStep || !canGoNext || isSuccessStep) return;
 
-    const nextStep = STEP_ORDER[currentStepIndex + 1];
+    const nextStep = NAVIGABLE_STEPS[currentStepIndex + 1];
     if (nextStep) {
       setValue("step", nextStep);
     }
-  }, [currentStepIndex, isLastStep, canGoNext, setValue]);
+  }, [currentStepIndex, isLastStep, isSuccessStep, canGoNext, setValue]);
 
   const goToPreviousStep = useCallback(() => {
-    if (isFirstStep) return;
+    if (isFirstStep || isSuccessStep) return;
 
-    const prevStep = STEP_ORDER[currentStepIndex - 1];
-
+    const prevStep = NAVIGABLE_STEPS[currentStepIndex - 1];
     if (prevStep) setValue("step", prevStep);
-  }, [currentStepIndex, isFirstStep, setValue]);
+  }, [currentStepIndex, isFirstStep, isSuccessStep, setValue]);
 
   return {
     currentStep,

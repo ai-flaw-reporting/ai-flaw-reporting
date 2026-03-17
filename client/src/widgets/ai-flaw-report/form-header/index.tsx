@@ -14,13 +14,16 @@ export function FormHeader() {
     return <div>Loading...</div>;
   }
 
+  const isSuccessStep = step === "SUBMISSION_SUCCESS";
   const stepNumber = STEP_ORDER.indexOf(step) + 1;
 
   return (
     <header aria-labelledby="form-title" className="space-y-4 text-center">
-      <p className="text-sm font-semibold uppercase tracking-wide text-blue-500">
-        Step {stepNumber}
-      </p>
+      {!isSuccessStep && (
+        <p className="text-sm font-semibold uppercase tracking-wide text-blue-500">
+          Step {stepNumber}
+        </p>
+      )}
       <h2
         id="form-title"
         className="display-sm font-bold text-gray-800 dark:text-white"
