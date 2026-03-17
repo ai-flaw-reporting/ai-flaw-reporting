@@ -28,8 +28,7 @@
     "nohoist": [
       "**/storybook",
       "**/@storybook/**",
-      "**/@hookform/**",
-      "**/zod"
+      "**/@hookform/**"
     ]
   },
   "packageManager": "yarn@1.22.22",
