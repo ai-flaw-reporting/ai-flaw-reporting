@@ -4,17 +4,24 @@
 
 import type { ReshapedReportData } from "../content-types/report/types";
 
-const EMAIL_MAPPING = {
+const EMAIL_MAPPING: Record<string, string | null> = {
   OpenAI: "placeholder@openai.com",
   Anthropic: "usersafety@anthropic.com",
   Google: "placeholder@google.com",
+  Meta: null,
+  Microsoft: null,
   Cohere: "security@cohere.com",
   "AI Incident Database": null,
   "AI Safety Institute": null,
+  "NIST AI Risk Management": null,
+  CISA: null,
+  MITRE: null,
+  CERT: null,
   AVID: null,
   AIID: null,
   "General AI Flaw Database": null,
   "Other Organizations": null,
+  "Other models provided by HuggingFace cards": null,
 };
 
 export default {

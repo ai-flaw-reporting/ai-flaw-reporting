@@ -8,7 +8,7 @@ export default function CardsContainer() {
       <h2 id="cta-title" className="sr-only">
         Actions
       </h2>
-      <div className="flex justify-center gap-4">
+      <div className="flex w-full flex-col items-center gap-4 md:flex-row md:flex-wrap md:items-stretch md:justify-center lg:flex-nowrap">
         <Card
           icon={
             <Image
@@ -20,7 +20,7 @@ export default function CardsContainer() {
               className="mx-auto mb-6"
             />
           }
-          title="Information & Resources"
+          title="AI Reporting Resources"
           description="Explore helpful definitions, and other resources for reporting issues with AI systems."
           action={{
             label: "Select",
@@ -29,6 +29,7 @@ export default function CardsContainer() {
           }}
         />
         <Card
+          highlighted
           icon={
             <Image
               src={"icons/bug.svg"}
@@ -39,12 +40,12 @@ export default function CardsContainer() {
               className="mx-auto mb-6"
             />
           }
-          title="AI Flaw"
+          title="Create Report"
           description="Generate flaw, vulnerability, and incident reports for AI systems. Automatically send reports to key stakeholders."
           action={{
             label: "Report flaw",
             href: routes.report,
-            variant: "outline",
+            variant: "default",
           }}
         />
         <Card
@@ -59,11 +60,10 @@ export default function CardsContainer() {
             />
           }
           title="Dashboard"
-          description="We’re building an open dashboard for AI flaw reports. Soon, you’ll be able to explore past reports and patterns."
+          description="A dashboard to see public AI flaw reports."
           action={{
-            label: "Open",
+            label: "Select",
             href: routes.dashboard,
-            tooltip: "We’re building an open dashboard for AI flaw reports.",
             variant: "outline",
           }}
         />

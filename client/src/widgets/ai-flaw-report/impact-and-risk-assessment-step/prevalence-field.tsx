@@ -30,9 +30,7 @@ export function PrevalenceField() {
                 aria-hidden="true"
               />
             )}
-            <span className="text-nowrap">
-              {PREVALENCE_FIELD.title}
-            </span>
+            <span className="text-nowrap">{PREVALENCE_FIELD.title}</span>
           </ItemTitle>
           <PrevalenceBadge />
         </div>
@@ -64,7 +62,7 @@ export function PrevalenceField() {
                     />
                     <div className="flex justify-between text-sm font-bold text-gray-600">
                       <span className="text-center capitalize">
-                        {PREVALENCE_FIELD.minValue}
+                        {PREVALENCE_FIELD.minValue.replace(/_/g, " ")}
                       </span>
                       <span className="text-center capitalize">
                         {PREVALENCE_FIELD.maxValue}

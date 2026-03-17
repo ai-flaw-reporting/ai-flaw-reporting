@@ -15,7 +15,7 @@ export const REPORTER_FIELDS: ReporterFieldConfig[] = [
     label: "Email Address",
     type: "input",
     inputType: "email",
-    placeholder: "olivia@gmail.com",
+    placeholder: "your.email@example.com",
     description: "Required for follow-up and report delivery",
     showMessage: true,
     required: true,

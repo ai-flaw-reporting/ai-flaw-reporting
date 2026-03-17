@@ -20,21 +20,22 @@ import {
 
 import { cn } from "~/lib/utils";
 
-type Action = {
+interface Action {
   label: string;
   href: string;
   variant?: "default" | "outline" | "secondary" | "ghost";
   disabled?: boolean;
   tooltip?: string;
-};
+}
 
-type Props = {
+interface Props {
   icon?: React.ReactNode;
   title: string;
   description: string;
   infoHint?: string;
   action: Action;
-};
+  highlighted?: boolean;
+}
 
 export default function CardComponent({
   icon,
@@ -42,6 +43,7 @@ export default function CardComponent({
   description,
   infoHint,
   action,
+  highlighted = false,
 }: Props) {
   const descId = useId();
   const titleId = useId();
@@ -55,7 +57,10 @@ export default function CardComponent({
         router.push(action.href);
       }}
       className={cn(
-        `group max-w-[258px] ${customCursor} border-gray-300 bg-white pt-6.5 pb-5 text-center dark:border-gray-700 dark:bg-gray-900`,
+        `group w-full md:w-[270px] ${customCursor} bg-[#F9FAFB] pt-8 pr-5 pb-5 pl-5 text-center transition-colors duration-300 ease-in-out dark:bg-gray-900`,
+        highlighted
+          ? "border-[#7F56D9] md:order-1 lg:order-none dark:border-[#7F56D9]"
+          : "border-gray-300 dark:border-gray-700",
         action.disabled && "pointer-events-none opacity-60",
       )}
     >
@@ -64,11 +69,14 @@ export default function CardComponent({
         aria-describedby={descId}
         className="flex h-full flex-col justify-between"
       >
-        <CardHeader className="px-5">
+        <CardHeader className="px-0">
           <CardTitle>
             {icon && icon}
             <div className="flex items-center justify-center gap-2">
-              <h3 id={titleId} className="text-md leading-7 font-semibold">
+              <h3
+                id={titleId}
+                className="text-base leading-6 font-bold text-black dark:text-white"
+              >
                 {title}
               </h3>
               <Tooltip>
@@ -89,7 +97,7 @@ export default function CardComponent({
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="px-5">
+        <CardContent className="px-0">
           <p
             id={descId}
             className="text-sm leading-5 text-gray-600 dark:text-gray-100"
@@ -98,12 +106,17 @@ export default function CardComponent({
           </p>
         </CardContent>
 
-        <CardFooter className="mt-4 px-5">
+        <CardFooter className="mt-4 px-0">
           <Button
             variant={action.variant ?? "default"}
             disabled={action.disabled}
             className={cn(
-              "group-hover:bg-blue-ai w-full font-semibold group-hover:border-transparent group-hover:text-base group-hover:text-white dark:group-hover:border-none dark:group-hover:text-white",
+              "w-full font-bold duration-300",
+              "group-hover:border-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white",
+              "dark:group-hover:border-[#2563EB] dark:group-hover:bg-[#2563EB] dark:group-hover:text-white",
+              highlighted &&
+                action.variant === "default" &&
+                "border-[#2563EB] bg-[#2563EB] px-5 py-3 text-white hover:bg-[#1d4ed8] dark:hover:bg-[#1d4ed8]",
               customCursor,
             )}
           >

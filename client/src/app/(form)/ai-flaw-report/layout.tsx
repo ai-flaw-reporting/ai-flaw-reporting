@@ -17,13 +17,14 @@ export default function FormLayout({ children }: PropsWithChildren) {
     defaultValues: {
       step: STEP_ORDER[0], // CLASSIFY_REPORT
       classifyReport: { csam_acknowledgment: false },
-      reporterDetails: { system: { notSure: false } },
+      reporterDetails: { systems: [] },
     },
   });
 
   return (
     <FormProvider {...form}>
       <AiFlawReportHeader />
+
       {children}
       <AiFlawReportFooter />
     </FormProvider>

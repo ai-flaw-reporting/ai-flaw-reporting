@@ -8,13 +8,6 @@ export default tseslint.config(
     ignores: [".next", "next-env.d.ts"],
   },
   {
-    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
-    rules: {
-      "react/no-unescaped-entities": "off",
-      "@next/next/no-page-custom-font": "off",
-    },
-  },
-  {
     files: ["**/*.ts", "**/*.tsx"],
     extends: [
       ...tseslint.configs.recommended,

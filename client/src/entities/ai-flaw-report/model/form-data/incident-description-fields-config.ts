@@ -24,7 +24,7 @@ export const ISSUE_DESCRIPTION_FIELD: IncidentDescriptionFieldConfig = {
   rows: 3,
   maxLength: 5000,
   placeholder:
-    "Provide a clear description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
+    "Provide a clear, detailed description of the issue you encountered. Include what happened, when it happened, and any relevant context...",
   description:
     "Be as specific as possible. This helps developers understand and reproduce the issue.",
   required: true,
@@ -50,28 +50,30 @@ export const ACTUAL_BEHAVIOR_FIELD: IncidentDescriptionFieldConfig = {
   type: "textarea",
   rows: 3,
   maxLength: 5000,
-  placeholder: "How did the system behave differently from what you expected?",
+  placeholder:
+    "How did the system behave differently from what you expected?",
 };
 
 export const POLICY_VIOLATION_FIELDS = {
   title: "Potential Policy Violations",
   icon: "/icons/form/warning-outline.svg",
-  description: "Select any policies or guidelines that this issue may violate:",
+  description:
+    "Link to any policies or guidelines this issue may violate. We've suggested some based on your selected AI systems.",
   url: {
     name: "incidentDescription.policyViolation.url",
     label: "Policy / Guideline Link",
     type: "input",
     inputType: "url",
-    placeholder: "Enter policy/guideline URL. Why is this a violation?",
+    placeholder: "https://example.com/policy",
   } as IncidentDescriptionFieldConfig,
   reason: {
     name: "incidentDescription.policyViolation.reason",
-    label:
-      "Please explain why this might be a potential violation of the policy, or of the intended acceptable uses for the product/system?",
+    label: "Why this is a policy violation?",
     type: "textarea",
     rows: 3,
     maxLength: 2000,
-    placeholder: "Explain how this issue violates the selected policy...",
+    placeholder:
+      "Please explain why this might be a potential violation of the policy, or of the intended acceptable uses for the product/system?",
   } as IncidentDescriptionFieldConfig,
   urlOptions: [
     {

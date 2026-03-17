@@ -1,5 +1,6 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useWatch } from "react-hook-form";
+import { FileText, Sparkles, ExternalLink } from "lucide-react";
 
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
@@ -11,7 +12,6 @@ import {
 import { truncateText } from "~/lib/utils";
 import { FormControl, FormField, FormItem } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -20,6 +20,13 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { FieldTooltip } from "~/components/field-tooltip";
+
+const MITRE_CWE_URL = "https://cwe.mitre.org/documents/schema/index.html";
+
+const CARD_ICONS = {
+  [HARM_OPTION_VALUE.DOCUMENTED]: FileText,
+  [HARM_OPTION_VALUE.NEW]: Sparkles,
+} as const;
 
 export function HarmType() {
   const { control, setValue } = useAiFlawFormContext();
@@ -63,73 +70,63 @@ export function HarmType() {
   return (
     <Item variant="outline" className="form-item-card">
       <ItemContent className="space-y-8">
-        <ItemTitle className="form-title flex items-baseline">
-          <span>
-            {HARM_TYPE_FIELD.title} <span className="text-error-600">*</span>
-          </span>
-        </ItemTitle>
+        <div className="space-y-2">
+          <ItemTitle className="form-title flex items-baseline">
+            <span>{HARM_TYPE_FIELD.title}</span>
+          </ItemTitle>
+          <p className="text-md text-gray-500">{HARM_TYPE_FIELD.label}</p>
+        </div>
         <FormField
           control={control}
           name="impactAssessment.harmType"
           render={({ field }) => (
             <FormItem className="form-item-field">
               <FormControl>
-                <RadioGroup
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  className="flex gap-4"
-                >
-                  <RadioGroupItem
-                    variant="dots"
-                    value={HARM_TYPE_FIELD.options[0].value}
-                    checked={field.value === HARM_OPTION_VALUE.DOCUMENTED}
-                    className="flex flex-1 items-start gap-2"
-                  >
-                    <div className="flex flex-col text-start">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-100">
-                        {HARM_TYPE_FIELD.options[0].label}
-                      </span>
-                      {HARM_TYPE_FIELD.options[0].description && (
-                        <span className="textgray-600 text-sm font-light dark:text-gray-100">
-                          {HARM_TYPE_FIELD.options[0].description}
-                          <a
-                            href="https://cwe.mitre.org/documents/schema/index.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 underline dark:text-blue-400"
-                          >
-                            MITRE's CWE
-                          </a>
-                        </span>
-                      )}
-                    </div>
-                  </RadioGroupItem>
-                  <RadioGroupItem
-                    variant="dots"
-                    value={HARM_TYPE_FIELD.options[1].value}
-                    checked={field.value === HARM_OPTION_VALUE.NEW}
-                    className="flex flex-1 items-start gap-2"
-                  >
-                    <div className="flex flex-col text-start">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-100">
-                        {HARM_TYPE_FIELD.options[1].label}
-                      </span>
-                      {HARM_TYPE_FIELD.options[1].description && (
-                        <span className="textgray-600 text-sm font-light dark:text-gray-100">
-                          {HARM_TYPE_FIELD.options[1].description}
-                          <a
-                            href="https://cwe.mitre.org/documents/schema/index.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 underline dark:text-blue-400"
-                          >
-                            MITRE's CWE
-                          </a>
-                        </span>
-                      )}
-                    </div>
-                  </RadioGroupItem>
-                </RadioGroup>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {HARM_TYPE_FIELD.options.map((option) => {
+                    const isSelected = field.value === option.value;
+                    const Icon = CARD_ICONS[option.value];
+
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => field.onChange(option.value)}
+                        className={`flex items-start gap-4 rounded-xl border-2 p-6 text-left transition-colors ${
+                          isSelected
+                            ? "border-blue-400 bg-blue-50"
+                            : "border-gray-200 bg-white hover:border-gray-300"
+                        }`}
+                      >
+                        <div
+                          className={`shrink-0 rounded-lg p-3 ${
+                            isSelected ? "bg-blue-100" : "bg-slate-100"
+                          }`}
+                        >
+                          <Icon className="size-6 text-gray-700" />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-lg font-semibold text-gray-800">
+                            {option.label}
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            {option.description}
+                            <a
+                              href={MITRE_CWE_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              MITRE CWE
+                              <ExternalLink className="size-3" />
+                            </a>
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </FormControl>
             </FormItem>
           )}

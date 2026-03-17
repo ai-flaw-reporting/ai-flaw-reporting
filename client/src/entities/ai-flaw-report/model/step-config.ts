@@ -38,7 +38,7 @@ export const STEP_CONFIGS = {
   SECURITY_INCIDENT_DETAILS: {
     id: "security-incident-details",
     title: "Security Incident Details",
-    badgeTitle: "Incident",
+    badgeTitle: "Additional",
     description:
       "Tell us about yourself and the AI system where you found this issue",
     formField: "securityDetails",
@@ -55,6 +55,13 @@ export const STEP_CONFIGS = {
     title: "Review & Submit Report",
     badgeTitle: "Review",
     description: "Review your report and choose how to submit it",
+    formField: "reviewReport",
+  },
+  SUBMISSION_SUCCESS: {
+    id: "submission-success",
+    title: "Report Successfully Filed",
+    badgeTitle: "Success",
+    description: "Your report has been filed and cannot be modified",
     formField: "reviewReport",
   },
 } as const;

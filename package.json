@@ -16,8 +16,9 @@
     "lint": "yarn client:lint"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
-    "concurrently": "^8.2.2"
+    "@img/sharp-libvips-darwin-arm64": "1.0.4",
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7"
   },
   "workspaces": {
     "packages": [
@@ -26,7 +27,9 @@
     ],
     "nohoist": [
       "**/storybook",
-      "**/@storybook/**"
+      "**/@storybook/**",
+      "**/@hookform/**",
+      "**/zod"
     ]
   },
   "packageManager": "yarn@1.22.22",

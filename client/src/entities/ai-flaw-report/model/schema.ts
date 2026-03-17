@@ -26,79 +26,21 @@ export const classifyReportSchema = z
     },
   );
 
-export const reporterDetailsSchema = z
-  .object({
-    reporter: z.object({
-      email: z.string().email(),
-      org: z.string().optional(),
-      country: z.string().optional(),
-    }),
-    system: z.object({
-      platforms: z.array(z.string()).min(1),
-      platformOther: z.string().optional(),
-      models: z.array(z.string()).optional(),
-      version: z.string().optional(),
-      accessMethod: z.string().optional(),
-      accessMethodOther: z.string().optional(),
-      notSure: z.boolean().default(false),
-    }),
-  })
-  .refine(
-    (data) => {
-      if (
-        data.system.platforms.includes(FORM_VALUES.OTHER) &&
-        !data.system.platformOther?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["system", "platformOther"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (!data.system.notSure && !data.system.models?.length) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["system", "models"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (
-        !data.system.notSure &&
-        data.system.accessMethod &&
-        data.system.accessMethod !== FORM_VALUES.OTHER &&
-        !data.system.version?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["system", "version"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (
-        data.system.accessMethod === FORM_VALUES.OTHER &&
-        !data.system.accessMethodOther?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["system", "accessMethodOther"],
-      message: "Please specify the other access method",
-    },
-  );
+export const aiSystemConfigSchema = z.object({
+  platform: z.string().min(1),
+  model: z.string().min(1),
+  accessMethod: z.string().optional(),
+  version: z.string().optional(),
+});
+
+export const reporterDetailsSchema = z.object({
+  reporter: z.object({
+    email: z.string().email(),
+    org: z.string().optional(),
+    country: z.string().optional(),
+  }),
+  systems: z.array(aiSystemConfigSchema).min(1).max(10),
+});
 
 export const incidentDescriptionSchema = z.object({
   issueDescription: z
@@ -215,6 +157,13 @@ export const impactAndRiskAssessmentSchema = z
       .min(1, "At least one stakeholder must be selected"),
     aiCompanyInvolved: z.array(z.string()).optional(),
     mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
+    discoveryContext: z.string().optional(),
+    responsibleFactors: z.array(z.string()).optional(),
+    responsibleFactorsOtherText: z
+      .string()
+      .max(400)
+      .optional()
+      .or(z.literal("")),
   })
   .refine(
     (data) => {
@@ -252,6 +201,24 @@ export const impactAndRiskAssessmentSchema = z
     {
       path: ["harmOtherText"],
       message: "Please specify the other harm type",
+    },
+  )
+  .refine(
+    (data) => {
+      if (
+        data.responsibleFactors &&
+        data.responsibleFactors.includes(
+          FORM_VALUES.OTHER_LOWERCASE as string,
+        ) &&
+        !data.responsibleFactorsOtherText?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      path: ["responsibleFactorsOtherText"],
+      message: "Please describe the responsible factor",
     },
   );
 

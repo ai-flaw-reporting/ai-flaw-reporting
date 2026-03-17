@@ -1,4 +1,4 @@
-import { SAVE_STATUS_KEY_PREFIX, FORM_VALUES } from "../model/constants";
+import { SAVE_STATUS_KEY_PREFIX } from "../model/constants";
 import type { AiFlawReportSchema } from "../model/types";
 
 /**
@@ -77,12 +77,13 @@ export function getReportType(formData: {
 
 export function getAiSystem(
   formData: AiFlawReportSchema["reporterDetails"],
-): string | string[] | undefined {
-  const platforms = formData?.system?.platforms;
-
-  return platforms.includes(FORM_VALUES.OTHER)
-    ? formData?.system?.platformOther
-    : platforms;
+): string[] | undefined {
+  if (!formData?.systems?.length) return undefined;
+  return formData.systems.map((s) => {
+    const parts = [s.platform, s.model];
+    if (s.accessMethod) parts.push(s.accessMethod);
+    return parts.join(" \u2192 ");
+  });
 }
 
 export function formatStakeholder(stakeholder: string): string {

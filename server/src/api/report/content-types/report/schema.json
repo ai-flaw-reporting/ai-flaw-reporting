@@ -50,27 +50,8 @@
     "reporter_country": {
       "type": "string"
     },
-    "system_platforms": {
+    "system_configurations": {
       "type": "json"
-    },
-    "system_platformOther": {
-      "type": "string"
-    },
-    "system_models": {
-      "type": "json"
-    },
-    "system_version": {
-      "type": "string"
-    },
-    "system_accessMethod": {
-      "type": "string"
-    },
-    "system_accessMethodOther": {
-      "type": "string"
-    },
-    "system_notSure": {
-      "type": "boolean",
-      "default": false
     },
     "incident_issueDescription": {
       "type": "text",
@@ -123,6 +104,18 @@
       "type": "json"
     },
     "impact_mitigationNotes": {
+      "type": "text"
+    },
+    "impact_documentedHarmCwe": {
+      "type": "string"
+    },
+    "impact_discoveryContext": {
+      "type": "string"
+    },
+    "impact_responsibleFactors": {
+      "type": "json"
+    },
+    "impact_responsibleFactorsOtherText": {
       "type": "text"
     },
     "security_attackerResources": {

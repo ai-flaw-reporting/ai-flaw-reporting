@@ -3,7 +3,7 @@ export default function Header() {
     <header className="mx-auto max-w-[462px] space-y-4">
       <h1
         id="hero-title"
-        className="display-sm text-center font-bold text-gray-800 dark:text-white"
+        className="text-center text-[30px] leading-[38px] font-bold text-gray-800 dark:text-white"
       >
         Report AI Flaws & Incidents
       </h1>

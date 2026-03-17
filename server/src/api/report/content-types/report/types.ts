@@ -18,13 +18,12 @@ export type FlattenedReport = {
   reporter_email?: string;
   reporter_org?: string;
   reporter_country?: string;
-  system_platforms?: string[];
-  system_platformOther?: string;
-  system_models?: string[];
-  system_version?: string;
-  system_accessMethod?: string;
-  system_accessMethodOther?: string;
-  system_notSure?: boolean;
+  system_configurations?: Array<{
+    platform: string;
+    model: string;
+    accessMethod?: string;
+    version?: string;
+  }>;
   incident_issueDescription?: string;
   incident_expectedBehavior?: string;
   incident_actualBehavior?: string;
@@ -41,6 +40,10 @@ export type FlattenedReport = {
   impact_harmOtherText?: string;
   impact_aiCompanyInvolved?: string[];
   impact_mitigationNotes?: string;
+  impact_documentedHarmCwe?: string;
+  impact_discoveryContext?: string;
+  impact_responsibleFactors?: string[];
+  impact_responsibleFactorsOtherText?: string;
   security_attackerResources?: string;
   security_attackerObjectives?: string;
   security_attackerObjectivesOther?: string;
@@ -83,15 +86,12 @@ export type ReshapedReportData = {
       org?: string;
       country?: string;
     };
-    system: {
-      platforms?: string[];
-      platformOther?: string;
-      models?: string[];
-      version?: string;
+    systems: Array<{
+      platform: string;
+      model: string;
       accessMethod?: string;
-      accessMethodOther?: string;
-      notSure?: boolean;
-    };
+      version?: string;
+    }>;
   };
   incidentDescription: {
     issueDescription?: string;
@@ -116,6 +116,10 @@ export type ReshapedReportData = {
     harmOtherText?: string;
     aiCompanyInvolved?: string[];
     mitigationNotes?: string;
+    documentedHarmCwe?: string;
+    discoveryContext?: string;
+    responsibleFactors?: string[];
+    responsibleFactorsOtherText?: string;
   };
   securityDetails: {
     attackerResources?: string;

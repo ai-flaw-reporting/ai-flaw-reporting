@@ -8,9 +8,14 @@ export function PrevalenceBadge() {
   const { control } = useAiFlawFormContext();
   const selected = useWatch({ control, name: "impactAssessment.prevalence" });
 
+  const displayValue = (selected ?? PREVALENCE_FIELD.minValue).replace(
+    /_/g,
+    " ",
+  );
+
   return (
     <Badge variant="outline" className="max-h-[25.76px] capitalize">
-      {selected ?? PREVALENCE_FIELD.minValue}
+      {displayValue}
     </Badge>
   );
 }

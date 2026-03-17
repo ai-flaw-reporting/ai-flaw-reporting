@@ -1,5 +1,3 @@
-import { truncateText } from "~/lib/utils";
-
 import type { PolicyLink } from "../model/types";
 import { POLICIES } from "../model/constants";
 
@@ -14,11 +12,7 @@ export function getPolicyLinks(selectedSystems: string[]): PolicyLink[] {
     }
   }
 
-  const MAX_LABEL_LENGTH = 13;
-  return links.map((link) => ({
-    ...link,
-    label: truncateText(link.label, MAX_LABEL_LENGTH),
-  }));
+  return links;
 }
 
 export { POLICIES };

@@ -30,9 +30,7 @@ export function SeverityHarmField() {
                 aria-hidden="true"
               />
             )}
-            <span className="text-nowrap">
-              {SEVERITY_OF_HARM_FIELD.title}
-            </span>
+            <span className="text-nowrap">{SEVERITY_OF_HARM_FIELD.title}</span>
           </ItemTitle>
           <SeverityHarmBadge />
         </div>
@@ -64,7 +62,7 @@ export function SeverityHarmField() {
                     />
                     <div className="flex justify-between text-sm font-bold text-gray-600">
                       <span className="text-center capitalize">
-                        {SEVERITY_OF_HARM_FIELD.minValue}
+                        {SEVERITY_OF_HARM_FIELD.minValue.replace(/_/g, " ")}
                       </span>
                       <span className="text-center capitalize">
                         {SEVERITY_OF_HARM_FIELD.maxValue}

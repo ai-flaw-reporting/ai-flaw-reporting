@@ -22,14 +22,8 @@ export const flattenReport = (data: any) => ({
   reporter_email: data.reporterDetails?.reporter?.email,
   reporter_org: data.reporterDetails?.reporter?.org,
   reporter_country: data.reporterDetails?.reporter?.country,
-  // System Details
-  system_platforms: data.reporterDetails?.system?.platforms,
-  system_platformOther: data.reporterDetails?.system?.platformOther,
-  system_models: data.reporterDetails?.system?.models,
-  system_version: data.reporterDetails?.system?.version,
-  system_accessMethod: data.reporterDetails?.system?.accessMethod,
-  system_accessMethodOther: data.reporterDetails?.system?.accessMethodOther,
-  system_notSure: data.reporterDetails?.system?.notSure,
+  // System Configurations
+  system_configurations: data.reporterDetails?.systems,
   // Incident Description
   incident_issueDescription: data.incidentDescription?.issueDescription,
   incident_expectedBehavior: data.incidentDescription?.expectedBehavior,
@@ -50,6 +44,11 @@ export const flattenReport = (data: any) => ({
   impact_harmOtherText: data.impactAssessment?.harmOtherText,
   impact_aiCompanyInvolved: data.impactAssessment?.aiCompanyInvolved,
   impact_mitigationNotes: data.impactAssessment?.mitigationNotes,
+  impact_documentedHarmCwe: data.impactAssessment?.documentedHarmCwe,
+  impact_discoveryContext: data.impactAssessment?.discoveryContext,
+  impact_responsibleFactors: data.impactAssessment?.responsibleFactors,
+  impact_responsibleFactorsOtherText:
+    data.impactAssessment?.responsibleFactorsOtherText,
   // Security Details
   security_attackerResources: data.securityDetails?.attackerResources,
   security_attackerObjectives: data.securityDetails?.attackerObjectives,
@@ -97,15 +96,7 @@ export const reshapeReport = (flatData: FlattenedReport): ReshapedReportData => 
       org: flatData.reporter_org,
       country: flatData.reporter_country,
     },
-    system: {
-      platforms: flatData.system_platforms,
-      platformOther: flatData.system_platformOther,
-      models: flatData.system_models,
-      version: flatData.system_version,
-      accessMethod: flatData.system_accessMethod,
-      accessMethodOther: flatData.system_accessMethodOther,
-      notSure: flatData.system_notSure,
-    },
+    systems: flatData.system_configurations ?? [],
   },
   incidentDescription: {
     issueDescription: flatData.incident_issueDescription,
@@ -130,6 +121,10 @@ export const reshapeReport = (flatData: FlattenedReport): ReshapedReportData => 
     harmOtherText: flatData.impact_harmOtherText,
     aiCompanyInvolved: flatData.impact_aiCompanyInvolved,
     mitigationNotes: flatData.impact_mitigationNotes,
+    documentedHarmCwe: flatData.impact_documentedHarmCwe,
+    discoveryContext: flatData.impact_discoveryContext,
+    responsibleFactors: flatData.impact_responsibleFactors,
+    responsibleFactorsOtherText: flatData.impact_responsibleFactorsOtherText,
   },
   securityDetails: {
     attackerResources: flatData.security_attackerResources,
