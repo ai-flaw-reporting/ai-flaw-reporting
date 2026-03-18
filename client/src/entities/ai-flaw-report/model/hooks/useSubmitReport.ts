@@ -1,8 +1,10 @@
 import { useWatch } from "react-hook-form";
 import { useAiFlawFormContext } from "./useAiFlawFormContext";
+import { useAiFlawFormState } from "./useAiFlawFormState";
 
 export function useSubmitReport() {
-  const { control, formState } = useAiFlawFormContext();
+  const { control } = useAiFlawFormContext();
+  const formState = useAiFlawFormState();
 
   const selectedStakeholders = useWatch({
     control,

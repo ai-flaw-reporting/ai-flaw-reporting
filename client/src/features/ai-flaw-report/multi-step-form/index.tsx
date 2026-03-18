@@ -10,10 +10,16 @@ import { FormNavigation } from "~/widgets/ai-flaw-report/form-navigation";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 import { submitReport } from "~/entities/ai-flaw-report/lib/submit-report";
+import { clearAllFormSaveStatus } from "~/entities/ai-flaw-report/lib/utils";
 import { cn } from "~/lib/utils";
 
-
-function FormContent({ huggingFaceModels }: { huggingFaceModels: string[] }) {
+function FormContent({
+  children,
+  huggingFaceModels,
+}: {
+  children: React.ReactNode;
+  huggingFaceModels: string[];
+}) {
   const { handleSubmit, control, reset, setValue } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
 
@@ -43,6 +49,7 @@ function FormContent({ huggingFaceModels }: { huggingFaceModels: string[] }) {
           data.reviewReport?.selectedStakeholders ?? [],
         );
         setIsSubmitSuccessful(true);
+        clearAllFormSaveStatus();
 
         setValue("step", "SUBMISSION_SUCCESS" as AiFlawReportSchema["step"]);
       } catch (error) {
@@ -92,10 +99,11 @@ function FormContent({ huggingFaceModels }: { huggingFaceModels: string[] }) {
           onSubmit={handleSubmit(onSubmit)}
           className={cn(
             "mx-auto max-w-[792px] space-y-4",
-            isSuccessStep && "flex max-w-none flex-1 items-center justify-center",
+            isSuccessStep &&
+              "flex max-w-none flex-1 items-center justify-center",
           )}
         >
-          <CurrentStepRenderer />
+          {children}
         </form>
         <FormNavigation />
       </section>
@@ -110,7 +118,9 @@ export function MultiStepAiFlawReportForm({
 }) {
   return (
     <SubmissionProvider>
-      <FormContent huggingFaceModels={huggingFaceModels} />
+      <FormContent huggingFaceModels={huggingFaceModels}>
+        <CurrentStepRenderer />
+      </FormContent>
     </SubmissionProvider>
   );
 }
