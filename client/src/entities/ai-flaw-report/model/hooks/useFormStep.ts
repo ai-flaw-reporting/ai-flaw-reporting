@@ -1,7 +1,7 @@
 "use client";
 
 import { useWatch } from "react-hook-form";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   FORM_AUTOSAVE_DELAY,
@@ -14,10 +14,12 @@ import {
 } from "../schema";
 import type { AiFlawReportSchema, FormStep, SaveStatus } from "../types";
 import { useAiFlawFormContext } from "./useAiFlawFormContext";
-import { getFormSaveStatus, saveFormSaveStatus } from "../../lib/utils";
+import { saveFormSaveStatus } from "../../lib/utils";
+import { useAiFlawFormState } from "./useAiFlawFormState";
 
 export function useFormStep(stepKey: FormStep) {
-  const { formState, getFieldState, getValues } = useAiFlawFormContext();
+  const { getFieldState, getValues } = useAiFlawFormContext();
+  const formState = useAiFlawFormState();
 
   const saveTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(SAVE_STATUS.SAVED);
@@ -28,6 +30,10 @@ export function useFormStep(stepKey: FormStep) {
   const formData = useWatch<AiFlawReportSchema>({
     name: formField,
   });
+
+  const csamInvolved = useWatch<AiFlawReportSchema>({
+    name: "classifyReport.csam_involved" as keyof AiFlawReportSchema,
+  }) as boolean | undefined;
 
   const fieldState = getFieldState(formField, formState);
 
@@ -80,6 +86,15 @@ export function useFormStep(stepKey: FormStep) {
   const isNextDisabled = !isStepValid;
 
   useEffect(() => {
+    if (stepKey === "EVIDENCE_AND_REPRODUCTION" && csamInvolved) {
+      saveFormSaveStatus(
+        { [formField]: { csam_skipped: true } },
+        stepConfig.id,
+      );
+    }
+  }, [stepKey, csamInvolved, formField, stepConfig.id]);
+
+  useEffect(() => {
     if (!formData) return;
 
     setSaveStatus(SAVE_STATUS.SAVING);
@@ -110,25 +125,11 @@ export function useFormStep(stepKey: FormStep) {
     };
   }, [formData, stepKey, formField, stepConfig.id]);
 
-  const loadSavedData = useCallback(() => {
-    const dataFromForm = getValues(formField);
-    const dataFromStorage = getFormSaveStatus(stepConfig.id);
-
-    const isFormDirty = formState.isDirty;
-
-    if (isFormDirty && dataFromForm) {
-      return dataFromForm;
-    }
-
-    return dataFromStorage;
-  }, [formField, getValues, stepConfig.id, formState.isDirty]);
-
   return {
     formData,
     stepConfig,
     isStepValid,
     isNextDisabled,
-    loadSavedData,
     saveStatus,
   };
 }

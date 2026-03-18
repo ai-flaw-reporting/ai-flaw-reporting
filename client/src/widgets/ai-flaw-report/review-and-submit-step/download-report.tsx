@@ -4,6 +4,7 @@ import { FileText, Loader2 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { DOWNLOAD_REPORT_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
 import { useDownloadReport } from "~/entities/ai-flaw-report/model/hooks/useDownloadReport";
+import { IncompleteSectionsWarning } from "./incomplete-sections-warning";
 
 function DownloadReportButton() {
   const { downloadReport, isDownloading } = useDownloadReport();
@@ -47,6 +48,7 @@ export function DownloadReport() {
           {DOWNLOAD_REPORT_CONFIG.description}
         </p>
         <DownloadReportButton />
+        <IncompleteSectionsWarning />
       </ItemContent>
     </Item>
   );

@@ -14,6 +14,7 @@ import {
 import { mergeStakeholdersWithPlatforms } from "~/entities/ai-flaw-report/lib/get-stakeholders-from-platforms";
 import { useHuggingFaceModels } from "~/features/ai-flaw-report/multi-step-form/models-context";
 import { SubmitButton } from "./submit-button";
+import { IncompleteSectionsWarning } from "./incomplete-sections-warning";
 import { AlertTriangle, ExternalLink } from "lucide-react";
 
 export function SubmitStakeholders() {
@@ -153,6 +154,7 @@ export function SubmitStakeholders() {
       </ItemContent>
       <ItemFooter className="flex flex-col gap-4">
         <SubmitButton />
+        <IncompleteSectionsWarning />
       </ItemFooter>
     </Item>
   );

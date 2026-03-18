@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { useWatch } from "react-hook-form";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -8,82 +7,14 @@ import { Button } from "~/components/ui/button";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
 import { useStepNavigation } from "~/entities/ai-flaw-report/model/hooks/useStepNavigation";
-import { STEP_CONFIGS_WITH_SCHEMAS } from "~/entities/ai-flaw-report/model/constants";
 
 export function FormNavigation() {
-  const { control, reset, trigger } = useAiFlawFormContext();
+  const { control } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
-  const loadedStepsRef = useRef<Set<string>>(new Set());
-  const rafIdRef = useRef<number | null>(null);
-  const currentStepRef = useRef(currentStep);
 
-  const { loadSavedData } = useFormStep(currentStep);
-  const { isLastStep, canGoNext, goToNextStep, goToPreviousStep, isFirstStep } =
+  useFormStep(currentStep);
+  const { isLastStep, goToNextStep, goToPreviousStep, isFirstStep } =
     useStepNavigation();
-
-  useEffect(() => {
-    currentStepRef.current = currentStep;
-  }, [currentStep]);
-
-  useEffect(() => {
-    loadedStepsRef.current.clear();
-    if (rafIdRef.current !== null) {
-      cancelAnimationFrame(rafIdRef.current);
-      rafIdRef.current = null;
-    }
-  }, [currentStep]);
-
-  useEffect(() => {
-    const stepConfig = STEP_CONFIGS_WITH_SCHEMAS[currentStep];
-    const stepId = stepConfig.id;
-
-    if (loadedStepsRef.current.has(stepId)) {
-      return;
-    }
-
-    rafIdRef.current = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const currentStepConfig =
-          STEP_CONFIGS_WITH_SCHEMAS[currentStepRef.current];
-        if (currentStepConfig.id !== stepId) {
-          rafIdRef.current = null;
-          return;
-        }
-
-        if (loadedStepsRef.current.has(stepId)) {
-          rafIdRef.current = null;
-          return;
-        }
-
-        const savedData = loadSavedData();
-
-        if (savedData != null) {
-          const formField = stepConfig.formField;
-
-          const fieldData = (savedData as Record<string, unknown>)[formField];
-
-          if (fieldData) {
-            reset((prevData) => ({
-              ...prevData,
-              [formField]: fieldData,
-            }));
-          } else {
-            loadedStepsRef.current.add(stepId);
-          }
-        } else {
-          loadedStepsRef.current.add(stepId);
-        }
-        rafIdRef.current = null;
-      });
-    });
-
-    return () => {
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-      }
-    };
-  }, [reset, trigger, currentStep, loadSavedData]);
 
   const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
   if (isSuccessStep) return null;
@@ -107,8 +38,7 @@ export function FormNavigation() {
           type="button"
           onClick={goToNextStep}
           aria-label="Go to next step"
-          disabled={!canGoNext}
-          className="bg-indigo-500 text-white hover:bg-indigo-500/90 focus-visible:ring-indigo-500/25 disabled:bg-indigo-200"
+          className="bg-indigo-500 text-white hover:bg-indigo-500/90 focus-visible:ring-indigo-500/25"
         >
           Next Step{" "}
           <ChevronRight aria-hidden="true" size={20} className="!h-5 !w-5" />

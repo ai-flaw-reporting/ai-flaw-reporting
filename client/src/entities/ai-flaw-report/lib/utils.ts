@@ -59,6 +59,17 @@ export const getFormSaveStatus = (stepId: string): unknown => {
   return saved ? JSON.parse(saved) : null;
 };
 
+export const clearAllFormSaveStatus = () => {
+  const keysToRemove: string[] = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith(SAVE_STATUS_KEY_PREFIX)) {
+      keysToRemove.push(key);
+    }
+  }
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
+};
+
 export function getReportType(formData: {
   classifyReport?: {
     csam_involved?: boolean;

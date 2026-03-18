@@ -7,10 +7,17 @@ import type {
   ReshapedReportData,
 } from "../content-types/report/types";
 
+const sanitizeDatetime = (value: unknown): string | undefined => {
+  if (!value || typeof value !== "string") return undefined;
+  const parsed = new Date(value);
+  if (isNaN(parsed.getTime())) return undefined;
+  return value;
+};
+
 export const flattenReport = (data: any) => ({
   step: data.step,
   // Metadata
-  metadata_createdAt: data.metadata?.createdAt,
+  metadata_createdAt: sanitizeDatetime(data.metadata?.createdAt),
   metadata_schemaVersion: data.metadata?.schemaVersion,
   metadata_reportType: data.metadata?.reportType,
   // Classify Report
@@ -64,16 +71,22 @@ export const flattenReport = (data: any) => ({
     data.disclosurePlan?.publicDisclosureIntent,
   disclosure_embargoDetails: data.disclosurePlan?.embargoDetails,
   disclosure_disclosureTimeline: data.disclosurePlan?.disclosureTimeline,
-  disclosure_disclosureDatepicker: data.disclosurePlan?.disclosureDatepicker,
+  disclosure_disclosureDatepicker: sanitizeDatetime(
+    data.disclosurePlan?.disclosureDatepicker,
+  ),
   // Review Report
   review_publicDisclosureIntent: data.reviewReport?.publicDisclosureIntent,
   review_embargoDetails: data.reviewReport?.embargoDetails,
   review_disclosureTimeline: data.reviewReport?.disclosureTimeline,
-  review_disclosureDatepicker: data.reviewReport?.disclosureDatepicker,
+  review_disclosureDatepicker: sanitizeDatetime(
+    data.reviewReport?.disclosureDatepicker,
+  ),
   review_selectedStakeholders: data.reviewReport?.selectedStakeholders,
 });
 
-export const reshapeReport = (flatData: FlattenedReport): ReshapedReportData => ({
+export const reshapeReport = (
+  flatData: FlattenedReport,
+): ReshapedReportData => ({
   id: flatData.id,
   documentId: flatData.documentId,
   createdAt: flatData.createdAt,

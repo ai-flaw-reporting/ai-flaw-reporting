@@ -3,6 +3,7 @@ import { Button } from "~/components/ui/button";
 import { Send, Loader2 } from "lucide-react";
 import { useSubmitReport } from "~/entities/ai-flaw-report/model/hooks/useSubmitReport";
 import { useSubmission } from "~/features/ai-flaw-report/multi-step-form/submission-context";
+import { useStepsValidation } from "~/entities/ai-flaw-report/model/hooks/useStepsValidation";
 import { SUBMIT_STAKEHOLDERS_CONFIG } from "~/entities/ai-flaw-report/model/form-data/review-and-submit-fields-config";
 import { SubmissionConfirmationModal } from "./submission-confirmation-modal";
 import { PublicDisclosureWarningModal } from "./public-disclosure-warning-modal";
@@ -11,6 +12,8 @@ export function SubmitButton() {
   const { isSubmitting, selectedStakeholders, isSubmitDisabled } =
     useSubmitReport();
   const { formRef } = useSubmission();
+  const { incompleteSteps } = useStepsValidation();
+  const hasIncompleteSections = incompleteSteps.length > 0;
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showPublicWarning, setShowPublicWarning] = useState(false);
@@ -52,7 +55,7 @@ export function SubmitButton() {
       <Button
         type="button"
         className="text-md border-gray-blue-600 min-h-11 w-full cursor-pointer bg-indigo-600 py-2.5 font-semibold text-white hover:bg-indigo-600 disabled:cursor-not-allowed disabled:bg-gray-300"
-        disabled={isSubmitDisabled || isSubmitting}
+        disabled={isSubmitDisabled || isSubmitting || hasIncompleteSections}
         onClick={handleSubmitClick}
       >
         {isSubmitting ? (

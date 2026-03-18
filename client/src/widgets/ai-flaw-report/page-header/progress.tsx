@@ -2,6 +2,7 @@ import { useWatch } from "react-hook-form";
 import { Check } from "lucide-react";
 
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
+import { useStepsValidation } from "~/entities/ai-flaw-report/model/hooks/useStepsValidation";
 import { STEP_ORDER } from "~/entities/ai-flaw-report/model/step-config";
 import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
 import { STEP_STATUS } from "~/entities/ai-flaw-report/model/constants";
@@ -15,8 +16,9 @@ import { cn } from "~/lib/utils";
 const VISIBLE_STEPS = STEP_ORDER.filter((s) => s !== "SUBMISSION_SUCCESS");
 
 export function ProgressComponent() {
-  const { control } = useAiFlawFormContext();
+  const { control, setValue } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
+  const { stepsValidity } = useStepsValidation();
 
   const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
   const currentStepIndex = isSuccessStep
@@ -40,7 +42,7 @@ export function ProgressComponent() {
       >
         {VISIBLE_STEPS.map((step, index) => {
           const stepConfig = STEP_CONFIGS[step];
-          const isCompleted = isSuccessStep || index < currentStepIndex;
+          const isCompleted = isSuccessStep || stepsValidity[step];
           const isCurrent = !isSuccessStep && step === currentStep;
 
           const stepStatus = isCurrent
@@ -51,26 +53,35 @@ export function ProgressComponent() {
 
           return (
             <li key={step} className="flex flex-col items-center gap-2.5">
-              <Badge
-                variant={BADGE_VARIANTS[stepStatus]}
-                className={cn(
-                  "h-8 w-8 rounded-full p-0 text-lg font-medium dark:text-gray-400",
-                  isCurrent && "text-primary-foreground dark:text-white",
-                  !isCurrent && !isCompleted && "dark:bg-transparent",
-                )}
-                aria-label={`Step ${index + 1}: ${stepConfig.badgeTitle} - ${stepStatus}`}
-                aria-current={isCurrent ? "step" : undefined}
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isSuccessStep) setValue("step", step);
+                }}
+                disabled={isSuccessStep}
+                className="cursor-pointer disabled:cursor-default"
               >
-                <span aria-hidden="true">
-                  {isCurrent ? (
-                    index + 1
-                  ) : isCompleted ? (
-                    <Check className="text-gray-25" />
-                  ) : (
-                    index + 1
+                <Badge
+                  variant={BADGE_VARIANTS[stepStatus]}
+                  className={cn(
+                    "h-8 w-8 rounded-full p-0 text-lg font-medium dark:text-gray-400",
+                    isCurrent && "text-primary-foreground dark:text-white",
+                    !isCurrent && !isCompleted && "dark:bg-transparent",
                   )}
-                </span>
-              </Badge>
+                  aria-label={`Step ${index + 1}: ${stepConfig.badgeTitle} - ${stepStatus}`}
+                  aria-current={isCurrent ? "step" : undefined}
+                >
+                  <span aria-hidden="true">
+                    {isCurrent ? (
+                      index + 1
+                    ) : isCompleted ? (
+                      <Check className="text-gray-25" />
+                    ) : (
+                      index + 1
+                    )}
+                  </span>
+                </Badge>
+              </button>
               <p
                 className={cn(
                   "text-sm",
