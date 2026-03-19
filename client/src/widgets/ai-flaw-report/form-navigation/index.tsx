@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useWatch } from "react-hook-form";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -7,14 +8,24 @@ import { Button } from "~/components/ui/button";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import { useFormStep } from "~/entities/ai-flaw-report/model/hooks/useFormStep";
 import { useStepNavigation } from "~/entities/ai-flaw-report/model/hooks/useStepNavigation";
+import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
+import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 
 export function FormNavigation() {
-  const { control } = useAiFlawFormContext();
+  const { control, trigger } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
 
   useFormStep(currentStep);
   const { isLastStep, goToNextStep, goToPreviousStep, isFirstStep } =
     useStepNavigation();
+
+  const handleNextStep = useCallback(async () => {
+    const stepConfig = STEP_CONFIGS[currentStep];
+    if (stepConfig?.formField) {
+      await trigger(stepConfig.formField as keyof AiFlawReportSchema);
+    }
+    goToNextStep();
+  }, [currentStep, trigger, goToNextStep]);
 
   const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
   if (isSuccessStep) return null;
@@ -36,7 +47,7 @@ export function FormNavigation() {
       {!isLastStep && !isReviewStep && (
         <Button
           type="button"
-          onClick={goToNextStep}
+          onClick={handleNextStep}
           aria-label="Go to next step"
           className="bg-indigo-500 text-white hover:bg-indigo-500/90 focus-visible:ring-indigo-500/25"
         >

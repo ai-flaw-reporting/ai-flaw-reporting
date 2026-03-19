@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AiFlawReportHeader } from "~/widgets/ai-flaw-report/page-header";
 import { AiFlawReportFooter } from "~/widgets/ai-flaw-report/page-footer";
 import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
-import { aiFlawReportSchema } from "~/entities/ai-flaw-report/model/schema";
+import { createAiFlawReportSchema } from "~/entities/ai-flaw-report/model/schema";
 import {
   STEP_ORDER,
   STEP_CONFIGS,
@@ -17,7 +17,21 @@ import { getFormSaveStatus } from "~/entities/ai-flaw-report/lib/utils";
 
 export default function FormLayout({ children }: PropsWithChildren) {
   const form = useForm<AiFlawReportSchema>({
-    resolver: zodResolver(aiFlawReportSchema) as Resolver<AiFlawReportSchema>,
+    resolver: async (values, context, options) => {
+      const csamInvolved = values.classifyReport?.csam_involved ?? false;
+      const realWorldHarm = values.classifyReport?.real_world_harm ?? false;
+      const maliciousUse = values.classifyReport?.malicious_use ?? false;
+      const schema = createAiFlawReportSchema({
+        csamInvolved,
+        realWorldHarm,
+        maliciousUse,
+      });
+      return (zodResolver(schema) as Resolver<AiFlawReportSchema>)(
+        values,
+        context,
+        options,
+      );
+    },
     mode: "onBlur",
     defaultValues: {
       step: STEP_ORDER[0], // CLASSIFY_REPORT
