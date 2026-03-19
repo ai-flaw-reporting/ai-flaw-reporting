@@ -147,14 +147,12 @@ export const impactAndRiskAssessmentSchema = z
   .object({
     severityOfHarm: z.string().optional(),
     prevalence: z.string().optional(),
-    harmType: z.string(),
+    harmType: z.string().default(""),
     documentedHarmCwe: z.string().optional(),
     harmTypes: z.array(z.string()).optional(),
     harmOtherText: z.string().max(200).optional(),
     specificImpactTypes: z.array(z.string()).optional().default([]),
-    affectedStakeholders: z
-      .array(z.string())
-      .min(1, "At least one stakeholder must be selected"),
+    affectedStakeholders: z.array(z.string()).default([]),
     aiCompanyInvolved: z.array(z.string()).optional(),
     mitigationNotes: z.string().max(2000).optional().or(z.literal("")),
     discoveryContext: z.string().optional(),
@@ -165,62 +163,59 @@ export const impactAndRiskAssessmentSchema = z
       .optional()
       .or(z.literal("")),
   })
-  .refine(
-    (data) => {
-      if (data.harmType === HARM_OPTION_VALUE.NEW) {
-        return !!data.harmTypes?.length;
-      }
-      return true;
-    },
-    {
-      path: ["harmTypes"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (data.harmType === HARM_OPTION_VALUE.DOCUMENTED) {
-        return !!data.documentedHarmCwe?.trim();
-      }
-      return true;
-    },
-    {
-      path: ["documentedHarmCwe"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (
-        data.harmTypes &&
-        data.harmTypes.includes(FORM_VALUES.OTHER_LOWERCASE as string) &&
-        !data.harmOtherText?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["harmOtherText"],
-      message: "Please specify the other harm type",
-    },
-  )
-  .refine(
-    (data) => {
-      if (
-        data.responsibleFactors &&
-        data.responsibleFactors.includes(
-          FORM_VALUES.OTHER_LOWERCASE as string,
-        ) &&
-        !data.responsibleFactorsOtherText?.trim()
-      ) {
-        return false;
-      }
-      return true;
-    },
-    {
-      path: ["responsibleFactorsOtherText"],
-      message: "Please describe the responsible factor",
-    },
-  );
+  .superRefine((data, ctx) => {
+    if (!data.affectedStakeholders?.length) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["affectedStakeholders"],
+        message: "At least one stakeholder must be selected",
+      });
+    }
+
+    if (
+      (data.harmType === HARM_OPTION_VALUE.NEW || !data.harmType) &&
+      !data.harmTypes?.length
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["harmTypes"],
+      });
+    }
+
+    if (
+      data.harmType === HARM_OPTION_VALUE.DOCUMENTED &&
+      !data.documentedHarmCwe?.trim()
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["documentedHarmCwe"],
+      });
+    }
+
+    if (
+      data.harmTypes?.includes(FORM_VALUES.OTHER_LOWERCASE as string) &&
+      !data.harmOtherText?.trim()
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["harmOtherText"],
+        message: "Please specify the other harm type",
+      });
+    }
+
+    if (
+      data.responsibleFactors?.includes(
+        FORM_VALUES.OTHER_LOWERCASE as string,
+      ) &&
+      !data.responsibleFactorsOtherText?.trim()
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["responsibleFactorsOtherText"],
+        message: "Please describe the responsible factor",
+      });
+    }
+  });
 
 export const securityDetailsSchema = z.object({
   substrateRelationship: z.string().optional(),
@@ -388,3 +383,24 @@ export const aiFlawReportSchema = z.object({
   disclosurePlan: disclosurePlanSchema,
   reviewReport: reviewReportSchema,
 });
+
+export const createAiFlawReportSchema = (opts: {
+  csamInvolved: boolean;
+  realWorldHarm: boolean;
+  maliciousUse: boolean;
+}) => {
+  return z.object({
+    step: z.enum(STEP_ORDER as [FormStep, ...FormStep[]]),
+    classifyReport: classifyReportSchema,
+    reporterDetails: reporterDetailsSchema,
+    incidentDescription: incidentDescriptionSchema,
+    evidence: createEvidenceSchema(opts.csamInvolved),
+    impactAssessment: impactAndRiskAssessmentSchema,
+    securityDetails: createSecurityIncidentDetailsSchema(
+      opts.realWorldHarm,
+      opts.maliciousUse,
+    ),
+    disclosurePlan: disclosurePlanSchema,
+    reviewReport: reviewReportSchema,
+  });
+};
