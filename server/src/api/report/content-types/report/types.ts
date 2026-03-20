@@ -55,6 +55,7 @@ export type FlattenedReport = {
   disclosure_embargoDetails?: string;
   disclosure_disclosureTimeline?: string;
   disclosure_disclosureDatepicker?: string;
+  disclosure_disclosureLink?: string;
   review_publicDisclosureIntent?: string;
   review_embargoDetails?: string;
   review_disclosureTimeline?: string;
@@ -134,6 +135,7 @@ export type ReshapedReportData = {
     embargoDetails?: string;
     disclosureTimeline?: string;
     disclosureDatepicker?: string;
+    disclosureLink?: string;
   };
   reviewReport: {
     publicDisclosureIntent?: string;

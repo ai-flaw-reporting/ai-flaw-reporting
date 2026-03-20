@@ -153,6 +153,9 @@
     "disclosure_disclosureDatepicker": {
       "type": "datetime"
     },
+    "disclosure_disclosureLink": {
+      "type": "string"
+    },
     "review_publicDisclosureIntent": {
       "type": "enumeration",
       "enum": ["yes", "no", "undecided", "already"]

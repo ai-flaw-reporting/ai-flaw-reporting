@@ -26,6 +26,7 @@ type ProcessedReport = {
   evidenceData?: Record<string, string | undefined>;
   disclosureIntent?: string;
   disclosureTimeline?: string;
+  disclosureLink?: string;
   disclosureChannels: string[];
   realWorldHarm: boolean;
   maliciousUse: boolean;
@@ -124,6 +125,7 @@ function processReport(
         disclosure.publicDisclosureIntent)
       : undefined,
     disclosureTimeline: disclosure?.disclosureTimeline,
+    disclosureLink: disclosure?.disclosureLink,
     disclosureChannels: formData.reviewReport?.selectedStakeholders ?? [],
     realWorldHarm: classify.real_world_harm ?? false,
     maliciousUse: classify.malicious_use ?? false,
@@ -221,6 +223,8 @@ function serializeToJsonLd(report: ProcessedReport): Record<string, unknown> {
     disclosure["flare:intent"] = report.disclosureIntent;
   if (report.disclosureTimeline)
     disclosure["flare:timeline"] = report.disclosureTimeline;
+  if (report.disclosureLink)
+    disclosure["flare:link"] = report.disclosureLink;
   if (report.disclosureChannels.length)
     disclosure["flare:channels"] = report.disclosureChannels;
   jsonld["flare:disclosure"] = disclosure;

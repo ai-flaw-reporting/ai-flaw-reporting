@@ -132,6 +132,9 @@ function buildDisclosurePlans(data: AiFlawReportSchema): string {
   if (disclosure.embargoDetails) {
     parts.push(`Embargo Details: ${disclosure.embargoDetails}`);
   }
+  if (disclosure.disclosureLink) {
+    parts.push(`Disclosure Link: ${disclosure.disclosureLink}`);
+  }
 
   return parts.join("\n");
 }

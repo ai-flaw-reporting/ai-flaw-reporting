@@ -490,6 +490,7 @@ export interface ApiReportReport extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     disclosure_disclosureDatepicker: Schema.Attribute.DateTime;
+    disclosure_disclosureLink: Schema.Attribute.String;
     disclosure_disclosureTimeline: Schema.Attribute.String;
     disclosure_embargoDetails: Schema.Attribute.String;
     disclosure_publicDisclosureIntent: Schema.Attribute.Enumeration<
