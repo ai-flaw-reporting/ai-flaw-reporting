@@ -11,6 +11,7 @@ import { isValidDate, isDisclosureDateDisabled } from "~/lib/date";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
 import {
   DISCLOSURE_DATEPICKER_FIELD,
+  DISCLOSURE_LINK_FIELD,
   DISCLOSURE_TIMELINE_FIELD,
   PUBLIC_DISCLOSURE_INTENT_VALUES,
 } from "~/entities/ai-flaw-report/model/form-data/disclosure-plan-fields-config";
@@ -99,8 +100,8 @@ export function DisclosureDetails() {
                   <span className="text-error-600">*</span>
                 </FormLabel>
                 <Popover>
-                  <FormControl>
-                    <PopoverTrigger asChild>
+                  <PopoverTrigger asChild>
+                    <FormControl>
                       <div className="relative">
                         <Button
                           variant="outline"
@@ -119,8 +120,8 @@ export function DisclosureDetails() {
                           className="top-[13px] right-11"
                         />
                       </div>
-                    </PopoverTrigger>
-                  </FormControl>
+                    </FormControl>
+                  </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
@@ -136,6 +137,28 @@ export function DisclosureDetails() {
             );
           }}
         />
+
+        {publicDisclosureIntent ===
+          PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY && (
+          <FormField
+            control={control}
+            name="disclosurePlan.disclosureLink"
+            render={({ field }) => (
+              <FormItem className="form-item-field">
+                <FormLabel className="form-label">
+                  {DISCLOSURE_LINK_FIELD.label}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="url"
+                    placeholder={DISCLOSURE_LINK_FIELD.placeholder}
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        )}
       </ItemContent>
     </Item>
   );

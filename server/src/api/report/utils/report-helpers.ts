@@ -72,6 +72,7 @@ export const flattenReport = (data: any) => ({
   disclosure_disclosureDatepicker: sanitizeDatetime(
     data.disclosurePlan?.disclosureDatepicker,
   ),
+  disclosure_disclosureLink: data.disclosurePlan?.disclosureLink,
   // Review Report
   review_publicDisclosureIntent: data.reviewReport?.publicDisclosureIntent,
   review_embargoDetails: data.reviewReport?.embargoDetails,
@@ -151,6 +152,7 @@ export const reshapeReport = (
     embargoDetails: flatData.disclosure_embargoDetails,
     disclosureTimeline: flatData.disclosure_disclosureTimeline,
     disclosureDatepicker: flatData.disclosure_disclosureDatepicker,
+    disclosureLink: flatData.disclosure_disclosureLink,
   },
   reviewReport: {
     publicDisclosureIntent: flatData.review_publicDisclosureIntent,

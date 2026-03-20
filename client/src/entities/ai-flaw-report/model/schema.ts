@@ -267,10 +267,13 @@ export const disclosurePlanSchema = z
     embargoDetails: z.string().optional(),
     disclosureTimeline: z.string().optional(),
     disclosureDatepicker: z.string().optional(),
+    disclosureLink: z.string().optional(),
   })
   .refine(
     (data) =>
-      data.publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES ||
+      (data.publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES &&
+        data.publicDisclosureIntent !==
+          PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY) ||
       !!data.embargoDetails?.trim(),
     {
       path: ["embargoDetails"],

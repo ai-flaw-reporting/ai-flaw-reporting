@@ -24,8 +24,6 @@ export function PublicDisclosureIntent() {
   });
 
   useEffect(() => {
-    const isYes =
-      publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.YES;
     const isYesOrAlready =
       publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.YES ||
       publicDisclosureIntent === PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY;
@@ -40,16 +38,20 @@ export function PublicDisclosureIntent() {
       });
     }
 
-    // Clear embargoDetails when not YES
-    if (!isYes) {
+    if (!isYesOrAlready) {
       setValue("disclosurePlan.embargoDetails", "", {
         shouldValidate: false,
       });
     }
 
-    // Clear disclosureTimeline when not YES or ALREADY
     if (!isYesOrAlready) {
       setValue("disclosurePlan.disclosureTimeline", "", {
+        shouldValidate: false,
+      });
+    }
+
+    if (publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY) {
+      setValue("disclosurePlan.disclosureLink", "", {
         shouldValidate: false,
       });
     }

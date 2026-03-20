@@ -24,7 +24,8 @@ export type DisclosurePlanFieldName =
   | "disclosurePlan.publicDisclosureIntent"
   | "disclosurePlan.embargoDetails"
   | "disclosurePlan.disclosureTimeline"
-  | "disclosurePlan.disclosureDatepicker";
+  | "disclosurePlan.disclosureDatepicker"
+  | "disclosurePlan.disclosureLink";
 
 export type DisclosurePlanFieldConfig = FieldConfig & {
   name: string;
@@ -98,6 +99,15 @@ export const DISCLOSURE_DATEPICKER_FIELD = {
   label: "When was / will it be disclosed?",
   placeholder: "Pick a date",
   type: "datepicker",
+};
+
+export const DISCLOSURE_LINK_FIELD = {
+  name: "disclosurePlan.disclosureLink",
+  title: "Disclosure Details",
+  label: "Link to the public disclosure",
+  placeholder: "https://...",
+  type: "input",
+  inputType: "url",
 };
 
 export const DISCLOSURE_GUIDANCE_FIELD = {

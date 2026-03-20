@@ -24,7 +24,10 @@ export function EmbargoDetails() {
     name: "disclosurePlan.publicDisclosureIntent",
   });
 
-  if (publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES) {
+  if (
+    publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.YES &&
+    publicDisclosureIntent !== PUBLIC_DISCLOSURE_INTENT_VALUES.ALREADY
+  ) {
     return null;
   }
 
