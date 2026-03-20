@@ -542,13 +542,12 @@ export interface ApiReportReport extends Struct.CollectionTypeSchema {
     >;
     review_selectedStakeholders: Schema.Attribute.JSON &
       Schema.Attribute.Required;
-    security_attackerObjectives: Schema.Attribute.String;
-    security_attackerObjectivesOther: Schema.Attribute.String;
-    security_attackerResources: Schema.Attribute.String;
-    security_detectionMethod: Schema.Attribute.String;
+    security_attackerObjectives: Schema.Attribute.Text;
+    security_attackerResources: Schema.Attribute.Text;
+    security_detectionMethod: Schema.Attribute.Text;
     security_discoveryNarrative: Schema.Attribute.Text;
     security_harmNarrative: Schema.Attribute.Text;
-    security_incidentLocation: Schema.Attribute.JSON;
+    security_incidentLocation: Schema.Attribute.String;
     security_substrateRelationship: Schema.Attribute.String;
     step: Schema.Attribute.String & Schema.Attribute.Required;
     system_configurations: Schema.Attribute.JSON;

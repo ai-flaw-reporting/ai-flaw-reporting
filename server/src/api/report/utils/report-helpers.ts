@@ -59,8 +59,6 @@ export const flattenReport = (data: any) => ({
   // Security Details
   security_attackerResources: data.securityDetails?.attackerResources,
   security_attackerObjectives: data.securityDetails?.attackerObjectives,
-  security_attackerObjectivesOther:
-    data.securityDetails?.attackerObjectivesOther,
   security_discoveryNarrative: data.securityDetails?.discoveryNarrative,
   security_substrateRelationship: data.securityDetails?.substrateRelationship,
   security_incidentLocation: data.securityDetails?.incidentLocation,
@@ -142,7 +140,6 @@ export const reshapeReport = (
   securityDetails: {
     attackerResources: flatData.security_attackerResources,
     attackerObjectives: flatData.security_attackerObjectives,
-    attackerObjectivesOther: flatData.security_attackerObjectivesOther,
     discoveryNarrative: flatData.security_discoveryNarrative,
     substrateRelationship: flatData.security_substrateRelationship,
     incidentLocation: flatData.security_incidentLocation,

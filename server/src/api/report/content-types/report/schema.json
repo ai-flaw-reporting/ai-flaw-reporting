@@ -119,13 +119,10 @@
       "type": "text"
     },
     "security_attackerResources": {
-      "type": "string"
+      "type": "text"
     },
     "security_attackerObjectives": {
-      "type": "string"
-    },
-    "security_attackerObjectivesOther": {
-      "type": "string"
+      "type": "text"
     },
     "security_discoveryNarrative": {
       "type": "text"
@@ -134,13 +131,13 @@
       "type": "string"
     },
     "security_incidentLocation": {
-      "type": "json"
+      "type": "string"
     },
     "security_harmNarrative": {
       "type": "text"
     },
     "security_detectionMethod": {
-      "type": "string"
+      "type": "text"
     },
     "disclosure_publicDisclosureIntent": {
       "type": "enumeration",
