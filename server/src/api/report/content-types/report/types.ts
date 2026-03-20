@@ -46,10 +46,9 @@ export type FlattenedReport = {
   impact_responsibleFactorsOtherText?: string;
   security_attackerResources?: string;
   security_attackerObjectives?: string;
-  security_attackerObjectivesOther?: string;
   security_discoveryNarrative?: string;
   security_substrateRelationship?: string;
-  security_incidentLocation?: string[];
+  security_incidentLocation?: string;
   security_harmNarrative?: string;
   security_detectionMethod?: string;
   disclosure_publicDisclosureIntent?: string;
@@ -124,10 +123,9 @@ export type ReshapedReportData = {
   securityDetails: {
     attackerResources?: string;
     attackerObjectives?: string;
-    attackerObjectivesOther?: string;
     discoveryNarrative?: string;
     substrateRelationship?: string;
-    incidentLocation?: string[];
+    incidentLocation?: string;
     harmNarrative?: string;
     detectionMethod?: string;
   };

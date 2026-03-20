@@ -219,14 +219,11 @@ export const impactAndRiskAssessmentSchema = z
 
 export const securityDetailsSchema = z.object({
   substrateRelationship: z.string().optional(),
-  substrateRelationshipOther: z.string().optional(),
-  incidentLocation: z.array(z.string()).optional().default([]),
-  harmNarrative: z.string().max(500).optional().or(z.literal("")),
-  attackerResources: z.string().optional(),
-  attackerResourcesOther: z.string().optional(),
-  attackerObjectives: z.string().optional(),
-  attackerObjectivesOther: z.string().optional(),
-  detectionMethod: z.string().optional(),
+  incidentLocation: z.string().optional().or(z.literal("")),
+  harmNarrative: z.string().max(2000).optional().or(z.literal("")),
+  attackerResources: z.string().optional().or(z.literal("")),
+  attackerObjectives: z.string().optional().or(z.literal("")),
+  detectionMethod: z.string().optional().or(z.literal("")),
   discoveryNarrative: z.string().optional().or(z.literal("")),
 });
 
@@ -237,55 +234,13 @@ export const createSecurityIncidentDetailsSchema = (
   return securityDetailsSchema
     .refine(
       (data) => {
-        if (realWorldHarm && !data.substrateRelationship?.trim()) {
+        if (realWorldHarm && !data.harmNarrative?.trim()) {
           return false;
         }
         return true;
       },
       {
-        path: ["substrateRelationship"],
-      },
-    )
-    .refine(
-      (data) => {
-        if (
-          realWorldHarm &&
-          data.substrateRelationship ===
-            (FORM_VALUES.OTHER_LOWERCASE as string) &&
-          !data.substrateRelationshipOther?.trim()
-        ) {
-          return false;
-        }
-        return true;
-      },
-      {
-        path: ["substrateRelationshipOther"],
-      },
-    )
-    .refine(
-      (data) => {
-        if (maliciousUse && !data.attackerResources?.trim()) {
-          return false;
-        }
-        return true;
-      },
-      {
-        path: ["attackerResources"],
-      },
-    )
-    .refine(
-      (data) => {
-        if (
-          maliciousUse &&
-          data.attackerResources === (FORM_VALUES.OTHER_LOWERCASE as string) &&
-          !data.attackerResourcesOther?.trim()
-        ) {
-          return false;
-        }
-        return true;
-      },
-      {
-        path: ["attackerResourcesOther"],
+        path: ["harmNarrative"],
       },
     )
     .refine(
@@ -297,32 +252,6 @@ export const createSecurityIncidentDetailsSchema = (
       },
       {
         path: ["attackerObjectives"],
-      },
-    )
-    .refine(
-      (data) => {
-        if (
-          maliciousUse &&
-          data.attackerObjectives === (FORM_VALUES.OTHER_LOWERCASE as string) &&
-          !data.attackerObjectivesOther?.trim()
-        ) {
-          return false;
-        }
-        return true;
-      },
-      {
-        path: ["attackerObjectivesOther"],
-      },
-    )
-    .refine(
-      (data) => {
-        if (realWorldHarm && !data.detectionMethod?.trim()) {
-          return false;
-        }
-        return true;
-      },
-      {
-        path: ["detectionMethod"],
       },
     );
 };

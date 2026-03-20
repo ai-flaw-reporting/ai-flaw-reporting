@@ -8,18 +8,13 @@ import {
   FormLabel,
 } from "~/components/ui/form";
 import { Item, ItemContent, ItemTitle } from "~/components/ui/item";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+import { Textarea } from "~/components/ui/textarea";
 import { useAiFlawFormContext } from "~/entities/ai-flaw-report/model/hooks/useAiFlawFormContext";
-import { ATTACKER_RESOURCES_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
-import { ATTACKER_OBJECTIVES_FIELD } from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
-import { AttackerResourcesField } from "./attacker-resources-field";
-import { AttackerObjectivesField } from "./attacker-objectives-field";
+import {
+  ATTACKER_RESOURCES_FIELD,
+  ATTACKER_OBJECTIVES_FIELD,
+  DETECTION_METHOD_FIELD,
+} from "~/entities/ai-flaw-report/model/form-data/security-details-fields-config";
 
 export function MalignantActorDetails() {
   const { control } = useAiFlawFormContext();
@@ -47,40 +42,6 @@ export function MalignantActorDetails() {
 
         <FormField
           control={control}
-          name="securityDetails.attackerResources"
-          render={({ field }) => (
-            <FormItem className="form-item-field">
-              <FormLabel className="form-label">
-                {ATTACKER_RESOURCES_FIELD.label}{" "}
-                <span className="text-error-600">*</span>
-              </FormLabel>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="text-md w-full dark:bg-white dark:text-gray-800">
-                    <SelectValue
-                      placeholder={ATTACKER_RESOURCES_FIELD.placeholder}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {ATTACKER_RESOURCES_FIELD.options?.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormDescription className="text-gray-600 dark:text-gray-100">
-                {ATTACKER_RESOURCES_FIELD.description}
-              </FormDescription>
-            </FormItem>
-          )}
-        />
-
-        <AttackerResourcesField />
-
-        <FormField
-          control={control}
           name="securityDetails.attackerObjectives"
           render={({ field }) => (
             <FormItem className="form-item-field">
@@ -89,20 +50,12 @@ export function MalignantActorDetails() {
                 <span className="text-error-600">*</span>
               </FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="text-md w-full dark:bg-white dark:text-gray-800">
-                    <SelectValue
-                      placeholder={ATTACKER_OBJECTIVES_FIELD.placeholder}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {ATTACKER_OBJECTIVES_FIELD.options?.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <Textarea
+                  placeholder={ATTACKER_OBJECTIVES_FIELD.placeholder}
+                  rows={ATTACKER_OBJECTIVES_FIELD.rows}
+                  className="text-md min-h-[100px] w-full resize-none pr-10 dark:bg-white dark:text-gray-800"
+                  {...field}
+                />
               </FormControl>
               <FormDescription className="text-gray-600 dark:text-gray-100">
                 {ATTACKER_OBJECTIVES_FIELD.description}
@@ -111,7 +64,51 @@ export function MalignantActorDetails() {
           )}
         />
 
-        <AttackerObjectivesField />
+        <FormField
+          control={control}
+          name="securityDetails.attackerResources"
+          render={({ field }) => (
+            <FormItem className="form-item-field">
+              <FormLabel className="form-label">
+                {ATTACKER_RESOURCES_FIELD.label}
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder={ATTACKER_RESOURCES_FIELD.placeholder}
+                  rows={ATTACKER_RESOURCES_FIELD.rows}
+                  className="text-md min-h-[100px] w-full resize-none pr-10 dark:bg-white dark:text-gray-800"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="text-gray-600 dark:text-gray-100">
+                {ATTACKER_RESOURCES_FIELD.description}
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="securityDetails.detectionMethod"
+          render={({ field }) => (
+            <FormItem className="form-item-field">
+              <FormLabel className="form-label">
+                {DETECTION_METHOD_FIELD.label}
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder={DETECTION_METHOD_FIELD.placeholder}
+                  rows={DETECTION_METHOD_FIELD.rows}
+                  className="text-md min-h-[100px] w-full resize-none pr-10 dark:bg-white dark:text-gray-800"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="text-gray-600 dark:text-gray-100">
+                {DETECTION_METHOD_FIELD.description}
+              </FormDescription>
+            </FormItem>
+          )}
+        />
       </ItemContent>
     </Item>
   );

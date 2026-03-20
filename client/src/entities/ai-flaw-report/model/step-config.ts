@@ -37,7 +37,7 @@ export const STEP_CONFIGS = {
   },
   SECURITY_INCIDENT_DETAILS: {
     id: "security-incident-details",
-    title: "Security Incident Details",
+    title: "Additional Details",
     badgeTitle: "Additional",
     description:
       "Tell us about yourself and the AI system where you found this issue",
