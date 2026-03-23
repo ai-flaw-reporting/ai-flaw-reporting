@@ -54,7 +54,7 @@ export function AffectedStakeholders() {
                 </FormLabel>
                 <FormControl>
                   <div className="space-y-8">
-                    <ul className="grid grid-cols-2 gap-1.5">
+                    <ul className="grid grid-cols-1 gap-1.5 md:grid-cols-2">
                       {AFFECTED_STAKEHOLDERS_FIELD.options.map((option) => (
                         <li key={option.value}>
                           <CheckboxCard
@@ -70,7 +70,7 @@ export function AffectedStakeholders() {
                               <h3 className="text-md font-semibold text-gray-900">
                                 {option.label}
                               </h3>
-                              <p className="text-md text-nowrap text-gray-700">
+                              <p className="text-md text-gray-700">
                                 {option.description}
                               </p>
                             </div>

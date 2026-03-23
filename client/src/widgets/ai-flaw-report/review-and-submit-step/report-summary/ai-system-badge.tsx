@@ -15,7 +15,7 @@ export default function AiSystemBadge() {
     <SummaryField label={REPORT_SUMMARY_CONFIG.aiSystem}>
       <div className="flex flex-wrap gap-2">
         {aiSystems.map((system) => (
-          <Badge key={system} className="badge" variant="outline">
+          <Badge key={system} className="badge max-h-none max-w-full whitespace-normal" variant="outline">
             {system}
           </Badge>
         ))}

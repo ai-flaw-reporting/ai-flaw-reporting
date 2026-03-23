@@ -21,7 +21,7 @@ export function StepIndicator() {
   const totalSteps = VISIBLE_STEPS.length;
 
   return (
-    <p className="text-xl font-medium text-gray-500 dark:text-gray-400">
+    <p className="text-base font-medium text-gray-500 sm:text-xl dark:text-gray-400">
       Step {currentStepIndex + 1} of {totalSteps}
     </p>
   );

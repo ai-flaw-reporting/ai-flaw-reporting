@@ -87,7 +87,7 @@ export function PublicDisclosureIntent() {
                       key={option.value}
                       value={option.value}
                       variant="card"
-                      className="w-full"
+                      className="w-full text-left"
                     >
                       <div className="flex items-center gap-4">
                         <option.icon className="text-gray-800" />

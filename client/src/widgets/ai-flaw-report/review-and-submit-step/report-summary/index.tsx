@@ -19,7 +19,7 @@ import IssueDescription from "./issue-description";
 export function ReportSummary() {
   return (
     <Item variant="outline" className="form-item-card">
-      <ItemContent className="gap-4">
+        <ItemContent className="min-w-0 gap-4">
         <ItemTitle className="flex w-full items-center justify-between">
           <ReportSummaryHeader
             title={REPORT_SUMMARY_CONFIG.title}
@@ -27,8 +27,8 @@ export function ReportSummary() {
           />
         </ItemTitle>
 
-        <dl className="grid grid-cols-2 gap-4">
-          <div className="space-y-4">
+        <dl className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="min-w-0 space-y-4">
             <ReportTypeBadge />
 
             <AiSystemBadge />
@@ -46,7 +46,7 @@ export function ReportSummary() {
             </SummaryField>
           </div>
 
-          <div className="space-y-4">
+          <div className="min-w-0 space-y-4">
             <SummaryField label={REPORT_SUMMARY_CONFIG.classification}>
               <Classification />
             </SummaryField>
