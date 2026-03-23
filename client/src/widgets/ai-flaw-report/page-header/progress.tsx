@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useWatch } from "react-hook-form";
 import { Check } from "lucide-react";
 
@@ -20,6 +21,16 @@ export function ProgressComponent() {
   const currentStep = useWatch({ control, name: "step" });
   const { stepsValidity } = useStepsValidation();
 
+  const currentStepRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    currentStepRef.current?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [currentStep]);
+
   const isSuccessStep = currentStep === "SUBMISSION_SUCCESS";
   const currentStepIndex = isSuccessStep
     ? VISIBLE_STEPS.length
@@ -37,7 +48,7 @@ export function ProgressComponent() {
         aria-hidden="true"
       />
       <ol
-        className="flex flex-wrap justify-center gap-19.5"
+        className="flex overflow-x-auto gap-6 sm:flex-wrap sm:justify-center sm:overflow-visible sm:gap-19.5"
         aria-label="Form steps"
       >
         {VISIBLE_STEPS.map((step, index) => {
@@ -52,7 +63,11 @@ export function ProgressComponent() {
               : STEP_STATUS.UPCOMING;
 
           return (
-            <li key={step} className="flex flex-col items-center gap-2.5">
+            <li
+              key={step}
+              ref={isCurrent ? currentStepRef : undefined}
+              className="flex shrink-0 flex-col items-center gap-2.5 sm:shrink"
+            >
               <button
                 type="button"
                 onClick={() => {

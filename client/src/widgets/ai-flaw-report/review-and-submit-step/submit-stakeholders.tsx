@@ -187,7 +187,7 @@ function StakeholderRow({
       />
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
             {stakeholder.name}
           </span>

@@ -18,17 +18,31 @@ export function AiFlawReportHeader() {
 
   return (
     <header className="w-full bg-gray-100 dark:bg-gray-900">
-      <div className="mx-auto max-w-[1440px] space-y-7 px-8 pt-8 pb-8">
+      <div className="mx-auto max-w-[1440px] space-y-7 px-4 pt-8 pb-8 sm:px-8">
+        <div className="flex justify-center sm:hidden">
+          <StepIndicator />
+        </div>
+
         <div className="flex items-center justify-between">
-          <div className="flex items-center justify-between gap-8">
+          <div className="flex items-center gap-3 sm:gap-8">
+            <div className="sm:hidden">
+              <ThemeToggle />
+            </div>
             <h1 className="dark:text-gray-25 text-xl font-bold text-gray-800">
               AI Flaw Reporting
             </h1>
-            <SaveStatus />
+            <div className="hidden sm:block">
+              <SaveStatus />
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            <StepIndicator />
-            <ThemeToggle />
+            <div className="sm:hidden">
+              <SaveStatus />
+            </div>
+            <div className="hidden sm:flex sm:items-center sm:gap-3">
+              <StepIndicator />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
         <ProgressComponent />

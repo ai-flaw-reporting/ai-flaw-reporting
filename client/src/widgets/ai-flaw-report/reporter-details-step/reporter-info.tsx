@@ -34,7 +34,7 @@ export function ReporterInfo() {
           />
         ))}
 
-        <div className="flex gap-8">
+        <div className="flex flex-col gap-8 md:flex-row">
           {REPORTER_ROW_FIELDS.map((fieldConfig) => (
             <FormFieldRenderer
               key={fieldConfig.name}

@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import { useWatch } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -12,6 +13,7 @@ import { STEP_CONFIGS } from "~/entities/ai-flaw-report/model/step-config";
 import type { AiFlawReportSchema } from "~/entities/ai-flaw-report/model/types";
 
 export function FormNavigation() {
+  const router = useRouter();
   const { control, trigger } = useAiFlawFormContext();
   const currentStep = useWatch({ control, name: "step" });
 
@@ -36,8 +38,11 @@ export function FormNavigation() {
     <nav className="mx-auto flex max-w-[1056px] justify-between">
       <Button
         type="button"
-        onClick={goToPreviousStep}
-        disabled={isFirstStep}
+        onClick={
+          isFirstStep
+            ? () => router.push("/introduction-ai-flaw-report")
+            : goToPreviousStep
+        }
         aria-label="Go to previous step"
         className="bg-indigo-500 text-white hover:bg-indigo-500/90 focus-visible:ring-indigo-500/25 disabled:bg-indigo-200"
       >

@@ -73,7 +73,7 @@ export function TypeOfHarmImpact() {
               <FormItem className="form-item-field">
                 <FormControl>
                   <div className="space-y-8">
-                    <ul className="grid grid-cols-2 gap-1.5">
+                    <ul className="grid grid-cols-1 gap-1.5 md:grid-cols-2">
                       {HARM_TYPES_FIELD.options.map((option) => (
                         <li key={option.value}>
                           <CheckboxCard
