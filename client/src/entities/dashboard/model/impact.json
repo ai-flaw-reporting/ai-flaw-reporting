@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Public reports",
+    "value": "1,284",
+    "trend": "+38 this week",
+    "iconUrl": "/icons/dashboard/document.svg",
+    "iconBg": "#EFF6FF"
+  },
+  {
+    "label": "Unique reporters",
+    "value": "612",
+    "trend": "+14 this week",
+    "iconUrl": "/icons/dashboard/persons.svg",
+    "iconBg": "#F5F3FF"
+  },
+  {
+    "label": "Active flaws under triage",
+    "value": "247",
+    "trend": "",
+    "iconUrl": "/icons/dashboard/warning.svg",
+    "iconBg": "#FFF1F2"
+  }
+]

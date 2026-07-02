@@ -1,0 +1,39 @@
+{
+  "name": "ai-flaw-reporting-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prepare": "husky",
+    "client:dev": "yarn workspace client dev",
+    "client:build": "yarn workspace client build",
+    "client:lint": "yarn workspace client lint",
+    "client:format": "yarn workspace client format:write",
+    "client:storybook": "yarn workspace client storybook",
+    "server:dev": "yarn workspace server develop",
+    "server:build": "yarn workspace server build",
+    "dev": "concurrently \"yarn client:dev\" \"yarn server:dev\"",
+    "build": "yarn client:build && yarn server:build",
+    "lint": "yarn client:lint"
+  },
+  "devDependencies": {
+    "@img/sharp-libvips-darwin-arm64": "1.0.4",
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7"
+  },
+  "workspaces": {
+    "packages": [
+      "client",
+      "server"
+    ],
+    "nohoist": [
+      "**/storybook",
+      "**/@storybook/**",
+      "**/@hookform/**"
+    ]
+  },
+  "packageManager": "yarn@1.22.22",
+  "resolutions": {
+    "sharp": "0.34.4",
+    "@img/sharp-libvips-linuxmusl-x64": "1.2.3"
+  }
+}

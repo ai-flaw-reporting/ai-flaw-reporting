@@ -1,0 +1,60 @@
+{
+  "pageSize": 6,
+  "total": "1,284",
+  "data": [
+    {
+      "reportId": "FLR-1284",
+      "title": "GPT-4 reveals system prompt via Markdown injection",
+      "system": "GPT-4 (api)",
+      "category": "Prompt injection",
+      "severity": "High",
+      "status": "Triaged",
+      "reported": "2 hours ago"
+    },
+    {
+      "reportId": "FLR-1283",
+      "title": "Image classifier mislabels medical scans of darker skin",
+      "system": "Custom CNN",
+      "category": "Bias / discrimination",
+      "severity": "Critical",
+      "status": "Routed",
+      "reported": "Today"
+    },
+    {
+      "reportId": "FLR-1282",
+      "title": "Code assistant suggests vulnerable SQL patterns by default",
+      "system": "Claude 3.5",
+      "category": "Unsafe instructions",
+      "severity": "Medium",
+      "status": "Submitted",
+      "reported": "Yesterday"
+    },
+    {
+      "reportId": "FLR-1281",
+      "title": "Chatbot leaks PII from training data when prompted indirectly",
+      "system": "Gemini 1.5",
+      "category": "Privacy leak",
+      "severity": "High",
+      "status": "Triaged",
+      "reported": "Yesterday"
+    },
+    {
+      "reportId": "FLR-1280",
+      "title": "Vision-language model hallucinates EXIF metadata",
+      "system": "Llama 3.2",
+      "category": "Hallucination",
+      "severity": "Low",
+      "status": "Resolved",
+      "reported": "3 days ago"
+    },
+    {
+      "reportId": "FLR-1279",
+      "title": "Recommendation engine amplifies extremist content for new users",
+      "system": "Internal RecSys",
+      "category": "Bias / discrimination",
+      "severity": "High",
+      "status": "Routed",
+      "reported": "4 days ago"
+    }
+  ]
+}

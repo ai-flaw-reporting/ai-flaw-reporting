@@ -1,0 +1,14 @@
+[
+  { "month": "Jan", "public": 120, "private": 30 },
+  { "month": "Feb", "public": 180, "private": 90 },
+  { "month": "Mar", "public": 160, "private": 70 },
+  { "month": "Apr", "public": 200, "private": 110 },
+  { "month": "May", "public": 220, "private": 130 },
+  { "month": "Jun", "public": 240, "private": 150 },
+  { "month": "Jul", "public": 280, "private": 190 },
+  { "month": "Aug", "public": 300, "private": 210 },
+  { "month": "Sep", "public": 310, "private": 215 },
+  { "month": "Oct", "public": 295, "private": 198 },
+  { "month": "Nov", "public": 270, "private": 175 },
+  { "month": "Dec", "public": 260, "private": 160 }
+]

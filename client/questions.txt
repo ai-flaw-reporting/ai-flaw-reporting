@@ -1,0 +1,142 @@
+========================================
+STEP 1: Classify Report
+========================================
+1. Has this flaw already caused an incident of harm?
+   (e.g., harm to people, property, rights, or infrastructure)
+
+2. Could this flaw be used by someone with bad intent?
+   (e.g., could an attacker use it to gain unauthorized access, spread disinformation, violate privacy, or manipulate outcomes?)
+
+3. Does this involve child sexual abuse material (real or synthetic)?
+   (e.g., any imagery, audio, or text that depicts or promotes the sexual exploitation of minors)
+   → If yes: CSAM acknowledgment checkbox (required)
+
+
+========================================
+STEP 2: Reporter & System Details
+========================================
+Reporter Info:
+- Email Address * (Required for follow-up and report delivery)
+- Organization (optional)
+- Country (optional)
+
+AI System Configurations (up to 10):
+- AI Product/Platform *
+- AI System/Model *
+- Access Method (optional)
+- Version (optional)
+
+
+========================================
+STEP 3: Flaw/Incident Description
+========================================
+1. Describe the flaw or incident *
+
+2. What should have happened? (Expected Behavior)
+
+3. What actually happened? (Actual Behavior)
+
+4. Potential Policy Violations:
+   - Policy / Guideline Link (optional, repeatable)
+   - Why this is a policy violation? (optional)
+
+
+========================================
+STEP 4: Evidence & Reproduction
+========================================
+1. How can someone else reproduce this issue? (Steps to Reproduce) *
+   (required unless CSAM is involved)
+
+2. Code, prompts, or techniques used (Proof of Concept / Exploit Code)
+
+3. Upload screenshots, logs, or other relevant files (File Attachments)
+   (Max 5MB per file; accepts .pdf, .docx, .jpg, .jpeg, .png)
+
+
+========================================
+STEP 5: Impact & Risk Assessment
+========================================
+1. How bad the harm would be if someone hits this flaw? (Severity of Harm)
+   Options: Not sure / Negligible / Low / Medium / High / Critical
+
+2. How common is this issue? (Prevalence)
+   Options: Not sure / Isolated / Rare / Occasional / Common / Widespread
+
+3. Is this harm already documented or is it a new type of harm? (Weakness Classification)
+   Options: Documented Harm / New Harm
+   → If Documented: select from MITRE CWE list
+   → If New (or either): Select all types of harm or impact that apply:
+     - Psychological Harm
+     - Financial Harm
+     - Reputational Harm
+     - Physical Harm
+     - Rights Violations
+     - Discrimination
+     - Misinformation
+     - Other → Please specify the other harm type *
+
+4. Select the specific types of harm that apply based on your impact selections.
+   (Specific Impact Types — dynamically populated)
+
+5. Who might be affected by this issue? (Affected Stakeholders) *
+   Options: End Users / AI Company / Researchers / General Public / Specific Groups / Infrastructure / Other
+   → Specific names of affected stakeholders (if known): (select AI companies/orgs)
+
+6. Any embargo or coordination requirements? (Mitigation Notes)
+
+7. Where was this issue discovered? (Discovery Context)
+   Options: User Observation / Monitoring / Testing / External Report / Automated Analysis
+
+8. What might be responsible for this issue? (Responsible Factors)
+   Options: Training Data Issues / Model Architecture / Fine-tuning Process / System Design /
+            User Interface / Content Filtering / Safety Measures / User Misconfiguration /
+            Third-party Integration / Other → Please describe the responsible factor *
+
+
+========================================
+STEP 6: Additional Details
+========================================
+Incident Details:
+- Your relationship to affected parties
+- Geographic location
+
+(If real-world harm was indicated in Step 1):
+- Describe the harm that occurred *
+
+Threat Actor Exploitation Details (if malicious use was indicated in Step 1):
+- Required attacker resources
+- What could an attacker accomplish? *
+
+- How could this be detected?
+
+- Statistical Argument with Examples
+  (Explain with examples why this flaw is likely to reoccur)
+
+
+========================================
+STEP 7: Disclosure Plan
+========================================
+1. Do you plan to disclose this issue publicly? *
+   Options:
+   - Yes, I plan to disclose publicly
+   - No, I prefer private reporting only
+   - I'm undecided
+   - Already publicly disclosed
+
+   → If "Yes" or "Already publicly disclosed":
+     - Any embargo or coordination requirements? *
+     - When did you or will you publicly disclose this report? *
+     - When was / will it be disclosed? (date picker) *
+
+   → If "Already publicly disclosed":
+     - Link to the public disclosure
+
+
+========================================
+STEP 8: Review & Submit Report
+========================================
+- Review report summary (read-only)
+- Download a machine-readable copy of your report (optional)
+- Toggle organizations to submit to * (at least one required)
+  Pre-selected based on your report; includes AI companies, incident databases,
+  government bodies, and standards organizations.

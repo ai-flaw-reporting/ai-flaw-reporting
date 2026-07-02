@@ -1,0 +1,8 @@
+[
+  { "label": "Hallucination", "value": 412 },
+  { "label": "Prompt injection", "value": 298 },
+  { "label": "Bias / discrimination", "value": 221 },
+  { "label": "Privacy leak", "value": 164 },
+  { "label": "Unsafe instructions", "value": 102 },
+  { "label": "Other", "value": 87 }
+]

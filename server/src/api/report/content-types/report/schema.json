@@ -1,0 +1,178 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "singularName": "report",
+    "pluralName": "reports",
+    "displayName": "AI Flaw Report",
+    "description": "AI system flaw and vulnerability reports"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metadata_createdAt": {
+      "type": "datetime"
+    },
+    "metadata_schemaVersion": {
+      "type": "string"
+    },
+    "metadata_reportType": {
+      "type": "string"
+    },
+    "step": {
+      "type": "string",
+      "required": true
+    },
+    "classify_realWorldHarm": {
+      "type": "boolean",
+      "default": false
+    },
+    "classify_maliciousUse": {
+      "type": "boolean",
+      "default": false
+    },
+    "classify_csamInvolved": {
+      "type": "boolean",
+      "default": false
+    },
+    "classify_csamAcknowledgment": {
+      "type": "boolean"
+    },
+    "reporter_email": {
+      "type": "email",
+      "required": true,
+      "private": true
+    },
+    "reporter_org": {
+      "type": "string"
+    },
+    "reporter_country": {
+      "type": "string"
+    },
+    "system_configurations": {
+      "type": "json"
+    },
+    "incident_issueDescription": {
+      "type": "text",
+      "required": true
+    },
+    "incident_expectedBehavior": {
+      "type": "text"
+    },
+    "incident_actualBehavior": {
+      "type": "text"
+    },
+    "incident_policyViolationUrls": {
+      "type": "json"
+    },
+    "incident_policyViolationReason": {
+      "type": "text"
+    },
+    "evidence_stepsToReproduce": {
+      "type": "text"
+    },
+    "evidence_proofOfConcept": {
+      "type": "text"
+    },
+    "evidence_attachments": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files", "videos"]
+    },
+    "impact_severityOfHarm": {
+      "type": "string"
+    },
+    "impact_prevalence": {
+      "type": "string"
+    },
+    "impact_harmType": {
+      "type": "string",
+      "required": true
+    },
+    "impact_harmTypes": {
+      "type": "json"
+    },
+    "impact_affectedStakeholders": {
+      "type": "json",
+      "required": true
+    },
+    "impact_harmOtherText": {
+      "type": "string"
+    },
+    "impact_aiCompanyInvolved": {
+      "type": "json"
+    },
+    "impact_mitigationNotes": {
+      "type": "text"
+    },
+    "impact_documentedHarmCwe": {
+      "type": "string"
+    },
+    "impact_discoveryContext": {
+      "type": "string"
+    },
+    "impact_responsibleFactors": {
+      "type": "json"
+    },
+    "impact_responsibleFactorsOtherText": {
+      "type": "text"
+    },
+    "security_attackerResources": {
+      "type": "text"
+    },
+    "security_attackerObjectives": {
+      "type": "text"
+    },
+    "security_discoveryNarrative": {
+      "type": "text"
+    },
+    "security_substrateRelationship": {
+      "type": "string"
+    },
+    "security_incidentLocation": {
+      "type": "string"
+    },
+    "security_harmNarrative": {
+      "type": "text"
+    },
+    "security_detectionMethod": {
+      "type": "text"
+    },
+    "disclosure_publicDisclosureIntent": {
+      "type": "enumeration",
+      "enum": ["yes", "no", "undecided", "already"],
+      "required": true
+    },
+    "disclosure_embargoDetails": {
+      "type": "string"
+    },
+    "disclosure_disclosureTimeline": {
+      "type": "string"
+    },
+    "disclosure_disclosureDatepicker": {
+      "type": "datetime"
+    },
+    "disclosure_disclosureLink": {
+      "type": "string"
+    },
+    "review_publicDisclosureIntent": {
+      "type": "enumeration",
+      "enum": ["yes", "no", "undecided", "already"]
+    },
+    "review_embargoDetails": {
+      "type": "string"
+    },
+    "review_disclosureTimeline": {
+      "type": "string"
+    },
+    "review_disclosureDatepicker": {
+      "type": "datetime"
+    },
+    "review_selectedStakeholders": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

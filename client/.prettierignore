@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+cms/node_modules
+
+# Build outputs
+.next
+out
+dist
+build
+cms/dist
+cms/build
+cms/.cache
+cms/.tmp
+
+# CMS directory
+cms
+
+# Package manager
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Storybook
+storybook-static
+
+# Misc
+.DS_Store
+*.log
+
