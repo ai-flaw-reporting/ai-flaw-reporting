@@ -31,13 +31,13 @@ The full form submission is attached as a JSON file. Any uploaded evidence (e.g.
 
 Please refer to the JSON for complete impact, discovery, and policy violation details.
 
-Once you tell us you have addressed this, either by saying whether this is not a valid flaw or that it has been fixed, we will make the report public with your response for valid flaws. The report will be kept private until then for safety reasons.
+If you decide to inform FLARE-AI whether you have addressed this flaw, please email contact@ai-reports.org with the report ID and let us know for record keeping purposes. Note that we do not store the contents of the actual report, but we maintain a record of the report ID and the organization the report was sent to.
 
 Thank you,
 FLARE-AI Team
 
 ---
-Note: This email was sent from a demo version of the FLARE-AI platform. If you have any feedback, please send it to contact@ai-reports.org.`;
+Note: This email was sent from a research preview version of the FLARE-AI platform. If you have any feedback, please send it to contact@ai-reports.org.`;
   },
 
   generateConfirmationBody(documentId: string, reportType: string): string {
